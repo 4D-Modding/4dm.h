@@ -2,6 +2,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "4dm.h"
+#include "InventoryGUI.h"
 namespace fdm
 {
 	class TexRenderer;
@@ -92,7 +93,7 @@ namespace fdm
         Inventory inventory;
         PlayerInventoryManager inventoryAndEquipment;
         PlayerInventoryManager playerInventory;
-        PAD(456); //InventoryGUI inventoryGUI;
+        InventoryGUI inventoryGUI;
         bool shouldThrowItem;
         PAD(7);
         std::unique_ptr<Item> queuedTrowItem;

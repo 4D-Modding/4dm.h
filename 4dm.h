@@ -31,6 +31,7 @@ namespace fdm
 }
 #include "m4.h"
 #include "Mesh.h"
+#include "MeshBuilder.h"
 #include "TexRenderer.h"
 #include "FontRenderer.h"
 #include "QuadRenderer.h"
@@ -47,7 +48,9 @@ namespace fdm
 #include "MeshRenderer.h"
 #include "Entity.h"
 #include "Player.h"
-//#include "InventoryGUI.h"
+#include "GUI/gui.h"
+#include "CraftingMenu.h"
+#include "InventoryGUI.h"
 #include "path.h"
 #include "CloudChunk.h"
 #include "CloudManager.h"

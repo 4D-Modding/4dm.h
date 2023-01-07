@@ -433,8 +433,19 @@
     <ClInclude Include="GL\glew.h" />
     <ClInclude Include="GL\glxew.h" />
     <ClInclude Include="GL\wglew.h" />
+    <ClInclude Include="GUI\Alignment.h" />
+    <ClInclude Include="GUI\Button.h" />
+    <ClInclude Include="GUI\CheckBox.h" />
+    <ClInclude Include="GUI\ContentBox.h" />
+    <ClInclude Include="CraftingMenu.h" />
+    <ClInclude Include="GUI\ElemContainer.h" />
+    <ClInclude Include="GUI\Element.h" />
     <ClInclude Include="GUI\gui.h" />
+    <ClInclude Include="GUI\Image.h" />
     <ClInclude Include="GUI\Interface.h" />
+    <ClInclude Include="GUI\Slider.h" />
+    <ClInclude Include="GUI\Text.h" />
+    <ClInclude Include="GUI\TextInput.h" />
     <ClInclude Include="GUI\Window.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryCursor.h" />
@@ -443,6 +454,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="m4.h" />
+    <ClInclude Include="MeshBuilder.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="path.h" />
     <ClInclude Include="Player.h" />

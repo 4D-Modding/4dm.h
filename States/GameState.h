@@ -13,7 +13,7 @@ namespace fdm
 	class TexRenderer;
 	class Tex2D;
 	class Player;
-	struct State;
+	class State;
 	class GameState : public State
 	{
 	private:

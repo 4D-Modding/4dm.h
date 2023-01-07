@@ -1,7 +1,6 @@
 #pragma once
 #ifndef GUI_WINDOW_H
 #define GUI_WINDOW_H
-#include "../4dm.h"
 #include "gui.h"
 namespace fdm
 {
