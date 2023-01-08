@@ -10,11 +10,11 @@ namespace fdm
 		class ElemContainer
 		{
 		public:
-			virtual void addElement(Element*);
-			virtual bool removeElement(Element*);
-			virtual bool selectElement(Element*);
-			virtual void clear();
-			virtual bool empty();
+			virtual void addElement(Element*) {};
+			virtual bool removeElement(Element*) { return NULL; };
+			virtual bool selectElement(Element*) { return NULL; };
+			virtual void clear() {};
+			virtual bool empty() { return NULL; };
 		};
 	}
 }

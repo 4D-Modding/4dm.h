@@ -11,8 +11,9 @@ namespace fdm
 		class ElemContainer;
 		enum AlignmentX;
 		enum AlignmentY;
-		class ContentBox : Element, Window, ElemContainer 
+		class ContentBox : public Element, public Window, public ElemContainer 
 		{
+		public:
 			static const int scrollbarWidth;
 			Window* parent;
 			std::vector<Element*> elements;
@@ -35,6 +36,13 @@ namespace fdm
 			int scrollbarClickPos;
 			int scrollStep;
 			bool viewUpdateFlag;
+
+			void addElement(Element* e) override
+			{
+				reinterpret_cast<void(__thiscall*)(gui::ContentBox*, Element*)> (
+					base + idaOffsetFix(0x5B660)
+					)(this, e);
+			}
 		};
 	}
 }
