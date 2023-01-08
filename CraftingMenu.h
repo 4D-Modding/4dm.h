@@ -48,33 +48,41 @@ namespace fdm
 		}
 		void render(gui::Window* w) override
 		{
-			reinterpret_cast<void(__thiscall*)(gui::Element*, gui::Window*)>(
+			reinterpret_cast<void(__thiscall*)(CraftingMenu*, gui::Window*)>(
 				base + idaOffsetFix(0x3BAE0)
 				)(this, w);
 		}
 		void offsetX(int offset) override 
 		{
+			this->xOffset = offset;
+		}
+		void offsetY(int offset) override
+		{
 			this->yOffset = offset;
 		}
-		void offsetY(int a) override
+		void alignX(gui::AlignmentX a) override
 		{
-			this->yAlign = (gui::AlignmentY)a;
+			this->xAlign = a;
+		}
+		void alignY(gui::AlignmentY a) override
+		{
+			this->yAlign = a;
 		}
 		void getPos(const gui::Window* w, int* x, int* y) override
 		{
-			reinterpret_cast<void(__thiscall*)(gui::Element*, const gui::Window*, int*, int*)>(
+			reinterpret_cast<void(__thiscall*)(CraftingMenu*, const gui::Window*, int*, int*)>(
 				base + idaOffsetFix(0x3BFA0)
 				)(this, w, x, y);
 		}
 		void getSize(const gui::Window* w, int* width, int* height) override
 		{
-			reinterpret_cast<void(__thiscall*)(gui::Element*, const gui::Window*, int*, int*)>(
+			reinterpret_cast<void(__thiscall*)(CraftingMenu*, const gui::Window*, int*, int*)>(
 				base + idaOffsetFix(0x3C080)
 				)(this, w, width, height);
 		}
 		bool mouseButtonInput(const gui::Window* w, int button, int action, int) override 
 		{
-			return reinterpret_cast<bool(__thiscall*)(gui::Element*, const gui::Window*, int, int)>(
+			return reinterpret_cast<bool(__thiscall*)(CraftingMenu*, const gui::Window*, int, int)>(
 				base + idaOffsetFix(0x3C120)
 				)(this, w, button, action);
 		}
