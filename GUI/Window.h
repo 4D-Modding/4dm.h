@@ -9,12 +9,12 @@ namespace fdm
 		class Window 
 		{
 		public:
-			virtual QuadRenderer* getQuadRenderer();
-			virtual FontRenderer* getFont();
-			virtual GLFWwindow* getGLFWwindow();
-			virtual void getCursorPos(int*, int*);
-			virtual void getSize(int*, int*);
-			virtual void changeViewport(const glm::ivec4*, const glm::ivec2*);
+			virtual QuadRenderer* getQuadRenderer() = NULL;
+			virtual FontRenderer* getFont() = NULL;
+			virtual GLFWwindow* getGLFWwindow() = NULL;
+			virtual void getCursorPos(int*, int*) = NULL;
+			virtual void getSize(int*, int*) = NULL;
+			virtual void changeViewport(const glm::ivec4*, const glm::ivec2*) = NULL;
 		};
 	}
 }

@@ -15,19 +15,19 @@ namespace fdm
 		static nlohmann::json blueprints;
 		
 		// abstract/virtual funcs
-		virtual std::string getName();
-		virtual void render(const World* world, const m4::Mat5& MV, bool glasses);
-		virtual void update(World* world, Player* player, double dt);
-		virtual glm::vec4 getPos();
-		virtual void setPos(const glm::vec4& pos);
-		virtual bool isDead();
-		virtual bool shouldSave();
-		virtual bool isClickable();
-		virtual bool isBlockEntity();
-		virtual float getHitboxRadius();
-		virtual void takeDamage(float dmg, World* world);
-		virtual bool action(World* world, Player* player, int action);
-		virtual nlohmann::json saveAttributes();
+		virtual std::string getName() = NULL;
+		virtual void render(const World* world, const m4::Mat5& MV, bool glasses) = NULL;
+		virtual void update(World* world, Player* player, double dt) = NULL;
+		virtual glm::vec4 getPos() = NULL;
+		virtual void setPos(const glm::vec4& pos) = NULL;
+		virtual bool isDead() = NULL;
+		virtual bool shouldSave() = NULL;
+		virtual bool isClickable() = NULL;
+		virtual bool isBlockEntity() = NULL;
+		virtual float getHitboxRadius() = NULL;
+		virtual void takeDamage(float dmg, World* world) = NULL;
+		virtual bool action(World* world, Player* player, int action) = NULL;
+		virtual nlohmann::json saveAttributes() = NULL;
 	};
 }
 #endif

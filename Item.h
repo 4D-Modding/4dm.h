@@ -103,17 +103,17 @@ namespace fdm
 		}
 
 		// abstract/virtual funcs
-		virtual std::string getName();
-		virtual void render(const glm::ivec2& pos);
-		virtual void renderEntity(const m4::Mat5& mat, bool inHand);
-		virtual bool isDeadly();
-		virtual bool isCompatible(const std::unique_ptr<Item>& other);
-		virtual unsigned int getStackLimit();
-		virtual bool action(World* world, Player* player, int action);
-		virtual bool breakBlock(World* world, Player* player, unsigned char block, const glm::ivec4& blockPos);
-		virtual bool entityAction(World* world, Player* player, std::unique_ptr<Entity>& entity, int action);
-		virtual std::unique_ptr<Item> clone();
-		nlohmann::json saveAttributes();
+		virtual std::string getName() = NULL;
+		virtual void render(const glm::ivec2& pos) = NULL;
+		virtual void renderEntity(const m4::Mat5& mat, bool inHand) = NULL;
+		virtual bool isDeadly() = NULL;
+		virtual bool isCompatible(const std::unique_ptr<Item>& other) = NULL;
+		virtual unsigned int getStackLimit() = NULL;
+		virtual bool action(World* world, Player* player, int action) = NULL;
+		virtual bool breakBlock(World* world, Player* player, unsigned char block, const glm::ivec4& blockPos) = NULL;
+		virtual bool entityAction(World* world, Player* player, std::unique_ptr<Entity>& entity, int action) = NULL;
+		virtual std::unique_ptr<Item> clone() = NULL;
+		nlohmann::json saveAttributes() = NULL;
 	};
 }
 #endif
