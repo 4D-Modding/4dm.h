@@ -2,10 +2,16 @@
 #ifndef ITEM_H
 #define ITEM_H
 #include "4dm.h"
+#include "World.h"
+#include "Player.h"
+#include "Entity.h"
 namespace fdm
 {
 	class FontRenderer;
 	class QuadRenderer;
+	class Entity;
+	class World;
+	class Player;
 	
 	class Item
 	{
@@ -13,6 +19,7 @@ namespace fdm
 		static FontRenderer fr;
 		static QuadRenderer qr;
 		static nlohmann::json blueprints;
+
 		unsigned int count;
 
 		bool loadItemInfo(void) 
@@ -94,6 +101,19 @@ namespace fdm
 				base + idaOffsetFix(0x6A050)
 				)(result, baseAttributes, additions);
 		}
+
+		// abstract/virtual funcs
+		virtual std::string getName();
+		virtual void render(const glm::ivec2& pos);
+		virtual void renderEntity(const m4::Mat5& mat, bool inHand);
+		virtual bool isDeadly();
+		virtual bool isCompatible(const std::unique_ptr<Item>& other);
+		virtual unsigned int getStackLimit();
+		virtual bool action(World* world, Player* player, int action);
+		virtual bool breakBlock(World* world, Player* player, unsigned char block, const glm::ivec4& blockPos);
+		virtual bool entityAction(World* world, Player* player, std::unique_ptr<Entity>& entity, int action);
+		virtual std::unique_ptr<Item> clone();
+		nlohmann::json saveAttributes();
 	};
 }
 #endif

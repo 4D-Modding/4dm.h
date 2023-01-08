@@ -57,4 +57,5 @@ namespace fdm
 #include "States/StateManager.h"
 #include "States/State.h"
 #include "States/GameState.h"
+#include "ShaderManager.h"
 #endif

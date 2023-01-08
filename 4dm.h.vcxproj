@@ -147,6 +147,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="FontRenderer.h" />
     <ClInclude Include="Frustum.h" />
+    <ClInclude Include="glfw.h" />
     <ClInclude Include="glm\common.hpp" />
     <ClInclude Include="glm\detail\compute_common.hpp" />
     <ClInclude Include="glm\detail\compute_vector_relational.hpp" />
@@ -464,6 +465,7 @@
     <ClInclude Include="CloudManager.h" />
     <ClInclude Include="CloudChunk.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="States\State.h" />
     <ClInclude Include="States\StateManager.h" />
     <ClInclude Include="States\GameState.h" />

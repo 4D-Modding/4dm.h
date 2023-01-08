@@ -23,24 +23,19 @@ namespace fdm
 			std::vector<unsigned int> indices;
 			bool updateQueued;
 		};
-		union 
-		{
-			const unsigned char SIZE;
-			const unsigned char HEIGHT;
-			struct 
-			{
-				unsigned char blocks[128][10][10][10];
-				unsigned char lightingHeightMap[10][10][10];
-				glm::i64vec3 pos;
-				bool saved;
-			};
-			const unsigned char MESH_COUNT;
-			const unsigned char MESH_HEIGHT;
-		};
+		static const unsigned char SIZE;
+		static const unsigned char HEIGHT;
+		static const unsigned char MESH_COUNT;
+		static const unsigned char MESH_HEIGHT;
+
+		unsigned char blocks[128][10][10][10];
+		unsigned char lightingHeightMap[10][10][10];
+		glm::i64vec3 pos;
+		bool saved;
 
 		PAD(7);
 
-		Chunk::ChunkMesh meshData[8];
+		ChunkMesh meshData[8];
 		MeshRenderer meshRenderers[8];
 		bool meshUpdatesQueued;
 
@@ -58,7 +53,7 @@ namespace fdm
 		PAD(1);
 
 		std::vector< std::unique_ptr<Entity> > entities;
-		std::map< glm::u8vec4, std::unique_ptr<Entity> > blockEntities;
+		std::unordered_map<glm::u8vec4, std::unique_ptr<Entity>, std::hash<glm::u8vec4 >, std::equal_to<glm::u8vec4 >, std::allocator<std::pair<glm::u8vec4 const, std::unique_ptr<Entity> > > > blockEntities;
 
 	};
 }

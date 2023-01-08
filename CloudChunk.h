@@ -11,16 +11,14 @@ namespace fdm
 	public:
 		class CloudChunkMesh : Mesh
 		{
-			PAD(2 * sizeof(long));
-			class std::vector<glm::u8vec4> verts;
-			class std::vector<unsigned int> indices;
+			std::vector<glm::u8vec4> verts;
+			std::vector<unsigned int> indices;
 		};
-		union
-		{
-			const unsigned char SIZE;
-			const unsigned char SCALE;
-			unsigned char blocks[6][6][6];
-		};
+		static const unsigned char SIZE;
+		static const unsigned char SCALE;
+
+		unsigned char blocks[6][6][6];
+
 		std::mutex meshMutex;
 		CloudChunk::CloudChunkMesh activeMesh;
 		MeshRenderer meshRenderer;

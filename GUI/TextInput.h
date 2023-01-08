@@ -6,6 +6,7 @@ namespace fdm
 {
 	namespace gui
 	{
+		using TextInputCallback = std::add_pointer<void(void* user, std::string& text)>::type;
 		class Element;
 		enum AlignmentX;
 		enum AlignmentY;
@@ -35,7 +36,7 @@ namespace fdm
 			enum AlignmentY yAlign;
 			PAD(4);
 			void* user;
-			void* callback;
+			TextInputCallback callback = NULL;
 		};
 	}
 }

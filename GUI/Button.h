@@ -6,6 +6,8 @@ namespace fdm
 {
 	namespace gui
 	{
+		using ButtonCallback = std::add_pointer<void(void* user)>::type;
+
 		class Element;
 		enum AlignmentX;
 		enum AlignmentY;
@@ -26,7 +28,7 @@ namespace fdm
 			int height;
 			PAD(4);
 			void* user;
-			void* callback;
+			ButtonCallback* callback = NULL;
 		};
 	}
 }

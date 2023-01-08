@@ -3,6 +3,7 @@
 #define PLAYER_H
 #include "4dm.h"
 #include "InventoryGUI.h"
+#include "PlayerInventoryManager.h"
 namespace fdm
 {
 	class TexRenderer;

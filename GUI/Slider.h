@@ -6,6 +6,8 @@ namespace fdm
 {
 	namespace gui
 	{
+		using SliderCallback = std::add_pointer<void(void* user, int value)>::type;
+
 		class Element;
 		enum AlignmentX;
 		enum AlignmentY;
@@ -27,7 +29,7 @@ namespace fdm
 			AlignmentX xAlign;
 			AlignmentY yAlign;
 			void* user;
-			void* callback;
+			SliderCallback callback;
 		};
 	}
 }

@@ -6,6 +6,8 @@ namespace fdm
 {
 	namespace gui 
 	{
+		using ViewportCallback = std::add_pointer<void(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>::type;
+
 		class Window;
 		class ElemContainer;
 		class Element;
@@ -20,7 +22,7 @@ namespace fdm
 			QuadRenderer* qr;
 			FontRenderer* font;
 			GLFWwindow* window;
-			void* viewportCallback;
+			ViewportCallback viewportCallback = NULL;
 			void* viewportUser;
 			bool viewUpdateFlag;
 		};

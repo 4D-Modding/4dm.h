@@ -6,6 +6,8 @@ namespace fdm
 {
 	namespace gui
 	{
+		using CheckBoxCallback = std::add_pointer<void(void* user, bool checked)>::type;
+
 		class Element;
 		enum AlignmentX;
 		enum AlignmentY;
@@ -24,7 +26,7 @@ namespace fdm
 			AlignmentY yAlign;
 			PAD(4);
 			void* user;
-			void* callback;
+			CheckBoxCallback callback = NULL;
 			bool checked;
 		};
 	}
