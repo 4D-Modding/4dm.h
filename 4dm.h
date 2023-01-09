@@ -48,6 +48,7 @@ namespace fdm
 #include "MeshRenderer.h"
 #include "Entity.h"
 #include "Player.h"
+#include "ShaderManager.h"
 #include "GUI/gui.h"
 #include "CraftingMenu.h"
 #include "InventoryGUI.h"
@@ -57,5 +58,4 @@ namespace fdm
 #include "States/StateManager.h"
 #include "States/State.h"
 #include "States/GameState.h"
-#include "ShaderManager.h"
 #endif

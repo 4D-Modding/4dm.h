@@ -4,10 +4,10 @@
 #include "gui.h"
 namespace fdm
 {
+	class QuadRenderer;
+	class FontRenderer;
 	namespace gui
 	{
-		class QuadRenderer;
-		class FontRenderer;
 		class Window 
 		{
 		public:

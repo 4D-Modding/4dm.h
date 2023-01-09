@@ -25,11 +25,11 @@ namespace fdm
 			int yOffset;
 			AlignmentX xAlign;
 			AlignmentY yAlign;
-			int width;
-			int height;
+			int width = 200;
+			int height = 50;
 			PAD(4);
 			void* user;
-			ButtonCallback* callback = NULL;
+			ButtonCallback callback = NULL;
 
 			~Button() 
 			{
@@ -93,6 +93,7 @@ namespace fdm
 					base + idaOffsetFix(0x572F0)
 					)(this, w);
 			}
+
 		};
 	}
 }
