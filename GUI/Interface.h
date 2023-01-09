@@ -38,17 +38,17 @@ namespace fdm
 					base + idaOffsetFix(0x56280)
 					)(this);
 			}
-			void mouseInput(double xpos, double ypos)
+			void mouseInput(double xPos, double yPos)
 			{
 				reinterpret_cast<void(__thiscall*)(gui::Interface*, double, double)>(
 					base + idaOffsetFix(0x56370)
-					)(this, xpos, ypos);
+					)(this, xPos, yPos);
 			}
-			bool scrollInput(double xOffset, double yOffset) 
+			bool scrollInput(double xOff, double yOff) 
 			{
 				return reinterpret_cast<bool(__thiscall*)(gui::Interface*, double, double)>(
 					base + idaOffsetFix(0x56400)
-					)(this, xOffset, yOffset);
+					)(this, xOff, yOff);
 			}
 			bool mouseButtonInput(int button, int action, int mods)
 			{
