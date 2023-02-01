@@ -2,6 +2,8 @@
 #ifndef GUI_INTERFACE_H
 #define GUI_INTERFACE_H
 #include "gui.h"
+#include "../Shader.h"
+#include "../ShaderManager.h"
 namespace fdm 
 {
 	class QuadRenderer;
@@ -26,7 +28,7 @@ namespace fdm
 			ViewportCallback viewportCallback = NULL;
 			void* viewportUser;
 			bool viewUpdateFlag;
-
+			
 			~Interface() 
 			{
 				reinterpret_cast<void(__thiscall*)(Interface*)>(

@@ -26,6 +26,14 @@ namespace fdm
 				base + idaOffsetFix(0x8A270)
 				)(this, path, type);
 		}
+		unsigned int id() const
+		{
+			return ID;
+		}
+		void use() const
+		{
+			glUseProgram(ID);
+		}
 	};
 }
 #endif

@@ -17,7 +17,7 @@ namespace fdm
 		class ContentBox : public Element, public Window, public ElemContainer 
 		{
 		public:
-			static const int scrollbarWidth;
+			static const int scrollbarWidth = 20;
 			Window* parent;
 			std::vector<Element*> elements;
 			int selectedElemIndex;
@@ -31,8 +31,8 @@ namespace fdm
 			AlignmentY yAlign;
 			int xScroll;
 			int yScroll;
-			unsigned int scrollW;
-			unsigned int scrollH;
+			unsigned int scrollW = 0;
+			unsigned int scrollH = 0;
 			bool scrollingX;
 			bool scrollingY;
 			PAD(2);

@@ -8,6 +8,9 @@
 #include <vector>
 #include "json.hpp"
 #include "glm/glm.hpp"
+#include "glm/trigonometric.hpp"
+#include "glm/ext/matrix_transform.hpp"
+#include "glm/ext/matrix_clip_space.hpp"
 #include "GL/glew.h"
 #include "glfw.h"
 #include <mutex>
@@ -58,4 +61,5 @@ namespace fdm
 #include "States/StateManager.h"
 #include "States/State.h"
 #include "States/GameState.h"
+#include "States/TitleState.h"
 #endif
