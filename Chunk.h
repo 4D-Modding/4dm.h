@@ -93,8 +93,8 @@ namespace fdm
 					)(this, side, side_tuvs, pos, light);
 			}
 		};
-		static const unsigned char SIZE;
-		static const unsigned char HEIGHT;
+		static const unsigned char SIZE = 10 * 128 * 10 * 10; // ig?
+		static const unsigned char HEIGHT = 128;
 		static const unsigned char MESH_COUNT;
 		static const unsigned char MESH_HEIGHT;
 
