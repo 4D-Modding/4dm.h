@@ -9,10 +9,11 @@ namespace fdm
 	struct Frustum;
 	class path;
 	class World;
+	struct Mesh;
 	class Chunk
 	{
 	public:
-		class ChunkMesh
+		class ChunkMesh : public Mesh
 		{
 		public:
 			struct VertData
@@ -21,7 +22,6 @@ namespace fdm
 				glm::u8vec4 tuv;
 				glm::u8vec3 lighting;
 			};
-			PAD(2 * sizeof(long));
 			std::vector<Chunk::ChunkMesh::VertData> verts;
 			std::vector<unsigned int> indices;
 			bool updateQueued;
@@ -38,39 +38,39 @@ namespace fdm
 					base + idaOffsetFix(0x2C180)
 					)(this);
 			}
-			std::int64_t buffSize(int buffIndex) 
+			int buffSize(int buffIndex) override
 			{
-				return reinterpret_cast<std::int64_t(__thiscall*)(ChunkMesh*, int)>(
+				return reinterpret_cast<int(__thiscall*)(ChunkMesh*, int)>(
 					base + idaOffsetFix(0x2C1D0)
 					)(this, buffIndex);
 			}
-			std::int64_t attrCount(int buffIndex)
+			int attrCount(int buffIndex) override
 			{
-				return reinterpret_cast<std::int64_t(__thiscall*)(ChunkMesh*, int)>(
+				return reinterpret_cast<int(__thiscall*)(ChunkMesh*, int)>(
 					base + idaOffsetFix(0x2C200)
 					)(this, buffIndex);
 			}
-			std::int64_t attrType(int buffIndex, int attrIndex)
+			unsigned int attrType(int buffIndex, int attrIndex) override
 			{
-				return reinterpret_cast<std::int64_t(__thiscall*)(ChunkMesh*, int, int)>(
+				return reinterpret_cast<unsigned int(__thiscall*)(ChunkMesh*, int, int)>(
 					base + idaOffsetFix(0x2C210)
 					)(this, buffIndex, attrIndex);
 			}
-			std::int64_t attrSize(int buffIndex, int attrIndex)
+			int attrSize(int buffIndex, int attrIndex) override
 			{
-				return reinterpret_cast<std::int64_t(__thiscall*)(ChunkMesh*, int, int)>(
+				return reinterpret_cast<int(__thiscall*)(ChunkMesh*, int, int)>(
 					base + idaOffsetFix(0x2C220)
 					)(this, buffIndex, attrIndex);
 			}
-			std::int64_t attrStride(int buffIndex, int attrIndex)
+			int attrStride(int buffIndex, int attrIndex) override
 			{
-				return reinterpret_cast<std::int64_t(__thiscall*)(ChunkMesh*, int, int)>(
+				return reinterpret_cast<int(__thiscall*)(ChunkMesh*, int, int)>(
 					base + idaOffsetFix(0x2C240)
 					)(this, buffIndex, attrIndex);
 			}
-			unsigned int* indexBuffData() 
+			const void* indexBuffData() override
 			{
-				return reinterpret_cast<unsigned int*(__thiscall*)(ChunkMesh*)>(
+				return reinterpret_cast<const void*(__thiscall*)(ChunkMesh*)>(
 					base + idaOffsetFix(0x2C260)
 					)(this);
 			}
@@ -93,7 +93,7 @@ namespace fdm
 					)(this, side, side_tuvs, pos, light);
 			}
 		};
-		static const unsigned char SIZE = 10 * 128 * 10 * 10; // ig?
+		static const unsigned char SIZE;
 		static const unsigned char HEIGHT = 128;
 		static const unsigned char MESH_COUNT;
 		static const unsigned char MESH_HEIGHT;

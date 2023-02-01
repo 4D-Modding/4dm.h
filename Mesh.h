@@ -7,16 +7,16 @@ namespace fdm
 	struct Mesh 
 	{
 	public:
-		virtual int buffCount();
-		virtual const void* buffData(int);
-		virtual int buffSize(int);
-		virtual int attrCount(int);
-		virtual unsigned int attrType(int, int);
-		virtual int attrSize(int, int);
-		virtual int attrStride(int, int);
-		virtual int vertCount();
-		virtual const void* indexBuffData();
-		virtual int indexBuffSize();
+		virtual int buffCount() {}
+		virtual const void* buffData(int buffIndex) {}
+		virtual int buffSize(int buffIndex) {}
+		virtual int attrCount(int buffIndex) {}
+		virtual unsigned int attrType(int buffIndex, int attrIndex) {}
+		virtual int attrSize(int buffIndex, int attrIndex) {}
+		virtual int attrStride(int buffIndex, int attrIndex) {}
+		virtual int vertCount() {}
+		virtual const void* indexBuffData() {}
+		virtual int indexBuffSize() {}
 	};
 }
 #endif
