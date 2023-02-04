@@ -2,6 +2,8 @@
 #ifndef CHUNK_H
 #define CHUNK_H
 #include "4dm.h"
+#include "Entity.h"
+
 namespace fdm
 {
 	class MeshRenderer;
@@ -10,6 +12,7 @@ namespace fdm
 	class path;
 	class World;
 	struct Mesh;
+	class Player;
 	class Chunk
 	{
 	public:
@@ -18,6 +21,7 @@ namespace fdm
 		public:
 			struct VertData
 			{
+				VertData(){}
 				glm::u8vec4 vert;
 				glm::u8vec4 tuv;
 				glm::u8vec3 lighting;
@@ -94,11 +98,11 @@ namespace fdm
 			}
 		};
 		static const unsigned char SIZE;
-		static const unsigned char HEIGHT = 128;
+		static const unsigned char HEIGHT;
 		static const unsigned char MESH_COUNT;
 		static const unsigned char MESH_HEIGHT;
 
-		unsigned char blocks[10][128][10][10];
+		unsigned char blocks[128][10][10][10];
 		unsigned char lightingHeightMap[10][10][10];
 		glm::i64vec3 pos;
 		bool saved;
@@ -122,11 +126,11 @@ namespace fdm
 
 		PAD(1);
 
-		std::vector< std::unique_ptr<Entity> > entities;
-		std::unordered_map<glm::u8vec4, std::unique_ptr<Entity>, std::hash<glm::u8vec4 >, std::equal_to<glm::u8vec4 >, std::allocator<std::pair<glm::u8vec4 const, std::unique_ptr<Entity> > > > blockEntities;
+		std::vector<std::unique_ptr<Entity>> entities;
+		std::unordered_map<glm::u8vec4, std::unique_ptr<Entity>> blockEntities;
 
 
-		Chunk(const glm::i64vec3& pos) 
+		Chunk(const glm::i64vec3& pos)
 		{
 			reinterpret_cast<void(__thiscall*)(Chunk*, const glm::i64vec3&)>(
 				base + idaOffsetFix(0x1CB40)
@@ -150,11 +154,11 @@ namespace fdm
 				base + idaOffsetFix(0x1D0B0)
 				)(this, world, player, dt);
 		}
-		void addEntity(std::unique_ptr<Entity>& entity)
+		void addEntity(std::unique_ptr<Entity> entity)
 		{
-			reinterpret_cast<void(__thiscall*)(Chunk*, std::unique_ptr<Entity>&)>(
+			reinterpret_cast<void(__thiscall*)(Chunk*, std::unique_ptr<Entity>*)>(
 				base + idaOffsetFix(0x1D4B0)
-				)(this, entity);
+				)(this, &entity);
 		}
 		std::unique_ptr<Entity>* getBlockEntity(const glm::u8vec4& relativeCoords)
 		{

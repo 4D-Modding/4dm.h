@@ -4,6 +4,7 @@
 #include "4dm.h"
 #include "InventoryGUI.h"
 #include "PlayerInventoryManager.h"
+#include "Inventory.h"
 namespace fdm
 {
 	class TexRenderer;

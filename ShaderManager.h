@@ -9,7 +9,7 @@ namespace fdm
 	public:
 		static std::map<std::string, Shader*> shaders() 
 		{
-			return (*reinterpret_cast<std::map<std::string, Shader*>*>((base + idaOffsetFix(0x1401C0A28))));
+			return (*reinterpret_cast<std::map<std::string, Shader*>*>((base + idaOffsetFix(0x1BF228))));
 		}
 		static const Shader* get(const std::string& shaderName) 
 		{

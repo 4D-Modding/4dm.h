@@ -2,6 +2,7 @@
 #ifndef PIM_H
 #define PIM_H
 #include "4dm.h"
+#include "InventoryManager.h"
 namespace fdm
 {
 	class InventoryManager;
@@ -12,10 +13,10 @@ namespace fdm
 	public:
 		InventoryManager* hotbar;
 		InventoryManager* inventory;
-		InventoryManager::iterator begin(void) override
+		iterator begin() override
 		{
-			InventoryManager::iterator* result = new InventoryManager::iterator();
-			return reinterpret_cast<InventoryManager::iterator(__thiscall*)(PlayerInventoryManager*, InventoryManager::iterator*)>(
+			iterator* result = new iterator();
+			return reinterpret_cast<iterator(__thiscall*)(PlayerInventoryManager*, iterator*)>(
 				base + idaOffsetFix(0x66E10)
 				)(this, result);
 		}
@@ -49,10 +50,10 @@ namespace fdm
 				base + idaOffsetFix(0x85410)
 				)(this, other, cursor, button, action, mods);
 		}
-		InventoryManager::iterator end(void) override
+		iterator end(void) override
 		{
-			InventoryManager::iterator* result = new InventoryManager::iterator();
-			return reinterpret_cast<InventoryManager::iterator(__thiscall*)(PlayerInventoryManager*, InventoryManager::iterator*)>(
+			iterator* result = new iterator();
+			return reinterpret_cast<iterator(__thiscall*)(PlayerInventoryManager*, iterator*)>(
 				base + idaOffsetFix(0x85490)
 				)(this, result);
 		}

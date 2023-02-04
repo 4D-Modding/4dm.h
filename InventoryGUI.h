@@ -5,6 +5,7 @@
 #include "GUI/gui.h"
 #include "CraftingMenu.h"
 #include "InventoryCursor.h"
+#include "QuadRenderer.h"
 namespace fdm
 {
 	class InventoryManager;

@@ -7,6 +7,7 @@ namespace fdm
 	struct Frustum
 	{
 	public:
+		Frustum(){}
 		struct 
 		{
 		public:

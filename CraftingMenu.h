@@ -3,28 +3,34 @@
 #define CRAFTINGMENU_H
 #include "4dm.h"
 #include "GUI/Window.h"
+#include "Item.h"
 namespace fdm
 {
 	class InventoryGUI;
 	class InventoryCursor;
 	class Window;
+	class Item;
+	
 	class CraftingMenu : public gui::Element
 	{
+	private:
+		static nlohmann::json recipes;
 	public:
-		struct CraftableRecipe 
+		struct CraftableRecipe
 		{
+		public:
 			std::vector<std::unique_ptr<Item>> recipe;
 			std::unique_ptr<Item> result;
+
 			int availableCount;
 			PAD(4);
-			~CraftableRecipe() 
+			~CraftableRecipe()
 			{
 				reinterpret_cast<void(__thiscall*)(CraftableRecipe*)>(
 					base + idaOffsetFix(0x3D790)
 					)(this);
 			}
 		};
-		static nlohmann::json recipes;
 		static TexRenderer tr;
 		InventoryGUI* intrface;
 		InventoryCursor* cursor;
@@ -33,7 +39,11 @@ namespace fdm
 		int yOffset;
 		gui::AlignmentX xAlign;
 		gui::AlignmentY yAlign;
-
+		static nlohmann::json getRecipes()
+		{
+			CraftingMenu::recipes = *reinterpret_cast<nlohmann::json*>((base + idaOffsetFix(0x1BDE68)));
+			return recipes;
+		}
 		static bool loadRecipes() 
 		{
 			return reinterpret_cast<bool(__fastcall*)()>(
@@ -93,5 +103,6 @@ namespace fdm
 				)(this);
 		}
 	};
+	nlohmann::json CraftingMenu::recipes{};
 }
 #endif

@@ -5,13 +5,14 @@
 #include "path.h"
 #include "Frustum.h"
 #include "MeshRenderer.h"
+#include "Chunk.h"
+
 namespace fdm
 {
 	class path;
 	struct Frustum;
 	class Entity;
 	class Chunk;
-
 	class World
 	{
 	public:
@@ -28,8 +29,7 @@ namespace fdm
 		glm::vec3 caveOffsets;
 		bool flatWorld;
 		PAD(7);
-		std::map<glm::i64vec3, Chunk*> world;
-		PAD(48);
+		std::unordered_map<glm::i64vec3, Chunk*> world;
 		std::mutex worldMutex;
 		std::atomic_bool chunksReady;
 		PAD(3);

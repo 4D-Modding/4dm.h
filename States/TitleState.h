@@ -60,7 +60,7 @@ namespace fdm
 
 		static TitleState* getInstance()
 		{
-			TitleState::instanceObj = reinterpret_cast<TitleState*>((base + idaOffsetFix(0x17E198)));
+			TitleState::instanceObj = reinterpret_cast<TitleState*>((base + idaOffsetFix(0x1BFA10)));
 			return instanceObj;
 		}
 		void updateProjection(int width, int height) 
