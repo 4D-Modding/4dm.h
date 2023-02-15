@@ -1,8 +1,16 @@
-// that was helpful kinda: https://javagl.github.io/GLConstantsTranslator/GLConstantsTranslator.html
-// for some stuff
+/* 
+ * that was kinda helpful for RE rendering : https://javagl.github.io/GLConstantsTranslator/GLConstantsTranslator.html 
+ * and some other stuff
+*/
 
 #ifndef __4DM_H__
 #define __4DM_H__
+#ifndef MOD_NAME
+#define MOD_NAME "Unknown Mod"
+#endif
+#ifndef MOD_VER
+#define MOD_VER "0.0"
+#endif
 #include <algorithm>
 #include <map>
 #include <unordered_map>
@@ -37,10 +45,14 @@
 #ifndef MBO
 #define MBO(t, c, off) *reinterpret_cast<t*>(reinterpret_cast<uintptr_t>(c) + off) // member by offset
 #endif
+
 namespace fdm
 {
+	const char* modName = "";
+	const char* modVer = "";
 	inline uintptr_t base = reinterpret_cast<uintptr_t>(GetModuleHandle(0));
 }
+#include "MinHook.h"
 #include "path.h"
 #include "m4.h"
 #include "Mesh.h"
@@ -62,14 +74,23 @@ namespace fdm
 #include "Player.h"
 #include "Chunk.h"
 #include "ShaderManager.h"
+#include "ResourceManager.h"
 #include "GUI/gui.h"
 #include "CraftingMenu.h"
 #include "InventoryGUI.h"
 #include "CloudChunk.h"
 #include "CloudManager.h"
 #include "BlockItem.h"
+#include "BlockHelper.h"
 #include "States/StateManager.h"
 #include "States/State.h"
 #include "States/GameState.h"
 #include "States/TitleState.h"
+
+extern "C" __declspec(dllexport) const char* getModName() { if (fdm::modName == "") fdm::modName = MOD_NAME; return fdm::modName; }
+extern "C" __declspec(dllexport) const char* getModVer() { if (fdm::modVer == "") fdm::modVer = MOD_VER; return fdm::modVer; }
+
+extern "C" __declspec(dllexport) void setModName(const char* newName) { fdm::modName = newName; }
+extern "C" __declspec(dllexport) void setModVer(const char* newVer) { fdm::modVer = newVer; }
+
 #endif

@@ -26,11 +26,31 @@ namespace fdm
 				base + idaOffsetFix(0x8A270)
 				)(this, path, type);
 		}
+		bool load(const std::string& vertexPath, const std::string& fragmentPath) const
+		{
+			return reinterpret_cast<bool(__thiscall*)(const Shader*, const std::string & vertexPath, const std::string & fragmentPath)>(
+				base + idaOffsetFix(0x8A140)
+				)(this, vertexPath, fragmentPath);
+		}
+		unsigned int compileShader(const std::string& path, shaderType type) const
+		{
+			return reinterpret_cast<unsigned int(__thiscall*)(const Shader*, const std::string & path, shaderType fragmentPath)>(
+				base + idaOffsetFix(0x8A270)
+				)(this, path, type);
+		}
 		unsigned int id() const
 		{
 			return ID;
 		}
 		void use() const
+		{
+			glUseProgram(ID);
+		}
+		unsigned int id()
+		{
+			return ID;
+		}
+		void use()
 		{
 			glUseProgram(ID);
 		}

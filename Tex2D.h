@@ -36,6 +36,24 @@ namespace fdm
 				base + idaOffsetFix(0x93410)
 				)(this, data, texWidth, texHeight, channels, cols);
 		}
+		bool load(const std::string& filename) const
+		{
+			return reinterpret_cast<bool(__thiscall*)(const Tex2D*, const std::string&)>(
+				base + idaOffsetFix(0x931D0)
+				)(this, filename);
+		}
+		bool loadRawImageData(const unsigned char* data, int texWidth, int texHeight, int channels) const
+		{
+			return reinterpret_cast<bool(__thiscall*)(const Tex2D*, const unsigned char*, int, int, int)>(
+				base + idaOffsetFix(0x932E0)
+				)(this, data, texWidth, texHeight, channels);
+		}
+		bool loadArrayTexture(const unsigned char* data, int texWidth, int texHeight, int channels, int cols) const
+		{
+			return reinterpret_cast<bool(__thiscall*)(const Tex2D*, const unsigned char*, int, int, int, int)>(
+				base + idaOffsetFix(0x93410)
+				)(this, data, texWidth, texHeight, channels, cols);
+		}
 	};
 }
 #endif

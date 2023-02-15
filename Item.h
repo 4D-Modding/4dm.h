@@ -24,7 +24,7 @@ namespace fdm
 		unsigned int count;
 		static nlohmann::json getBlueprints()
 		{
-			Item::blueprints = *reinterpret_cast<nlohmann::json*>((base + idaOffsetFix(0x1BE580)));
+			Item::blueprints = *reinterpret_cast<nlohmann::json*>((base + idaOffsetFix(0x1327B0)));
 			return blueprints;
 		}
 		bool loadItemInfo(void) 
