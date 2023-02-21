@@ -52,6 +52,7 @@ namespace fdm
 	const char* modVer = "";
 	inline uintptr_t base = reinterpret_cast<uintptr_t>(GetModuleHandle(0));
 }
+
 #include "MinHook.h"
 #include "path.h"
 #include "m4.h"
