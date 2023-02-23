@@ -142,8 +142,8 @@ namespace fdm
 			if (!initialized) 
 			{
 				// initializing hooks
-				MH_CreateHook(reinterpret_cast<void*>(base + idaOffsetFix(0x16690)), reinterpret_cast<void*>(&BlockItem_renderEntity_H), reinterpret_cast<void**>(&BlockItem_renderEntity_O));
-				MH_EnableHook(reinterpret_cast<void*>(base + idaOffsetFix(0x16690)));
+				Hook(reinterpret_cast<void*>(base + idaOffsetFix(0x16690)), reinterpret_cast<void*>(&BlockItem_renderEntity_H), reinterpret_cast<void**>(&BlockItem_renderEntity_O));
+				EnableHook(reinterpret_cast<void*>(base + idaOffsetFix(0x16690)));
 
 				// loading stuff
 				tilesTex = ResourceManager::get("tiles.png", true);
