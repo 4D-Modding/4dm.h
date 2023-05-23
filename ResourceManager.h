@@ -18,7 +18,7 @@ namespace fdm
 			}
 			else 
 			{
-				const Tex2D* texture{};
+				const Tex2D* texture = new Tex2D();
 				if (texture->load("mods/" + std::string(fdm::modName) + "/" + filename))
 					return texture;
 				else 
