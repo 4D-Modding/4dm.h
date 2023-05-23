@@ -5,6 +5,7 @@
 #include "../Tex2D.h"
 #include "../TexRenderer.h"
 #include "../ShaderManager.h"
+#include "../ResourceManager.h"
 namespace fdm
 {
 	class Tex2D;
