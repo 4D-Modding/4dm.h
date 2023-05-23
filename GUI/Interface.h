@@ -107,7 +107,9 @@ namespace fdm
 			}
 			bool removeElement(Element* e) override
 			{
-				elements.erase(std::remove(elements.begin(), elements.end(), e), elements.end());
+				return reinterpret_cast<bool(__thiscall*)(Interface*, Element*)> (
+					base + idaOffsetFix(0x56850)
+					)(this, e);
 			}
 			bool selectElement(Element* e) override
 			{
