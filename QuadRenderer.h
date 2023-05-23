@@ -11,8 +11,8 @@ namespace fdm
 		const Shader* shader;
 		unsigned int VAO;
 		unsigned int buffers[4];
-		unsigned int mode;
-		unsigned int elementCount;
+		unsigned int mode = 4;
+		unsigned int elementCount = 6;
 		~QuadRenderer()
 		{
 			glBindVertexArray(this->VAO);

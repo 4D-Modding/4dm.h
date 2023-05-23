@@ -18,7 +18,7 @@ namespace fdm
 			int yOffset;
 			AlignmentX xAlign;
 			AlignmentY yAlign;
-			glm::vec4 color;
+			glm::vec4 color = glm::vec4{ 1.0f };
 			unsigned int size;
 			unsigned int wrapWidth;
 			bool shadow;

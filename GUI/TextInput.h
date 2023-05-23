@@ -55,10 +55,6 @@ namespace fdm
 			{
 				this->yAlign = a;
 			}
-			void offsetX(int offset) override
-			{
-				this->xOffset = offset;
-			}
 			void offsetY(int offset) override
 			{
 				this->yOffset = offset;
@@ -115,6 +111,10 @@ namespace fdm
 				reinterpret_cast<void(__thiscall*)(TextInput*)>(
 					base + idaOffsetFix(0x59DB0)
 					)(this);
+			}
+			void offsetX(int offset) override
+			{
+				this->xOffset = offset;
 			}
 		};
 		const int TextInput::maxScrollPos = 4;

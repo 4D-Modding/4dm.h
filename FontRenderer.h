@@ -12,9 +12,9 @@ namespace fdm
 	public:
 		std::string text;
 		glm::ivec2 charSize;
-		int fontSize;
+		int fontSize = 1;
 		glm::ivec2 pos;
-		glm::vec4 color;
+		glm::vec4 color = glm::vec4{1.0f};
 		glm::mat4x4 model;
 		bool centered;
 		PAD(3);
@@ -23,6 +23,7 @@ namespace fdm
 		unsigned int VAO;
 		unsigned int charVBO;
 
+		FontRenderer(){}
 		FontRenderer(const Tex2D* texture, const Shader* shader) {
 			reinterpret_cast<void(__thiscall*)(FontRenderer*, const Tex2D*, const Shader*)>(
 				base + idaOffsetFix(0x4F8F0)

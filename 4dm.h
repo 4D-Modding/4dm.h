@@ -54,7 +54,6 @@ namespace fdm
 	const char* modVer = "";
 	inline uintptr_t base = reinterpret_cast<uintptr_t>(GetModuleHandle(0));
 }
-
 #include "path.h"
 #include "m4.h"
 #include "Mesh.h"
@@ -88,6 +87,7 @@ namespace fdm
 #include "States/State.h"
 #include "States/GameState.h"
 #include "States/TitleState.h"
+#include "States/CreateWorldState.h"
 
 extern "C" __declspec(dllexport) const char* getModName() { if (fdm::modName == "") fdm::modName = MOD_NAME; return fdm::modName; }
 extern "C" __declspec(dllexport) const char* getModVer() { if (fdm::modVer == "") fdm::modVer = MOD_VER; return fdm::modVer; }

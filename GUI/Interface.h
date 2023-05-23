@@ -4,18 +4,18 @@
 #include "gui.h"
 #include "../Shader.h"
 #include "../ShaderManager.h"
-namespace fdm 
+namespace fdm
 {
 	class QuadRenderer;
 	class FontRenderer;
-	namespace gui 
+	namespace gui
 	{
 		using ViewportCallback = std::add_pointer<void(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>::type;
 
 		class Window;
 		class ElemContainer;
 		class Element;
-		
+
 		class Interface : public Window, public ElemContainer
 		{
 		public:
@@ -28,8 +28,8 @@ namespace fdm
 			ViewportCallback viewportCallback = NULL;
 			void* viewportUser;
 			bool viewUpdateFlag;
-			
-			~Interface() 
+
+			~Interface()
 			{
 				reinterpret_cast<void(__thiscall*)(Interface*)>(
 					base + idaOffsetFix(0x3EF40)
@@ -47,7 +47,7 @@ namespace fdm
 					base + idaOffsetFix(0x56370)
 					)(this, xPos, yPos);
 			}
-			bool scrollInput(double xOff, double yOff) 
+			bool scrollInput(double xOff, double yOff)
 			{
 				return reinterpret_cast<bool(__thiscall*)(Interface*, double, double)>(
 					base + idaOffsetFix(0x56400)
@@ -65,7 +65,7 @@ namespace fdm
 					base + idaOffsetFix(0x565A0)
 					)(this, key, scancode, action, mods);
 			}
-			QuadRenderer* getQuadRenderer() override 
+			QuadRenderer* getQuadRenderer() override
 			{
 				return reinterpret_cast<QuadRenderer * (__thiscall*)(Interface*)>(
 					base + idaOffsetFix(0x56750)
@@ -101,9 +101,9 @@ namespace fdm
 					base + idaOffsetFix(0x567F0)
 					)(this, pos, scroll);
 			}
-			void addElement(Element* e) override 
+			void addElement(Element* e) override
 			{
-				reinterpret_cast<void(__thiscall*)(Interface*, Element*) > (
+				reinterpret_cast<void(__thiscall*)(Interface*, Element*)> (
 					base + idaOffsetFix(0x56810)
 					)(this, e);
 			}
@@ -119,7 +119,7 @@ namespace fdm
 					base + idaOffsetFix(0x568E0)
 					)(this, e);
 			}
-			void clear() override 
+			void clear() override
 			{
 				reinterpret_cast<void(__thiscall*)(Interface*)> (
 					base + idaOffsetFix(0x569A0)
@@ -127,7 +127,7 @@ namespace fdm
 			}
 			bool empty() override
 			{
-				reinterpret_cast<bool(__thiscall*)(Interface*)> (
+				return reinterpret_cast<bool(__thiscall*)(Interface*)> (
 					base + idaOffsetFix(0x569F0)
 					)(this);
 			}

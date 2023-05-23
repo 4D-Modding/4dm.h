@@ -15,6 +15,7 @@ namespace fdm
 			float b12;
 			float b13;
 			float b23;
+			
 			void normalize()
 			{
 				return reinterpret_cast<void(__thiscall*)(BiVector4*)>(
@@ -78,6 +79,13 @@ namespace fdm
 		{
 		public:
 			float value[5][5];
+			// 0.0
+			Mat5() 
+			{
+				reinterpret_cast<void(__thiscall*)(Mat5*, float)>(
+					base + idaOffsetFix(0x767D0)
+					)(this, 0.0);
+			}
 			Mat5(float x)
 			{
 				reinterpret_cast<void(__thiscall*)(Mat5*, float)>(
