@@ -119,15 +119,11 @@ namespace fdm
 			}
 			void clear() override
 			{
-				reinterpret_cast<void(__thiscall*)(Interface*)> (
-					base + idaOffsetFix(0x569A0)
-					)(this);
+				elements.clear();
 			}
 			bool empty() override
 			{
-				return reinterpret_cast<bool(__thiscall*)(Interface*)> (
-					base + idaOffsetFix(0x569F0)
-					)(this);
+				return elements.empty();
 			}
 		};
 	}

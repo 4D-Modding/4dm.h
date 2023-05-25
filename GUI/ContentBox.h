@@ -170,15 +170,11 @@ namespace fdm
 			}
 			void clear() override 
 			{
-				reinterpret_cast<void(__thiscall*)(gui::ContentBox*)> (
-					base + idaOffsetFix(0x5B7D0)
-					)(this);
+				elements.clear();
 			}
 			bool empty() override
 			{
-				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox*)> (
-					base + idaOffsetFix(0x5B820)
-					)(this);
+				return elements.empty();
 			}
 			void alignX(AlignmentX a) override
 			{
