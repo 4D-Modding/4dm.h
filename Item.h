@@ -109,15 +109,15 @@ namespace fdm
 		}
 
 		// abstract/virtual funcs
-		virtual std::string getName() {}
+		virtual std::string getName() { return ""; }
 		virtual void render(const glm::ivec2& pos) {}
 		virtual void renderEntity(const m4::Mat5& mat, bool inHand) {}
-		virtual bool isDeadly() {}
-		virtual bool isCompatible(const std::unique_ptr<Item>& other) {}
-		virtual unsigned int getStackLimit() {}
-		virtual bool action(World* world, Player* player, int action) {}
-		virtual bool breakBlock(World* world, Player* player, unsigned char block, const glm::ivec4& blockPos) {}
-		virtual bool entityAction(World* world, Player* player, std::unique_ptr<Entity>& entity, int action) {}
+		virtual bool isDeadly() { return false; }
+		virtual bool isCompatible(const std::unique_ptr<Item>& other) { return false; }
+		virtual unsigned int getStackLimit() { return 4096; }
+		virtual bool action(World* world, Player* player, int action) { return false; }
+		virtual bool breakBlock(World* world, Player* player, unsigned char block, const glm::ivec4& blockPos) { return false; }
+		virtual bool entityAction(World* world, Player* player, std::unique_ptr<Entity>& entity, int action) { return false; }
 		virtual std::unique_ptr<Item> clone() { return NULL; }
 		nlohmann::json saveAttributes() { return NULL; }
 	};
