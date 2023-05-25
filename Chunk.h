@@ -97,20 +97,20 @@ namespace fdm
 					)(this, side, side_tuvs, pos, light);
 			}
 		};
-		static const unsigned char SIZE;
-		static const unsigned char HEIGHT;
-		static const unsigned char MESH_COUNT;
-		static const unsigned char MESH_HEIGHT;
+		inline static const unsigned char SIZE = 10; // ig? not sure
+		inline static const unsigned char HEIGHT = 128;
+		inline static const unsigned char MESH_COUNT = 8; // ig? not sure
+		inline static const unsigned char MESH_HEIGHT = 0; // idk number
 
-		unsigned char blocks[128][10][10][10];
-		unsigned char lightingHeightMap[10][10][10];
+		unsigned char blocks[HEIGHT][SIZE][SIZE][SIZE];
+		unsigned char lightingHeightMap[SIZE][SIZE][SIZE];
 		glm::i64vec3 pos;
 		bool saved;
 
 		PAD(7);
 
-		ChunkMesh meshData[8];
-		MeshRenderer meshRenderers[8];
+		ChunkMesh meshData[MESH_COUNT];
+		MeshRenderer meshRenderers[MESH_COUNT];
 		bool meshUpdatesQueued;
 
 		PAD(7);

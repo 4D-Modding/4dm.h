@@ -40,10 +40,10 @@ namespace fdm
 					)(this, buffIndex, attrIndex);
 			}
 		};
-		static const unsigned char SIZE;
-		static const unsigned char SCALE;
+		inline static const unsigned char SIZE = 6; // ig? not sure
+		inline static const unsigned char SCALE = 1; // idk???
 
-		unsigned char blocks[6][6][6];
+		unsigned char blocks[SIZE * SCALE][SIZE * SCALE][SIZE * SCALE];
 
 		std::mutex meshMutex;
 		CloudChunk::CloudChunkMesh activeMesh;

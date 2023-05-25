@@ -16,7 +16,7 @@ namespace fdm
 	class InventoryGUI
 	{
 	public:
-		static const int scale;
+		inline static const int scale = 0; // idk??
 		InventoryManager* primary;
 		InventoryManager* secondary;
 		InventoryCursor cursor;
@@ -53,7 +53,7 @@ namespace fdm
 				base + idaOffsetFix(0x67490)
 				)(this);
 		}
-		static void viewportCallback(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)
+		inline static void viewportCallback(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, const glm::ivec4&, const glm::ivec2&)>(
 				base + idaOffsetFix(0x67540)

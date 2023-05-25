@@ -5,6 +5,9 @@
 #include "World.h"
 #include "Player.h"
 #include "Entity.h"
+#include "FontRenderer.h"
+#include "QuadRenderer.h"
+
 namespace fdm
 {
 	class FontRenderer;
@@ -16,13 +19,13 @@ namespace fdm
 	class Item
 	{
 	private:
-		static nlohmann::json blueprints;
+		inline static nlohmann::json blueprints;
 	public:
-		static FontRenderer fr;
-		static QuadRenderer qr;
+		inline static FontRenderer fr;
+		inline static QuadRenderer qr;
 		
 		unsigned int count;
-		static nlohmann::json getBlueprints()
+		inline static nlohmann::json getBlueprints()
 		{
 			Item::blueprints = *reinterpret_cast<nlohmann::json*>((base + idaOffsetFix(0x1327B0)));
 			return blueprints;
@@ -53,51 +56,51 @@ namespace fdm
 				)(this, other);
 		}
 
-		// static funcs fr
-		static void renderItem(std::unique_ptr<Item>& item, const glm::ivec2& pos)
+		// inline static funcs fr
+		inline static void renderItem(std::unique_ptr<Item>& item, const glm::ivec2& pos)
 		{
 			return reinterpret_cast<void(__fastcall*)(std::unique_ptr<Item>&, const glm::ivec2&)>(
 				base + idaOffsetFix(0x683B0)
 				)(item, pos);
 		}
-		static void renderItemDescription(std::unique_ptr<Item>& item, const glm::ivec2& pos)
+		inline static void renderItemDescription(std::unique_ptr<Item>& item, const glm::ivec2& pos)
 		{
 			return reinterpret_cast<void(__fastcall*)(std::unique_ptr<Item>&, const glm::ivec2&)>(
 				base + idaOffsetFix(0x68540)
 				)(item, pos);
 		}
-		static std::unique_ptr<Item> createFromJson(const nlohmann::json& j)
+		inline static std::unique_ptr<Item> createFromJson(const nlohmann::json& j)
 		{
 			return reinterpret_cast<std::unique_ptr<Item>(__fastcall*)(std::unique_ptr<Item>*, const nlohmann::json&)>(
 				base + idaOffsetFix(0x68A80)
 				)(nullptr, j);
 		}
-		static std::unique_ptr<Item> create(const std::string& itemName, unsigned int count)
+		inline static std::unique_ptr<Item> create(const std::string& itemName, unsigned int count)
 		{
 			return reinterpret_cast<std::unique_ptr<Item>(__fastcall*)(std::unique_ptr<Item>*, const std::string&, unsigned int)>(
 				base + idaOffsetFix(0x69710)
 				)(nullptr, itemName, count);
 		}
-		static bool giveMax(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to)
+		inline static bool giveMax(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to)
 		{
 			return reinterpret_cast<bool(__fastcall*)(std::unique_ptr<Item>&, std::unique_ptr<Item>&)>(
 				base + idaOffsetFix(0x69BD0)
 				)(from, to);
 		}
-		static bool giveOne(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to)
+		inline static bool giveOne(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to)
 		{
 			return reinterpret_cast<bool(__fastcall*)(std::unique_ptr<Item>&, std::unique_ptr<Item>&)>(
 				base + idaOffsetFix(0x69D90)
 				)(from, to);
 		}
-		static std::unique_ptr<Item> instantiateItem(const std::string& itemName, unsigned int count, const std::string& type, const nlohmann::json& attributes)
+		inline static std::unique_ptr<Item> instantiateItem(const std::string& itemName, unsigned int count, const std::string& type, const nlohmann::json& attributes)
 		{
 			std::unique_ptr<Item>* result = new std::unique_ptr<Item>();
 			return reinterpret_cast<std::unique_ptr<Item>(__fastcall*)(std::unique_ptr<Item>*, const std::string&, unsigned int, const std::string&, const nlohmann::json&)>(
 				base + idaOffsetFix(0x69F00)
 				)(result, itemName, count, type, attributes);
 		}
-		static nlohmann::json combineItemAttributes(const nlohmann::json& baseAttributes, const nlohmann::json& additions)
+		inline static nlohmann::json combineItemAttributes(const nlohmann::json& baseAttributes, const nlohmann::json& additions)
 		{
 			nlohmann::json* result = new nlohmann::json();
 			return reinterpret_cast<nlohmann::json(__fastcall*)(nlohmann::json*, const nlohmann::json&, const nlohmann::json&)>(
@@ -118,7 +121,5 @@ namespace fdm
 		virtual std::unique_ptr<Item> clone() { return NULL; }
 		nlohmann::json saveAttributes() { return NULL; }
 	};
-	nlohmann::json Item::blueprints{};
-
 }
 #endif

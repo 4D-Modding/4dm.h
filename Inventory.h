@@ -16,8 +16,8 @@ namespace fdm
 	class Inventory : public InventoryManager
 	{
 	public:
-		static TexRenderer tr;
-		static FontRenderer fr;
+		inline static TexRenderer tr;
+		inline static FontRenderer fr;
 		glm::ivec2 renderPos;
 		glm::ivec2 size;
 		glm::ivec2 selectedSlot;

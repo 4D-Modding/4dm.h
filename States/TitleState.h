@@ -21,7 +21,7 @@ namespace fdm
 	class TitleState : public State
 	{
 	private:
-		static TitleState* instanceObj;
+		inline static TitleState* instanceObj;
 	public:
 		glm::mat4x4 projection2D;
 		glm::mat4x4 projection3D;
@@ -148,6 +148,5 @@ namespace fdm
 				)(this, width, height);
 		}
 	};
-	TitleState* TitleState::instanceObj;
 }
 #endif

@@ -5,6 +5,7 @@
 #include "../Tex2D.h"
 #include "../TexRenderer.h"
 #include "../ShaderManager.h"
+#include "../ResourceManager.h"
 namespace fdm
 {
 	class Tex2D;
@@ -61,10 +62,10 @@ namespace fdm
 					base + idaOffsetFix(0x5C6B0)
 					)(this, w, width, height);
 			}
-			void loadImage(const std::string& path) // thats custom function (it doesnt exist in game) but it makes it easier to use Image
+			// thats custom function (it doesnt exist in game) but it makes it easier to use Image
+			void loadImage(const std::string& path, bool modFolder = false)
 			{
-				Tex2D* img = new Tex2D();
-				img->load(path);
+				const Tex2D* img = ResourceManager::get(path, modFolder);
 				TexRenderer* tr = new TexRenderer();
 				tr->texture = img;
 				tr->shader = ShaderManager::get("tex2DShader");

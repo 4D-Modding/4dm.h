@@ -14,7 +14,7 @@ namespace fdm
 	class CraftingMenu : public gui::Element
 	{
 	private:
-		static nlohmann::json recipes;
+		inline static nlohmann::json recipes;
 	public:
 		struct CraftableRecipe
 		{
@@ -31,7 +31,7 @@ namespace fdm
 					)(this);
 			}
 		};
-		static TexRenderer tr;
+		inline static TexRenderer tr;
 		InventoryGUI* intrface;
 		InventoryCursor* cursor;
 		std::vector<CraftableRecipe> craftableRecipes;
@@ -39,18 +39,18 @@ namespace fdm
 		int yOffset;
 		gui::AlignmentX xAlign;
 		gui::AlignmentY yAlign;
-		static nlohmann::json getRecipes()
+		inline static nlohmann::json getRecipes()
 		{
 			CraftingMenu::recipes = *reinterpret_cast<nlohmann::json*>((base + idaOffsetFix(0x1BDE68)));
 			return recipes;
 		}
-		static bool loadRecipes() 
+		inline static bool loadRecipes() 
 		{
 			return reinterpret_cast<bool(__fastcall*)()>(
 				base + idaOffsetFix(0x3B650)
 				)();
 		}
-		static void renderInit() 
+		inline static void renderInit() 
 		{
 			reinterpret_cast<void(__fastcall*)()>(
 				base + idaOffsetFix(0x3B960)
@@ -103,6 +103,5 @@ namespace fdm
 				)(this);
 		}
 	};
-	nlohmann::json CraftingMenu::recipes{};
 }
 #endif

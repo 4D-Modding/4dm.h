@@ -13,10 +13,10 @@ namespace fdm
 	class Entity
 	{
 	public:
-		static const float MAX_HITBOX_RADIUS;
-		static TexRenderer ftr;
-		static FontRenderer fr;
-		static nlohmann::json blueprints;
+		inline static const float MAX_HITBOX_RADIUS = 1.f; // idk???
+		inline static TexRenderer ftr;
+		inline static FontRenderer fr;
+		inline static nlohmann::json blueprints;
 		// abstract/virtual funcs
 		virtual std::string getName() {}
 		virtual void render(const World* world, const m4::Mat5& MV, bool glasses) {}

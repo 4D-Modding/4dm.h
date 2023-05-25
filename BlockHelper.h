@@ -15,9 +15,9 @@ namespace fdm
 	class BlockHelper
 	{
 	private:
-		static bool initialized;
+		inline static bool initialized;
 	public:
-		static const int lastBlockID = 28;
+		inline static const int lastBlockID = 28;
 
 		// same struct as 4D Miner BlockInfo::ItemMesh.
 		struct ItemMesh
@@ -84,7 +84,7 @@ namespace fdm
 			*/
 			BlockTUV(std::vector<glm::u8vec4> top, std::vector<glm::u8vec4> side, std::vector<glm::u8vec4> bottom, std::vector<glm::u8vec4> full_block) : BlockTUV(top.data(), side.data(), bottom.data(), full_block.data()) {}
 
-			static BlockTUV generateSingleColumn(unsigned int column) 
+			inline static BlockTUV generateSingleColumn(unsigned int column) 
 			{
 				glm::u8vec4 side[8] =
 				{
@@ -132,12 +132,12 @@ namespace fdm
 			BlockTUV blockTUV;
 		};
 
-		static std::vector<Block> blocks;
-		static const Tex2D* tilesTex;
-		static const Shader* blockShader;
+		inline static std::vector<Block> blocks;
+		inline static const Tex2D* tilesTex;
+		inline static const Shader* blockShader;
 
 		// initializes render hooks for custom blocks to work properly
-		static void init()
+		inline static void init()
 		{
 			if (!initialized) 
 			{
@@ -153,7 +153,7 @@ namespace fdm
 			}
 		}
 		// blockID starts from 0!! This function will automatically add 29 so its not messing up other 4D Miner blocks!!
-		static void addBlockItem(const std::string& blockName, unsigned char blockID = 0)
+		inline static void addBlockItem(const std::string& blockName, unsigned char blockID = 0)
 		{
 			nlohmann::json attrs;
 			if (blockID >= 255 - lastBlockID - 1)
@@ -163,8 +163,8 @@ namespace fdm
 		}
 
 	private:
-		static void(__thiscall* BlockItem_renderEntity_O)(BlockItem* self, const m4::Mat5& MV, bool inHand);
-		static void __fastcall BlockItem_renderEntity_H(BlockItem* self, const m4::Mat5& MV, bool inHand)
+		inline static void(__thiscall* BlockItem_renderEntity_O)(BlockItem* self, const m4::Mat5& MV, bool inHand);
+		inline static void __fastcall BlockItem_renderEntity_H(BlockItem* self, const m4::Mat5& MV, bool inHand)
 		{
 			if (self->blockID <= lastBlockID) 
 			{
@@ -193,10 +193,5 @@ namespace fdm
 			glBindVertexArray(0);
 		}
 	};
-	const Tex2D* BlockHelper::tilesTex{};
-	const Shader* BlockHelper::blockShader{};
-	bool BlockHelper::initialized = false;
-	std::vector<BlockHelper::Block> BlockHelper::blocks{};
-	void (__thiscall* BlockHelper::BlockItem_renderEntity_O)(BlockItem* self, const m4::Mat5& MV, bool inHand) = NULL;
 }
 #endif

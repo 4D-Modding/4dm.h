@@ -7,8 +7,8 @@ namespace fdm
 	class ResourceManager
 	{
 	public:
-		// if you use modFolder assets then base path will be "mods/fdm::MOD_NAME/" instead of "assets/textures/"
-		static const Tex2D* get(const std::string& filename, bool modFolder = false) 
+		// if you use modFolder assets then base path will be "mods/MOD_NAME/" instead of "assets/textures/"
+		inline static const Tex2D* get(const std::string& filename, bool modFolder = false) 
 		{
 			if (!modFolder) 
 			{
@@ -18,8 +18,8 @@ namespace fdm
 			}
 			else 
 			{
-				const Tex2D* texture{};
-				if (texture->load("mods/" + std::string(fdm::modName) + "/" + filename))
+				const Tex2D* texture = new Tex2D();
+				if (texture->load("mods/" + std::string(MOD_NAME) + "/" + filename))
 					return texture;
 				else 
 				{
@@ -29,7 +29,7 @@ namespace fdm
 				return NULL;
 			}
 		}
-		static bool loadArrayTexture(const std::string& filename, int cols, int rows)
+		inline static bool loadArrayTexture(const std::string& filename, int cols, int rows)
 		{
 			return reinterpret_cast<bool(__fastcall*)(const std::string&, int, int)>(
 				base + idaOffsetFix(0x85EB0)

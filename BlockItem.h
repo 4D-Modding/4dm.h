@@ -9,19 +9,19 @@ namespace fdm
 	class BlockItem : public Item
 	{
 	private:
-		static std::unordered_map<int, std::string> itemTypes;
+		inline static std::unordered_map<int, std::string> itemTypes;
 	public:
 		int blockID;
 
-		static const int STACK_MAX = 4096;
-		static TexRenderer tr;
+		inline static const int STACK_MAX = 4096;
+		inline static TexRenderer tr;
 		
-		static std::unordered_map<int, std::string> getItemTypes() 
+		inline static std::unordered_map<int, std::string> getItemTypes() 
 		{
 			BlockItem::itemTypes = *reinterpret_cast<std::unordered_map<int, std::string>*>((base + idaOffsetFix(0x1C1FB0)));
 			return itemTypes;
 		}
-		static void addItemType(const std::string& itemType, nlohmann::json& baseAttributes) 
+		inline static void addItemType(const std::string& itemType, nlohmann::json& baseAttributes) 
 		{
 			reinterpret_cast<void(__fastcall*)(const std::string&, nlohmann::json&)>(
 				base + idaOffsetFix(0x160D0)

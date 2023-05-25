@@ -29,14 +29,14 @@ namespace fdm
 				return b;
 			}
 		};
-		glm::vec4 cross(const glm::vec4& u, const glm::vec4& v, const glm::vec4& w)
+		inline glm::vec4 cross(const glm::vec4& u, const glm::vec4& v, const glm::vec4& w)
 		{
 			glm::vec4* result = new glm::vec4(0.0f);
 			return reinterpret_cast<glm::vec4& (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
 				base + idaOffsetFix(0x75AF0)
 				)(result, u, v, w);
 		}
-		BiVector4 wedge(const glm::vec4& u, const glm::vec4& v) 
+		inline BiVector4 wedge(const glm::vec4& u, const glm::vec4& v)
 		{
 			BiVector4* result = new BiVector4();
 			return reinterpret_cast<BiVector4 & (__fastcall*)(BiVector4* result, const glm::vec4&, const glm::vec4&)>(
@@ -134,7 +134,7 @@ namespace fdm
 				return value[index];
 			}
 		};
-		Mat5 createCamera(const glm::vec4& eye, const glm::vec4& forward, const glm::vec4& up, const glm::vec4& left, const glm::vec4& over)
+		inline Mat5 createCamera(const glm::vec4& eye, const glm::vec4& forward, const glm::vec4& up, const glm::vec4& left, const glm::vec4& over)
 		{
 			Mat5 cameraD{ 1 };
 
@@ -163,7 +163,7 @@ namespace fdm
 
 			return cameraD * cameraP;
 		}
-		glm::vec4 adjustToMaxHorizSpeed(const glm::vec4& vel, const glm::vec4& deltaVel, float maxHorizSpeed)
+		inline glm::vec4 adjustToMaxHorizSpeed(const glm::vec4& vel, const glm::vec4& deltaVel, float maxHorizSpeed)
 		{
 			glm::vec4* result = new glm::vec4(0.0f);
 			return reinterpret_cast<glm::vec4& (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, float)>(

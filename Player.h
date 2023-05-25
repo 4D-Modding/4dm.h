@@ -15,20 +15,20 @@ namespace fdm
 	class Player
 	{
 	public:
-        static const float zNear;
-        static const float zFar;
-        static const float height;
-        static const float acc;
-        static const float fric;
-        static const float maxWalkSpeed;
-        static const float maxCrouchSpeed;
-        static const float maxSprintSpeed;
-        static const glm::vec4 defaultSpawnPos;
-        static const float maxHealth;
-        static const float hitCooldown;
-        static const float damageCooldown;
-        static TexRenderer healthRenderer;
-        static FontRenderer fr;
+        inline static const float zNear = 0.01f; // idk???
+        inline static const float zFar = 1000.0f; // idk???
+        inline static const float height = 2.f; // idk???
+        inline static const float acc = 0.f; // idk???
+        inline static const float fric = 0.f; // idk???
+        inline static const float maxWalkSpeed = 0.f; // idk???
+        inline static const float maxCrouchSpeed = 0.f; // idk???
+        inline static const float maxSprintSpeed = 0.f; // idk???
+        inline static const glm::vec4 defaultSpawnPos;
+        inline static const float maxHealth = 1.f; // idk???
+        inline static const float hitCooldown = 0.f; // idk???
+        inline static const float damageCooldown = 0.f; // idk???
+        inline static TexRenderer healthRenderer;
+        inline static FontRenderer fr;
 
         struct
         {

@@ -17,7 +17,7 @@ namespace fdm
 		class ContentBox : public Element, public Window, public ElemContainer 
 		{
 		public:
-			static const int scrollbarWidth = 20;
+			inline static const int scrollbarWidth = 20;
 			gui::Window* parent;
 			std::vector<gui::Element*> elements;
 			int selectedElemIndex;
@@ -154,9 +154,7 @@ namespace fdm
 			}
 			void addElement(gui::Element* e) override
 			{
-				reinterpret_cast<void(__thiscall*)(gui::ContentBox*, gui::Element*)> (
-					base + idaOffsetFix(0x5B660)
-					)(this, e);
+				elements.push_back(e);
 			}
 			bool removeElement(gui::Element* e) override
 			{

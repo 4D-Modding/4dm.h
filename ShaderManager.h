@@ -7,17 +7,17 @@ namespace fdm
 	class ShaderManager 
 	{
 	public:
-		static std::map<std::string, Shader*> shaders() 
+		inline static std::map<std::string, Shader*> shaders() 
 		{
 			return (*reinterpret_cast<std::map<std::string, Shader*>*>((base + idaOffsetFix(0x1BF228))));
 		}
-		static const Shader* get(const std::string& shaderName) 
+		inline static const Shader* get(const std::string& shaderName) 
 		{
 			return reinterpret_cast<const Shader*(__fastcall*)(const std::string&)>(
 				base + idaOffsetFix(0x8A8E0)
 				)(shaderName);
 		}
-		static bool loadFromShaderList(const std::string& jsonListPath)
+		inline static bool loadFromShaderList(const std::string& jsonListPath)
 		{
 			return reinterpret_cast<const Shader * (__fastcall*)(const std::string&)>(
 				base + idaOffsetFix(0x8A950)

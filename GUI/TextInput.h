@@ -14,9 +14,9 @@ namespace fdm
 		class TextInput : public Element
 		{
 		public:
-			static const int maxScrollPos;
-			static const float cursorBlinkTime;
-			static const float lastTypedCharTime;
+			inline static const int maxScrollPos = 4; // idk??
+			inline static const float cursorBlinkTime = 1.f; // idk??
+			inline static const float lastTypedCharTime = 1.f; // idk??
 			std::string text = "";
 			bool enabled = true;
 			bool mouseDown = false;
@@ -117,9 +117,6 @@ namespace fdm
 				this->xOffset = offset;
 			}
 		};
-		const int TextInput::maxScrollPos = 4;
-		const float TextInput::cursorBlinkTime = 1;
-		const float TextInput::lastTypedCharTime = 1;
 	}
 }
 #endif

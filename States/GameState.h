@@ -17,7 +17,7 @@ namespace fdm
 	class GameState : public State
 	{
 	private:
-		static GameState* instanceObj;
+		inline static GameState* instanceObj;
 	public:
 		World world;
 		CloudManager clouds;
@@ -50,8 +50,7 @@ namespace fdm
 
 		static GameState* getInstance() 
 		{
-			GameState::instanceObj = reinterpret_cast<GameState*>((base + idaOffsetFix(0x17B460)));
-			return instanceObj;
+			return reinterpret_cast<GameState*>((base + idaOffsetFix(0x17B460)));
 		}
 
 		void init(StateManager& s) override
@@ -127,6 +126,5 @@ namespace fdm
 				)(this, width, height);
 		}
 	};
-	GameState* GameState::instanceObj;
 }
 #endif

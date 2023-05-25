@@ -103,9 +103,7 @@ namespace fdm
 			}
 			void addElement(Element* e) override
 			{
-				reinterpret_cast<void(__thiscall*)(Interface*, Element*)> (
-					base + idaOffsetFix(0x56810)
-					)(this, e);
+				elements.push_back(e);
 			}
 			bool removeElement(Element* e) override
 			{
