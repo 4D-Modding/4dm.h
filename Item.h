@@ -119,7 +119,7 @@ namespace fdm
 		virtual bool breakBlock(World* world, Player* player, unsigned char block, const glm::ivec4& blockPos) { return false; }
 		virtual bool entityAction(World* world, Player* player, std::unique_ptr<Entity>& entity, int action) { return false; }
 		virtual std::unique_ptr<Item> clone() { return NULL; }
-		nlohmann::json saveAttributes() { return NULL; }
+		virtual nlohmann::json saveAttributes() { return NULL; }
 	};
 }
 #endif

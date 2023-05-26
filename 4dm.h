@@ -1,15 +1,17 @@
-/* 
- * that was kinda helpful for RE rendering : https://javagl.github.io/GLConstantsTranslator/GLConstantsTranslator.html 
+/*
+ * that was kinda helpful for RE rendering : https://javagl.github.io/GLConstantsTranslator/GLConstantsTranslator.html
  * and some other stuff
 */
 #ifndef __4DM_H__
 #define __4DM_H__
+
 #ifndef MOD_NAME
 #define MOD_NAME "Unknown Mod"
 #endif
 #ifndef MOD_VER
 #define MOD_VER "0.0"
 #endif
+
 #include <algorithm>
 #include <map>
 #include <unordered_map>

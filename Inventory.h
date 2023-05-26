@@ -22,7 +22,7 @@ namespace fdm
 		glm::ivec2 size;
 		glm::ivec2 selectedSlot;
 		std::string label;
-		std::vector<Item> slots;
+		std::vector<std::unique_ptr<Item>> slots;
 
 		~Inventory() 
 		{
