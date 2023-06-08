@@ -31,7 +31,7 @@ namespace fdm
 		~MeshBuilder() 
 		{
 			reinterpret_cast<void(__thiscall*)(MeshBuilder*)>(
-				base + idaOffsetFix(0x55980)
+				FUNC_MESHBUILDER_DMESHBUILDER
 				)(this);
 		}
 		int buffCount() override

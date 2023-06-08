@@ -56,6 +56,8 @@ namespace fdm
 	inline uintptr_t base = reinterpret_cast<uintptr_t>(GetModuleHandle(0));
 }
 
+#include "addresses.h"
+
 #include "path.h"
 #include "m4.h"
 #include "Mesh.h"

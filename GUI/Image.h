@@ -47,19 +47,19 @@ namespace fdm
 			void render(Window* w) override 
 			{
 				reinterpret_cast<void(__thiscall*)(Image*, Window*)>(
-					base + idaOffsetFix(0x5C4C0)
+					FUNC_GUI_IMAGE_RENDER
 					)(this, w);
 			}
 			void getPos(const Window* w, int* x, int* y) override
 			{
 				reinterpret_cast<void(__thiscall*)(Image*, const Window*, int*, int*)>(
-					base + idaOffsetFix(0x5C5D0)
+					FUNC_GUI_IMAGE_GETPOS
 					)(this, w, x, y);
 			}
 			void getSize(const Window* w, int* width, int* height) override
 			{
 				reinterpret_cast<void(__thiscall*)(Image*, const Window*, int*, int*)>(
-					base + idaOffsetFix(0x5C6B0)
+					FUNC_GUI_IMAGE_GETSIZE
 					)(this, w, width, height);
 			}
 			// thats custom function (it doesnt exist in game) but it makes it easier to use Image

@@ -55,37 +55,37 @@ namespace fdm
 			void render(Window* w) override 
 			{
 				reinterpret_cast<void(__thiscall*)(Slider*)>(
-					base + idaOffsetFix(0x57DC0)
+					FUNC_GUI_SLIDER_RENDER
 					)(this);
 			}
 			void mouseInput(const Window* w, double xPos, double yPos) override
 			{
 				reinterpret_cast<void(__thiscall*)(Slider*, const Window*, double, double)>(
-					base + idaOffsetFix(0x584E0)
+					FUNC_GUI_SLIDER_MOUSEINPUT
 					)(this, w, xPos, yPos);
 			}
 			bool mouseButtonInput(const Window* w, int button, int action, int mods) override
 			{
 				return reinterpret_cast<bool(__thiscall*)(Slider*, const Window*, int, int, int)>(
-					base + idaOffsetFix(0x58400)
+					FUNC_GUI_SLIDER_MOUSEBUTTONINPUT
 					)(this, w, button, action, mods);
 			}
 			bool keyInput(const Window* w, int key, int scancode, int action, int mods) override
 			{
 				return reinterpret_cast<bool(__thiscall*)(Slider*, const Window*, int, int, int, int)>(
-					base + idaOffsetFix(0x585A0)
+					FUNC_GUI_SLIDER_KEYINPUT
 					)(this, w, key, scancode, action, mods);
 			}
 			void getPos(const Window* w, int* x, int* y) override
 			{
 				reinterpret_cast<void(__thiscall*)(Slider*, const Window*, int*, int*)>(
-					base + idaOffsetFix(0x58620)
+					FUNC_GUI_SLIDER_GETPOS
 					)(this, w, x, y);
 			}
 			void getSize(const Window* w, int* width, int* height) override
 			{
 				reinterpret_cast<void(__thiscall*)(Slider*, const Window*, int*, int*)>(
-					base + idaOffsetFix(0x586D0)
+					FUNC_GUI_SLIDER_GETSIZE
 					)(this, w, width, height);
 			}
 		};

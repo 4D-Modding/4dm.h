@@ -17,7 +17,7 @@ namespace fdm
 		~TexRenderer() 
 		{
 			reinterpret_cast<void(__thiscall*)(TexRenderer*)>(
-				base + idaOffsetFix(0x92750)
+				FUNC_TEXRENDERER_DTEXRENDERER
 				)(this);
 		}
 		TexRenderer(){}
@@ -54,25 +54,25 @@ namespace fdm
 		bool init() 
 		{
 			return reinterpret_cast<bool(__thiscall*)(TexRenderer*)>(
-				base + idaOffsetFix(0x92840)
+				FUNC_TEXRENDERER_INIT
 				)(this);
 		}
 		void setClip(int x, int y, unsigned int w, unsigned int h)
 		{
 			return reinterpret_cast<void(__thiscall*)(TexRenderer*, int, int, unsigned int, unsigned int)>(
-				base + idaOffsetFix(0x92D20)
+				FUNC_TEXRENDERER_SETCLIP
 				)(this, x, y, w, h);
 		}
 		void setColor(float r, float g, float b, float a)
 		{
 			return reinterpret_cast<void(__thiscall*)(TexRenderer*, float, float, float, float)>(
-				base + idaOffsetFix(0x92E50)
+				FUNC_TEXRENDERER_SETCOLOR
 				)(this, r, g, b, a);
 		}
 		void setPos(int x, int y, int w, int h)
 		{
 			return reinterpret_cast<void(__thiscall*)(TexRenderer*, int, int, int, int)>(
-				base + idaOffsetFix(0x92F30)
+				FUNC_TEXRENDERER_SETPOS
 				)(this, x, y, w, h);
 		}
 		// thx compiler for removing that and thx to mashpoe for telling me that it exists

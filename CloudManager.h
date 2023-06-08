@@ -20,6 +20,27 @@ namespace fdm
         std::atomic_int loadedChunks;
         std::vector<CloudChunk*, std::allocator<CloudChunk*> > newChunks;
         std::vector<std::tuple<__int64, __int64, __int64>> newChunkPositions;
+
+        void render(const m4::Mat5& MV, const glm::mat4& P, int matUniformID)
+        {
+            return reinterpret_cast<void(__thiscall*)(CloudManager * self, const m4::Mat5& MV, const glm::mat4& P, int matUniformID)>(FUNC_CLOUDMANAGER_RENDER)(this, MV, P, matUniformID);
+        }
+        void updateLoadedChunks(const glm::vec4& pos, const glm::vec4& over, unsigned char renderDistance)
+        {
+            return reinterpret_cast<void(__thiscall*)(CloudManager * self, const glm::vec4& pos, const glm::vec4& over, unsigned char renderDistance)>(FUNC_CLOUDMANAGER_UPDATELOADEDCHUNKS)(this, pos, over, renderDistance);
+        }
+        void loadChunks()
+        {
+            return reinterpret_cast<void(__thiscall*)(CloudManager * self)>(FUNC_CLOUDMANAGER_LOADCHUNKS)(this);
+        }
+        void updateChunk(glm::vec3& coords)
+        {
+            return reinterpret_cast<void(__thiscall*)(CloudManager * self, glm::vec3& coords)>(FUNC_CLOUDMANAGER_UPDATECHUNK)(this, coords);
+        }
+        ~CloudManager()
+        {
+            reinterpret_cast<void(__thiscall*)(CloudManager * self)>(FUNC_CLOUDMANAGER_DCLOUDMANAGER)(this);
+        }
 	};
 }
 #endif

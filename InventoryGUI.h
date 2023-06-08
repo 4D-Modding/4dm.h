@@ -32,37 +32,37 @@ namespace fdm
 		~InventoryGUI() 
 		{
 			reinterpret_cast<void(__thiscall*)(InventoryGUI*)>(
-				base + idaOffsetFix(0x4FFD0)
+				FUNC_INVENTORYGUI_DINVENTORYGUI
 				)(this);
 		}
 		void renderInit(GLFWwindow* w) 
 		{
 			reinterpret_cast<void(__thiscall*)(InventoryGUI*, GLFWwindow*)>(
-				base + idaOffsetFix(0x67040)
+				FUNC_INVENTORYGUI_RENDERINIT
 				)(this, w);
 		}
 		void windowResize(GLFWwindow* w, int width, int height) 
 		{
 			reinterpret_cast<void(__thiscall*)(InventoryGUI*, GLFWwindow*, int, int)>(
-				base + idaOffsetFix(0x673E0)
+				FUNC_INVENTORYGUI_WINDOWRESIZE
 				)(this, w, width, height);
 		}
 		void updateCraftingMenuBox() 
 		{
 			reinterpret_cast<void(__thiscall*)(InventoryGUI*)>(
-				base + idaOffsetFix(0x67490)
+				FUNC_INVENTORYGUI_UPDATECRAFTINGMENUBOX
 				)(this);
 		}
 		inline static void viewportCallback(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, const glm::ivec4&, const glm::ivec2&)>(
-				base + idaOffsetFix(0x67540)
+				FUNC_INVENTORYGUI_VIEWPORTCALLBACK
 				)(user, pos, scroll);
 		}
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D)
 		{
 			reinterpret_cast<void(__thiscall*)(InventoryGUI*, const glm::ivec2&, const glm::ivec2&)>(
-				base + idaOffsetFix(0x675A0)
+				FUNC_INVENTORYGUI_UPDATEPROJECTION
 				)(this, size, translate2D);
 		}
 	};

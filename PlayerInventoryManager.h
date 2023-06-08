@@ -17,56 +17,56 @@ namespace fdm
 		{
 			iterator* result = new iterator();
 			return reinterpret_cast<iterator(__thiscall*)(PlayerInventoryManager*, iterator*)>(
-				base + idaOffsetFix(0x66E10)
+				FUNC_PLAYERINVENTORYMANAGER_BEGIN
 				)(this, result);
 		}
 		void render(const glm::ivec2& cursorPos) override
 		{
 			return reinterpret_cast<void(__thiscall*)(PlayerInventoryManager*, const glm::ivec2&)>(
-				base + idaOffsetFix(0x85300)
+				FUNC_PLAYERINVENTORYMANAGER_RENDER
 				)(this, cursorPos);
 		}
 		bool addItem(std::unique_ptr<Item>& item) override
 		{
 			return reinterpret_cast<bool(__thiscall*)(PlayerInventoryManager*, std::unique_ptr<Item>&)>(
-				base + idaOffsetFix(0x66730)
+				FUNC_PLAYERINVENTORYMANAGER_ADDITEM
 				)(this, item);
 		}
 		bool combineItem(std::unique_ptr<Item>& item) override
 		{
 			return reinterpret_cast<bool(__thiscall*)(PlayerInventoryManager*, std::unique_ptr<Item>&)>(
-				base + idaOffsetFix(0x85330)
+				FUNC_PLAYERINVENTORYMANAGER_COMBINEITEM
 				)(this, item);
 		}
 		bool placeItem(std::unique_ptr<Item>& item) override
 		{
 			return reinterpret_cast<bool(__thiscall*)(PlayerInventoryManager*, std::unique_ptr<Item>&)>(
-				base + idaOffsetFix(0x853A0)
+				FUNC_PLAYERINVENTORYMANAGER_PLACEITEM
 				)(this, item);
 		}
 		bool mouseButtonEvent(InventoryManager* other, InventoryCursor* cursor, int button, int action, char mods) override
 		{
 			return reinterpret_cast<bool(__thiscall*)(PlayerInventoryManager*, InventoryManager*, InventoryCursor*, int, int, char)>(
-				base + idaOffsetFix(0x85410)
+				FUNC_PLAYERINVENTORYMANAGER_MOUSEBUTTONEVENT
 				)(this, other, cursor, button, action, mods);
 		}
 		iterator end(void) override
 		{
 			iterator* result = new iterator();
 			return reinterpret_cast<iterator(__thiscall*)(PlayerInventoryManager*, iterator*)>(
-				base + idaOffsetFix(0x85490)
+				FUNC_PLAYERINVENTORYMANAGER_END
 				)(this, result);
 		}
 		int getSlotCount(void) override
 		{
 			return reinterpret_cast<int(__thiscall*)(PlayerInventoryManager*)>(
-				base + idaOffsetFix(0x854E0)
+				FUNC_PLAYERINVENTORYMANAGER_GETSLOTCOUNT
 				)(this);
 		}
 		std::unique_ptr<Item>* getSlot(unsigned int index) override
 		{
 			return reinterpret_cast<std::unique_ptr<Item>*(__thiscall*)(PlayerInventoryManager*, unsigned int)>(
-				base + idaOffsetFix(0x85510)
+				FUNC_PLAYERINVENTORYMANAGER_GETSLOT
 				)(this, index);
 		}
 	};

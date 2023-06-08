@@ -17,25 +17,25 @@ namespace fdm
 		bool load(const std::string& vertexPath, const std::string& fragmentPath) 
 		{
 			return reinterpret_cast<bool(__thiscall*)(Shader*, const std::string & vertexPath, const std::string & fragmentPath)>(
-				base + idaOffsetFix(0x8A140)
+				FUNC_SHADER_LOAD
 				)(this, vertexPath, fragmentPath);
 		}
 		unsigned int compileShader(const std::string& path, shaderType type) 
 		{
 			return reinterpret_cast<unsigned int(__thiscall*)(Shader*, const std::string & path, shaderType fragmentPath)>(
-				base + idaOffsetFix(0x8A270)
+				FUNC_SHADER_COMPILESHADER
 				)(this, path, type);
 		}
 		bool load(const std::string& vertexPath, const std::string& fragmentPath) const
 		{
 			return reinterpret_cast<bool(__thiscall*)(const Shader*, const std::string & vertexPath, const std::string & fragmentPath)>(
-				base + idaOffsetFix(0x8A140)
+				FUNC_SHADER_LOAD
 				)(this, vertexPath, fragmentPath);
 		}
 		unsigned int compileShader(const std::string& path, shaderType type) const
 		{
 			return reinterpret_cast<unsigned int(__thiscall*)(const Shader*, const std::string & path, shaderType fragmentPath)>(
-				base + idaOffsetFix(0x8A270)
+				FUNC_SHADER_COMPILESHADER
 				)(this, path, type);
 		}
 		unsigned int id() const

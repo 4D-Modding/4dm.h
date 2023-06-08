@@ -16,8 +16,6 @@ namespace fdm
 	class State;
 	class GameState : public State
 	{
-	private:
-		inline static GameState* instanceObj;
 	public:
 		World world;
 		CloudManager clouds;
@@ -48,81 +46,86 @@ namespace fdm
 		float cloudRenderDistance;
 		float FOV;
 
-		static GameState* getInstance() 
+		inline static GameState* getInstance() // instanceObj
 		{
-			return reinterpret_cast<GameState*>((base + idaOffsetFix(0x17B460)));
+			return *reinterpret_cast<GameState**>((base + 0x1BE400));
 		}
-
+		GameState()
+		{
+			reinterpret_cast<void(__thiscall*)(GameState*)>(
+				FUNC_GAMESTATE_GAMESTATE
+				)(this);
+		}
 		void init(StateManager& s) override
 		{
 			reinterpret_cast<void(__thiscall*)(GameState*, StateManager&)>(
-				base + idaOffsetFix(0x50690)
+				FUNC_GAMESTATE_INIT
 				)(this, s);
 		}
 		void close(StateManager& s) override
 		{
 			reinterpret_cast<void(__thiscall*)(GameState*, StateManager&)>(
-				base + idaOffsetFix(0x51340)
+				FUNC_GAMESTATE_CLOSE
 				)(this, s);
 		}
 		void pause(StateManager& s) override
 		{
 			reinterpret_cast<void(__thiscall*)(GameState*, StateManager&)>(
-				base + idaOffsetFix(0x519B0)
+				FUNC_GAMESTATE_PAUSE
 				)(this, s);
 		}
 		void resume(StateManager& s) override
 		{
 			reinterpret_cast<void(__thiscall*)(GameState*, StateManager&)>(
-				base + idaOffsetFix(0x51A00)
+				FUNC_GAMESTATE_RESUME
 				)(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
 			reinterpret_cast<void(__thiscall*)(GameState*, StateManager&, double)>(
-				base + idaOffsetFix(0x51AC0)
+				FUNC_GAMESTATE_UPDATE
 				)(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
 			reinterpret_cast<void(__thiscall*)(GameState*, StateManager&)>(
-				base + idaOffsetFix(0x51DD0)
+				FUNC_GAMESTATE_RENDER
 				)(this, s);
 		}
 		void mouseInput(StateManager& s, double xPos, double yPos) override
 		{
 			reinterpret_cast<void(__thiscall*)(GameState*, StateManager&, double, double)>(
-				base + idaOffsetFix(0x53760)
+				FUNC_GAMESTATE_MOUSEINPUT
 				)(this, s, xPos, yPos);
 		}
 		void scrollInput(StateManager& s, double xOff, double yOff) override
 		{
 			reinterpret_cast<void(__thiscall*)(GameState*, StateManager&, double, double)>(
-				base + idaOffsetFix(0x53770)
+				FUNC_GAMESTATE_SCROLLINPUT
 				)(this, s, xOff, yOff);
 		}
 		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
 			reinterpret_cast<void(__thiscall*)(GameState*, StateManager&, int, int, int)>(
-				base + idaOffsetFix(0x53870)
+				FUNC_GAMESTATE_MOUSEBUTTONINPUT
 				)(this, s, button, action, mods);
 		}
 		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
 			reinterpret_cast<void(__thiscall*)(GameState*, StateManager&, int, int, int, int)>(
-				base + idaOffsetFix(0x53880)
+				FUNC_GAMESTATE_KEYINPUT
 				)(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
 			reinterpret_cast<void(__thiscall*)(GameState*, StateManager&, int, int)>(
-				base + idaOffsetFix(0x53940)
+				FUNC_GAMESTATE_WINDOWRESIZE
 				)(this, s, width, height);
 		}
 		void updateProjection(int width, int height)
 		{
 			reinterpret_cast<void(__thiscall*)(GameState*, int, int)>(
-				base + idaOffsetFix(0x53990)
+				FUNC_GAMESTATE_UPDATEPROJECTION
 				)(this, width, height);
 		}
 	};

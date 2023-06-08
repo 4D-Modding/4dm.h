@@ -18,41 +18,49 @@ namespace fdm
 	
 	class Item
 	{
-	private:
-		inline static nlohmann::json blueprints;
 	public:
-		inline static FontRenderer fr;
-		inline static QuadRenderer qr;
+		//inline static FontRenderer fr;
+		//inline static QuadRenderer qr;
+
+		inline static FontRenderer getFontRenderer() // fr
+		{
+			return *reinterpret_cast<FontRenderer*>((base + 0x17BF80));
+		}
+
+		inline static QuadRenderer getQuadRenderer() // qr
+		{
+			return *reinterpret_cast<QuadRenderer*>((base + 0x17BAA8));
+		}
 		
 		unsigned int count;
-		inline static nlohmann::json getBlueprints()
+
+		inline static nlohmann::json getBlueprints() // blueprints
 		{
-			Item::blueprints = *reinterpret_cast<nlohmann::json*>((base + idaOffsetFix(0x1327B0)));
-			return blueprints;
+			return *reinterpret_cast<nlohmann::json*>((base + 0x1BED98));
 		}
+
 		bool loadItemInfo(void) 
 		{
 			return reinterpret_cast<bool(__thiscall*)(Item*)>(
-				base + idaOffsetFix(0x67A00)
+				FUNC_ITEM_LOADITEMINFO
 				)(this);
 		}
 		void renderInit(void) 
 		{
 			return reinterpret_cast<void(__thiscall*)(Item*)>(
-				base + idaOffsetFix(0x68090)
+				FUNC_ITEM_RENDERINIT
 				)(this);
 		}
 		nlohmann::json save(void) 
 		{
-			nlohmann::json* result = new nlohmann::json();
 			return reinterpret_cast<nlohmann::json(__thiscall*)(Item*, nlohmann::json*)>(
-				base + idaOffsetFix(0x6A300)
-				)(this, result);
+				FUNC_ITEM_SAVE
+				)(this, nullptr);
 		}
 		bool takeHalf(std::unique_ptr<Item>& other) 
 		{
 			return reinterpret_cast<nlohmann::json(__thiscall*)(Item*, std::unique_ptr<Item>&)>(
-				base + idaOffsetFix(0x6A500)
+				FUNC_ITEM_TAKEHALF
 				)(this, other);
 		}
 
@@ -60,52 +68,50 @@ namespace fdm
 		inline static void renderItem(std::unique_ptr<Item>& item, const glm::ivec2& pos)
 		{
 			return reinterpret_cast<void(__fastcall*)(std::unique_ptr<Item>&, const glm::ivec2&)>(
-				base + idaOffsetFix(0x683B0)
+				FUNC_ITEM_RENDERITEM
 				)(item, pos);
 		}
 		inline static void renderItemDescription(std::unique_ptr<Item>& item, const glm::ivec2& pos)
 		{
 			return reinterpret_cast<void(__fastcall*)(std::unique_ptr<Item>&, const glm::ivec2&)>(
-				base + idaOffsetFix(0x68540)
+				FUNC_ITEM_RENDERITEMDESCRIPTION
 				)(item, pos);
 		}
 		inline static std::unique_ptr<Item> createFromJson(const nlohmann::json& j)
 		{
 			return reinterpret_cast<std::unique_ptr<Item>(__fastcall*)(std::unique_ptr<Item>*, const nlohmann::json&)>(
-				base + idaOffsetFix(0x68A80)
+				FUNC_ITEM_CREATEFROMJSON
 				)(nullptr, j);
 		}
 		inline static std::unique_ptr<Item> create(const std::string& itemName, unsigned int count)
 		{
 			return reinterpret_cast<std::unique_ptr<Item>(__fastcall*)(std::unique_ptr<Item>*, const std::string&, unsigned int)>(
-				base + idaOffsetFix(0x69710)
+				FUNC_ITEM_CREATE
 				)(nullptr, itemName, count);
 		}
 		inline static bool giveMax(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to)
 		{
 			return reinterpret_cast<bool(__fastcall*)(std::unique_ptr<Item>&, std::unique_ptr<Item>&)>(
-				base + idaOffsetFix(0x69BD0)
+				FUNC_ITEM_GIVEMAX
 				)(from, to);
 		}
 		inline static bool giveOne(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to)
 		{
 			return reinterpret_cast<bool(__fastcall*)(std::unique_ptr<Item>&, std::unique_ptr<Item>&)>(
-				base + idaOffsetFix(0x69D90)
+				FUNC_ITEM_GIVEONE
 				)(from, to);
 		}
 		inline static std::unique_ptr<Item> instantiateItem(const std::string& itemName, unsigned int count, const std::string& type, const nlohmann::json& attributes)
 		{
-			std::unique_ptr<Item>* result = new std::unique_ptr<Item>();
 			return reinterpret_cast<std::unique_ptr<Item>(__fastcall*)(std::unique_ptr<Item>*, const std::string&, unsigned int, const std::string&, const nlohmann::json&)>(
-				base + idaOffsetFix(0x69F00)
-				)(result, itemName, count, type, attributes);
+				FUNC_ITEM_INSTANTIATEITEM
+				)(nullptr, itemName, count, type, attributes);
 		}
 		inline static nlohmann::json combineItemAttributes(const nlohmann::json& baseAttributes, const nlohmann::json& additions)
 		{
-			nlohmann::json* result = new nlohmann::json();
 			return reinterpret_cast<nlohmann::json(__fastcall*)(nlohmann::json*, const nlohmann::json&, const nlohmann::json&)>(
-				base + idaOffsetFix(0x6A050)
-				)(result, baseAttributes, additions);
+				FUNC_ITEM_COMBINEITEMATTRIBUTES
+				)(nullptr, baseAttributes, additions);
 		}
 
 		// abstract/virtual funcs
