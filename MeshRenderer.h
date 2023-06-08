@@ -17,39 +17,39 @@ namespace fdm
 
 		MeshRenderer()
 		{
-			reinterpret_cast<void(__thiscall*)(MeshRenderer * self)>(base + idaOffsetFix(0x77080))(this);
+			reinterpret_cast<void(__thiscall*)(MeshRenderer * self)>(FUNC_MESHRENDERER_MESHRENDERER)(this);
 		}
 		void setMesh(Mesh* mesh)
 		{
-			return reinterpret_cast<void(__thiscall*)(MeshRenderer * self, Mesh * mesh)>(base + idaOffsetFix(0x770A0))(this, mesh);
+			return reinterpret_cast<void(__thiscall*)(MeshRenderer * self, Mesh * mesh)>(FUNC_MESHRENDERER_SETMESH)(this, mesh);
 		}
 		void updateMesh(Mesh* mesh)
 		{
-			return reinterpret_cast<void(__thiscall*)(MeshRenderer * self, Mesh * mesh)>(base + idaOffsetFix(0x77130))(this, mesh);
+			return reinterpret_cast<void(__thiscall*)(MeshRenderer * self, Mesh * mesh)>(FUNC_MESHRENDERER_UPDATEMESH)(this, mesh);
 		}
 		~MeshRenderer()
 		{
-			reinterpret_cast<void(__thiscall*)(MeshRenderer * self)>(base + idaOffsetFix(0x77230))(this);
+			reinterpret_cast<void(__thiscall*)(MeshRenderer * self)>(FUNC_MESHRENDERER_DMESHRENDERER)(this);
 		}
 		MeshRenderer* operator=(MeshRenderer* other)
 		{
-			return reinterpret_cast<MeshRenderer * (__thiscall*)(MeshRenderer * self, MeshRenderer * other)>(base + idaOffsetFix(0x772B0))(this, other);
+			return reinterpret_cast<MeshRenderer * (__thiscall*)(MeshRenderer * self, MeshRenderer * other)>(FUNC_MESHRENDERER_OPERATOR_EQ)(this, other);
 		}
 		void render()
 		{
-			return reinterpret_cast<void(__thiscall*)(MeshRenderer * self)>(base + idaOffsetFix(0x77380))(this);
+			return reinterpret_cast<void(__thiscall*)(MeshRenderer * self)>(FUNC_MESHRENDERER_RENDER)(this);
 		}
 		void init(Mesh* mesh)
 		{
-			return reinterpret_cast<void(__thiscall*)(MeshRenderer * self, Mesh * mesh)>(base + idaOffsetFix(0x773F0))(this, mesh);
+			return reinterpret_cast<void(__thiscall*)(MeshRenderer * self, Mesh * mesh)>(FUNC_MESHRENDERER_INIT)(this, mesh);
 		}
 		void cleanup()
 		{
-			return reinterpret_cast<void(__thiscall*)(MeshRenderer * self)>(base + idaOffsetFix(0x77500))(this);
+			return reinterpret_cast<void(__thiscall*)(MeshRenderer * self)>(FUNC_MESHRENDERER_CLEANUP)(this);
 		}
 		void initAttrs(Mesh* mesh)
 		{
-			return reinterpret_cast<void(__thiscall*)(MeshRenderer * self, Mesh * mesh)>(base + idaOffsetFix(0x77570))(this, mesh);
+			return reinterpret_cast<void(__thiscall*)(MeshRenderer * self, Mesh * mesh)>(FUNC_MESHRENDERER_INITATTRS)(this, mesh);
 		}
 
 		/* // these RE-s are perfectly fine but i decided to not use em lol

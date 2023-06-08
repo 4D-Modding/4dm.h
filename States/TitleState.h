@@ -20,8 +20,6 @@ namespace fdm
 
 	class TitleState : public State
 	{
-	private:
-		inline static TitleState* instanceObj;
 	public:
 		glm::mat4x4 projection2D;
 		glm::mat4x4 projection3D;
@@ -58,93 +56,98 @@ namespace fdm
 		Button quitButton;
 		Button creditsButton;
 
-		static TitleState* getInstance()
+		inline static TitleState* getInstance() // instanceObj
 		{
-			TitleState::instanceObj = reinterpret_cast<TitleState*>((base + idaOffsetFix(0x1BFA10)));
-			return instanceObj;
+			return *reinterpret_cast<TitleState**>((base + 0x1C0230));
+		}
+		TitleState()
+		{
+			reinterpret_cast<void(__thiscall*)(TitleState*)>(
+				FUNC_TITLESTATE_TITLESTATE
+				)(this);
 		}
 		void updateProjection(int width, int height) 
 		{
 			reinterpret_cast<void(__thiscall*)(TitleState*, int, int)>(
-				base + idaOffsetFix(0x93A70)
+				FUNC_TITLESTATE_UPDATEPROJECTION
 				)(this, width, height);
 		}
-		static void singleplayerButtonCallback(void* user)
+		inline static void singleplayerButtonCallback(void* user)
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(
-				base + idaOffsetFix(0x93EF0)
+				FUNC_TITLESTATE_SINGLEPLAYERBUTTONCALLBACK
 				)(user);
 		}
-		static void creditsButtonCallback(void* user)
+		inline static void creditsButtonCallback(void* user)
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(
-				base + idaOffsetFix(0x93F80)
+				FUNC_TITLESTATE_CREDITSBUTTONCALLBACK
 				)(user);
 		}
-		static void tutorialButtonCallback(void* user)
+		inline static void tutorialButtonCallback(void* user)
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(
-				base + idaOffsetFix(0x94010)
+				FUNC_TITLESTATE_TUTORIALBUTTONCALLBACK
 				)(user);
 		}
 		void init(StateManager& s) override
 		{
 			reinterpret_cast<void(__thiscall*)(TitleState*, StateManager&)>(
-				base + idaOffsetFix(0x940A0)
+				FUNC_TITLESTATE_INIT
 				)(this, s);
 		}
 		void close(StateManager& s) override
 		{
 			reinterpret_cast<void(__thiscall*)(TitleState*, StateManager&)>(
-				base + idaOffsetFix(0x94990)
+				FUNC_TITLESTATE_CLOSE
 				)(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
 			reinterpret_cast<void(__thiscall*)(TitleState*, StateManager&, double)>(
-				base + idaOffsetFix(0x94B00)
+				FUNC_TITLESTATE_UPDATE
 				)(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
 			reinterpret_cast<void(__thiscall*)(TitleState*, StateManager&)>(
-				base + idaOffsetFix(0x94BF0)
+				FUNC_TITLESTATE_RENDER
 				)(this, s);
 		}
 		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
 			reinterpret_cast<void(__thiscall*)(TitleState*, StateManager&, int, int, int, int)>(
-				base + idaOffsetFix(0x953D0)
+				FUNC_TITLESTATE_KEYINPUT
 				)(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
 			reinterpret_cast<void(__thiscall*)(TitleState*, StateManager&, int, int)>(
-				base + idaOffsetFix(0x95460)
+				FUNC_TITLESTATE_WINDOWRESIZE
 				)(this, s, width, height);
 		}
 		void mouseInput(StateManager& s, double xPos, double yPos) override
 		{
 			reinterpret_cast<void(__thiscall*)(TitleState*, StateManager&, double, double)>(
-				base + idaOffsetFix(0x95470)
+				FUNC_TITLESTATE_MOUSEINPUT
 				)(this, s, xPos, yPos);
 		}
 		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
 			reinterpret_cast<void(__thiscall*)(TitleState*, StateManager&, int, int, int)>(
-				base + idaOffsetFix(0x95490)
+				FUNC_TITLESTATE_MOUSEBUTTONINPUT
 				)(this, s, button, action, mods);
 		}
 		void resume(StateManager& s) override
 		{
 			reinterpret_cast<void(__thiscall*)(TitleState*, StateManager&)>(
-				base + idaOffsetFix(0x954C0)
+				FUNC_TITLESTATE_RESUME
 				)(this, s);
 		}
 		void renderBackground(int width, int height)
 		{
 			reinterpret_cast<void(__thiscall*)(TitleState*, int, int)>(
-				base + idaOffsetFix(0x95520)
+				FUNC_TITLESTATE_RENDERBACKGROUND
 				)(this, width, height);
 		}
 	};

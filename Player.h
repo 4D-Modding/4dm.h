@@ -27,8 +27,17 @@ namespace fdm
         inline static const float maxHealth = 1.f; // idk???
         inline static const float hitCooldown = 0.f; // idk???
         inline static const float damageCooldown = 0.f; // idk???
-        inline static TexRenderer healthRenderer;
-        inline static FontRenderer fr;
+
+        inline static TexRenderer getHealthRenderer() // healthRenderer
+        {
+            return *(reinterpret_cast<TexRenderer*>((base + 0x1BF070)));
+        }
+        inline static FontRenderer getFontRenderer() // fr
+        {
+            return *(reinterpret_cast<FontRenderer*>((base + 0x17C120)));
+        }
+        //inline static TexRenderer healthRenderer;
+        //inline static FontRenderer fr;
 
         struct
         {
@@ -109,91 +118,91 @@ namespace fdm
 
         ~Player()
         {
-            reinterpret_cast<void(__thiscall*)(Player * self)>(base + idaOffsetFix(0x4FF50))(this);
+            reinterpret_cast<void(__thiscall*)(Player * self)>(FUNC_PLAYER_DPLAYER)(this);
         }
         Player()
         {
-            reinterpret_cast<void(__thiscall*)(Player * self)>(base + idaOffsetFix(0x50130))(this);
+            reinterpret_cast<void(__thiscall*)(Player * self)>(FUNC_PLAYER_PLAYER)(this);
         }
         void updatePos(World* world, double dt)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, World * world, double dt)>(base + idaOffsetFix(0x78690))(this, world, dt);
+            return reinterpret_cast<void(__thiscall*)(Player * self, World * world, double dt)>(FUNC_PLAYER_UPDATEPOS)(this, world, dt);
         }
         void updateCurrentBlock()
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self)>(base + idaOffsetFix(0x79390))(this);
+            return reinterpret_cast<void(__thiscall*)(Player * self)>(FUNC_PLAYER_UPDATECURRENTBLOCK)(this);
         }
         void handleCollision(World* world)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, World * world)>(base + idaOffsetFix(0x79510))(this, world);
+            return reinterpret_cast<void(__thiscall*)(Player * self, World * world)>(FUNC_PLAYER_HANDLECOLLISION)(this, world);
         }
         void updateComponentVectors()
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self)>(base + idaOffsetFix(0x7A7C0))(this);
+            return reinterpret_cast<void(__thiscall*)(Player * self)>(FUNC_PLAYER_UPDATECOMPONENTVECTORS)(this);
         }
         void removeVelComp(unsigned int comp)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, unsigned int comp)>(base + idaOffsetFix(0x7B300))(this, comp);
+            return reinterpret_cast<void(__thiscall*)(Player * self, unsigned int comp)>(FUNC_PLAYER_REMOVEVELCOMP)(this, comp);
         }
         void updateTargetBlock(World* world, float maxDist)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, World * world, float maxDist)>(base + idaOffsetFix(0x7B850))(this, world, maxDist);
+            return reinterpret_cast<void(__thiscall*)(Player * self, World * world, float maxDist)>(FUNC_PLAYER_UPDATETARGETBLOCK)(this, world, maxDist);
         }
         void init()
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self)>(base + idaOffsetFix(0x7C400))(this);
+            return reinterpret_cast<void(__thiscall*)(Player * self)>(FUNC_PLAYER_INIT)(this);
         }
         void renderHud(GLFWwindow* window)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, GLFWwindow * window)>(base + idaOffsetFix(0x7C6A0))(this, window);
+            return reinterpret_cast<void(__thiscall*)(Player * self, GLFWwindow * window)>(FUNC_PLAYER_RENDERHUD)(this, window);
         }
         void throwItem(World* world, std::unique_ptr<Item>& item)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, World * world, std::unique_ptr<Item> &item)>(base + idaOffsetFix(0x7E9D0))(this, world, item);
+            return reinterpret_cast<void(__thiscall*)(Player * self, World * world, std::unique_ptr<Item> &item)>(FUNC_PLAYER_THROWITEM)(this, world, item);
         }
         void update(Entity* window, World* world, double dt)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, Entity * window, World * world, double dt)>(base + idaOffsetFix(0x7EB40))(this, window, world, dt);
+            return reinterpret_cast<void(__thiscall*)(Player * self, Entity * window, World * world, double dt)>(FUNC_PLAYER_UPDATE)(this, window, world, dt);
         }
         void updateCameraPos(World* world)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, World * world)>(base + idaOffsetFix(0x80940))(this, world);
+            return reinterpret_cast<void(__thiscall*)(Player * self, World * world)>(FUNC_PLAYER_UPDATECAMERAPOS)(this, world);
         }
         void resetMouse(GLFWwindow* window)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, GLFWwindow * window)>(base + idaOffsetFix(0x817A0))(this, window);
+            return reinterpret_cast<void(__thiscall*)(Player * self, GLFWwindow * window)>(FUNC_PLAYER_RESETMOUSE)(this, window);
         }
         char keyInput(GLFWwindow* window, int key, int scancode, int action, char mods)
         {
-            return reinterpret_cast<char(__thiscall*)(Player * self, GLFWwindow * window, int key, int scancode, int action, char mods)>(base + idaOffsetFix(0x81880))(this, window, key, scancode, action, mods);
+            return reinterpret_cast<char(__thiscall*)(Player * self, GLFWwindow * window, int key, int scancode, int action, char mods)>(FUNC_PLAYER_KEYINPUT)(this, window, key, scancode, action, mods);
         }
         void mouseInput(GLFWwindow* window, double xpos, double ypos)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, GLFWwindow * window, double xpos, double ypos)>(base + idaOffsetFix(0x82040))(this, window, xpos, ypos);
+            return reinterpret_cast<void(__thiscall*)(Player * self, GLFWwindow * window, double xpos, double ypos)>(FUNC_PLAYER_MOUSEINPUT)(this, window, xpos, ypos);
         }
         void mouseButtonInput(GLFWwindow* window, unsigned int button, int action, int mods)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, GLFWwindow * window, unsigned int button, int action, int mods)>(base + idaOffsetFix(0x82660))(this, window, button, action, mods);
+            return reinterpret_cast<void(__thiscall*)(Player * self, GLFWwindow * window, unsigned int button, int action, int mods)>(FUNC_PLAYER_MOUSEBUTTONINPUT)(this, window, button, action, mods);
         }
         bool isHoldingGlasses()
         {
-            return reinterpret_cast<bool(__thiscall*)(Player * self)>(base + idaOffsetFix(0x827F0))(this);
+            return reinterpret_cast<bool(__thiscall*)(Player * self)>(FUNC_PLAYER_ISHOLDINGGLASSES)(this);
         }
         bool isHoldingCompass()
         {
-            return reinterpret_cast<bool(__thiscall*)(Player * self)>(base + idaOffsetFix(0x82970))(this);
+            return reinterpret_cast<bool(__thiscall*)(Player * self)>(FUNC_PLAYER_ISHOLDINGCOMPASS)(this);
         }
         nlohmann::json* save()
         {
-            return reinterpret_cast<nlohmann::json * (__thiscall*)(Player * self, nlohmann::json * result)>(base + idaOffsetFix(0x83F00))(this, nullptr);
+            return reinterpret_cast<nlohmann::json * (__thiscall*)(Player * self, nlohmann::json * result)>(FUNC_PLAYER_SAVE)(this, nullptr);
         }
         void renderInit(GLFWwindow* window)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, GLFWwindow * window)>(base + idaOffsetFix(0x84C60))(this, window);
+            return reinterpret_cast<void(__thiscall*)(Player * self, GLFWwindow * window)>(FUNC_PLAYER_RENDERINIT)(this, window);
         }
         void load(const nlohmann::json& j)
         {
-            return reinterpret_cast<void(__thiscall*)(Player * self, const nlohmann::json & j)>(base + idaOffsetFix(0x82A60))(this, j);
+            return reinterpret_cast<void(__thiscall*)(Player * self, const nlohmann::json & j)>(FUNC_PLAYER_LOAD)(this, j);
         }
 	};
 }

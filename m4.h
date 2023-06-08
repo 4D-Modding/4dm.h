@@ -19,7 +19,7 @@ namespace fdm
 			void normalize()
 			{
 				return reinterpret_cast<void(__thiscall*)(BiVector4*)>(
-					base + idaOffsetFix(0x759D0)
+					FUNC_M4_BIVECTOR4_NORMALIZE
 					)(this);
 			}
 			BiVector4 normalized() const
@@ -31,17 +31,15 @@ namespace fdm
 		};
 		inline glm::vec4 cross(const glm::vec4& u, const glm::vec4& v, const glm::vec4& w)
 		{
-			glm::vec4* result = new glm::vec4(0.0f);
 			return reinterpret_cast<glm::vec4& (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
-				base + idaOffsetFix(0x75AF0)
-				)(result, u, v, w);
+				FUNC_M4_CROSS
+				)(nullptr, u, v, w);
 		}
 		inline BiVector4 wedge(const glm::vec4& u, const glm::vec4& v)
 		{
-			BiVector4* result = new BiVector4();
 			return reinterpret_cast<BiVector4 & (__fastcall*)(BiVector4* result, const glm::vec4&, const glm::vec4&)>(
-				base + idaOffsetFix(0x75CB0)
-				)(result, u, v);
+				FUNC_M4_WEDGE
+				)(nullptr, u, v);
 		}
 		class Rotor 
 		{
@@ -52,26 +50,25 @@ namespace fdm
 			Rotor(const BiVector4& plane, float radians) 
 			{
 				reinterpret_cast<void(__thiscall*)(Rotor*, const BiVector4&, float)>(
-					base + idaOffsetFix(0x75D80)
+					FUNC_M4_ROTOR_ROTOR
 					)(this, plane, radians);
 			}
 			void operator*=(const Rotor& r) 
 			{
 				return reinterpret_cast<void(__thiscall*)(Rotor*, const Rotor&)>(
-					base + idaOffsetFix(0x75E40)
+					FUNC_M4_ROTOR_OPERATOR_MULT_EQ
 					)(this, r);
 			}
 			glm::vec4 rotate(const glm::vec4& v) 
 			{
-				glm::vec4* result = new glm::vec4(0.0f);
 				return reinterpret_cast<glm::vec4(__thiscall*)(Rotor*, glm::vec4*, const glm::vec4&)>(
-					base + idaOffsetFix(0x761D0)
-					)(this, result, v);
+					FUNC_M4_ROTOR_ROTATE
+					)(this, nullptr, v);
 			}
 			void normalize() 
 			{
 				return reinterpret_cast<void(__thiscall*)(Rotor*)>(
-					base + idaOffsetFix(0x76660)
+					FUNC_M4_ROTOR_NORMALIZE
 					)(this);
 			}
 		};
@@ -83,35 +80,32 @@ namespace fdm
 			Mat5() 
 			{
 				reinterpret_cast<void(__thiscall*)(Mat5*, float)>(
-					base + idaOffsetFix(0x767D0)
+					FUNC_M4_MAT5_MAT5
 					)(this, 0.0);
 			}
 			Mat5(float x)
 			{
 				reinterpret_cast<void(__thiscall*)(Mat5*, float)>(
-					base + idaOffsetFix(0x767D0)
+					FUNC_M4_MAT5_MAT5
 					)(this, x);
 			}
 			Mat5 operator*(const Mat5& other)
 			{
-				Mat5* result = new Mat5(0.0f);
 				return reinterpret_cast<Mat5(__thiscall*)(Mat5*, Mat5*, const Mat5&)>(
-					base + idaOffsetFix(0x76810)
-					)(this, result, other);
+					FUNC_M4_MAT5_OPERATOR_MULT
+					)(this, nullptr, other);
 			}
 			Mat5 operator*=(const Mat5& other)
 			{
-				Mat5* result = new Mat5(0.0f);
 				return reinterpret_cast<Mat5(__thiscall*)(Mat5*, Mat5*, const Mat5&)>(
-					base + idaOffsetFix(0x76900)
-					)(this, result, other);
+					FUNC_M4_MAT5_OPERATOR_MULT_EQ
+					)(this, nullptr, other);
 			}
 			glm::vec4 multiply(const glm::vec4& v, float finalComp)
 			{
-				glm::vec4* result = new glm::vec4(0.0f);
 				return reinterpret_cast<glm::vec4(__thiscall*)(Mat5*, glm::vec4*, const glm::vec4&, float)>(
-					base + idaOffsetFix(0x769A0)
-					)(this, result, v, finalComp);
+					FUNC_M4_MAT5_MULTIPLY
+					)(this, nullptr, v, finalComp);
 			}
 			glm::vec4 operator*(const glm::vec4& v)
 			{
@@ -120,13 +114,13 @@ namespace fdm
 			void translate(const glm::vec4& v)
 			{
 				return reinterpret_cast<void(__thiscall*)(Mat5*, const glm::vec4&)>(
-					base + idaOffsetFix(0x76AA0)
+					FUNC_M4_MAT5_TRANSLATE
 					)(this, v);
 			}
 			void scale(const glm::vec4& s)
 			{
 				return reinterpret_cast<void(__thiscall*)(Mat5*, const glm::vec4&)>(
-					base + idaOffsetFix(0x76BA0)
+					FUNC_M4_MAT5_SCALE
 					)(this, s);
 			}
 			float* operator[](int index)
@@ -165,10 +159,9 @@ namespace fdm
 		}
 		inline glm::vec4 adjustToMaxHorizSpeed(const glm::vec4& vel, const glm::vec4& deltaVel, float maxHorizSpeed)
 		{
-			glm::vec4* result = new glm::vec4(0.0f);
 			return reinterpret_cast<glm::vec4& (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, float)>(
-				base + idaOffsetFix(0x76E60)
-				)(result, vel, deltaVel, maxHorizSpeed);
+				FUNC_M4_ADJUSTTOMAXHORIZSPEED
+				)(nullptr, vel, deltaVel, maxHorizSpeed);
 		}
 	}
 }

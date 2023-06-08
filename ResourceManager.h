@@ -7,13 +7,17 @@ namespace fdm
 	class ResourceManager
 	{
 	public:
+		inline static std::unordered_map<std::string, Tex2D*> getTextures() // textures
+		{
+			return *(reinterpret_cast<std::unordered_map<std::string, Tex2D*>*>((base + 0x1C2870)));
+		}
 		// if you use modFolder assets then base path will be "mods/MOD_NAME/" instead of "assets/textures/"
 		inline static const Tex2D* get(const std::string& filename, bool modFolder = false) 
 		{
 			if (!modFolder) 
 			{
 				return reinterpret_cast<const Tex2D * (__fastcall*)(const std::string&)>(
-					base + idaOffsetFix(0x85D20)
+					FUNC_RESOURCEMANAGER_GET
 					)(filename);
 			}
 			else 
@@ -28,12 +32,6 @@ namespace fdm
 				}
 				return NULL;
 			}
-		}
-		inline static bool loadArrayTexture(const std::string& filename, int cols, int rows)
-		{
-			return reinterpret_cast<bool(__fastcall*)(const std::string&, int, int)>(
-				base + idaOffsetFix(0x85EB0)
-				)(filename, cols, rows);
 		}
 	};
 }

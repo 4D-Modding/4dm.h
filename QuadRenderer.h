@@ -27,19 +27,19 @@ namespace fdm
 		bool init(void) 
 		{
 			return reinterpret_cast<bool(__thiscall*)(QuadRenderer*)>(
-				base + idaOffsetFix(0x855C0)
+				FUNC_QUADRENDERER_INIT
 				)(this);
 		}
 		void setColor(float r, float g, float b, float a)
 		{
 			return reinterpret_cast<void(__thiscall*)(QuadRenderer*, float, float, float, float)>(
-				base + idaOffsetFix(0x859D0)
+				FUNC_QUADRENDERER_SETCOLOR
 				)(this, r, g, b, a);
 		}
 		void setPos(int x, int y, int w, int h)
 		{
 			return reinterpret_cast<void(__thiscall*)(QuadRenderer*, int, int, int, int)>(
-				base + idaOffsetFix(0x85AB0)
+				FUNC_QUADRENDERER_SETPOS
 				)(this, x, y, w, h);
 		}
 		// thx compiler for removing that and thx to mashpoe for telling me that it exists

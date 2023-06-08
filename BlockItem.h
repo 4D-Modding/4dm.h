@@ -8,74 +8,56 @@ namespace fdm
 	class TexRenderer;
 	class BlockItem : public Item
 	{
-	private:
-		inline static std::unordered_map<int, std::string> itemTypes;
 	public:
 		int blockID;
 
 		inline static const int STACK_MAX = 4096;
 		inline static TexRenderer tr;
 		
-		inline static std::unordered_map<int, std::string> getItemTypes() 
+		inline static std::unordered_map<int, std::string> getItemTypes() // itemTypes
 		{
-			BlockItem::itemTypes = *reinterpret_cast<std::unordered_map<int, std::string>*>((base + idaOffsetFix(0x1C1FB0)));
-			return itemTypes;
+			return *reinterpret_cast<std::unordered_map<int, std::string>*>((base + 0x1C2830));
 		}
-		inline static void addItemType(const std::string& itemType, nlohmann::json& baseAttributes) 
+		inline static TexRenderer getTexRenderer() // tr
 		{
-			reinterpret_cast<void(__fastcall*)(const std::string&, nlohmann::json&)>(
-				base + idaOffsetFix(0x160D0)
-				)(itemType, baseAttributes);
+			return *reinterpret_cast<TexRenderer*>((base + 0x1BDD40));
 		}
 
-		BlockItem(const std::string& itemName, nlohmann::json& attributes) 
+		inline static void addItemType(const std::string itemType, nlohmann::json baseAttributes)
 		{
-			reinterpret_cast<void(__thiscall*)(BlockItem*, const std::string&, nlohmann::json&)>(
-				base + idaOffsetFix(0x162F0)
-				)(this, itemName, attributes);
+			return reinterpret_cast<void(__fastcall*)(const std::string itemType, nlohmann::json baseAttributes)>(FUNC_BLOCKITEM_ADDITEMTYPE)(itemType, baseAttributes);
 		}
-
-		std::string getName() override 
+		BlockItem(const std::string itemName, nlohmann::json attributes)
 		{
-			std::string* result = new std::string();
-			return reinterpret_cast<std::string(__thiscall*)(BlockItem*, std::string*)>(
-				base + idaOffsetFix(0x16510)
-				)(this, result);
+			reinterpret_cast<void(__thiscall*)(BlockItem * self, const std::string itemName, nlohmann::json attributes)>(FUNC_BLOCKITEM_BLOCKITEM)(this, itemName, attributes);
 		}
-		void render(const glm::ivec2& pos) override 
+		std::string getName() override
 		{
-			reinterpret_cast<void(__thiscall*)(BlockItem*, const glm::ivec2&)>(
-				base + idaOffsetFix(0x165D0)
-				)(this, pos);
+			return reinterpret_cast<std::string (__thiscall*)(BlockItem * self, std::string* result)>(FUNC_BLOCKITEM_GETNAME)(this, nullptr);
+		}
+		void render(const glm::ivec2& pos) override
+		{
+			return reinterpret_cast<void(__thiscall*)(BlockItem * self, const glm::ivec2& pos)>(FUNC_BLOCKITEM_RENDER)(this, pos);
 		}
 		void renderEntity(const m4::Mat5& MV, bool inHand) override
 		{
-			reinterpret_cast<void(__thiscall*)(BlockItem*, const m4::Mat5&, bool)>(
-				base + idaOffsetFix(0x16690)
-				)(this, MV, inHand);
+			return reinterpret_cast<void(__thiscall*)(BlockItem * self, const m4::Mat5& MV, bool inHand)>(FUNC_BLOCKITEM_RENDERENTITY)(this, MV, inHand);
 		}
-		bool isDeadly() override 
+		bool isDeadly() override
 		{
-			return blockID == 8;
+			return reinterpret_cast<bool(__thiscall*)(BlockItem * self)>(FUNC_BLOCKITEM_ISDEADLY)(this);
 		}
 		bool isCompatible(const std::unique_ptr<Item>& other) override
 		{
-			return reinterpret_cast<bool(__thiscall*)(BlockItem*, const std::unique_ptr<Item>&)>(
-				base + idaOffsetFix(0x16A10)
-				)(this, other);
+			return reinterpret_cast<bool(__thiscall*)(BlockItem * self, const std::unique_ptr<Item>& other)>(FUNC_BLOCKITEM_ISCOMPATIBLE)(this, other);
 		}
 		bool action(World* world, Player* player, int action) override
 		{
-			return reinterpret_cast<bool(__thiscall*)(BlockItem*, World*, Player*, int)>(
-				base + idaOffsetFix(0x16AA0)
-				)(this, world, player, action);
+			return reinterpret_cast<bool(__thiscall*)(BlockItem * self, World * world, Player * player, int action)>(FUNC_BLOCKITEM_ACTION)(this, world, player, action);
 		}
-		std::unique_ptr<Item> clone() override 
+		std::unique_ptr<Item> clone() override
 		{
-			std::unique_ptr<Item>* result = new std::unique_ptr<Item>();
-			return reinterpret_cast<std::unique_ptr<Item>(__thiscall*)(BlockItem*, std::unique_ptr<Item>*)>(
-				base + idaOffsetFix(0x16C10)
-				)(this, result);
+			return reinterpret_cast<std::unique_ptr<Item> (__thiscall*)(BlockItem * self, std::unique_ptr<Item> *result)>(FUNC_BLOCKITEM_CLONE)(this, nullptr);
 		}
 	};
 }

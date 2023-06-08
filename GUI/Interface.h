@@ -32,73 +32,73 @@ namespace fdm
 			~Interface()
 			{
 				reinterpret_cast<void(__thiscall*)(Interface*)>(
-					base + idaOffsetFix(0x3EF40)
+					FUNC_GUI_INTERFACE_DINTERFACE
 					)(this);
 			}
 			void render()
 			{
 				reinterpret_cast<void(__thiscall*)(Interface*)>(
-					base + idaOffsetFix(0x56280)
+					FUNC_GUI_INTERFACE_RENDER
 					)(this);
 			}
 			void mouseInput(double xPos, double yPos)
 			{
 				reinterpret_cast<void(__thiscall*)(Interface*, double, double)>(
-					base + idaOffsetFix(0x56370)
+					FUNC_GUI_INTERFACE_MOUSEINPUT
 					)(this, xPos, yPos);
 			}
 			bool scrollInput(double xOff, double yOff)
 			{
 				return reinterpret_cast<bool(__thiscall*)(Interface*, double, double)>(
-					base + idaOffsetFix(0x56400)
+					FUNC_GUI_INTERFACE_SCROLLINPUT
 					)(this, xOff, yOff);
 			}
 			bool mouseButtonInput(int button, int action, int mods)
 			{
 				return reinterpret_cast<bool(__thiscall*)(Interface*, int, int, int)>(
-					base + idaOffsetFix(0x564A0)
+					FUNC_GUI_INTERFACE_MOUSEBUTTONINPUT
 					)(this, button, action, mods);
 			}
 			bool keyInput(int key, int scancode, int action, int mods)
 			{
 				return reinterpret_cast<bool(__thiscall*)(Interface*, int, int, int, int)>(
-					base + idaOffsetFix(0x565A0)
+					FUNC_GUI_INTERFACE_KEYINPUT
 					)(this, key, scancode, action, mods);
 			}
 			QuadRenderer* getQuadRenderer() override
 			{
 				return reinterpret_cast<QuadRenderer * (__thiscall*)(Interface*)>(
-					base + idaOffsetFix(0x56750)
+					FUNC_GUI_INTERFACE_GETQUADRENDERER
 					)(this);
 			}
 			FontRenderer* getFont() override
 			{
 				return reinterpret_cast<FontRenderer * (__thiscall*)(Interface*)>(
-					base + idaOffsetFix(0x56760)
+					FUNC_GUI_INTERFACE_GETFONT
 					)(this);
 			}
 			GLFWwindow* getGLFWwindow() override
 			{
 				return reinterpret_cast<GLFWwindow * (__thiscall*)(Interface*)>(
-					base + idaOffsetFix(0x56770)
+					FUNC_GUI_INTERFACE_GETGLFWWINDOW
 					)(this);
 			}
 			void getCursorPos(int* x, int* y) override
 			{
 				reinterpret_cast<void(__thiscall*)(Interface*, int*, int*)>(
-					base + idaOffsetFix(0x56780)
+					FUNC_GUI_INTERFACE_GETCURSORPOS
 					)(this, x, y);
 			}
 			void getSize(int* w, int* h) override
 			{
 				reinterpret_cast<void(__thiscall*)(Interface*, int*, int*)>(
-					base + idaOffsetFix(0x567E0)
+					FUNC_GUI_INTERFACE_GETSIZE
 					)(this, w, h);
 			}
 			void changeViewport(const glm::ivec4& pos, const glm::ivec2& scroll) override
 			{
 				reinterpret_cast<void(__thiscall*)(Interface*, const glm::ivec4&, const glm::ivec2&)>(
-					base + idaOffsetFix(0x567F0)
+					FUNC_GUI_INTERFACE_CHANGEVIEWPORT
 					)(this, pos, scroll);
 			}
 			void addElement(Element* e) override
@@ -108,13 +108,13 @@ namespace fdm
 			bool removeElement(Element* e) override
 			{
 				return reinterpret_cast<bool(__thiscall*)(Interface*, Element*)> (
-					base + idaOffsetFix(0x56850)
+					FUNC_GUI_INTERFACE_REMOVEELEMENT
 					)(this, e);
 			}
 			bool selectElement(Element* e) override
 			{
 				return reinterpret_cast<bool(__thiscall*)(Interface*, Element*)> (
-					base + idaOffsetFix(0x568E0)
+					FUNC_GUI_INTERFACE_SELECTELEMENT
 					)(this, e);
 			}
 			void clear() override

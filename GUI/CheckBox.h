@@ -49,37 +49,37 @@ namespace fdm
 			void render(Window* w) override 
 			{
 				reinterpret_cast<void(__thiscall*)(CheckBox*, Window*)>(
-					base + idaOffsetFix(0x57380)
+					FUNC_GUI_CHECKBOX_RENDER
 					)(this, w);
 			}
 			bool mouseButtonInput(const Window* w, int button, int action, int mods) override
 			{
 				return reinterpret_cast<bool(__thiscall*)(CheckBox*, const Window*, int, int, int)>(
-					base + idaOffsetFix(0x57B20)
+					FUNC_GUI_CHECKBOX_MOUSEBUTTONINPUT
 					)(this, w, button, action, mods);
 			}
 			bool keyInput(const Window* w, int key, int scancode, int action, int mods) override
 			{
 				return reinterpret_cast<bool(__thiscall*)(CheckBox*, const Window*, int, int, int, int)>(
-					base + idaOffsetFix(0x57BB0)
+					FUNC_GUI_CHECKBOX_KEYINPUT
 					)(this, w, key, scancode, action, mods);
 			}
 			void getPos(const Window* w, int* x, int* y) override
 			{
 				reinterpret_cast<void(__thiscall*)(CheckBox*, const Window*, int*, int*)>(
-					base + idaOffsetFix(0x57C00)
+					FUNC_GUI_CHECKBOX_GETPOS
 					)(this, w, x, y);
 			}
 			void getSize(const Window* w, int* width, int* height) override
 			{
 				reinterpret_cast<void(__thiscall*)(CheckBox*, const Window*, int*, int*)>(
-					base + idaOffsetFix(0x57CE0)
+					FUNC_GUI_CHECKBOX_GETSIZE
 					)(this, w, width, height);
 			}
 			bool touchingMouse(const Window* w)
 			{
 				return reinterpret_cast<bool(__thiscall*)(CheckBox*, const Window*)>(
-					base + idaOffsetFix(0x57D30)
+					FUNC_GUI_CHECKBOX_TOUCHINGMOUSE
 					)(this, w);
 			}
 		};

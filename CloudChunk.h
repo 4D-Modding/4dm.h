@@ -18,25 +18,25 @@ namespace fdm
 			int vertCount() override 
 			{
 				return reinterpret_cast<int(__thiscall*)(CloudChunkMesh*)>(
-					base + idaOffsetFix(0x2C250)
+					FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_VERTCOUNT
 					)(this);
 			}
 			int indexBuffSize() override
 			{
 				return reinterpret_cast<int(__thiscall*)(CloudChunkMesh*)>(
-					base + idaOffsetFix(0x2C270)
+					FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_INDEXBUFFSIZE
 					)(this);
 			}
 			int buffSize(int buffIndex) override
 			{
 				return reinterpret_cast<int(__thiscall*)(CloudChunkMesh*, int)>(
-					base + idaOffsetFix(0x2FD40)
+					FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_BUFFSIZE
 					)(this, buffIndex);
 			}
 			int attrStride(int buffIndex, int attrIndex) override
 			{
 				return reinterpret_cast<int(__thiscall*)(CloudChunkMesh*, int, int)>(
-					base + idaOffsetFix(0x2FD50)
+					FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_ATTRSTRIDE
 					)(this, buffIndex, attrIndex);
 			}
 		};
@@ -56,7 +56,7 @@ namespace fdm
 		void generateMesh() 
 		{
 			reinterpret_cast<void(__thiscall*)(CloudChunk*)>(
-				base + idaOffsetFix(0x2FD60)
+				FUNC_CLOUDCHUNK_GENERATEMESH
 				)(this);
 		}
 	};
