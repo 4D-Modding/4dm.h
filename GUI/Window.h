@@ -1,23 +1,22 @@
 #pragma once
-#ifndef GUI_WINDOW_H
-#define GUI_WINDOW_H
-#include "gui.h"
-namespace fdm
+
+#include "4dm.h"
+
+namespace fdm 
 {
-	class QuadRenderer;
-	class FontRenderer;
-	namespace gui
+	class gui::Window 
 	{
-		class Window 
-		{
-		public:
-			virtual QuadRenderer* getQuadRenderer() { return NULL; };
-			virtual FontRenderer* getFont() { return NULL; };
-			virtual GLFWwindow* getGLFWwindow() { return NULL; };
-			virtual void getCursorPos(int* x, int* y) { };
-			virtual void getSize(int* width, int* height) { };
-			virtual void changeViewport(const glm::ivec4& pos, const glm::ivec2& scroll) { };
-		};
-	}
+	public:
+
+
+
+		// VIRTUAL FUNCS
+
+		virtual QuadRenderer getQuadRenderer() = NULL;
+		virtual FontRenderer getFont() = NULL;
+		virtual GLFWwindow getGLFWwindow() = NULL;
+		virtual void getCursorPos(int *, int *) = NULL;
+		virtual void getSize(int *, int *) = NULL;
+		virtual void changeViewport(const glm::ivec4&, const glm::ivec2&) = NULL;
+	};
 }
-#endif

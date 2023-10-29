@@ -1,57 +1,32 @@
 #pragma once
-#ifndef TEX2D_H
-#define TEX2D_H
+
 #include "4dm.h"
-namespace fdm
+
+namespace fdm 
 {
-	class Tex2D
+	class Tex2D 
 	{
 	public:
-		unsigned int ID;
-		int width;
-		int height;
-		~Tex2D(void)
+		uint32_t ID; 
+		int width; // 0x4
+		int height; // 0x8
+		uint32_t target; // 0xC
+
+		~Tex2D() 
 		{
-			reinterpret_cast<void(__thiscall*)(Tex2D*)>(
-				FUNC_TEX2D_DTEX2D
-				)(this);
+			return reinterpret_cast<void(__thiscall*)(Tex2D* self)>(FUNC_TEX2D_DESTR_TEX2D_A)(this);
 		}
-		bool load(const std::string& filename) 
+		bool loadRawImageData(const unsigned char* data, int texWidth, int texHeight, int channels) 
 		{
-			return reinterpret_cast<bool(__thiscall*)(Tex2D*, const std::string&)>(
-				FUNC_TEX2D_LOAD
-				)(this, filename);
+			return reinterpret_cast<bool (__thiscall*)(Tex2D* self, const unsigned char* data, int texWidth, int texHeight, int channels)>(FUNC_TEX2D_LOADRAWIMAGEDATA_A)(this, data, texWidth, texHeight, channels);
 		}
-		bool loadRawImageData(const unsigned char* data, int texWidth, int texHeight, int channels)
+		bool initFromTexID(uint32_t texID) 
 		{
-			return reinterpret_cast<bool(__thiscall*)(Tex2D*, const unsigned char*, int, int, int)>(
-				FUNC_TEX2D_LOADRAWIMAGEDATA
-				)(this, data, texWidth, texHeight, channels);
+			return reinterpret_cast<bool (__thiscall*)(Tex2D* self, uint32_t texID)>(FUNC_TEX2D_INITFROMTEXID_A)(this, texID);
 		}
-		bool load(const std::string& filename) const
+		bool loadArrayTexture(const unsigned char* data, GLint texWidth, int texHeight, int channels, int cols, int rows) 
 		{
-			return reinterpret_cast<bool(__thiscall*)(const Tex2D*, const std::string&)>(
-				FUNC_TEX2D_LOAD
-				)(this, filename);
-		}
-		bool loadRawImageData(const unsigned char* data, int texWidth, int texHeight, int channels) const
-		{
-			return reinterpret_cast<bool(__thiscall*)(const Tex2D*, const unsigned char*, int, int, int)>(
-				FUNC_TEX2D_LOADRAWIMAGEDATA
-				)(this, data, texWidth, texHeight, channels);
-		}
-		bool initFromTexID(unsigned int texID)
-		{
-			return reinterpret_cast<bool(__thiscall*)(Tex2D*, unsigned int)>(
-				FUNC_TEX2D_INITFROMTEXID
-				)(this, texID);
-		}
-		bool initFromTexID(unsigned int texID) const
-		{
-			return reinterpret_cast<bool(__thiscall*)(const Tex2D*, unsigned int)>(
-				FUNC_TEX2D_INITFROMTEXID
-				)(this, texID);
+			return reinterpret_cast<bool (__thiscall*)(Tex2D* self, const unsigned char* data, GLint texWidth, int texHeight, int channels, int cols, int rows)>(FUNC_TEX2D_LOADARRAYTEXTURE_A)(this, data, texWidth, texHeight, channels, cols, rows);
 		}
 	};
 }
-#endif

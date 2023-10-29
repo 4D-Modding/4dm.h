@@ -1,88 +1,51 @@
 #pragma once
-#ifndef GUI_CHECKBOX_H
-#define GUI_CHECKBOX_H
-#include "gui.h"
-namespace fdm
+
+#include "4dm.h"
+
+namespace fdm 
 {
-	namespace gui
+	class gui::CheckBox : public gui::Element 
 	{
-		using CheckBoxCallback = std::add_pointer<void(void* user, bool checked)>::type;
+	public:
+		std::string text; // 0x8
+		bool clickable; // 0x28
+		bool mouseDown; // 0x29
+		bool selected; // 0x2A
+		PAD(0x1);
+		int xOffset; // 0x2C
+		int yOffset; // 0x30
+		gui::AlignmentX xAlign; // 0x34
+		gui::AlignmentY yAlign; // 0x38
+		inline static const int width = 20; 
+		inline static const int height = 20; 
+		PAD(0x4);
+		void* user; // 0x40
+		void* callback; // 0x48
+		bool checked; // 0x50
 
-		class Window;
-		class Element;
-		enum AlignmentX;
-		enum AlignmentY;
-
-		class CheckBox : public Element
+		void render(gui::Window* w) override
 		{
-		public:
-			std::string text;
-			bool clickable = true;
-			bool mouseDown;
-			bool selected;
-			PAD(1);
-			int xOffset;
-			int yOffset;
-			AlignmentX xAlign;
-			AlignmentY yAlign;
-			PAD(4);
-			void* user;
-			CheckBoxCallback callback = NULL;
-			bool checked;
-
-			void offsetX(int offset) override
-			{
-				this->xOffset = offset;
-			}
-			void offsetY(int offset) override
-			{
-				this->yOffset = offset;
-			}
-			void alignX(AlignmentX a) override
-			{
-				this->xAlign = a;
-			}
-			void alignY(AlignmentY a) override
-			{
-				this->yAlign = a;
-			}
-			void render(Window* w) override 
-			{
-				reinterpret_cast<void(__thiscall*)(CheckBox*, Window*)>(
-					FUNC_GUI_CHECKBOX_RENDER
-					)(this, w);
-			}
-			bool mouseButtonInput(const Window* w, int button, int action, int mods) override
-			{
-				return reinterpret_cast<bool(__thiscall*)(CheckBox*, const Window*, int, int, int)>(
-					FUNC_GUI_CHECKBOX_MOUSEBUTTONINPUT
-					)(this, w, button, action, mods);
-			}
-			bool keyInput(const Window* w, int key, int scancode, int action, int mods) override
-			{
-				return reinterpret_cast<bool(__thiscall*)(CheckBox*, const Window*, int, int, int, int)>(
-					FUNC_GUI_CHECKBOX_KEYINPUT
-					)(this, w, key, scancode, action, mods);
-			}
-			void getPos(const Window* w, int* x, int* y) override
-			{
-				reinterpret_cast<void(__thiscall*)(CheckBox*, const Window*, int*, int*)>(
-					FUNC_GUI_CHECKBOX_GETPOS
-					)(this, w, x, y);
-			}
-			void getSize(const Window* w, int* width, int* height) override
-			{
-				reinterpret_cast<void(__thiscall*)(CheckBox*, const Window*, int*, int*)>(
-					FUNC_GUI_CHECKBOX_GETSIZE
-					)(this, w, width, height);
-			}
-			bool touchingMouse(const Window* w)
-			{
-				return reinterpret_cast<bool(__thiscall*)(CheckBox*, const Window*)>(
-					FUNC_GUI_CHECKBOX_TOUCHINGMOUSE
-					)(this, w);
-			}
-		};
-	}
+			return reinterpret_cast<void (__thiscall*)(gui::CheckBox* self, gui::Window* w)>(FUNC_GUI_CHECKBOX_RENDER)(this, w);
+		}
+		bool mouseButtonInput(gui::Window* w, int button, int action) override
+		{
+			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, gui::Window* w, int button, int action)>(FUNC_GUI_CHECKBOX_MOUSEBUTTONINPUT)(this, w, button, action);
+		}
+		bool keyInput(const gui::Window* w, __int64 key, __int64 scancode, int action) override
+		{
+			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, const gui::Window* w, __int64 key, __int64 scancode, int action)>(FUNC_GUI_CHECKBOX_KEYINPUT)(this, w, key, scancode, action);
+		}
+		void getPos(gui::Window* w, int* x, int* y) override
+		{
+			return reinterpret_cast<void (__thiscall*)(gui::CheckBox* self, gui::Window* w, int* x, int* y)>(FUNC_GUI_CHECKBOX_GETPOS)(this, w, x, y);
+		}
+		void getSize(const gui::Window* w, int* width, int* height) override
+		{
+			return reinterpret_cast<void (__thiscall*)(gui::CheckBox* self, const gui::Window* w, int* width, int* height)>(FUNC_GUI_CHECKBOX_GETSIZE)(this, w, width, height);
+		}
+		bool touchingMouse(gui::Window* w) 
+		{
+			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, gui::Window* w)>(FUNC_GUI_CHECKBOX_TOUCHINGMOUSE)(this, w);
+		}
+	};
 }
-#endif

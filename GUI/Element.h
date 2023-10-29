@@ -1,34 +1,38 @@
 #pragma once
-#ifndef GUI_ELEMENT_H
-#define GUI_ELEMENT_H
-#include "gui.h"
-#include "Window.h"
-namespace fdm
+
+#include "4dm.h"
+
+namespace fdm 
 {
-	namespace gui
+	class gui::Element 
 	{
-		class Window;
-		enum AlignmentX;
-		enum AlignmentY;
-		class Element
+	public:
+
+		bool enabled() override
 		{
-		public:
-			virtual void render(Window* w) {}
-			virtual void alignX(AlignmentX a) {}
-			virtual void alignY(AlignmentY a) {}
-			virtual void offsetX(int offset) {}
-			virtual void offsetY(int offset) {}
-			virtual void getPos(const Window* w, int* x, int* y) {}
-			virtual void getSize(const Window* w, int* width, int* height) {}
-			virtual void mouseInput(const Window* w, double xPos, double yPos) {}
-			virtual bool scrollInput(const Window* w, double xOff, double yOff) { return NULL; }
-			virtual bool mouseButtonInput(const Window* w, int button, int action, int mods) { return NULL; }
-			virtual bool keyInput(const Window* w, int key, int scancode, int action, int mods) { return NULL; }
-			virtual bool charInput(const Window* w, unsigned int codepoint) { return NULL; }
-			virtual bool enabled() { return NULL; }
-			virtual void select() {}
-			virtual void deselect() {}
-		};
-	}
+			return reinterpret_cast<bool (__thiscall*)(gui::Element* self)>(FUNC_GUI_ELEMENT_ENABLED)(this);
+		}
+		int getCursorType() override
+		{
+			return reinterpret_cast<int (__thiscall*)(gui::Element* self)>(FUNC_GUI_ELEMENT_GETCURSORTYPE)(this);
+		}
+
+
+		// VIRTUAL FUNCS
+
+		virtual void render(gui::Window *) = NULL;
+		virtual void alignX(gui::AlignmentX) = NULL;
+		virtual void alignY(gui::AlignmentY) = NULL;
+		virtual void offsetX(int) = NULL;
+		virtual void offsetY(int) = NULL;
+		virtual void getPos(const gui::Window &, int *, int *) = NULL;
+		virtual void getSize(const gui::Window &, int *, int *) = NULL;
+		virtual bool mouseInput(const gui::Window &, double, double) = NULL;
+		virtual bool scrollInput(const gui::Window &, double, double) = NULL;
+		virtual bool mouseButtonInput(const gui::Window &, int, int, int) = NULL;
+		virtual bool keyInput(const gui::Window &, int, int, int, int) = NULL;
+		virtual bool charInput(const gui::Window &, uint32_t) = NULL;
+		virtual void select() = NULL;
+		virtual void deselect() = NULL;
+	};
 }
-#endif

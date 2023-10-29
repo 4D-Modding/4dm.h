@@ -1,6 +1,5 @@
 #pragma once
-#ifndef GUI_H
-#define GUI_H
+
 #include "../4dm.h"
 #include "Alignment.h"
 #include "Element.h"
@@ -33,4 +32,3 @@ namespace fdm
 		class Image;
 	}
 }
-#endif

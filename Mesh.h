@@ -1,22 +1,21 @@
 #pragma once
-#ifndef MESH_H
-#define MESH_H
+
 #include "4dm.h"
+
 namespace fdm
 {
-	struct Mesh 
+	class Mesh 
 	{
 	public:
-		virtual int buffCount() {}
-		virtual const void* buffData(int buffIndex) {}
-		virtual int buffSize(int buffIndex) {}
-		virtual int attrCount(int buffIndex) {}
-		virtual unsigned int attrType(int buffIndex, int attrIndex) {}
-		virtual int attrSize(int buffIndex, int attrIndex) {}
-		virtual int attrStride(int buffIndex, int attrIndex) {}
-		virtual int vertCount() {}
-		virtual const void* indexBuffData() {}
-		virtual int indexBuffSize() {}
+		virtual int buffCount() const = NULL;
+		virtual const void* buffData(int buffIndex) const = NULL;
+		virtual int buffSize(int buffIndex) const = NULL;
+		virtual int attrCount(int buffIndex) const = NULL;
+		virtual unsigned int attrType(int buffIndex, int attrIndex) const = NULL;
+		virtual int attrSize(int buffIndex, int attrIndex) const = NULL;
+		virtual int attrStride(int buffIndex, int attrIndex) const = NULL;
+		virtual int vertCount() const = NULL;
+		virtual const void* indexBuffData() const = NULL;
+		virtual int indexBuffSize() const = NULL;
 	};
 }
-#endif

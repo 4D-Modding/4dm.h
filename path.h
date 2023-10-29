@@ -1,8 +1,7 @@
 #pragma once
-#ifndef PATH_H
-#define PATH_H
+
 #include "4dm.h"
-namespace fdm 
+namespace fdm
 {
     class path
     {
@@ -30,4 +29,3 @@ namespace fdm
         }
     };
 }
-#endif

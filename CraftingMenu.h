@@ -1,108 +1,72 @@
 #pragma once
-#ifndef CRAFTINGMENU_H
-#define CRAFTINGMENU_H
+
 #include "4dm.h"
-#include "GUI/Window.h"
-#include "Item.h"
-namespace fdm
+
+namespace fdm 
 {
-	class InventoryGUI;
-	class InventoryCursor;
-	class Window;
-	class Item;
-	
-	class CraftingMenu : public gui::Element
+	class CraftingMenu : public gui::Element 
 	{
 	public:
-		struct CraftableRecipe
+		struct CraftableRecipe 
 		{
-		public:
-			std::vector<std::unique_ptr<Item>> recipe;
-			std::unique_ptr<Item> result;
+			int recipeIndex; 
+			PAD(0x4);
+			std::vector<std::unique_ptr<Item,std::default_delete<Item> >,std::allocator<std::unique_ptr<Item,std::default_delete<Item> > > > recipe; // 0x8
+			std::unique_ptr<Item,std::default_delete<Item> > result; // 0x20
+			int availableCount; // 0x28
 
-			int availableCount;
-			PAD(4);
-			~CraftableRecipe()
+			~CraftableRecipe() 
 			{
-				reinterpret_cast<void(__thiscall*)(CraftableRecipe*)>(
-					FUNC_CRAFTINGMENU_CRAFTABLERECIPE_DCRAFTABLERECIPE
-					)(this);
+				return reinterpret_cast<void(__thiscall*)(CraftingMenu::CraftableRecipe* self)>(FUNC_CRAFTINGMENU_CRAFTABLERECIPE_DESTR_CRAFTABLERECIPE)(this);
+			}
+			CraftableRecipe(int recipeIndex, nlohmann::json& j, int availableCount) 
+			{
+				return reinterpret_cast<void(__thiscall*)(CraftingMenu::CraftableRecipe* self, int recipeIndex, nlohmann::json& j, int availableCount)>(FUNC_CRAFTINGMENU_CRAFTABLERECIPE_CRAFTABLERECIPE)(this, recipeIndex, j, availableCount);
 			}
 		};
-		
-		InventoryGUI* intrface;
-		InventoryCursor* cursor;
-		std::vector<CraftableRecipe> craftableRecipes;
-		int xOffset;
-		int yOffset;
-		gui::AlignmentX xAlign;
-		gui::AlignmentY yAlign;
-		inline static nlohmann::json getRecipes() // recipes
-		{
-			return *(reinterpret_cast<nlohmann::json*>((base + 0x1BDD68)));
-		}
-		inline static TexRenderer getTexRenderer() // tr
-		{
-			return *(reinterpret_cast<TexRenderer*>((base + 0x1BDD78)));
-		}
+		inline static constexpr nlohmann::json recipes = *reinterpret_cast<nlohmann::json*>((base + 0x2BDF90)); 
+		InventoryManager* interface; // 0x8
+		InventoryCursor* cursor; // 0x10
+		std::vector<CraftingMenu::CraftableRecipe,std::allocator<CraftingMenu::CraftableRecipe> > craftableRecipes; // 0x18
+		int xOffset; // 0x30
+		int yOffset; // 0x34
+		gui::AlignmentX xAlign; // 0x38
+		gui::AlignmentY yAlign; // 0x3C
+		inline static constexpr TexRenderer tr = *reinterpret_cast<TexRenderer*>((base + 0x2BDFA0)); 
+		bool* callback; // 0x40
+		void* user; // 0x48
+
 		inline static bool loadRecipes() 
 		{
-			return reinterpret_cast<bool(__fastcall*)()>(
-				FUNC_CRAFTINGMENU_LOADRECIPES
-				)();
-		}
-		inline static void renderInit() 
-		{
-			reinterpret_cast<void(__fastcall*)()>(
-				FUNC_CRAFTINGMENU_RENDERINIT
-				)();
+			return reinterpret_cast<bool (__fastcall*)()>(FUNC_CRAFTINGMENU_LOADRECIPES)();
 		}
 		void render(gui::Window* w) override
 		{
-			reinterpret_cast<void(__thiscall*)(CraftingMenu*, gui::Window*)>(
-				FUNC_CRAFTINGMENU_RENDER
-				)(this, w);
+			return reinterpret_cast<void (__thiscall*)(CraftingMenu* self, gui::Window* w)>(FUNC_CRAFTINGMENU_RENDER)(this, w);
 		}
-		void offsetX(int offset) override 
+		void offsetX(int offset) override
 		{
-			this->xOffset = offset;
+			return reinterpret_cast<void (__thiscall*)(CraftingMenu* self, int offset)>(FUNC_CRAFTINGMENU_OFFSETX)(this, offset);
 		}
-		void offsetY(int offset) override
+		void offsetY(gui::AlignmentY a) override
 		{
-			this->yOffset = offset;
+			return reinterpret_cast<void (__thiscall*)(CraftingMenu* self, gui::AlignmentY a)>(FUNC_CRAFTINGMENU_OFFSETY)(this, a);
 		}
-		void alignX(gui::AlignmentX a) override
+		void getPos(gui::Window* w, int* x, int* y) override
 		{
-			this->xAlign = a;
-		}
-		void alignY(gui::AlignmentY a) override
-		{
-			this->yAlign = a;
-		}
-		void getPos(const gui::Window* w, int* x, int* y) override
-		{
-			reinterpret_cast<void(__thiscall*)(CraftingMenu*, const gui::Window*, int*, int*)>(
-				FUNC_CRAFTINGMENU_GETPOS
-				)(this, w, x, y);
+			return reinterpret_cast<void (__thiscall*)(CraftingMenu* self, gui::Window* w, int* x, int* y)>(FUNC_CRAFTINGMENU_GETPOS)(this, w, x, y);
 		}
 		void getSize(const gui::Window* w, int* width, int* height) override
 		{
-			reinterpret_cast<void(__thiscall*)(CraftingMenu*, const gui::Window*, int*, int*)>(
-				FUNC_CRAFTINGMENU_GETSIZE
-				)(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(CraftingMenu* self, const gui::Window* w, int* width, int* height)>(FUNC_CRAFTINGMENU_GETSIZE)(this, w, width, height);
 		}
-		bool mouseButtonInput(const gui::Window* w, int button, int action, int) override 
+		bool mouseButtonInput(gui::Window* w, int button, int action) override
 		{
-			return reinterpret_cast<bool(__thiscall*)(CraftingMenu*, const gui::Window*, int, int)>(
-				FUNC_CRAFTINGMENU_MOUSEBUTTONINPUT
-				)(this, w, button, action);
+			return reinterpret_cast<bool (__thiscall*)(CraftingMenu* self, gui::Window* w, int button, int action)>(FUNC_CRAFTINGMENU_MOUSEBUTTONINPUT)(this, w, button, action);
 		}
 		void updateAvailableRecipes() 
 		{
-			reinterpret_cast<void(__thiscall*)(CraftingMenu*)>(
-				FUNC_CRAFTINGMENU_UPDATEAVAILABLERECIPES
-				)(this);
+			return reinterpret_cast<void (__thiscall*)(CraftingMenu* self)>(FUNC_CRAFTINGMENU_UPDATEAVAILABLERECIPES)(this);
 		}
 	};
 }
-#endif
