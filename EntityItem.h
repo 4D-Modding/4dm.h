@@ -12,19 +12,21 @@ namespace fdm
 		inline static const float hitboxRadius = 0.1f; 
 		Hitbox hitbox; // 0x28
 		float rotation; // 0x78
-		inline static constexpr MeshRenderer wireframeRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279540)); 
+		inline static MeshRenderer* wireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279540));
 		PAD(0x4);
 		float spawnTime; // 0x80
 		inline static const float serverUpdateDelay = 0.5f; 
 		float lastServerUpdateTime; // 0x88
 
-		inline static std::unique_ptr<Entity,std::default_delete<Entity> > createWithItem(std::unique_ptr<Item> item, const glm::vec4& pos, const glm::vec4& vel) 
+		inline static std::unique_ptr<Entity,std::default_delete<Entity> > createWithItem(const std::unique_ptr<Item>& item, const glm::vec4& pos, const glm::vec4& vel) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity,std::default_delete<Entity> > (__fastcall*)(std::unique_ptr<Entity>& result, std::unique_ptr<Item> item, const glm::vec4& pos, const glm::vec4& vel)>(FUNC_ENTITYITEM_CREATEWITHITEM)(result, item, pos, vel);
+			return reinterpret_cast<std::unique_ptr<Entity,std::default_delete<Entity> > (__fastcall*)(const std::unique_ptr<Item>& item, const glm::vec4& pos, const glm::vec4& vel)>(FUNC_ENTITYITEM_CREATEWITHITEM)(item, pos, vel);
 		}
 		std::string getName() override
 		{
-			return reinterpret_cast<std::string (__thiscall*)(EntityItem* self, std::string& result)>(FUNC_ENTITYITEM_GETNAME)(this, result);
+			std::string result;
+			reinterpret_cast<std::string (__thiscall*)(EntityItem* self, std::string* result)>(FUNC_ENTITYITEM_GETNAME)(this, &result);
+			return result;
 		}
 		void update(World* world, double dt) override
 		{
@@ -36,15 +38,19 @@ namespace fdm
 		}
 		nlohmann::json saveAttributes() override
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityItem* self, nlohmann::json& result)>(FUNC_ENTITYITEM_SAVEATTRIBUTES)(this, result);
+			nlohmann::json result;
+			reinterpret_cast<nlohmann::json (__thiscall*)(EntityItem* self, nlohmann::json* result)>(FUNC_ENTITYITEM_SAVEATTRIBUTES)(this, &result);
+			return result;
 		}
-		void applyServerUpdate(nlohmann::json& j, World* world) override
+		void applyServerUpdate(const nlohmann::json& j, World* world) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityItem* self, nlohmann::json& j, World* world)>(FUNC_ENTITYITEM_APPLYSERVERUPDATE)(this, j, world);
+			return reinterpret_cast<void (__thiscall*)(EntityItem* self, const nlohmann::json& j, World* world)>(FUNC_ENTITYITEM_APPLYSERVERUPDATE)(this, j, world);
 		}
 		glm::vec4 getPos() override
 		{
-			return reinterpret_cast<glm::vec4 (__thiscall*)(EntityItem* self, glm::vec4& result)>(FUNC_ENTITYITEM_GETPOS)(this, result);
+			glm::vec4 result;
+			reinterpret_cast<glm::vec4 (__thiscall*)(EntityItem* self, glm::vec4* result)>(FUNC_ENTITYITEM_GETPOS)(this, &result);
+			return result;
 		}
 		void setPos(const glm::vec4& pos) override
 		{
@@ -54,13 +60,13 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(EntityItem* self)>(FUNC_ENTITYITEM_SHOULDSAVE)(this);
 		}
-		bool isIntersectingRay(const Entity::Ray* ray) override
+		bool isIntersectingRay(const Entity::Ray& ray) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(EntityItem* self, const Entity::Ray* ray)>(FUNC_ENTITYITEM_ISINTERSECTINGRAY)(this, ray);
+			return reinterpret_cast<bool (__thiscall*)(EntityItem* self, const Entity::Ray& ray)>(FUNC_ENTITYITEM_ISINTERSECTINGRAY)(this, ray);
 		}
-		uint32_t give(Inventory* inventory, __int64 maxCount) 
+		uint32_t give(Inventory* inventory, int maxCount) 
 		{
-			return reinterpret_cast<uint32_t (__thiscall*)(EntityItem* self, Inventory* inventory, __int64 maxCount)>(FUNC_ENTITYITEM_GIVE)(this, inventory, maxCount);
+			return reinterpret_cast<uint32_t (__thiscall*)(EntityItem* self, Inventory* inventory, int maxCount)>(FUNC_ENTITYITEM_GIVE)(this, inventory, maxCount);
 		}
 		void combineWithNearby(World* world) 
 		{

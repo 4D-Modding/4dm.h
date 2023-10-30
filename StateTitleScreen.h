@@ -7,7 +7,7 @@ namespace fdm
 	class StateTitleScreen : public State 
 	{
 	public:
-		inline static constexpr StateTitleScreen instanceObj = *reinterpret_cast<StateTitleScreen*>((base + 0x2C1980)); 
+		inline static StateTitleScreen* instanceObj = reinterpret_cast<StateTitleScreen*>((base + 0x2C1980));
 		glm::mat4 projection2D; // 0x8
 		glm::mat4 projection3D; // 0x48
 		bool paused; // 0x88

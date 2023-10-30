@@ -1,6 +1,7 @@
 #pragma once
 
 #include "4dm.h"
+#include "Player.h"
 
 namespace fdm 
 {
@@ -15,13 +16,13 @@ namespace fdm
 		};
 		Player* player; // 0x20
 		std::unique_ptr<Player,std::default_delete<Player> > ownedPlayer; // 0x28
-		inline static constexpr PlayerSkin defualtSkin = *reinterpret_cast<PlayerSkin*>((base + 0x2797A0)); 
+		inline static PlayerSkin* defaultSkin = reinterpret_cast<PlayerSkin*>((base + 0x2797A0)); // lmfao it was "defualtSkin" in game :misinformation:
 		PlayerSkin skin; // 0x30
 		PlayerSkinRenderer skinRenderer; // 0x180
-		inline static constexpr glm::mat4 projection3D = *reinterpret_cast<glm::mat4*>((base + 0x278490)); 
-		inline static constexpr int wWidth = *reinterpret_cast<int*>((base + 0x29B3F4)); 
-		inline static constexpr int wHeight = *reinterpret_cast<int*>((base + 0x29B3F0)); 
-		inline static constexpr FontRenderer fr = *reinterpret_cast<FontRenderer*>((base + 0x279700)); 
+		inline static glm::mat4* projection3D = reinterpret_cast<glm::mat4*>((base + 0x278490));
+		inline static int* wWidth = reinterpret_cast<int*>((base + 0x29B3F4));
+		inline static int* wHeight = reinterpret_cast<int*>((base + 0x29B3F0));
+		inline static FontRenderer* fr = reinterpret_cast<FontRenderer*>((base + 0x279700));
 		std::string displayName; // 0x710
 		float lastMovementUpdateTime; // 0x730
 		bool justDamaged; // 0x738
@@ -31,43 +32,49 @@ namespace fdm
 
 		inline static std::unique_ptr<Entity,std::default_delete<Entity> > createFromPlayer(Player* p) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity,std::default_delete<Entity> > (__fastcall*)(std::unique_ptr<Entity>& result, Player* p)>(FUNC_ENTITYPLAYER_CREATEFROMPLAYER)(result, p);
+			return reinterpret_cast<std::unique_ptr<Entity,std::default_delete<Entity> > (__fastcall*)(Player* p)>(FUNC_ENTITYPLAYER_CREATEFROMPLAYER)(p);
 		}
 		EntityPlayer(nlohmann::json& j) 
 		{
-			return reinterpret_cast<void(__thiscall*)(EntityPlayer* self, nlohmann::json& j)>(FUNC_ENTITYPLAYER_ENTITYPLAYER)(this, j);
+			reinterpret_cast<void(__thiscall*)(EntityPlayer* self, nlohmann::json& j)>(FUNC_ENTITYPLAYER_ENTITYPLAYER)(this, j);
 		}
 		std::string getName() override
 		{
-			return reinterpret_cast<std::string (__thiscall*)(EntityPlayer* self, std::string& result)>(FUNC_ENTITYPLAYER_GETNAME)(this, result);
+			std::string result;
+			reinterpret_cast<std::string (__thiscall*)(EntityPlayer* self, std::string* result)>(FUNC_ENTITYPLAYER_GETNAME)(this, &result);
+			return result;
 		}
 		void update(World* world, double dt) override
 		{
 			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, World* world, double dt)>(FUNC_ENTITYPLAYER_UPDATE)(this, world, dt);
 		}
-		void render(const World* world, const m4::Mat5& MV, char glasses) override
+		void render(const World* world, const m4::Mat5& MV, bool glasses) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, const World* world, const m4::Mat5& MV, char glasses)>(FUNC_ENTITYPLAYER_RENDER)(this, world, MV, glasses);
+			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, const World* world, const m4::Mat5& MV, bool glasses)>(FUNC_ENTITYPLAYER_RENDER)(this, world, MV, glasses);
 		}
 		nlohmann::json saveAttributes() override
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityPlayer* self, nlohmann::json& result)>(FUNC_ENTITYPLAYER_SAVEATTRIBUTES)(this, result);
+			nlohmann::json result;
+			reinterpret_cast<nlohmann::json (__thiscall*)(EntityPlayer* self, nlohmann::json* result)>(FUNC_ENTITYPLAYER_SAVEATTRIBUTES)(this, &result);
+			return result;
 		}
-		void applyServerUpdate(nlohmann::json& j, World* world) override
+		void applyServerUpdate(const nlohmann::json& j, World* world) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, nlohmann::json& j, World* world)>(FUNC_ENTITYPLAYER_APPLYSERVERUPDATE)(this, j, world);
+			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, const nlohmann::json& j, World* world)>(FUNC_ENTITYPLAYER_APPLYSERVERUPDATE)(this, j, world);
 		}
 		glm::vec4 getPos() override
 		{
-			return reinterpret_cast<glm::vec4 (__thiscall*)(EntityPlayer* self, glm::vec4& result)>(FUNC_ENTITYPLAYER_GETPOS)(this, result);
+			glm::vec4 result;
+			reinterpret_cast<glm::vec4 (__thiscall*)(EntityPlayer* self, glm::vec4* result)>(FUNC_ENTITYPLAYER_GETPOS)(this, &result);
+			return result;
 		}
 		void setPos(const glm::vec4& pos) override
 		{
 			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, const glm::vec4& pos)>(FUNC_ENTITYPLAYER_SETPOS)(this, pos);
 		}
-		bool isIntersectingRay(const Entity::Ray* ray) override
+		bool isIntersectingRay(const Entity::Ray& ray) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(EntityPlayer* self, const Entity::Ray* ray)>(FUNC_ENTITYPLAYER_ISINTERSECTINGRAY)(this, ray);
+			return reinterpret_cast<bool (__thiscall*)(EntityPlayer* self, const Entity::Ray& ray)>(FUNC_ENTITYPLAYER_ISINTERSECTINGRAY)(this, ray);
 		}
 		void takeDamage(float damage, World* world) override
 		{

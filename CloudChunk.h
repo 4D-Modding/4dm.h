@@ -10,27 +10,27 @@ namespace fdm
 		class CloudChunkMesh : public Mesh 
 		{
 			inline static const int TRUNCATED_OCTAHEDRON_VERT_COUNT = 25; 
-			inline static constexpr glm::vec4* truncated_octahedron_verts = *reinterpret_cast<glm::vec4**>((base + 0x2ACCE0)); 
+			inline static glm::vec4** truncated_octahedron_verts = reinterpret_cast<glm::vec4**>((base + 0x2ACCE0));
 			inline static const int TRUNCATED_OCTAHEDRON_INDEX_COUNT = 176; 
-			inline static constexpr uint32_t* truncated_octahedron_indices = *reinterpret_cast<uint32_t**>((base + 0x2ACE70)); 
+			inline static uint32_t** truncated_octahedron_indices = reinterpret_cast<uint32_t**>((base + 0x2ACE70));
 			std::vector<glm::vec4,std::allocator<glm::vec4 > > verts; // 0x8
 			std::vector<uint32_t,std::allocator<uint32_t> > indices; // 0x20
 
-			int indexBuffSize() override
+			int indexBuffSize() const override
 			{
-				return reinterpret_cast<int (__thiscall*)(CloudChunk::CloudChunkMesh* self)>(FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_INDEXBUFFSIZE)(this);
+				return reinterpret_cast<int (__thiscall*)(const CloudChunk::CloudChunkMesh* self)>(FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_INDEXBUFFSIZE)(this);
 			}
-			int buffSize(int buffIndex) override
+			int buffSize(int buffIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(CloudChunk::CloudChunkMesh* self, int buffIndex)>(FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_BUFFSIZE)(this, buffIndex);
+				return reinterpret_cast<int (__thiscall*)(const CloudChunk::CloudChunkMesh* self, int buffIndex)>(FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_BUFFSIZE)(this, buffIndex);
 			}
-			int attrSize(int buffIndex, int attrIndex) override
+			int attrSize(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(CloudChunk::CloudChunkMesh* self, int buffIndex, int attrIndex)>(FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_ATTRSIZE)(this, buffIndex, attrIndex);
+				return reinterpret_cast<int (__thiscall*)(const CloudChunk::CloudChunkMesh* self, int buffIndex, int attrIndex)>(FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_ATTRSIZE)(this, buffIndex, attrIndex);
 			}
-			int attrStride(int buffIndex, int attrIndex) override
+			int attrStride(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(CloudChunk::CloudChunkMesh* self, int buffIndex, int attrIndex)>(FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_ATTRSTRIDE)(this, buffIndex, attrIndex);
+				return reinterpret_cast<int (__thiscall*)(const CloudChunk::CloudChunkMesh* self, int buffIndex, int attrIndex)>(FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_ATTRSTRIDE)(this, buffIndex, attrIndex);
 			}
 			void move(CloudChunk::CloudChunkMesh* other) 
 			{
@@ -38,7 +38,7 @@ namespace fdm
 			}
 			~CloudChunkMesh() 
 			{
-				return reinterpret_cast<void(__thiscall*)(CloudChunk::CloudChunkMesh* self)>(FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_DESTR_CLOUDCHUNKMESH)(this);
+				reinterpret_cast<void(__thiscall*)(CloudChunk::CloudChunkMesh* self)>(FUNC_CLOUDCHUNK_CLOUDCHUNKMESH_DESTR_CLOUDCHUNKMESH)(this);
 			}
 		};
 		inline static const uint32_t SIZE = 6; 

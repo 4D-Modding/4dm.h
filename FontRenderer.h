@@ -22,15 +22,15 @@ namespace fdm
 
 		FontRenderer(const Tex2D* texture, const Shader* shader) 
 		{
-			return reinterpret_cast<void(__thiscall*)(FontRenderer* self, const Tex2D* texture, const Shader* shader)>(FUNC_FONTRENDERER_FONTRENDERER)(this, texture, shader);
+			reinterpret_cast<void(__thiscall*)(FontRenderer* self, const Tex2D* texture, const Shader* shader)>(FUNC_FONTRENDERER_FONTRENDERER)(this, texture, shader);
 		}
 		FontRenderer() 
 		{
-			return reinterpret_cast<void(__thiscall*)(FontRenderer* self)>(FUNC_FONTRENDERER_FONTRENDERER_A)(this);
+			reinterpret_cast<void(__thiscall*)(FontRenderer* self)>(FUNC_FONTRENDERER_FONTRENDERER_A)(this);
 		}
-		void setText(FontRenderer* text) 
+		void setText(const std::string& text) 
 		{
-			return reinterpret_cast<void (__thiscall*)(FontRenderer* self, FontRenderer* text)>(FUNC_FONTRENDERER_SETTEXT)(this, text);
+			return reinterpret_cast<void (__thiscall*)(FontRenderer* self, const std::string& text)>(FUNC_FONTRENDERER_SETTEXT)(this, text);
 		}
 		void render() 
 		{
@@ -40,9 +40,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(FontRenderer* self)>(FUNC_FONTRENDERER_UPDATEMODEL)(this);
 		}
-		void move(FontRenderer* other) 
+		void move(FontRenderer& other) 
 		{
-			return reinterpret_cast<void (__thiscall*)(FontRenderer* self, FontRenderer* other)>(FUNC_FONTRENDERER_MOVE)(this, other);
+			return reinterpret_cast<void (__thiscall*)(FontRenderer* self, FontRenderer& other)>(FUNC_FONTRENDERER_MOVE)(this, other);
 		}
 	};
 }

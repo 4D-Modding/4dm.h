@@ -14,25 +14,29 @@ namespace fdm
 		{
 			return reinterpret_cast<float (__thiscall*)(EntityDying* self)>(FUNC_ENTITYDYING_DEATHTIMER)(this);
 		}
-		inline static std::unique_ptr<Entity,std::default_delete<Entity> > createWithEntity(std::unique_ptr<Entity> entity, uuid* id) 
+		inline static std::unique_ptr<Entity,std::default_delete<Entity> > createWithEntity(const std::unique_ptr<Entity>& entity, uuid* id) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity,std::default_delete<Entity> > (__fastcall*)(std::unique_ptr<Entity>& result, std::unique_ptr<Entity> entity, uuid* id)>(FUNC_ENTITYDYING_CREATEWITHENTITY)(result, entity, id);
+			return reinterpret_cast<std::unique_ptr<Entity,std::default_delete<Entity> > (__fastcall*)(const std::unique_ptr<Entity>&entity, uuid* id)>(FUNC_ENTITYDYING_CREATEWITHENTITY)(entity, id);
 		}
 		std::string getName() override
 		{
-			return reinterpret_cast<std::string (__thiscall*)(EntityDying* self, std::string& result)>(FUNC_ENTITYDYING_GETNAME)(this, result);
+			std::string result;
+			reinterpret_cast<std::string (__thiscall*)(EntityDying* self, std::string* result)>(FUNC_ENTITYDYING_GETNAME)(this, &result);
+			return result;
 		}
 		void update(World* world, double dt) override
 		{
 			return reinterpret_cast<void (__thiscall*)(EntityDying* self, World* world, double dt)>(FUNC_ENTITYDYING_UPDATE)(this, world, dt);
 		}
-		void render(const World* world, const m4::Mat5& MV, _BOOL8 glasses) override
+		void render(const World* world, const m4::Mat5& MV, bool glasses) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityDying* self, const World* world, const m4::Mat5& MV, _BOOL8 glasses)>(FUNC_ENTITYDYING_RENDER)(this, world, MV, glasses);
+			return reinterpret_cast<void (__thiscall*)(EntityDying* self, const World* world, const m4::Mat5& MV, bool glasses)>(FUNC_ENTITYDYING_RENDER)(this, world, MV, glasses);
 		}
 		nlohmann::json getServerUpdateAttributes() override
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityDying* self, nlohmann::json& result)>(FUNC_ENTITYDYING_GETSERVERUPDATEATTRIBUTES)(this, result);
+			nlohmann::json result;
+			reinterpret_cast<nlohmann::json (__thiscall*)(EntityDying* self, nlohmann::json* result)>(FUNC_ENTITYDYING_GETSERVERUPDATEATTRIBUTES)(this, &result);
+			return result;
 		}
 		void applyServerUpdate(const nlohmann::json& j, World* world) override
 		{
@@ -40,7 +44,9 @@ namespace fdm
 		}
 		glm::vec4 getPos() override
 		{
-			return reinterpret_cast<glm::vec4 (__thiscall*)(EntityDying* self, glm::vec4& result)>(FUNC_ENTITYDYING_GETPOS)(this, result);
+			glm::vec4 result;
+			reinterpret_cast<glm::vec4 (__thiscall*)(EntityDying* self, glm::vec4* result)>(FUNC_ENTITYDYING_GETPOS)(this, &result);
+			return result;
 		}
 		void setPos(const glm::vec4& pos) override
 		{
@@ -50,9 +56,9 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(EntityDying* self)>(FUNC_ENTITYDYING_ISBLOCKENTITY)(this);
 		}
-		bool isIntersectingRay(const Entity::Ray* ray) override
+		bool isIntersectingRay(const Entity::Ray& ray) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(EntityDying* self, const Entity::Ray* ray)>(FUNC_ENTITYDYING_ISINTERSECTINGRAY)(this, ray);
+			return reinterpret_cast<bool (__thiscall*)(EntityDying* self, const Entity::Ray& ray)>(FUNC_ENTITYDYING_ISINTERSECTINGRAY)(this, ray);
 		}
 	};
 }

@@ -7,7 +7,7 @@ namespace fdm
 	class ShaderManager 
 	{
 	public:
-		inline static constexpr std::map<std::string,Shader *,std::less<std::string >,std::allocator<std::pair<std::string const ,Shader *> > > shaders = *reinterpret_cast<std::map<std::string,Shader *,std::less<std::string >,std::allocator<std::pair<std::string const ,Shader *> > >*>((base + 0x2C0728)); 
+		inline static std::map<std::string,Shader *>* shaders = reinterpret_cast<std::map<std::string,Shader *>*>((base + 0x2C0728));
 
 		inline static bool loadFromShaderList(const std::string& jsonListPath) 
 		{

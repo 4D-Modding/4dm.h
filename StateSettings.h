@@ -9,7 +9,7 @@ namespace fdm
 	public:
 		inline static const int DEFAULT_WINDOW_WIDTH = 1024; 
 		inline static const int DEFAULT_WINDOW_HEIGHT = 768; 
-		inline static constexpr StateSettings instanceObj = *reinterpret_cast<StateSettings*>((base + 0x2BFAE0)); 
+		inline static StateSettings* instanceObj = reinterpret_cast<StateSettings*>((base + 0x2BFAE0));
 		FontRenderer font; // 0x8
 		QuadRenderer qr; // 0xA8
 		Shader* qs; // 0xD0

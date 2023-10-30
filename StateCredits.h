@@ -7,7 +7,7 @@ namespace fdm
 	class StateCredits : public State 
 	{
 	public:
-		inline static constexpr StateCredits instanceObj = *reinterpret_cast<StateCredits*>((base + 0x278BA0)); 
+		inline static StateCredits* instanceObj = reinterpret_cast<StateCredits*>((base + 0x278BA0));
 		glm::mat4 projection2D; // 0x8
 		float yOffset; // 0x48
 		PAD(0x4);

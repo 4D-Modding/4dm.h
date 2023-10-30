@@ -22,35 +22,35 @@ namespace fdm
 
 			~ChunkMesh() 
 			{
-				return reinterpret_cast<void(__thiscall*)(Chunk::ChunkMesh* self)>(FUNC_CHUNK_CHUNKMESH_DESTR_CHUNKMESH)(this);
+				reinterpret_cast<void(__thiscall*)(Chunk::ChunkMesh* self)>(FUNC_CHUNK_CHUNKMESH_DESTR_CHUNKMESH)(this);
 			}
 			ChunkMesh() 
 			{
-				return reinterpret_cast<void(__thiscall*)(Chunk::ChunkMesh* self)>(FUNC_CHUNK_CHUNKMESH_CHUNKMESH)(this);
+				reinterpret_cast<void(__thiscall*)(Chunk::ChunkMesh* self)>(FUNC_CHUNK_CHUNKMESH_CHUNKMESH)(this);
 			}
-			int buffSize(int buffIndex) override
+			int buffSize(int buffIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(Chunk::ChunkMesh* self, int buffIndex)>(FUNC_CHUNK_CHUNKMESH_BUFFSIZE)(this, buffIndex);
+				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex)>(FUNC_CHUNK_CHUNKMESH_BUFFSIZE)(this, buffIndex);
 			}
-			int attrCount(int buffIndex) override
+			int attrCount(int buffIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(Chunk::ChunkMesh* self, int buffIndex)>(FUNC_CHUNK_CHUNKMESH_ATTRCOUNT)(this, buffIndex);
+				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex)>(FUNC_CHUNK_CHUNKMESH_ATTRCOUNT)(this, buffIndex);
 			}
-			uint32_t attrType(int buffIndex, int attrIndex) override
+			int attrType(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<uint32_t (__thiscall*)(Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(FUNC_CHUNK_CHUNKMESH_ATTRTYPE)(this, buffIndex, attrIndex);
+				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(FUNC_CHUNK_CHUNKMESH_ATTRTYPE)(this, buffIndex, attrIndex);
 			}
-			int attrSize(int buffIndex, int attrIndex) override
+			int attrSize(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(FUNC_CHUNK_CHUNKMESH_ATTRSIZE)(this, buffIndex, attrIndex);
+				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(FUNC_CHUNK_CHUNKMESH_ATTRSIZE)(this, buffIndex, attrIndex);
 			}
-			int attrStride(int buffIndex, int attrIndex) override
+			int attrStride(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(FUNC_CHUNK_CHUNKMESH_ATTRSTRIDE)(this, buffIndex, attrIndex);
+				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(FUNC_CHUNK_CHUNKMESH_ATTRSTRIDE)(this, buffIndex, attrIndex);
 			}
-			void indexBuffData() override
+			const void* indexBuffData() const override
 			{
-				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self)>(FUNC_CHUNK_CHUNKMESH_INDEXBUFFDATA)(this);
+				return reinterpret_cast<const void* (__thiscall*)(const Chunk::ChunkMesh* self)>(FUNC_CHUNK_CHUNKMESH_INDEXBUFFDATA)(this);
 			}
 			void move(Chunk::ChunkMesh* other) 
 			{
@@ -93,7 +93,7 @@ namespace fdm
 
 		Chunk(const glm::i64vec3& pos) 
 		{
-			return reinterpret_cast<void(__thiscall*)(Chunk* self, const glm::i64vec3& pos)>(FUNC_CHUNK_CHUNK)(this, pos);
+			reinterpret_cast<void(__thiscall*)(Chunk* self, const glm::i64vec3& pos)>(FUNC_CHUNK_CHUNK)(this, pos);
 		}
 		void setBlock(const glm::ivec4& block, unsigned char value) 
 		{
@@ -123,21 +123,21 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, bool smoothLighting, bool shadows, bool lights)>(FUNC_CHUNK_UPDATEMESH)(this, smoothLighting, shadows, lights);
 		}
-		bool load(const path* chunksFolderPath, World* world) 
+		bool load(const path& chunksFolderPath, World* world) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(Chunk* self, const path* chunksFolderPath, World* world)>(FUNC_CHUNK_LOAD)(this, chunksFolderPath, world);
+			return reinterpret_cast<bool (__thiscall*)(Chunk* self, const path& chunksFolderPath, World* world)>(FUNC_CHUNK_LOAD)(this, chunksFolderPath, world);
 		}
-		void save(const path* chunksFolderPath) 
+		void save(const path& chunksFolderPath) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Chunk* self, const path* chunksFolderPath)>(FUNC_CHUNK_SAVE)(this, chunksFolderPath);
+			return reinterpret_cast<void (__thiscall*)(Chunk* self, const path& chunksFolderPath)>(FUNC_CHUNK_SAVE)(this, chunksFolderPath);
 		}
-		void loadFromMessage(const Connection::InMessage* message, World* world) 
+		void loadFromMessage(const Connection::InMessage& message, World* world) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Chunk* self, const Connection::InMessage* message, World* world)>(FUNC_CHUNK_LOADFROMMESSAGE)(this, message, world);
+			return reinterpret_cast<void (__thiscall*)(Chunk* self, const Connection::InMessage& message, World* world)>(FUNC_CHUNK_LOADFROMMESSAGE)(this, message, world);
 		}
-		void updateCacheSection(const Chunk* other, bool shadows) 
+		void updateCacheSection(const Chunk& other, bool shadows) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Chunk* self, const Chunk* other, bool shadows)>(FUNC_CHUNK_UPDATECACHESECTION)(this, other, shadows);
+			return reinterpret_cast<void (__thiscall*)(Chunk* self, const Chunk& other, bool shadows)>(FUNC_CHUNK_UPDATECACHESECTION)(this, other, shadows);
 		}
 		void updateHeightmapCacheSection(glm::i64vec3* borderingChunkPos) 
 		{
@@ -165,7 +165,9 @@ namespace fdm
 		}
 		std::string getFilenamePrefix() 
 		{
-			return reinterpret_cast<std::string (__thiscall*)(Chunk* self, std::string& result)>(FUNC_CHUNK_GETFILENAMEPREFIX)(this, result);
+			std::string result;
+			reinterpret_cast<std::string (__thiscall*)(Chunk* self, std::string* result)>(FUNC_CHUNK_GETFILENAMEPREFIX)(this, &result);
+			return result;
 		}
 	};
 }

@@ -28,6 +28,7 @@
 #include "GL/glew.h"
 #include "glfw.h"
 #include <mutex>
+#include <set>
 
 #define __STR_CAT___(str1, str2) str1##str2
 #define __STR_CAT__(str1, str2) __STR_CAT___(str1, str2)
@@ -74,6 +75,7 @@ namespace fdm
 #include "PentachoronHollow.h"
 #include "Skybox.h"
 #include "Sphere.h"
+#include "KleinBottle.h"
 
 // general
 #include "m4.h"
@@ -83,6 +85,10 @@ namespace fdm
 #include "Shader.h"
 #include "ResourceManager.h"
 #include "ShaderManager.h"
+#include "Hitbox.h"
+
+// audio lol!!!
+#include "AudioManager.h"
 
 // renderers
 #include "TexRenderer.h"

@@ -9,15 +9,15 @@ namespace fdm
 	public:
 		inline static const int STACK_MAX = 4096; 
 		std::string name; // 0x10
-		inline static constexpr TexRenderer tr = *reinterpret_cast<TexRenderer*>((base + 0x2BF0A8)); 
-		inline static constexpr glm::u8vec4* barTUV = *reinterpret_cast<glm::u8vec4**>((base + 0x2AD220)); 
-		inline static constexpr MeshRenderer hypersilkRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x2795C0)); 
-		inline static constexpr MeshRenderer rockRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x2795E0)); 
-		inline static constexpr MeshRenderer barRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279580)); 
-		inline static constexpr MeshRenderer kleinBottleRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279560)); 
-		inline static constexpr MeshRenderer healthPotionRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x2795A0)); 
-		inline static constexpr MeshRenderer glassesFrameRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279600)); 
-		inline static constexpr MeshRenderer glassesLensRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279620)); 
+		inline static TexRenderer* tr = reinterpret_cast<TexRenderer*>((base + 0x2BF0A8));
+		inline static glm::u8vec4** barTUV = reinterpret_cast<glm::u8vec4**>((base + 0x2AD220));
+		inline static MeshRenderer *hypersilkRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2795C0)); 
+		inline static MeshRenderer *rockRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2795E0)); 
+		inline static MeshRenderer *barRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279580)); 
+		inline static MeshRenderer *kleinBottleRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279560)); 
+		inline static MeshRenderer *healthPotionRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2795A0)); 
+		inline static MeshRenderer *glassesFrameRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279600)); 
+		inline static MeshRenderer *glassesLensRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279620)); 
 
 		uint32_t getStackLimit() override
 		{

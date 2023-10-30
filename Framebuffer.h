@@ -15,7 +15,7 @@ namespace fdm
 
 		~Framebuffer() 
 		{
-			return reinterpret_cast<void(__thiscall*)(Framebuffer* self)>(FUNC_FRAMEBUFFER_DESTR_FRAMEBUFFER)(this);
+			reinterpret_cast<void(__thiscall*)(Framebuffer* self)>(FUNC_FRAMEBUFFER_DESTR_FRAMEBUFFER)(this);
 		}
 		void render() 
 		{

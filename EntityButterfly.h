@@ -13,7 +13,7 @@ namespace fdm
 			const glm::vec4 colorB; // 0x10
 
 		};
-		inline static constexpr glm::u8vec3* wing_tuv = *reinterpret_cast<glm::u8vec3**>((base + 0x2ACC90)); 
+		inline static glm::u8vec3** wing_tuv = reinterpret_cast<glm::u8vec3**>((base + 0x2ACC90));
 		inline static const float hitboxRadius = 1.4f; 
 		inline static const float maxSpeed = 1.8f; 
 		Hitbox hitbox; // 0x20
@@ -23,10 +23,10 @@ namespace fdm
 		float hitTime; // 0x88
 		inline static const float hitDelay = 0.7f; 
 		inline static const int NUM_TYPES = 4; 
-		inline static constexpr EntityButterfly::ButterflyType* ButterflyTypes = *reinterpret_cast<EntityButterfly::ButterflyType**>((base + 0x2783C0)); 
+		inline static EntityButterfly::ButterflyType** ButterflyTypes = reinterpret_cast<EntityButterfly::ButterflyType**>((base + 0x2783C0));
 		int type; // 0x90
-		inline static constexpr MeshRenderer wingRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x2788C8)); 
-		inline static constexpr MeshRenderer wireframeRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x2788A8)); 
+		inline static MeshRenderer* wingRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2788C8));
+		inline static MeshRenderer* wireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2788A8));
 		inline static const float minFlapDelay = NULL; 
 		inline static const float maxFlapDelay = NULL; 
 		PAD(0x4);
@@ -39,7 +39,9 @@ namespace fdm
 
 		std::string getName() override
 		{
-			return reinterpret_cast<std::string (__thiscall*)(EntityButterfly* self, std::string& result)>(FUNC_ENTITYBUTTERFLY_GETNAME)(this, result);
+			std::string result;
+			reinterpret_cast<std::string (__thiscall*)(EntityButterfly* self, std::string* result)>(FUNC_ENTITYBUTTERFLY_GETNAME)(this, &result);
+			return result;
 		}
 		void update(World* world, double dt) override
 		{
@@ -51,11 +53,13 @@ namespace fdm
 		}
 		nlohmann::json getServerUpdateAttributes() override
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityButterfly* self, nlohmann::json& result)>(FUNC_ENTITYBUTTERFLY_GETSERVERUPDATEATTRIBUTES)(this, result);
+			nlohmann::json result;
+			reinterpret_cast<nlohmann::json (__thiscall*)(EntityButterfly* self, nlohmann::json* result)>(FUNC_ENTITYBUTTERFLY_GETSERVERUPDATEATTRIBUTES)(this, &result);
+			return result;
 		}
-		void applyServerUpdate(nlohmann::json& j, World* world) override
+		void applyServerUpdate(const nlohmann::json& j, World* world) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityButterfly* self, nlohmann::json& j, World* world)>(FUNC_ENTITYBUTTERFLY_APPLYSERVERUPDATE)(this, j, world);
+			return reinterpret_cast<void (__thiscall*)(EntityButterfly* self, const nlohmann::json& j, World* world)>(FUNC_ENTITYBUTTERFLY_APPLYSERVERUPDATE)(this, j, world);
 		}
 		void takeDamage(float damage, World* world) override
 		{
@@ -69,9 +73,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(EntityButterfly* self)>(FUNC_ENTITYBUTTERFLY_PLAYDEATHSOUND)(this);
 		}
-		inline static void collisionCallback(void* user, Hitbox* hitbox, World* world, const glm::ivec4& collisionBlock, int collisionComp, $FCA921BEFA95D44D60D784C4D8D7ED2C* prevVel) 
+		inline static void collisionCallback(void* user, Hitbox* hitbox, World* world, const glm::ivec4& collisionBlock, int collisionComp, const glm::vec4& prevVel) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, Hitbox* hitbox, World* world, const glm::ivec4& collisionBlock, int collisionComp, $FCA921BEFA95D44D60D784C4D8D7ED2C* prevVel)>(FUNC_ENTITYBUTTERFLY_COLLISIONCALLBACK)(user, hitbox, world, collisionBlock, collisionComp, prevVel);
+			return reinterpret_cast<void (__fastcall*)(void* user, Hitbox* hitbox, World* world, const glm::ivec4& collisionBlock, int collisionComp, const glm::vec4& prevVel)>(FUNC_ENTITYBUTTERFLY_COLLISIONCALLBACK)(user, hitbox, world, collisionBlock, collisionComp, prevVel);
 		}
 	};
 }

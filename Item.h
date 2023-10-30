@@ -7,9 +7,9 @@ namespace fdm
 	class Item 
 	{
 	public:
-		inline static constexpr FontRenderer fr = *reinterpret_cast<FontRenderer*>((base + 0x2794A0)); 
-		inline static constexpr QuadRenderer qr = *reinterpret_cast<QuadRenderer*>((base + 0x278F18)); 
-		inline static constexpr nlohmann::json blueprints = *reinterpret_cast<nlohmann::json*>((base + 0x2BF098)); 
+		inline static FontRenderer* fr = reinterpret_cast<FontRenderer*>((base + 0x2794A0));
+		inline static QuadRenderer* qr = reinterpret_cast<QuadRenderer*>((base + 0x278F18));
+		inline static nlohmann::json* blueprints = reinterpret_cast<nlohmann::json*>((base + 0x2BF098));
 		uint32_t count; // 0x8
 
 		inline static bool loadItemInfo() 
@@ -26,7 +26,7 @@ namespace fdm
 		}
 		inline static std::unique_ptr<Item,std::default_delete<Item> > createFromJson(nlohmann::json& j) 
 		{
-			return reinterpret_cast<std::unique_ptr<Item,std::default_delete<Item> > (__fastcall*)(std::unique_ptr<Item>& result, nlohmann::json& j)>(FUNC_ITEM_CREATEFROMJSON)(result, j);
+			return reinterpret_cast<std::unique_ptr<Item,std::default_delete<Item> > (__fastcall*)(nlohmann::json& j)>(FUNC_ITEM_CREATEFROMJSON)(j);
 		}
 		inline static bool giveMax(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to) 
 		{
@@ -38,19 +38,21 @@ namespace fdm
 		}
 		inline static std::unique_ptr<Item,std::default_delete<Item> > instantiateItem(const std::string& itemName, uint32_t count, const std::string& type, nlohmann::json& attributes) 
 		{
-			return reinterpret_cast<std::unique_ptr<Item,std::default_delete<Item> > (__fastcall*)(std::unique_ptr<Item>& result, const std::string& itemName, uint32_t count, const std::string& type, nlohmann::json& attributes)>(FUNC_ITEM_INSTANTIATEITEM)(result, itemName, count, type, attributes);
+			return reinterpret_cast<std::unique_ptr<Item,std::default_delete<Item> > (__fastcall*)(const std::string& itemName, uint32_t count, const std::string& type, nlohmann::json& attributes)>(FUNC_ITEM_INSTANTIATEITEM)(itemName, count, type, attributes);
 		}
 		inline static nlohmann::json combineItemAttributes(nlohmann::json& baseAttributes, nlohmann::json& additions) 
 		{
-			return reinterpret_cast<nlohmann::json (__fastcall*)(nlohmann::json& result, nlohmann::json& baseAttributes, nlohmann::json& additions)>(FUNC_ITEM_COMBINEITEMATTRIBUTES)(result, baseAttributes, additions);
+			return reinterpret_cast<nlohmann::json (__fastcall*)(nlohmann::json& baseAttributes, nlohmann::json& additions)>(FUNC_ITEM_COMBINEITEMATTRIBUTES)(baseAttributes, additions);
 		}
 		nlohmann::json save() 
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Item* self, nlohmann::json& result)>(FUNC_ITEM_SAVE)(this, result);
+			nlohmann::json result;
+			reinterpret_cast<nlohmann::json (__thiscall*)(Item* self, nlohmann::json* result)>(FUNC_ITEM_SAVE)(this, &result);
+			return result;
 		}
-		~Item() override
+		~Item()
 		{
-			return reinterpret_cast<void(__thiscall*)(Item* self)>(FUNC_ITEM_DESTR_ITEM)(this);
+			reinterpret_cast<void(__thiscall*)(Item* self)>(FUNC_ITEM_DESTR_ITEM)(this);
 		}
 		bool takeMax(std::unique_ptr<Item>& other) 
 		{

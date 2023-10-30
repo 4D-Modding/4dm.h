@@ -9,23 +9,23 @@ namespace fdm
 	public:
 		std::string name; // 0x10
 		inline static const float scaleFactor = 0.15f; 
-		inline static constexpr glm::vec4* pickaxeVerts = *reinterpret_cast<glm::vec4**>((base + 0x29B600)); 
-		inline static constexpr glm::vec4* pickaxeNormals = *reinterpret_cast<glm::vec4**>((base + 0x29BC40)); 
-		inline static constexpr glm::vec3* ironPickTUV = *reinterpret_cast<glm::vec3**>((base + 0x29BA60)); 
-		inline static constexpr glm::vec3* deadlyPickTUV = *reinterpret_cast<glm::vec3**>((base + 0x29B880)); 
-		inline static constexpr glm::u8vec4* ultrahammerTUV = *reinterpret_cast<glm::u8vec4**>((base + 0x2AF3F0)); 
-		inline static constexpr glm::u8vec4* solenoidCollectorTUV = *reinterpret_cast<glm::u8vec4**>((base + 0x2AF2F0)); 
-		inline static constexpr MeshRenderer ironPickaxeRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279D68)); 
-		inline static constexpr MeshRenderer deadlyPickaxeRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279D88)); 
-		inline static constexpr MeshRenderer rockRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279E48)); 
-		inline static constexpr MeshRenderer ultrahammerRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279E68)); 
-		inline static constexpr MeshRenderer solenoidCollectorRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279DC8)); 
-		inline static constexpr Coil coilMesh = *reinterpret_cast<Coil*>((base + 0x2C1E48)); 
-		inline static constexpr MeshRenderer coilRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279DA8)); 
-		inline static constexpr Dodecaplex collectorBall = *reinterpret_cast<Dodecaplex*>((base + 0x279DF0)); 
-		inline static constexpr MeshRenderer collectorBallRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279E88)); 
-		inline static constexpr bool collectorAnimation = *reinterpret_cast<bool*>((base + 0x29B3E1)); 
-		inline static constexpr TexRenderer tr = *reinterpret_cast<TexRenderer*>((base + 0x2C1E20)); 
+		inline static glm::vec4* *pickaxeVerts = reinterpret_cast<glm::vec4**>((base + 0x29B600)); 
+		inline static glm::vec4* *pickaxeNormals = reinterpret_cast<glm::vec4**>((base + 0x29BC40)); 
+		inline static glm::vec3* *ironPickTUV = reinterpret_cast<glm::vec3**>((base + 0x29BA60)); 
+		inline static glm::vec3* *deadlyPickTUV = reinterpret_cast<glm::vec3**>((base + 0x29B880)); 
+		inline static glm::u8vec4* *ultrahammerTUV = reinterpret_cast<glm::u8vec4**>((base + 0x2AF3F0)); 
+		inline static glm::u8vec4* *solenoidCollectorTUV = reinterpret_cast<glm::u8vec4**>((base + 0x2AF2F0)); 
+		inline static MeshRenderer *ironPickaxeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279D68)); 
+		inline static MeshRenderer *deadlyPickaxeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279D88)); 
+		inline static MeshRenderer *rockRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279E48)); 
+		inline static MeshRenderer *ultrahammerRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279E68)); 
+		inline static MeshRenderer *solenoidCollectorRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279DC8)); 
+		inline static Coil* coilMesh = reinterpret_cast<Coil*>((base + 0x2C1E48));
+		inline static MeshRenderer* coilRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279DA8));
+		inline static Dodecaplex* collectorBall = reinterpret_cast<Dodecaplex*>((base + 0x279DF0));
+		inline static MeshRenderer* collectorBallRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279E88));
+		inline static bool* collectorAnimation = reinterpret_cast<bool*>((base + 0x29B3E1));
+		inline static TexRenderer* tr = reinterpret_cast<TexRenderer*>((base + 0x2C1E20));
 
 		void render(const glm::ivec2& pos) override
 		{

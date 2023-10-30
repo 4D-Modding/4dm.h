@@ -1,22 +1,8 @@
 #pragma once
 
-#include "../4dm.h"
-#include "Alignment.h"
-#include "Element.h"
-#include "Window.h"
-#include "ElemContainer.h"
-#include "Interface.h"
-#include "Text.h"
-#include "ContentBox.h"
-#include "Button.h"
-#include "Slider.h"
-#include "CheckBox.h"
-#include "TextInput.h"
-#include "Image.h"
-
-namespace fdm 
+namespace fdm
 {
-	namespace gui 
+	namespace gui
 	{
 		enum Alignment;
 		class Element;
@@ -32,3 +18,18 @@ namespace fdm
 		class Image;
 	}
 }
+
+#include "../4dm.h"
+#include "Alignment.h"
+#include "Element.h"
+#include "Window.h"
+#include "ElemContainer.h"
+#include "Interface.h"
+#include "Text.h"
+#include "ContentBox.h"
+#include "Button.h"
+#include "Slider.h"
+#include "CheckBox.h"
+#include "TextInput.h"
+#include "Image.h"
+

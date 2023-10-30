@@ -7,7 +7,7 @@ namespace fdm
 	class ResourceManager 
 	{
 	public:
-		inline static constexpr std::unordered_map<std::string,Tex2D *,std::hash<std::string >,std::equal_to<std::string >,std::allocator<std::pair<std::string const ,Tex2D *> > > textures = *reinterpret_cast<std::unordered_map<std::string,Tex2D *,std::hash<std::string >,std::equal_to<std::string >,std::allocator<std::pair<std::string const ,Tex2D *> > >*>((base + 0x2C40F0)); 
+		inline static std::unordered_map<std::string,Tex2D *>* textures = reinterpret_cast<std::unordered_map<std::string,Tex2D *>*>((base + 0x2C40F0));
 
 		inline static bool loadArrayTexture(const std::string& filename, int cols, int rows) 
 		{

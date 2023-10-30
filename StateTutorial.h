@@ -15,7 +15,7 @@ namespace fdm
 
 		};
 		inline static const float _zero = 1e-08f; 
-		inline static constexpr StateTutorial instanceObj = *reinterpret_cast<StateTutorial*>((base + 0x2C2860)); 
+		inline static StateTutorial* instanceObj = reinterpret_cast<StateTutorial*>((base + 0x2C2860));
 		bool updateViewFlag; // 0x8
 		PAD(0x3);
 		glm::mat4 projection3D; // 0xC

@@ -7,7 +7,7 @@ namespace fdm
 	class StateTutorialSlideshow : public State 
 	{
 	public:
-		inline static constexpr StateTutorialSlideshow instanceObj = *reinterpret_cast<StateTutorialSlideshow*>((base + 0x2C1E80)); 
+		inline static StateTutorialSlideshow* instanceObj = reinterpret_cast<StateTutorialSlideshow*>((base + 0x2C1E80));
 		bool updateViewFlag; // 0x8
 		PAD(0x7);
 		FontRenderer font; // 0x10

@@ -8,16 +8,16 @@ namespace fdm
 	{
 	public:
 		inline static const float Z_NEAR = 0.003f; 
-		inline static const float Z_FAR = 1000f; 
+		inline static const float Z_FAR = 1000.f; 
 		inline static const float HEIGHT = 1.8f; 
-		inline static const float ACC = 25f; 
-		inline static const float FRIC = 15f; 
-		inline static const float MAX_WALK_SPEED = 5f; 
-		inline static const float MAX_CROUCH_SPEED = 2f; 
-		inline static const float MAX_SPRINT_SPEED = 8f; 
-		inline static const float JUMP_VEL = 12f; 
+		inline static const float ACC = 25.f; 
+		inline static const float FRIC = 15.f; 
+		inline static const float MAX_WALK_SPEED = 5.f; 
+		inline static const float MAX_CROUCH_SPEED = 2.f; 
+		inline static const float MAX_SPRINT_SPEED = 8.f; 
+		inline static const float JUMP_VEL = 12.f; 
 		inline static const float DAMAGE_COOLDOWN = 1.2f; 
-		inline static constexpr const glm::ivec4 defaultSpawnPos = *reinterpret_cast<const glm::ivec4*>((base + 0x2B3508)); 
+		inline static const glm::ivec4* defaultSpawnPos = reinterpret_cast<const glm::ivec4*>((base + 0x2B3508));
 		uuid EntityPlayerID; 
 		struct 
 		{
@@ -92,7 +92,7 @@ namespace fdm
 		InventoryPlayer playerInventory; // 0x398
 		InventoryManager inventoryManager; // 0x3D8
 		bool shouldResetMouse; // 0x5D8
-		inline static const float maxHealth = 100f; 
+		inline static const float maxHealth = 100.f; 
 		PAD(0x3);
 		float health; // 0x5DC
 		inline static const float leftClickActionCooldown = 0.8f; 
@@ -100,18 +100,18 @@ namespace fdm
 		float leftClickActionTime; // 0x5E0
 		float rightClickActionTime; // 0x5E8
 		float damageTime; // 0x5F0
-		inline static constexpr MeshRenderer targetBlockRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x279640)); 
-		inline static constexpr TexRenderer healthRenderer = *reinterpret_cast<TexRenderer*>((base + 0x2BFA80)); 
-		inline static constexpr FontRenderer fr = *reinterpret_cast<FontRenderer*>((base + 0x279660)); 
+		inline static MeshRenderer* targetBlockRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279640));
+		inline static TexRenderer* healthRenderer = reinterpret_cast<TexRenderer*>((base + 0x2BFA80));
+		inline static FontRenderer* fr = reinterpret_cast<FontRenderer*>((base + 0x279660));
 		int headBlock; // 0x5F8
 
 		~Player() 
 		{
-			return reinterpret_cast<void(__thiscall*)(Player* self)>(FUNC_PLAYER_DESTR_PLAYER)(this);
+			reinterpret_cast<void(__thiscall*)(Player* self)>(FUNC_PLAYER_DESTR_PLAYER)(this);
 		}
 		Player() 
 		{
-			return reinterpret_cast<void(__thiscall*)(Player* self)>(FUNC_PLAYER_PLAYER)(this);
+			reinterpret_cast<void(__thiscall*)(Player* self)>(FUNC_PLAYER_PLAYER)(this);
 		}
 		void updatePos(World* world, double dt) 
 		{

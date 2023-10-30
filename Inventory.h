@@ -9,9 +9,9 @@ namespace fdm
 	public:
 		class iterator 
 		{
+		public:
 			Inventory* inventory; 
 			int index; // 0x8
-
 		};
 		std::string name; // 0x8
 		bool updateFlag; // 0x28

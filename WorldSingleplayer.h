@@ -17,9 +17,9 @@ namespace fdm
 		std::thread chunkLoadingThread; // 0x2F8
 		std::thread meshRegeneratingThread; // 0x308
 
-		WorldSingleplayer(const path* worldPath, const path* biomeInfoPath) 
+		WorldSingleplayer(const path& worldPath, const path& biomeInfoPath) 
 		{
-			return reinterpret_cast<void(__thiscall*)(WorldSingleplayer* self, const path* worldPath, const path* biomeInfoPath)>(FUNC_WORLDSINGLEPLAYER_WORLDSINGLEPLAYER)(this, worldPath, biomeInfoPath);
+			return reinterpret_cast<void(__thiscall*)(WorldSingleplayer* self, const path& worldPath, const path& biomeInfoPath)>(FUNC_WORLDSINGLEPLAYER_WORLDSINGLEPLAYER)(this, worldPath, biomeInfoPath);
 		}
 		~WorldSingleplayer() override
 		{

@@ -7,7 +7,7 @@ namespace fdm
 	class StateWorldGen : public State 
 	{
 	public:
-		inline static constexpr StateWorldGen instanceObj = *reinterpret_cast<StateWorldGen*>((base + 0x279EB0)); 
+		inline static StateWorldGen* instanceObj = reinterpret_cast<StateWorldGen*>((base + 0x279EB0));
 		glm::mat4 projection2D; // 0x8
 		glm::mat4 projection3D; // 0x48
 		float displayProgress; // 0x88

@@ -7,10 +7,10 @@ namespace fdm
 	class StateIntro : public State 
 	{
 	public:
-		inline static constexpr StateIntro instanceObj = *reinterpret_cast<StateIntro*>((base + 0x279140)); 
+		inline static StateIntro* instanceObj = reinterpret_cast<StateIntro*>((base + 0x279140));
 		glm::mat4 projection2D; // 0x8
 		glm::mat4 projection3D; // 0x48
-		inline static constexpr const char* fileNames[6] = {"logo.png", "moon.png", "sun.png", "crosshair.png", "targetBlock.png", "forg.png"}; // rip "ock.png"
+		inline static const char* fileNames[6] = {"logo.png", "moon.png", "sun.png", "crosshair.png", "targetBlock.png", "forg.png"}; // rip "ock.png"
 		inline static const int fileCount = 6; 
 		struct 
 		{

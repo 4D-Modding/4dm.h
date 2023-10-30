@@ -7,7 +7,7 @@ namespace fdm
 	class StateMultiplayer : public State 
 	{
 	public:
-		inline static constexpr StateMultiplayer instanceObj = *reinterpret_cast<StateMultiplayer*>((base + 0x2BF0D0)); 
+		inline static StateMultiplayer* instanceObj = reinterpret_cast<StateMultiplayer*>((base + 0x2BF0D0));
 		FontRenderer font; // 0x8
 		QuadRenderer qr; // 0xA8
 		Shader* qs; // 0xD0

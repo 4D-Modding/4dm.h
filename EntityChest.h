@@ -1,6 +1,8 @@
 #pragma once
 
 #include "4dm.h"
+#include "InventoryGrid.h"
+#include "InventorySession.h"
 
 namespace fdm 
 {
@@ -13,7 +15,7 @@ namespace fdm
 		glm::vec4 pos; // 0x20
 		InventoryGrid inventory; // 0x30
 		InventorySession openInstance; // 0xB0
-		inline static constexpr MeshRenderer wireframeRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x2788E8)); 
+		inline static MeshRenderer* wireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2788E8));
 
 		bool isClickable() override
 		{
@@ -21,7 +23,9 @@ namespace fdm
 		}
 		std::string getName() override
 		{
-			return reinterpret_cast<std::string (__thiscall*)(EntityChest* self, std::string& result)>(FUNC_ENTITYCHEST_GETNAME)(this, result);
+			std::string result;
+			reinterpret_cast<std::string (__thiscall*)(EntityChest* self, std::string* result)>(FUNC_ENTITYCHEST_GETNAME)(this, &result);
+			return result;
 		}
 		void update(World* world, double dt) override
 		{
@@ -33,19 +37,25 @@ namespace fdm
 		}
 		nlohmann::json saveAttributes() override
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityChest* self, nlohmann::json& result)>(FUNC_ENTITYCHEST_SAVEATTRIBUTES)(this, result);
+			nlohmann::json result;
+			reinterpret_cast<nlohmann::json (__thiscall*)(EntityChest* self, nlohmann::json* result)>(FUNC_ENTITYCHEST_SAVEATTRIBUTES)(this, &result);
+			return result;
 		}
 		nlohmann::json getServerUpdateAttributes() override
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityChest* self, nlohmann::json& result)>(FUNC_ENTITYCHEST_GETSERVERUPDATEATTRIBUTES)(this, result);
+			nlohmann::json result;
+			reinterpret_cast<nlohmann::json (__thiscall*)(EntityChest* self, nlohmann::json* result)>(FUNC_ENTITYCHEST_GETSERVERUPDATEATTRIBUTES)(this, &result);
+			return result;
 		}
-		void applyServerUpdate(nlohmann::json& j, World* world) override
+		void applyServerUpdate(const nlohmann::json& j, World* world) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityChest* self, nlohmann::json& j, World* world)>(FUNC_ENTITYCHEST_APPLYSERVERUPDATE)(this, j, world);
+			return reinterpret_cast<void (__thiscall*)(EntityChest* self, const nlohmann::json& j, World* world)>(FUNC_ENTITYCHEST_APPLYSERVERUPDATE)(this, j, world);
 		}
 		glm::vec4 getPos() override
 		{
-			return reinterpret_cast<glm::vec4 (__thiscall*)(EntityChest* self, glm::vec4& result)>(FUNC_ENTITYCHEST_GETPOS)(this, result);
+			glm::vec4 result;
+			reinterpret_cast<glm::vec4 (__thiscall*)(EntityChest* self, glm::vec4* result)>(FUNC_ENTITYCHEST_GETPOS)(this, &result);
+			return result;
 		}
 		void setPos(const glm::vec4& pos) override
 		{

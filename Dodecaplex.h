@@ -1,6 +1,7 @@
 #pragma once
 
 #include "4dm.h"
+#include "DodecaplexWireframe.h"
 
 namespace fdm 
 {
@@ -36,29 +37,29 @@ namespace fdm
 		PAD(0x7);
 		std::vector<glm::vec4,std::allocator<glm::vec4 > > n; // 0x40
 
-		int buffCount() override
+		int buffCount() const override
 		{
-			return reinterpret_cast<int (__thiscall*)(Dodecaplex* self)>(FUNC_DODECAPLEX_BUFFCOUNT)(this);
+			return reinterpret_cast<int (__thiscall*)(const Dodecaplex* self)>(FUNC_DODECAPLEX_BUFFCOUNT)(this);
 		}
-		void buffData(int buffIndex) override
+		const void* buffData(int buffIndex) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, int buffIndex)>(FUNC_DODECAPLEX_BUFFDATA)(this, buffIndex);
+			return reinterpret_cast<const void* (__thiscall*)(const Dodecaplex* self, int buffIndex)>(FUNC_DODECAPLEX_BUFFDATA)(this, buffIndex);
 		}
-		int buffSize(int buffIndex) override
+		int buffSize(int buffIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(Dodecaplex* self, int buffIndex)>(FUNC_DODECAPLEX_BUFFSIZE)(this, buffIndex);
+			return reinterpret_cast<int (__thiscall*)(const Dodecaplex* self, int buffIndex)>(FUNC_DODECAPLEX_BUFFSIZE)(this, buffIndex);
 		}
-		int attrSize(int buffIndex, int attrIndex) override
+		int attrSize(int buffIndex, int attrIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(Dodecaplex* self, int buffIndex, int attrIndex)>(FUNC_DODECAPLEX_ATTRSIZE)(this, buffIndex, attrIndex);
+			return reinterpret_cast<int (__thiscall*)(const Dodecaplex* self, int buffIndex, int attrIndex)>(FUNC_DODECAPLEX_ATTRSIZE)(this, buffIndex, attrIndex);
 		}
 		void generateMesh(bool hollow, float distance, bool generateInner, const glm::vec3& colors, bool spider) 
 		{
 			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, bool hollow, float distance, bool generateInner, const glm::vec3& colors, bool spider)>(FUNC_DODECAPLEX_GENERATEMESH)(this, hollow, distance, generateInner, colors, spider);
 		}
-		void generateCellColors(std::vector<glm::vec3>* colors) 
+		void generateCellColors(std::vector<glm::vec3>& colors) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, std::vector<glm::vec3>* colors)>(FUNC_DODECAPLEX_GENERATECELLCOLORS)(this, colors);
+			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, std::vector<glm::vec3>& colors)>(FUNC_DODECAPLEX_GENERATECELLCOLORS)(this, colors);
 		}
 		void addFaces(Dodecaplex::Face* face, std::vector<DodecaplexWireframe::Face>* list, int recurse_limit) 
 		{
@@ -70,7 +71,14 @@ namespace fdm
 		}
 		~Dodecaplex() 
 		{
-			return reinterpret_cast<void(__thiscall*)(Dodecaplex* self)>(FUNC_DODECAPLEX_DESTR_DODECAPLEX)(this);
+			reinterpret_cast<void(__thiscall*)(Dodecaplex* self)>(FUNC_DODECAPLEX_DESTR_DODECAPLEX)(this);
 		}
+
+		int attrCount(int buffIndex) const { return 0; }
+		unsigned int attrType(int buffIndex, int attrIndex) const { return 0; }
+		int attrStride(int buffIndex, int attrIndex) const { return 0; }
+		int vertCount() const { return 0; }
+		const void* indexBuffData() const { return nullptr; }
+		int indexBuffSize() const { return 0; }
 	};
 }

@@ -62,9 +62,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(WorldClient* self, Player* player, double dt)>(FUNC_WORLDCLIENT_UPDATEPHYSICS)(this, player, dt);
 		}
-		bool handleWorldMessage(const Connection::InMessage* message, Player* player) 
+		bool handleWorldMessage(const Connection::InMessage& message, Player* player) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(WorldClient* self, const Connection::InMessage* message, Player* player)>(FUNC_WORLDCLIENT_HANDLEWORLDMESSAGE)(this, message, player);
+			return reinterpret_cast<bool (__thiscall*)(WorldClient* self, const Connection::InMessage& message, Player* player)>(FUNC_WORLDCLIENT_HANDLEWORLDMESSAGE)(this, message, player);
 		}
 		void handleLightingOptionsUpdate() override
 		{
@@ -98,9 +98,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(WorldClient* self)>(FUNC_WORLDCLIENT_JOINALLCHUNKLOADINGTHREADS)(this);
 		}
-		void handleMessage(const Connection::InMessage* message, Player* player) 
+		void handleMessage(const Connection::InMessage& message, Player* player) 
 		{
-			return reinterpret_cast<void (__thiscall*)(WorldClient* self, const Connection::InMessage* message, Player* player)>(FUNC_WORLDCLIENT_HANDLEMESSAGE)(this, message, player);
+			return reinterpret_cast<void (__thiscall*)(WorldClient* self, const Connection::InMessage& message, Player* player)>(FUNC_WORLDCLIENT_HANDLEMESSAGE)(this, message, player);
 		}
 		inline static bool inventoryUpdateCallback(nlohmann::json& action, void* user) 
 		{

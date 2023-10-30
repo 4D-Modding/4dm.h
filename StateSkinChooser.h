@@ -7,8 +7,8 @@ namespace fdm
 	class StateSkinChooser : public State 
 	{
 	public:
-		inline static constexpr const std::string defaultSkinPath = *reinterpret_cast<const std::string*>((base + 0x2C0F40)); 
-		inline static constexpr StateSkinChooser instanceObj = *reinterpret_cast<StateSkinChooser*>((base + 0x2C0F60)); 
+		inline static const std::string* defaultSkinPath = reinterpret_cast<const std::string*>((base + 0x2C0F40));
+		inline static StateSkinChooser* instanceObj = reinterpret_cast<StateSkinChooser*>((base + 0x2C0F60));
 		FontRenderer font; // 0x8
 		QuadRenderer qr; // 0xA8
 		Shader* qs; // 0xD0

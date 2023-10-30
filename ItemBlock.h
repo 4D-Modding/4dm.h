@@ -8,7 +8,7 @@ namespace fdm
 	{
 	public:
 		inline static const int STACK_MAX = 4096; 
-		inline static constexpr TexRenderer tr = *reinterpret_cast<TexRenderer*>((base + 0x2BDF18)); 
+		inline static TexRenderer* tr = reinterpret_cast<TexRenderer*>((base + 0x2BDF18));
 		int blockID; // 0x10
 
 		void render(const glm::ivec2& pos) override

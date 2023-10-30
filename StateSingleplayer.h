@@ -7,7 +7,7 @@ namespace fdm
 	class StateSingleplayer : public State 
 	{
 	public:
-		inline static constexpr StateSingleplayer instanceObj = *reinterpret_cast<StateSingleplayer*>((base + 0x2C0BE0)); 
+		inline static StateSingleplayer* instanceObj = reinterpret_cast<StateSingleplayer*>((base + 0x2C0BE0));
 		bool updateViewFlag; // 0x8
 		PAD(0x7);
 		FontRenderer font; // 0x10

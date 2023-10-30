@@ -7,7 +7,7 @@ namespace fdm
 	class StatePause : public State 
 	{
 	public:
-		inline static constexpr StatePause instanceObj = *reinterpret_cast<StatePause*>((base + 0x2BF7D0)); 
+		inline static StatePause* instanceObj = reinterpret_cast<StatePause*>((base + 0x2BF7D0));
 		bool paused; // 0x8
 		PAD(0x7);
 		FontRenderer font; // 0x10

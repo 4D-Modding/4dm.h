@@ -7,7 +7,7 @@ namespace fdm
 	class StateGame : public State 
 	{
 	public:
-		inline static constexpr StateGame instanceObj = *reinterpret_cast<StateGame*>((base + 0x2BE5E0)); 
+		inline static StateGame* instanceObj = reinterpret_cast<StateGame*>((base + 0x2BE5E0));
 		std::unique_ptr<WorldManager,std::default_delete<WorldManager> > world; // 0x8
 		CloudManager clouds; // 0x10
 		glm::mat4 projection2D; // 0xB0

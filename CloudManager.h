@@ -1,6 +1,7 @@
 #pragma once
 
 #include "4dm.h"
+#include "CloudChunk.h"
 
 namespace fdm 
 {
@@ -13,7 +14,7 @@ namespace fdm
 		glm::vec3 velocity; // 0x14
 		uint32_t seed; // 0x20
 		PAD(0x4);
-		std::unordered_map<glm::i64vec3,std::unique_ptr<CloudChunk,std::default_delete<CloudChunk> >,std::hash<glm::i64vec3 >,std::equal_to<glm::i64vec3 >,std::allocator<std::pair<glm::i64vec3 const ,std::unique_ptr<CloudChunk,std::default_delete<CloudChunk> > > > > chunks; // 0x28
+		std::unordered_map<glm::i64vec3,std::unique_ptr<CloudChunk>> chunks; // 0x28
 		std::atomic<bool> chunksReady; // 0x68
 		PAD(0x3);
 		std::atomic<int> loadedChunks; // 0x6C
@@ -24,7 +25,7 @@ namespace fdm
 
 		~CloudManager() 
 		{
-			return reinterpret_cast<void(__thiscall*)(CloudManager* self)>(FUNC_CLOUDMANAGER_DESTR_CLOUDMANAGER)(this);
+			reinterpret_cast<void(__thiscall*)(CloudManager* self)>(FUNC_CLOUDMANAGER_DESTR_CLOUDMANAGER)(this);
 		}
 		void render(const m4::Mat5& MV, const glm::mat4& P, int matUniformID) 
 		{

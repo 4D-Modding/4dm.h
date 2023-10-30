@@ -1,15 +1,26 @@
 #pragma once
 
 #include "4dm.h"
+#include "CraftingMenu.h"
+#include "GUI/gui.h"
 
 namespace fdm 
 {
 	class InventoryManager 
 	{
 	public:
+		enum TransferAction
+		{
+			ACTION_SWAP = 0x0,
+			ACTION_TAKE_HALF = 0x1,
+			ACTION_GIVE_MAX = 0x2,
+			ACTION_GIVE_ONE = 0x3,
+			ACTION_MOVE = 0x4,
+		};
 		class iterator 
 		{
-			InventoryManager* interface; 
+		public:
+			InventoryManager* Interface; 
 			int index; // 0x8
 
 		};
@@ -21,7 +32,7 @@ namespace fdm
 		PAD(0x3);
 		int wWidth; // 0x24
 		int wHeight; // 0x28
-		inline static constexpr FontRenderer font = *reinterpret_cast<FontRenderer*>((base + 0x279400)); 
+		inline static FontRenderer* font = reinterpret_cast<FontRenderer*>((base + 0x279400));
 		PAD(0x4);
 		QuadRenderer qr; // 0x30
 		Shader* qs; // 0x58
@@ -34,7 +45,7 @@ namespace fdm
 
 		~InventoryManager() 
 		{
-			return reinterpret_cast<void(__thiscall*)(InventoryManager* self)>(FUNC_INVENTORYMANAGER_DESTR_INVENTORYMANAGER)(this);
+			reinterpret_cast<void(__thiscall*)(InventoryManager* self)>(FUNC_INVENTORYMANAGER_DESTR_INVENTORYMANAGER)(this);
 		}
 		void renderInit(GLFWwindow* w) 
 		{
@@ -56,9 +67,9 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(InventoryManager* self, InventoryManager::TransferAction action, std::unique_ptr<Item>& selectedSlot, std::unique_ptr<Item>& cursorSlot, Inventory* other)>(FUNC_INVENTORYMANAGER_APPLYTRANSFER)(this, action, selectedSlot, cursorSlot, other);
 		}
-		Inventory findInventory(World* world, Player* player, const std::string& inventoryName) 
+		Inventory* findInventory(World* world, Player* player, const std::string& inventoryName) 
 		{
-			return reinterpret_cast<Inventory (__thiscall*)(InventoryManager* self, World* world, Player* player, const std::string& inventoryName)>(FUNC_INVENTORYMANAGER_FINDINVENTORY)(this, world, player, inventoryName);
+			return reinterpret_cast<Inventory* (__thiscall*)(InventoryManager* self, World* world, Player* player, const std::string& inventoryName)>(FUNC_INVENTORYMANAGER_FINDINVENTORY)(this, world, player, inventoryName);
 		}
 		void updateCraftingMenuBox() 
 		{

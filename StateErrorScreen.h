@@ -7,7 +7,7 @@ namespace fdm
 	class StateErrorScreen : public State 
 	{
 	public:
-		inline static constexpr StateErrorScreen instanceObj = *reinterpret_cast<StateErrorScreen*>((base + 0x278F40)); 
+		inline static StateErrorScreen* instanceObj = reinterpret_cast<StateErrorScreen*>((base + 0x278F40));
 		FontRenderer font; // 0x8
 		QuadRenderer qr; // 0xA8
 		Shader* qs; // 0xD0

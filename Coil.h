@@ -12,15 +12,15 @@ namespace fdm
 
 		Coil(int n, int s, float r, float w, float h) 
 		{
-			return reinterpret_cast<void(__thiscall*)(Coil* self, int n, int s, float r, float w, float h)>(FUNC_COIL_COIL)(this, n, s, r, w, h);
+			reinterpret_cast<void(__thiscall*)(Coil* self, int n, int s, float r, float w, float h)>(FUNC_COIL_COIL)(this, n, s, r, w, h);
 		}
-		int buffSize(int buffIndex) override
+		int buffSize(int buffIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(Coil* self, int buffIndex)>(FUNC_COIL_BUFFSIZE)(this, buffIndex);
+			return reinterpret_cast<int (__thiscall*)(const Coil* self, int buffIndex)>(FUNC_COIL_BUFFSIZE)(this, buffIndex);
 		}
-		int attrSize(int buffIndex, int attrIndex) override
+		int attrSize(int buffIndex, int attrIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(Coil* self, int buffIndex, int attrIndex)>(FUNC_COIL_ATTRSIZE)(this, buffIndex, attrIndex);
+			return reinterpret_cast<int (__thiscall*)(const Coil* self, int buffIndex, int attrIndex)>(FUNC_COIL_ATTRSIZE)(this, buffIndex, attrIndex);
 		}
 	};
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "4dm.h"
+#include "InventoryManager.h"
 
 namespace fdm 
 {
@@ -12,7 +13,7 @@ namespace fdm
 
 		~InventorySession() 
 		{
-			return reinterpret_cast<void(__thiscall*)(InventorySession* self)>(FUNC_INVENTORYSESSION_DESTR_INVENTORYSESSION)(this);
+			reinterpret_cast<void(__thiscall*)(InventorySession* self)>(FUNC_INVENTORYSESSION_DESTR_INVENTORYSESSION)(this);
 		}
 	};
 }

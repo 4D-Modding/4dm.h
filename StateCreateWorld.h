@@ -7,7 +7,7 @@ namespace fdm
 	class StateCreateWorld : public State 
 	{
 	public:
-		inline static constexpr StateCreateWorld instanceObj = *reinterpret_cast<StateCreateWorld*>((base + 0x2BDFD0)); 
+		inline static StateCreateWorld* instanceObj = reinterpret_cast<StateCreateWorld*>((base + 0x2BDFD0));
 		bool updateViewFlag; // 0x8
 		PAD(0x7);
 		FontRenderer font; // 0x10

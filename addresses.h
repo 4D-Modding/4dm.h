@@ -2,6 +2,31 @@
 
 #include "4dm.h"
 
+// AudioManager
+
+#define FUNC_AUDIOMANAGER_LOADSOUND (base + idaOffsetFix(0x67D0))
+#define FUNC_AUDIOMANAGER_PLAYSOUND4D (base + idaOffsetFix(0x6A80))
+#define FUNC_AUDIOMANAGER_SETLISTENERINFO4D (base + idaOffsetFix(0x6DD0))
+#define FUNC_AUDIOMANAGER_LOADBGMFROMJSON (base + idaOffsetFix(0x7290))
+#define FUNC_AUDIOMANAGER_UPDATEBGM (base + idaOffsetFix(0x7760))
+#define FUNC_AUDIOMANAGER_GETSOUND (base + idaOffsetFix(0x78A0))
+#define FUNC_AUDIOMANAGER_GETVOICEGROUPINFO (base + idaOffsetFix(0x7930))
+
+// Hitbox
+
+#define FUNC_HITBOX_ADDVELWITHMAXHORIZSPEED (base + idaOffsetFix(0x83440))
+#define FUNC_HITBOX_UPDATE (base + idaOffsetFix(0x83760))
+#define FUNC_HITBOX_ISINTERSECTINGRAY (base + idaOffsetFix(0x83FD0))
+#define FUNC_HITBOX_TAKESTEP (base + idaOffsetFix(0x842C0))
+
+// KleinBottle
+
+#define FUNC_KLEINBOTTLE_BUFFDATA (base + idaOffsetFix(0x4A9F0))
+#define FUNC_KLEINBOTTLE_ATTRSIZE (base + idaOffsetFix(0x92F50))
+#define FUNC_KLEINBOTTLE_KLEINBOTTLE (base + idaOffsetFix(0x9CF80))
+#define FUNC_KLEINBOTTLE_BUFFSIZE (base + idaOffsetFix(0x9DC60))
+#define FUNC_KLEINBOTTLE_DESTR_KLEINBOTTLE (base + idaOffsetFix(0x9EED0))
+
 // Connection::InMessage
 
 #define FUNC_CONNECTION_INMESSAGE_INMESSAGEDELETER (base + idaOffsetFix(0x4FC40))

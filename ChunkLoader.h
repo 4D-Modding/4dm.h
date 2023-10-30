@@ -9,6 +9,14 @@ namespace fdm
 	public:
 		struct BiomeInfo 
 		{
+			enum TreeType
+			{
+				TREE_NONE = 0x0,
+				TREE_REDLEAF = 0x1,
+				TREE_MIDNIGHT = 0x2,
+				TREE_SNOWY = 0x3,
+			};
+
 			std::string name; 
 			float weight; // 0x20
 			float hMultiplier; // 0x24
@@ -26,11 +34,11 @@ namespace fdm
 
 			~BiomeInfo() 
 			{
-				return reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self)>(FUNC_CHUNKLOADER_BIOMEINFO_DESTR_BIOMEINFO)(this);
+				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self)>(FUNC_CHUNKLOADER_BIOMEINFO_DESTR_BIOMEINFO)(this);
 			}
-			BiomeInfo(ChunkLoader::BiomeInfo* __that) 
+			BiomeInfo(ChunkLoader::BiomeInfo&& __that) noexcept 
 			{
-				return reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self, ChunkLoader::BiomeInfo* __that)>(FUNC_CHUNKLOADER_BIOMEINFO_BIOMEINFO)(this, __that);
+				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self, ChunkLoader::BiomeInfo&& __that)>(FUNC_CHUNKLOADER_BIOMEINFO_BIOMEINFO)(this, __that);
 			}
 		};
 		struct BiomeMapPixel 
@@ -39,7 +47,6 @@ namespace fdm
 			PAD(0x3);
 			float hMultiplier; // 0x4
 			float vMultiplier; // 0x8
-
 		};
 		path worldPath; 
 		path chunksPath; // 0x20
@@ -58,23 +65,23 @@ namespace fdm
 		PAD(0x2);
 		int difficulty; // 0x7C
 		std::vector<ChunkLoader::BiomeInfo,std::allocator<ChunkLoader::BiomeInfo> > biomes; // 0x80
-		std::unique_ptr<ChunkLoader::BiomeMapPixel [0],std::default_delete<ChunkLoader::BiomeMapPixel [0]> > biomeMap; // 0x98
+		std::unique_ptr<ChunkLoader::BiomeMapPixel*> biomeMap; // 0x98
 
-		bool init(const path* worldPath, const path* biomeInfoPath) 
+		bool init(const path& worldPath, const path& biomeInfoPath) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(ChunkLoader* self, const path* worldPath, const path* biomeInfoPath)>(FUNC_CHUNKLOADER_INIT)(this, worldPath, biomeInfoPath);
+			return reinterpret_cast<bool (__thiscall*)(ChunkLoader* self, const path& worldPath, const path& biomeInfoPath)>(FUNC_CHUNKLOADER_INIT)(this, worldPath, biomeInfoPath);
 		}
 		void loadChunk(Chunk* c, World* world) 
 		{
 			return reinterpret_cast<void (__thiscall*)(ChunkLoader* self, Chunk* c, World* world)>(FUNC_CHUNKLOADER_LOADCHUNK)(this, c, world);
 		}
-		bool loadBiomes(const path* biomeInfoPath) 
+		bool loadBiomes(const path& biomeInfoPath) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(ChunkLoader* self, const path* biomeInfoPath)>(FUNC_CHUNKLOADER_LOADBIOMES)(this, biomeInfoPath);
+			return reinterpret_cast<bool (__thiscall*)(ChunkLoader* self, const path& biomeInfoPath)>(FUNC_CHUNKLOADER_LOADBIOMES)(this, biomeInfoPath);
 		}
-		bool loadInfo(const path* worldInfoPath) 
+		bool loadInfo(const path& worldInfoPath) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(ChunkLoader* self, const path* worldInfoPath)>(FUNC_CHUNKLOADER_LOADINFO)(this, worldInfoPath);
+			return reinterpret_cast<bool (__thiscall*)(ChunkLoader* self, const path& worldInfoPath)>(FUNC_CHUNKLOADER_LOADINFO)(this, worldInfoPath);
 		}
 		void generateChunk(Chunk* chunk) 
 		{

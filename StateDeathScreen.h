@@ -7,7 +7,7 @@ namespace fdm
 	class StateDeathScreen : public State 
 	{
 	public:
-		inline static constexpr StateDeathScreen instanceObj = *reinterpret_cast<StateDeathScreen*>((base + 0x278CF0)); 
+		inline static StateDeathScreen* instanceObj = reinterpret_cast<StateDeathScreen*>((base + 0x278CF0));
 		TexRenderer skullRenderer; // 0x8
 		FontRenderer font; // 0x30
 		QuadRenderer qr; // 0xD0

@@ -22,20 +22,20 @@ namespace fdm
 
 			SPInfo() 
 			{
-				return reinterpret_cast<void(__thiscall*)(EntityAlidade::SPInfo* self)>(FUNC_ENTITYALIDADE_SPINFO_SPINFO)(this);
+				reinterpret_cast<void(__thiscall*)(EntityAlidade::SPInfo* self)>(FUNC_ENTITYALIDADE_SPINFO_SPINFO)(this);
 			}
 			~SPInfo() 
 			{
-				return reinterpret_cast<void(__thiscall*)(EntityAlidade::SPInfo* self)>(FUNC_ENTITYALIDADE_SPINFO_DESTR_SPINFO)(this);
+				reinterpret_cast<void(__thiscall*)(EntityAlidade::SPInfo* self)>(FUNC_ENTITYALIDADE_SPINFO_DESTR_SPINFO)(this);
 			}
 		};
-		inline static constexpr MeshRenderer telescopeRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x278828)); 
-		inline static constexpr MeshRenderer baseRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x278888)); 
-		inline static constexpr MeshRenderer supportRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x278868)); 
-		inline static constexpr MeshRenderer semicircleRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x278848)); 
-		inline static constexpr MeshRenderer wireframeRenderer = *reinterpret_cast<MeshRenderer*>((base + 0x278808)); 
+		inline static MeshRenderer *telescopeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x278828)); 
+		inline static MeshRenderer *baseRenderer = reinterpret_cast<MeshRenderer*>((base + 0x278888)); 
+		inline static MeshRenderer *supportRenderer = reinterpret_cast<MeshRenderer*>((base + 0x278868)); 
+		inline static MeshRenderer *semicircleRenderer = reinterpret_cast<MeshRenderer*>((base + 0x278848)); 
+		inline static MeshRenderer *wireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x278808)); 
 		Hitbox hitbox; // 0x20
-		inline static const float HEALTH_MAX = 10f; 
+		inline static const float HEALTH_MAX = 10.f; 
 		float health; // 0x70
 		glm::vec4 pos; // 0x74
 		glm::ivec4 currentBlock; // 0x84
@@ -43,7 +43,9 @@ namespace fdm
 
 		std::string getName() override
 		{
-			return reinterpret_cast<std::string (__thiscall*)(EntityAlidade* self, std::string& result)>(FUNC_ENTITYALIDADE_GETNAME)(this, result);
+			std::string result;
+			reinterpret_cast<std::string (__thiscall*)(EntityAlidade* self, std::string* result)>(FUNC_ENTITYALIDADE_GETNAME)(this, &result);
+			return result;
 		}
 		void update(World* world, double dt) override
 		{
@@ -55,11 +57,15 @@ namespace fdm
 		}
 		nlohmann::json saveAttributes() override
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityAlidade* self, nlohmann::json& result)>(FUNC_ENTITYALIDADE_SAVEATTRIBUTES)(this, result);
+			nlohmann::json result;
+			reinterpret_cast<nlohmann::json (__thiscall*)(EntityAlidade* self, nlohmann::json* result)>(FUNC_ENTITYALIDADE_SAVEATTRIBUTES)(this, &result);
+			return result;
 		}
 		glm::vec4 getPos() override
 		{
-			return reinterpret_cast<glm::vec4 (__thiscall*)(EntityAlidade* self, glm::vec4& result)>(FUNC_ENTITYALIDADE_GETPOS)(this, result);
+			glm::vec4 result;
+			reinterpret_cast<glm::vec4 (__thiscall*)(EntityAlidade* self, glm::vec4* result)>(FUNC_ENTITYALIDADE_GETPOS)(this, &result);
+			return result;
 		}
 		void setPos(const glm::vec4& pos) override
 		{
@@ -69,9 +75,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(EntityAlidade* self, float damage, World* world)>(FUNC_ENTITYALIDADE_TAKEDAMAGE)(this, damage, world);
 		}
-		bool action(World* world, Entity* actor, int action) override
+		bool action(World* world, Entity* actor, int action, const nlohmann::json& details) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(EntityAlidade* self, World* world, Entity* actor, int action)>(FUNC_ENTITYALIDADE_ACTION)(this, world, actor, action);
+			return reinterpret_cast<bool (__thiscall*)(EntityAlidade* self, World* world, Entity* actor, int action, const nlohmann::json & details)>(FUNC_ENTITYALIDADE_ACTION)(this, world, actor, action, details);
 		}
 		void postAction(World* world, Entity* actor, int action) override
 		{
