@@ -1,22 +1,19 @@
 #pragma once
 
-#include "4dm.h"
+#include "gui.h"
 
-namespace fdm 
+namespace fdm::gui
 {
-	class gui::Window 
+	class Window 
 	{
 	public:
-
-
-
 		// VIRTUAL FUNCS
 
-		virtual QuadRenderer getQuadRenderer() = NULL;
-		virtual FontRenderer getFont() = NULL;
-		virtual GLFWwindow getGLFWwindow() = NULL;
-		virtual void getCursorPos(int *, int *) = NULL;
-		virtual void getSize(int *, int *) = NULL;
-		virtual void changeViewport(const glm::ivec4&, const glm::ivec2&) = NULL;
+		virtual QuadRenderer* getQuadRenderer() = NULL;
+		virtual FontRenderer* getFont() = NULL;
+		virtual GLFWwindow* getGLFWwindow() = NULL;
+		virtual void getCursorPos(int * x, int * y) = NULL;
+		virtual void getSize(int * width, int * height) = NULL;
+		virtual void changeViewport(const glm::ivec4& pos, const glm::ivec2& scroll) = NULL;
 	};
 }

@@ -1,10 +1,11 @@
 #pragma once
 
-#include "4dm.h"
+#include "gui.h"
 
-namespace fdm 
+namespace fdm::gui
 {
-	class gui::Slider : public gui::Element 
+	using SliderCallback = std::add_pointer<void(void* user, int value)>::type;
+	class Slider : public gui::Element 
 	{
 	public:
 		inline static const int height = 50; 
@@ -21,7 +22,7 @@ namespace fdm
 		gui::AlignmentX xAlign; // 0x40
 		gui::AlignmentY yAlign; // 0x44
 		void* user; // 0x48
-		void* callback; // 0x50
+		SliderCallback callback = NULL; // 0x50
 
 		void offsetX(int offset) override
 		{
@@ -39,17 +40,17 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::Slider* self, gui::Window* w)>(FUNC_GUI_SLIDER_RENDER)(this, w);
 		}
-		bool mouseButtonInput(gui::Window* w, int button, int action) override
+		bool mouseButtonInput(gui::Window* w, int button, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::Slider* self, gui::Window* w, int button, int action)>(FUNC_GUI_SLIDER_MOUSEBUTTONINPUT)(this, w, button, action);
+			return reinterpret_cast<bool (__thiscall*)(gui::Slider* self, gui::Window* w, int button, int action, int mods)>(FUNC_GUI_SLIDER_MOUSEBUTTONINPUT)(this, w, button, action, mods);
 		}
 		bool mouseInput(gui::Window* w, double xpos, double ypos) override
 		{
 			return reinterpret_cast<bool (__thiscall*)(gui::Slider* self, gui::Window* w, double xpos, double ypos)>(FUNC_GUI_SLIDER_MOUSEINPUT)(this, w, xpos, ypos);
 		}
-		bool keyInput(const gui::Window* w, int key, __int64 scancode, int action) override
+		bool keyInput(gui::Window* w, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::Slider* self, const gui::Window* w, int key, __int64 scancode, int action)>(FUNC_GUI_SLIDER_KEYINPUT)(this, w, key, scancode, action);
+			return reinterpret_cast<bool (__thiscall*)(gui::Slider* self, gui::Window* w, int key, int scancode, int action, int mods)>(FUNC_GUI_SLIDER_KEYINPUT)(this, w, key, scancode, action, mods);
 		}
 		void alignX(gui::AlignmentX a) override
 		{
@@ -63,9 +64,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::Slider* self, gui::Window* w, int* x, int* y)>(FUNC_GUI_SLIDER_GETPOS)(this, w, x, y);
 		}
-		void getSize(const gui::Window* w, int* width, int* height) override
+		void getSize(gui::Window* w, int* width, int* height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Slider* self, const gui::Window* w, int* width, int* height)>(FUNC_GUI_SLIDER_GETSIZE)(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(gui::Slider* self, gui::Window* w, int* width, int* height)>(FUNC_GUI_SLIDER_GETSIZE)(this, w, width, height);
 		}
 	};
 }

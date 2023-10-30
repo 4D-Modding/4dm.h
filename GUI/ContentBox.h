@@ -1,10 +1,10 @@
 #pragma once
 
-#include "4dm.h"
+#include "gui.h"
 
-namespace fdm 
+namespace fdm::gui
 {
-	class gui::ContentBox : public gui::Element, public gui::Window, public gui::ElemContainer 
+	class ContentBox : public gui::Element, public gui::Window, public gui::ElemContainer 
 	{
 	public:
 		gui::Window* parent; // 0x18
@@ -32,21 +32,21 @@ namespace fdm
 		PAD(0x3);
 		int currentCursorType; // 0x78
 
-		void ~ContentBox() 
+		~ContentBox() 
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::ContentBox* self)>(FUNC_GUI_CONTENTBOX_DESTR_CONTENTBOX)(this);
+			reinterpret_cast<void (__thiscall*)(gui::ContentBox* self)>(FUNC_GUI_CONTENTBOX_DESTR_CONTENTBOX)(this);
 		}
-		QuadRenderer getQuadRenderer() override
+		QuadRenderer* getQuadRenderer() override
 		{
-			return reinterpret_cast<QuadRenderer (__thiscall*)(gui::ContentBox* self)>(FUNC_GUI_CONTENTBOX_GETQUADRENDERER)(this);
+			return reinterpret_cast<QuadRenderer* (__thiscall*)(gui::ContentBox* self)>(FUNC_GUI_CONTENTBOX_GETQUADRENDERER)(this);
 		}
-		FontRenderer getFont() override
+		FontRenderer* getFont() override
 		{
-			return reinterpret_cast<FontRenderer (__thiscall*)(gui::ContentBox* self)>(FUNC_GUI_CONTENTBOX_GETFONT)(this);
+			return reinterpret_cast<FontRenderer* (__thiscall*)(gui::ContentBox* self)>(FUNC_GUI_CONTENTBOX_GETFONT)(this);
 		}
-		GLFWwindow getGLFWwindow() override
+		GLFWwindow* getGLFWwindow() override
 		{
-			return reinterpret_cast<GLFWwindow (__thiscall*)(gui::ContentBox* self)>(FUNC_GUI_CONTENTBOX_GETGLFWWINDOW)(this);
+			return reinterpret_cast<GLFWwindow* (__thiscall*)(gui::ContentBox* self)>(FUNC_GUI_CONTENTBOX_GETGLFWWINDOW)(this);
 		}
 		void getCursorPos(int* x, int* y) override
 		{
@@ -60,13 +60,13 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::ContentBox* self, const glm::ivec4& pos, const glm::ivec2& scroll)>(FUNC_GUI_CONTENTBOX_CHANGEVIEWPORT)(this, pos, scroll);
 		}
-		void getPos(const gui::Window* w, int* x, int* y) override
+		void getPos(gui::Window* w, int* x, int* y) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::ContentBox* self, const gui::Window* w, int* x, int* y)>(FUNC_GUI_CONTENTBOX_GETPOS)(this, w, x, y);
+			return reinterpret_cast<void (__thiscall*)(gui::ContentBox* self, gui::Window* w, int* x, int* y)>(FUNC_GUI_CONTENTBOX_GETPOS)(this, w, x, y);
 		}
-		void getSize(const gui::Window* w, uint32_t* width, uint32_t* height) override
+		void getSize(gui::Window* w, int* width, int* height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::ContentBox* self, const gui::Window* w, uint32_t* width, uint32_t* height)>(FUNC_GUI_CONTENTBOX_GETSIZE_A)(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(gui::ContentBox* self, gui::Window* w, int* width, int* height)>(FUNC_GUI_CONTENTBOX_GETSIZE_A)(this, w, width, height);
 		}
 		bool touchingMouse() 
 		{
@@ -96,21 +96,21 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::ContentBox* self, int offset)>(FUNC_GUI_CONTENTBOX_OFFSETY)(this, offset);
 		}
-		bool mouseInput(const gui::Window* w, double xpos, double ypos) override
+		bool mouseInput(gui::Window* w, double xpos, double ypos) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::ContentBox* self, const gui::Window* w, double xpos, double ypos)>(FUNC_GUI_CONTENTBOX_MOUSEINPUT)(this, w, xpos, ypos);
+			return reinterpret_cast<bool (__thiscall*)(gui::ContentBox* self, gui::Window* w, double xpos, double ypos)>(FUNC_GUI_CONTENTBOX_MOUSEINPUT)(this, w, xpos, ypos);
 		}
-		bool scrollInput(const gui::Window* w, double xoffset, double yoffset) override
+		bool scrollInput(gui::Window* w, double xoffset, double yoffset) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::ContentBox* self, const gui::Window* w, double xoffset, double yoffset)>(FUNC_GUI_CONTENTBOX_SCROLLINPUT)(this, w, xoffset, yoffset);
+			return reinterpret_cast<bool (__thiscall*)(gui::ContentBox* self, gui::Window* w, double xoffset, double yoffset)>(FUNC_GUI_CONTENTBOX_SCROLLINPUT)(this, w, xoffset, yoffset);
 		}
-		bool mouseButtonInput(const gui::Window* w, uint32_t button, uint32_t action, int mods) override
+		bool mouseButtonInput(gui::Window* w, int button, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::ContentBox* self, const gui::Window* w, uint32_t button, uint32_t action, int mods)>(FUNC_GUI_CONTENTBOX_MOUSEBUTTONINPUT)(this, w, button, action, mods);
+			return reinterpret_cast<bool (__thiscall*)(gui::ContentBox* self, gui::Window* w, int button, int action, int mods)>(FUNC_GUI_CONTENTBOX_MOUSEBUTTONINPUT)(this, w, button, action, mods);
 		}
-		bool keyInput(const gui::Window* w, __int64 key, __int64 scancode, int action, int mods) override
+		bool keyInput(gui::Window* w, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::ContentBox* self, const gui::Window* w, __int64 key, __int64 scancode, int action, int mods)>(FUNC_GUI_CONTENTBOX_KEYINPUT)(this, w, key, scancode, action, mods);
+			return reinterpret_cast<bool (__thiscall*)(gui::ContentBox* self, gui::Window* w, int key, int scancode, int action, int mods)>(FUNC_GUI_CONTENTBOX_KEYINPUT)(this, w, key, scancode, action, mods);
 		}
 		void select() override
 		{
@@ -120,9 +120,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::ContentBox* self)>(FUNC_GUI_CONTENTBOX_DESELECT)(this);
 		}
-		void addElement(Chunk* e) override
+		void addElement(gui::Element* e) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::ContentBox* self, Chunk* e)>(FUNC_GUI_CONTENTBOX_ADDELEMENT)(this, e);
+			return reinterpret_cast<void (__thiscall*)(gui::ContentBox* self, gui::Element* e)>(FUNC_GUI_CONTENTBOX_ADDELEMENT)(this, e);
 		}
 		bool removeElement(gui::Element* e) override
 		{

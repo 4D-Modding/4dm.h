@@ -1,10 +1,10 @@
 #pragma once
 
-#include "4dm.h"
+#include "gui.h"
 
-namespace fdm 
+namespace fdm::gui
 {
-	class gui::Text : public gui::Element 
+	class Text : public gui::Element 
 	{
 	public:
 		std::string text; // 0x8
@@ -12,7 +12,7 @@ namespace fdm
 		int yOffset; // 0x2C
 		gui::AlignmentX xAlign; // 0x30
 		gui::AlignmentY yAlign; // 0x34
-		glm::vec4 color; // 0x38
+		glm::vec4 color{1}; // 0x38
 		uint32_t size; // 0x48
 		uint32_t wrapWidth; // 0x4C
 		bool shadow; // 0x50
@@ -30,9 +30,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w, int* x, int* y)>(FUNC_GUI_TEXT_GETPOS)(this, w, x, y);
 		}
-		void getSize(const gui::Window* w, uint32_t* width, int* height) override
+		void getSize(gui::Window* w, int* width, int* height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Text* self, const gui::Window* w, uint32_t* width, int* height)>(FUNC_GUI_TEXT_GETSIZE)(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w, int* width, int* height)>(FUNC_GUI_TEXT_GETSIZE)(this, w, width, height);
 		}
 		void setText(const std::string& text) 
 		{

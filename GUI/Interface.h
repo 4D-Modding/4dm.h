@@ -1,10 +1,11 @@
 #pragma once
 
-#include "4dm.h"
+#include "gui.h"
 
-namespace fdm 
+namespace fdm::gui
 {
-	class gui::Interface : public gui::Window, public gui::ElemContainer 
+	using ViewportCallback = std::add_pointer<void(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>::type;
+	class Interface : public gui::Window, public gui::ElemContainer 
 	{
 	public:
 		std::vector<gui::Element *,std::allocator<gui::Element *> > elements; // 0x10
@@ -13,20 +14,20 @@ namespace fdm
 		QuadRenderer* qr; // 0x30
 		FontRenderer* font; // 0x38
 		GLFWwindow* window; // 0x40
-		void* viewportCallback; // 0x48
+		ViewportCallback viewportCallback = NULL; // 0x48
 		void* viewportUser; // 0x50
 		bool viewUpdateFlag; // 0x58
 		PAD(0x3);
 		int currentCursorType; // 0x5C
 		GLFWcursor* cursor; // 0x60
 
-		void Interface(GLFWwindow* window) 
+		Interface(GLFWwindow* window) 
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Interface* self, GLFWwindow* window)>(FUNC_GUI_INTERFACE_INTERFACE)(this, window);
+			reinterpret_cast<void (__thiscall*)(gui::Interface* self, GLFWwindow* window)>(FUNC_GUI_INTERFACE_INTERFACE)(this, window);
 		}
-		void ~Interface() 
+		~Interface()
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Interface* self)>(FUNC_GUI_INTERFACE_DESTR_INTERFACE)(this);
+			reinterpret_cast<void (__thiscall*)(gui::Interface* self)>(FUNC_GUI_INTERFACE_DESTR_INTERFACE)(this);
 		}
 		void render() 
 		{
@@ -40,25 +41,25 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(gui::Interface* self, double xoffset, double yoffset)>(FUNC_GUI_INTERFACE_SCROLLINPUT)(this, xoffset, yoffset);
 		}
-		bool mouseButtonInput(uint32_t button, uint32_t action, int mods) 
+		bool mouseButtonInput(int button, int action, int mods)
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::Interface* self, uint32_t button, uint32_t action, int mods)>(FUNC_GUI_INTERFACE_MOUSEBUTTONINPUT)(this, button, action, mods);
+			return reinterpret_cast<bool (__thiscall*)(gui::Interface* self, int button, int action, int mods)>(FUNC_GUI_INTERFACE_MOUSEBUTTONINPUT)(this, button, action, mods);
 		}
-		bool keyInput(uint32_t key, __int64 scancode, int action, int mods) 
+		bool keyInput(int key, int scancode, int action, int mods)
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::Interface* self, uint32_t key, __int64 scancode, int action, int mods)>(FUNC_GUI_INTERFACE_KEYINPUT)(this, key, scancode, action, mods);
+			return reinterpret_cast<bool (__thiscall*)(gui::Interface* self, int key, int scancode, int action, int mods)>(FUNC_GUI_INTERFACE_KEYINPUT)(this, key, scancode, action, mods);
 		}
-		QuadRenderer getQuadRenderer() override
+		QuadRenderer* getQuadRenderer() override
 		{
-			return reinterpret_cast<QuadRenderer (__thiscall*)(gui::Interface* self)>(FUNC_GUI_INTERFACE_GETQUADRENDERER)(this);
+			return reinterpret_cast<QuadRenderer* (__thiscall*)(gui::Interface* self)>(FUNC_GUI_INTERFACE_GETQUADRENDERER)(this);
 		}
-		FontRenderer getFont() override
+		FontRenderer* getFont() override
 		{
-			return reinterpret_cast<FontRenderer (__thiscall*)(gui::Interface* self)>(FUNC_GUI_INTERFACE_GETFONT)(this);
+			return reinterpret_cast<FontRenderer* (__thiscall*)(gui::Interface* self)>(FUNC_GUI_INTERFACE_GETFONT)(this);
 		}
-		GLFWwindow getGLFWwindow() override
+		GLFWwindow* getGLFWwindow() override
 		{
-			return reinterpret_cast<GLFWwindow (__thiscall*)(gui::Interface* self)>(FUNC_GUI_INTERFACE_GETGLFWWINDOW)(this);
+			return reinterpret_cast<GLFWwindow* (__thiscall*)(gui::Interface* self)>(FUNC_GUI_INTERFACE_GETGLFWWINDOW)(this);
 		}
 		void getCursorPos(int* x, int* y) override
 		{
@@ -72,9 +73,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::Interface* self, const glm::ivec4& pos, const glm::ivec2& scroll)>(FUNC_GUI_INTERFACE_CHANGEVIEWPORT)(this, pos, scroll);
 		}
-		void addElement(Chunk* e) override
+		void addElement(gui::Element* e) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Interface* self, Chunk* e)>(FUNC_GUI_INTERFACE_ADDELEMENT)(this, e);
+			return reinterpret_cast<void (__thiscall*)(gui::Interface* self, gui::Element * e)>(FUNC_GUI_INTERFACE_ADDELEMENT)(this, e);
 		}
 		bool removeElement(gui::Element* e) override
 		{

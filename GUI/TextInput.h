@@ -1,10 +1,11 @@
 #pragma once
 
-#include "4dm.h"
+#include "gui.h"
 
-namespace fdm 
+namespace fdm::gui
 {
-	class gui::TextInput : public gui::Element 
+	using TextInputCallback = std::add_pointer<void(void* user, std::string& text)>::type;
+	class TextInput : public gui::Element 
 	{
 	public:
 		std::string text; // 0x8
@@ -32,7 +33,7 @@ namespace fdm
 		gui::AlignmentX xAlign; // 0x78
 		gui::AlignmentY yAlign; // 0x7C
 		void* user; // 0x80
-		void* callback; // 0x88
+		TextInputCallback callback = NULL; // 0x88
 
 		void render(gui::Window* w) override
 		{
@@ -54,21 +55,21 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, int offset)>(FUNC_GUI_TEXTINPUT_OFFSETY)(this, offset);
 		}
-		bool mouseButtonInput(gui::Window* w, int button, int action) override
+		bool mouseButtonInput(gui::Window* w, int button, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, gui::Window* w, int button, int action)>(FUNC_GUI_TEXTINPUT_MOUSEBUTTONINPUT)(this, w, button, action);
+			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, gui::Window* w, int button, int action, int mods)>(FUNC_GUI_TEXTINPUT_MOUSEBUTTONINPUT)(this, w, button, action, mods);
 		}
-		bool mouseInput(const gui::Window* w, double xpos, double ypos) override
+		bool mouseInput(gui::Window* w, double xpos, double ypos) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, const gui::Window* w, double xpos, double ypos)>(FUNC_GUI_TEXTINPUT_MOUSEINPUT)(this, w, xpos, ypos);
+			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, gui::Window* w, double xpos, double ypos)>(FUNC_GUI_TEXTINPUT_MOUSEINPUT)(this, w, xpos, ypos);
 		}
-		bool keyInput(const gui::Window* w, __int64 key, __int64 scancode, int action, char mods) override
+		bool keyInput(gui::Window* w, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, const gui::Window* w, __int64 key, __int64 scancode, int action, char mods)>(FUNC_GUI_TEXTINPUT_KEYINPUT)(this, w, key, scancode, action, mods);
+			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, gui::Window* w, int key, int scancode, int action, char mods)>(FUNC_GUI_TEXTINPUT_KEYINPUT)(this, w, key, scancode, action, mods);
 		}
-		bool charInput(const gui::Window* w, uint32_t codepoint) override
+		bool charInput(gui::Window* w, uint32_t codepoint) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, const gui::Window* w, uint32_t codepoint)>(FUNC_GUI_TEXTINPUT_CHARINPUT)(this, w, codepoint);
+			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, gui::Window* w, uint32_t codepoint)>(FUNC_GUI_TEXTINPUT_CHARINPUT)(this, w, codepoint);
 		}
 		int getCursorType() override
 		{
@@ -86,21 +87,23 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self)>(FUNC_GUI_TEXTINPUT_UPDATEPASSWORDVISUALTEXT)(this);
 		}
-		void updateScrollPos(const gui::Window* w) 
+		void updateScrollPos(gui::Window* w) 
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, const gui::Window* w)>(FUNC_GUI_TEXTINPUT_UPDATESCROLLPOS)(this, w);
+			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::Window* w)>(FUNC_GUI_TEXTINPUT_UPDATESCROLLPOS)(this, w);
 		}
 		void getPos(gui::Window* w, int* x, int* y) override
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::Window* w, int* x, int* y)>(FUNC_GUI_TEXTINPUT_GETPOS)(this, w, x, y);
 		}
-		void getSize(const gui::Window* w, uint32_t* width, uint32_t* height) override
+		void getSize(gui::Window* w, int* width, int* height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, const gui::Window* w, uint32_t* width, uint32_t* height)>(FUNC_GUI_TEXTINPUT_GETSIZE)(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::Window* w, int* width, int* height)>(FUNC_GUI_TEXTINPUT_GETSIZE)(this, w, width, height);
 		}
 		std::string removeInvalidChars(const char* str) 
 		{
-			return reinterpret_cast<std::string (__thiscall*)(gui::TextInput* self, std::string& result, const char* str)>(FUNC_GUI_TEXTINPUT_REMOVEINVALIDCHARS)(this, result, str);
+			std::string result;
+			reinterpret_cast<std::string (__thiscall*)(gui::TextInput* self, std::string* result, const char* str)>(FUNC_GUI_TEXTINPUT_REMOVEINVALIDCHARS)(this, &result, str);
+			return result;
 		}
 		void removeHighlightedText() 
 		{

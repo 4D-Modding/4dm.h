@@ -1,20 +1,16 @@
 #pragma once
 
-#include "4dm.h"
+#include "gui.h"
 
-namespace fdm 
+namespace fdm::gui
 {
-	class gui::ElemContainer 
+	class ElemContainer 
 	{
 	public:
-
-
-
 		// VIRTUAL FUNCS
-
-		virtual void addElement(gui::Element *) = NULL;
-		virtual bool removeElement(gui::Element *) = NULL;
-		virtual bool selectElement(gui::Element *) = NULL;
+		virtual void addElement(gui::Element * element) = NULL;
+		virtual bool removeElement(gui::Element * element) = NULL;
+		virtual bool selectElement(gui::Element * element) = NULL;
 		virtual void clear() = NULL;
 		virtual bool empty() = NULL;
 	};

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "4dm.h"
+#include "gui.h"
 
-namespace fdm 
+namespace fdm::gui
 {
-	class gui::Image : public gui::Element 
+	class Image : public gui::Element 
 	{
 	public:
 		TexRenderer* tr; // 0x8
@@ -31,9 +31,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::Image* self, gui::Window* w, int* x, int* y)>(FUNC_GUI_IMAGE_GETPOS)(this, w, x, y);
 		}
-		void getSize(const gui::Window* w, int* width, int* height) override
+		void getSize(gui::Window* w, int* width, int* height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Image* self, const gui::Window* w, int* width, int* height)>(FUNC_GUI_IMAGE_GETSIZE)(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(gui::Image* self, gui::Window* w, int* width, int* height)>(FUNC_GUI_IMAGE_GETSIZE)(this, w, width, height);
 		}
 	};
 }

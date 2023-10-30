@@ -1,10 +1,11 @@
 #pragma once
 
-#include "4dm.h"
+#include "gui.h"
 
-namespace fdm 
+namespace fdm::gui
 {
-	class gui::CheckBox : public gui::Element 
+	using CheckBoxCallback = std::add_pointer<void(void* user, bool checked)>::type;
+	class CheckBox : public gui::Element 
 	{
 	public:
 		std::string text; // 0x8
@@ -20,28 +21,28 @@ namespace fdm
 		inline static const int height = 20; 
 		PAD(0x4);
 		void* user; // 0x40
-		void* callback; // 0x48
+		CheckBoxCallback callback = NULL; // 0x48
 		bool checked; // 0x50
 
 		void render(gui::Window* w) override
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::CheckBox* self, gui::Window* w)>(FUNC_GUI_CHECKBOX_RENDER)(this, w);
 		}
-		bool mouseButtonInput(gui::Window* w, int button, int action) override
+		bool mouseButtonInput(gui::Window* w, int button, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, gui::Window* w, int button, int action)>(FUNC_GUI_CHECKBOX_MOUSEBUTTONINPUT)(this, w, button, action);
+			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, gui::Window* w, int button, int action, int mods)>(FUNC_GUI_CHECKBOX_MOUSEBUTTONINPUT)(this, w, button, action, mods);
 		}
-		bool keyInput(const gui::Window* w, __int64 key, __int64 scancode, int action) override
+		bool keyInput(gui::Window* w, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, const gui::Window* w, __int64 key, __int64 scancode, int action)>(FUNC_GUI_CHECKBOX_KEYINPUT)(this, w, key, scancode, action);
+			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, gui::Window* w, int key, int scancode, int action, int mods)>(FUNC_GUI_CHECKBOX_KEYINPUT)(this, w, key, scancode, action, mods);
 		}
 		void getPos(gui::Window* w, int* x, int* y) override
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::CheckBox* self, gui::Window* w, int* x, int* y)>(FUNC_GUI_CHECKBOX_GETPOS)(this, w, x, y);
 		}
-		void getSize(const gui::Window* w, int* width, int* height) override
+		void getSize(gui::Window* w, int* width, int* height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::CheckBox* self, const gui::Window* w, int* width, int* height)>(FUNC_GUI_CHECKBOX_GETSIZE)(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(gui::CheckBox* self, gui::Window* w, int* width, int* height)>(FUNC_GUI_CHECKBOX_GETSIZE)(this, w, width, height);
 		}
 		bool touchingMouse(gui::Window* w) 
 		{
