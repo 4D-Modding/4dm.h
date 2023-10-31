@@ -1,6 +1,10 @@
 #pragma once
 
 #include "4dm.h"
+#include "EntityPlayer.h"
+#include "InventoryGrid.h"
+#include "InventoryManager.h"
+#include "InventoryPlayer.h"
 
 namespace fdm 
 {
@@ -155,7 +159,8 @@ namespace fdm
 		}
 		nlohmann::json getMovementUpdate() 
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json& result)>(FUNC_PLAYER_GETMOVEMENTUPDATE)(this, result);
+			nlohmann::json result;
+			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(FUNC_PLAYER_GETMOVEMENTUPDATE)(this, &result);
 		}
 		void setMovementBehavior(nlohmann::json& movementKeys, bool keepOnEdge) 
 		{
@@ -173,9 +178,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, std::unique_ptr<Item>& item, uint32_t maxCount)>(FUNC_PLAYER_THROWITEM)(this, world, item, maxCount);
 		}
-		void update(World* world, double dt, EntityPlayer* EntityPlayer) 
+		void update(World* world, double dt, EntityPlayer* entityPlayer) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, double dt, EntityPlayer* EntityPlayer)>(FUNC_PLAYER_UPDATE)(this, world, dt, EntityPlayer);
+			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, double dt, EntityPlayer* entityPlayer)>(FUNC_PLAYER_UPDATE)(this, world, dt, entityPlayer);
 		}
 		void updateLocal(World* world, double dt, GLFWwindow* window) 
 		{
@@ -231,7 +236,8 @@ namespace fdm
 		}
 		nlohmann::json save() 
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json& result)>(FUNC_PLAYER_SAVE)(this, result);
+			nlohmann::json result;
+			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(FUNC_PLAYER_SAVE)(this, &result);
 		}
 		void loadClientData(nlohmann::json& j) 
 		{
@@ -239,11 +245,13 @@ namespace fdm
 		}
 		nlohmann::json saveClientData() 
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json& result)>(FUNC_PLAYER_SAVECLIENTDATA)(this, result);
+			nlohmann::json result;
+			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(FUNC_PLAYER_SAVECLIENTDATA)(this, &result);
 		}
 		nlohmann::json saveOrientation() 
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json& result)>(FUNC_PLAYER_SAVEORIENTATION)(this, result);
+			nlohmann::json result;
+			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(FUNC_PLAYER_SAVEORIENTATION)(this,& result);
 		}
 	};
 }

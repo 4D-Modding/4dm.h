@@ -43,6 +43,7 @@ namespace fdm
 		bool* callback; // 0x1F0
 		void* user; // 0x1F8
 
+		InventoryManager(){}
 		~InventoryManager() 
 		{
 			reinterpret_cast<void(__thiscall*)(InventoryManager* self)>(FUNC_INVENTORYMANAGER_DESTR_INVENTORYMANAGER)(this);

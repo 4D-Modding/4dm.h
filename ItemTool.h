@@ -31,17 +31,17 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(ItemTool* self, const glm::ivec2& pos)>(FUNC_ITEMTOOL_RENDER)(this, pos);
 		}
-		void renderEntity(const m4::Mat5* mat, bool inHand, glm::vec4& lightDir) override
+		void renderEntity(const m4::Mat5& mat, bool inHand, const glm::vec4& lightDir) override
 		{
-			return reinterpret_cast<void (__thiscall*)(ItemTool* self, const m4::Mat5* mat, bool inHand, glm::vec4& lightDir)>(FUNC_ITEMTOOL_RENDERENTITY)(this, mat, inHand, lightDir);
+			return reinterpret_cast<void (__thiscall*)(ItemTool* self, const m4::Mat5& mat, bool inHand, const glm::vec4& lightDir)>(FUNC_ITEMTOOL_RENDERENTITY)(this, mat, inHand, lightDir);
 		}
 		bool isDeadly() override
 		{
 			return reinterpret_cast<bool (__thiscall*)(ItemTool* self)>(FUNC_ITEMTOOL_ISDEADLY)(this);
 		}
-		bool isCompatible(const std::unique_ptr<Item>* other) override
+		bool isCompatible(const std::unique_ptr<Item>& other) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(ItemTool* self, const std::unique_ptr<Item>* other)>(FUNC_ITEMTOOL_ISCOMPATIBLE)(this, other);
+			return reinterpret_cast<bool (__thiscall*)(ItemTool* self, const std::unique_ptr<Item>& other)>(FUNC_ITEMTOOL_ISCOMPATIBLE)(this, other);
 		}
 		uint32_t getStackLimit() override
 		{
@@ -61,7 +61,8 @@ namespace fdm
 		}
 		std::unique_ptr<Item,std::default_delete<Item> > clone() override
 		{
-			return reinterpret_cast<std::unique_ptr<Item,std::default_delete<Item> > (__thiscall*)(ItemTool* self, std::unique_ptr<Item>& result)>(FUNC_ITEMTOOL_CLONE)(this, result);
+			std::unique_ptr<Item> result;
+			return reinterpret_cast<std::unique_ptr<Item,std::default_delete<Item> > (__thiscall*)(ItemTool* self, std::unique_ptr<Item>* result)>(FUNC_ITEMTOOL_CLONE)(this, &result);
 		}
 	};
 }

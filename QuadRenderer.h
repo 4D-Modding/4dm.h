@@ -15,7 +15,7 @@ namespace fdm
 
 		~QuadRenderer() 
 		{
-			return reinterpret_cast<void(__thiscall*)(QuadRenderer* self)>(FUNC_QUADRENDERER_DESTR_QUADRENDERER)(this);
+			reinterpret_cast<void(__thiscall*)(QuadRenderer* self)>(FUNC_QUADRENDERER_DESTR_QUADRENDERER)(this);
 		}
 		bool init() 
 		{
@@ -25,9 +25,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, float r, float g, float b, int a)>(FUNC_QUADRENDERER_SETCOLOR)(this, r, g, b, a);
 		}
-		void setPos(uint32_t x, int y, int w, int h) 
+		void setPos(int x, int y, int w, int h)
 		{
-			return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, uint32_t x, int y, int w, int h)>(FUNC_QUADRENDERER_SETPOS)(this, x, y, w, h);
+			return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, int x, int y, int w, int h)>(FUNC_QUADRENDERER_SETPOS)(this, x, y, w, h);
 		}
 	};
 }

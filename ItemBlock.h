@@ -24,9 +24,9 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(ItemBlock* self)>(FUNC_ITEMBLOCK_ISDEADLY)(this);
 		}
-		bool isCompatible(const std::unique_ptr<Item>* other) override
+		bool isCompatible(const std::unique_ptr<Item>& other) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(ItemBlock* self, const std::unique_ptr<Item>* other)>(FUNC_ITEMBLOCK_ISCOMPATIBLE)(this, other);
+			return reinterpret_cast<bool (__thiscall*)(ItemBlock* self, const std::unique_ptr<Item>& other)>(FUNC_ITEMBLOCK_ISCOMPATIBLE)(this, other);
 		}
 		nlohmann::json saveAttributes() override
 		{

@@ -17,7 +17,7 @@ namespace fdm
 
 		MeshRenderer() 
 		{
-			return reinterpret_cast<void(__thiscall*)(MeshRenderer* self)>(FUNC_MESHRENDERER_MESHRENDERER)(this);
+			reinterpret_cast<void(__thiscall*)(MeshRenderer* self)>(FUNC_MESHRENDERER_MESHRENDERER)(this);
 		}
 		void setMesh(Mesh* mesh) 
 		{
@@ -29,7 +29,7 @@ namespace fdm
 		}
 		~MeshRenderer() 
 		{
-			return reinterpret_cast<void(__thiscall*)(MeshRenderer* self)>(FUNC_MESHRENDERER_DESTR_MESHRENDERER)(this);
+			reinterpret_cast<void(__thiscall*)(MeshRenderer* self)>(FUNC_MESHRENDERER_DESTR_MESHRENDERER)(this);
 		}
 		void render() 
 		{

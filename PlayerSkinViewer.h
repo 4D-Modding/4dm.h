@@ -1,6 +1,8 @@
 #pragma once
 
 #include "4dm.h"
+#include "Framebuffer.h"
+#include "GUI/Element.h"
 
 namespace fdm 
 {
@@ -32,13 +34,13 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, gui::Window* w, int* x, int* y)>(FUNC_PLAYERSKINVIEWER_GETPOS)(this, w, x, y);
 		}
-		void getSize(const gui::Window* w, uint32_t* width, uint32_t* height) override
+		void getSize(gui::Window* w, int* width, int* height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, const gui::Window* w, uint32_t* width, uint32_t* height)>(FUNC_PLAYERSKINVIEWER_GETSIZE)(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, gui::Window* w, int* width, int* height)>(FUNC_PLAYERSKINVIEWER_GETSIZE)(this, w, width, height);
 		}
-		bool mouseInput(const gui::Window* w, double xpos, double ypos) override
+		bool mouseInput(gui::Window* w, double xpos, double ypos) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(PlayerSkinViewer* self, const gui::Window* w, double xpos, double ypos)>(FUNC_PLAYERSKINVIEWER_MOUSEINPUT)(this, w, xpos, ypos);
+			return reinterpret_cast<bool (__thiscall*)(PlayerSkinViewer* self, gui::Window* w, double xpos, double ypos)>(FUNC_PLAYERSKINVIEWER_MOUSEINPUT)(this, w, xpos, ypos);
 		}
 		int getCursorType() override
 		{

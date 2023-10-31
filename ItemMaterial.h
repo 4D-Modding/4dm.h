@@ -25,23 +25,24 @@ namespace fdm
 		}
 		std::string getName() override
 		{
-			return reinterpret_cast<std::string (__thiscall*)(ItemMaterial* self, std::string& result)>(FUNC_ITEMMATERIAL_GETNAME)(this, result);
+			std::string result;
+			return reinterpret_cast<std::string (__thiscall*)(ItemMaterial* self, std::string* result)>(FUNC_ITEMMATERIAL_GETNAME)(this, &result);
 		}
 		void render(const glm::ivec2& pos) override
 		{
 			return reinterpret_cast<void (__thiscall*)(ItemMaterial* self, const glm::ivec2& pos)>(FUNC_ITEMMATERIAL_RENDER)(this, pos);
 		}
-		void renderEntity(const m4::Mat5* mat, bool inHand, glm::vec4& lightDir) override
+		void renderEntity(const m4::Mat5& MV, bool inHand, const glm::vec4& lightDir) override
 		{
-			return reinterpret_cast<void (__thiscall*)(ItemMaterial* self, const m4::Mat5* mat, bool inHand, glm::vec4& lightDir)>(FUNC_ITEMMATERIAL_RENDERENTITY)(this, mat, inHand, lightDir);
+			return reinterpret_cast<void (__thiscall*)(ItemMaterial* self, const m4::Mat5 & MV, bool inHand, const glm::vec4 & lightDir)>(FUNC_ITEMMATERIAL_RENDERENTITY)(this, MV, inHand, lightDir);
 		}
 		bool isDeadly() override
 		{
 			return reinterpret_cast<bool (__thiscall*)(ItemMaterial* self)>(FUNC_ITEMMATERIAL_ISDEADLY)(this);
 		}
-		bool isCompatible(const std::unique_ptr<Item>* other) override
+		bool isCompatible(const std::unique_ptr<Item>& other) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(ItemMaterial* self, const std::unique_ptr<Item>* other)>(FUNC_ITEMMATERIAL_ISCOMPATIBLE)(this, other);
+			return reinterpret_cast<bool (__thiscall*)(ItemMaterial* self, const std::unique_ptr<Item>& other)>(FUNC_ITEMMATERIAL_ISCOMPATIBLE)(this, other);
 		}
 		bool action(World* world, Player* player, int action) override
 		{
@@ -53,7 +54,8 @@ namespace fdm
 		}
 		std::unique_ptr<Item,std::default_delete<Item> > clone() override
 		{
-			return reinterpret_cast<std::unique_ptr<Item,std::default_delete<Item> > (__thiscall*)(ItemMaterial* self, std::unique_ptr<Item>& result)>(FUNC_ITEMMATERIAL_CLONE)(this, result);
+			std::unique_ptr<Item> result;
+			return reinterpret_cast<std::unique_ptr<Item,std::default_delete<Item> > (__thiscall*)(ItemMaterial* self, std::unique_ptr<Item>* result)>(FUNC_ITEMMATERIAL_CLONE)(this, &result);
 		}
 	};
 }

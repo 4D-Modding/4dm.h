@@ -737,6 +737,7 @@
 // ResourceManager
 
 #define FUNC_RESOURCEMANAGER_LOADARRAYTEXTURE (base + idaOffsetFix(0xC47F0))
+#define FUNC_RESOURCEMANAGER_GET (base + idaOffsetFix(0xC45A0))
 
 // ShaderManager
 

@@ -21,7 +21,7 @@ namespace fdm
 		{
 			reinterpret_cast<void(__thiscall*)(InventoryGrid* self)>(FUNC_INVENTORYGRID_DESTR_INVENTORYGRID)(this);
 		}
-		InventoryGrid(const glm::ivec2& size) 
+		InventoryGrid(const glm::ivec2& size = {0}) 
 		{
 			reinterpret_cast<void(__thiscall*)(InventoryGrid* self, const glm::ivec2& size)>(FUNC_INVENTORYGRID_INVENTORYGRID)(this, size);
 		}

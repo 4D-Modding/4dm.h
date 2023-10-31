@@ -15,21 +15,21 @@ namespace fdm
 		};
 		std::vector<PentachoronHollow::VertData,std::allocator<PentachoronHollow::VertData> > vertices; // 0x8
 
-		void buffData(int buffIndex) override
+		const void* buffData(int buffIndex) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(PentachoronHollow* self, int buffIndex)>(FUNC_PENTACHORONHOLLOW_BUFFDATA)(this, buffIndex);
+			return reinterpret_cast<const void* (__thiscall*)(const PentachoronHollow* self, int buffIndex)>(FUNC_PENTACHORONHOLLOW_BUFFDATA)(this, buffIndex);
 		}
 		PentachoronHollow(float distance) 
 		{
-			return reinterpret_cast<void(__thiscall*)(PentachoronHollow* self, float distance)>(FUNC_PENTACHORONHOLLOW_PENTACHORONHOLLOW)(this, distance);
+			reinterpret_cast<void(__thiscall*)(PentachoronHollow* self, float distance)>(FUNC_PENTACHORONHOLLOW_PENTACHORONHOLLOW)(this, distance);
 		}
-		int buffSize(int buffIndex) override
+		int buffSize(int buffIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(PentachoronHollow* self, int buffIndex)>(FUNC_PENTACHORONHOLLOW_BUFFSIZE)(this, buffIndex);
+			return reinterpret_cast<int (__thiscall*)(const PentachoronHollow* self, int buffIndex)>(FUNC_PENTACHORONHOLLOW_BUFFSIZE)(this, buffIndex);
 		}
-		int vertCount() override
+		int vertCount() const override
 		{
-			return reinterpret_cast<int (__thiscall*)(PentachoronHollow* self)>(FUNC_PENTACHORONHOLLOW_VERTCOUNT)(this);
+			return reinterpret_cast<int (__thiscall*)(const PentachoronHollow* self)>(FUNC_PENTACHORONHOLLOW_VERTCOUNT)(this);
 		}
 		void addTetSide(const glm::vec4& simp_ptr, const glm::vec4& inner, int i0, int i1, int i2) 
 		{

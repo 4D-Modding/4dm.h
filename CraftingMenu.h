@@ -1,6 +1,7 @@
 #pragma once
 
 #include "4dm.h"
+#include "InventoryCursor.h"
 #include "GUI/Element.h"
 
 namespace fdm 

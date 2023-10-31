@@ -20,7 +20,7 @@ namespace fdm::gui
 		PAD(0x3);
 		int currentCursorType; // 0x5C
 		GLFWcursor* cursor; // 0x60
-
+		Interface(){}
 		Interface(GLFWwindow* window) 
 		{
 			reinterpret_cast<void (__thiscall*)(gui::Interface* self, GLFWwindow* window)>(FUNC_GUI_INTERFACE_INTERFACE)(this, window);
