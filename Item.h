@@ -47,7 +47,7 @@ namespace fdm
 		nlohmann::json save() 
 		{
 			nlohmann::json result;
-			reinterpret_cast<nlohmann::json (__thiscall*)(Item* self, nlohmann::json* result)>(FUNC_ITEM_SAVE)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(Item* self, nlohmann::json* result)>(FUNC_ITEM_SAVE)(this, &result);
 			return result;
 		}
 		~Item()

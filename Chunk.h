@@ -166,7 +166,7 @@ namespace fdm
 		std::string getFilenamePrefix() 
 		{
 			std::string result;
-			reinterpret_cast<std::string (__thiscall*)(Chunk* self, std::string* result)>(FUNC_CHUNK_GETFILENAMEPREFIX)(this, &result);
+			return reinterpret_cast<std::string (__thiscall*)(Chunk* self, std::string* result)>(FUNC_CHUNK_GETFILENAMEPREFIX)(this, &result);
 			return result;
 		}
 	};

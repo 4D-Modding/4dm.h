@@ -27,7 +27,7 @@ namespace fdm
 			nlohmann::json toJson()
 			{
 				nlohmann::json result{};
-				reinterpret_cast<nlohmann::json(__thiscall*)(m4::BiVector4 * self, nlohmann::json * result)>(FUNC_M4_BIVECTOR4_TOJSON)(this, &result);
+				return reinterpret_cast<nlohmann::json(__thiscall*)(m4::BiVector4 * self, nlohmann::json * result)>(FUNC_M4_BIVECTOR4_TOJSON)(this, &result);
 				return result;
 			}
 
@@ -48,7 +48,7 @@ namespace fdm
 		inline glm::vec4 cross(const glm::vec4& u, const glm::vec4& v, const glm::vec4& w)
 		{
 			glm::vec4 result(0.0f);
-			reinterpret_cast<glm::vec4& (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
+			return reinterpret_cast<glm::vec4& (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
 				FUNC_M4_CROSS
 				)(&result, u, v, w);
 			return result;
@@ -94,7 +94,7 @@ namespace fdm
 			glm::vec4 rotate(const glm::vec4& v)
 			{
 				glm::vec4 result{};
-				reinterpret_cast<void(__thiscall*)(Rotor*, glm::vec4*, const glm::vec4&)>(
+				return reinterpret_cast<void(__thiscall*)(Rotor*, glm::vec4*, const glm::vec4&)>(
 					FUNC_M4_ROTOR_ROTATE
 					)(this, &result, v);
 
@@ -103,7 +103,7 @@ namespace fdm
 			glm::vec4 rotate(const glm::vec4& v) const
 			{
 				glm::vec4 result{};
-				reinterpret_cast<void(__thiscall*)(const Rotor*, glm::vec4*, const glm::vec4&)>(
+				return reinterpret_cast<void(__thiscall*)(const Rotor*, glm::vec4*, const glm::vec4&)>(
 					FUNC_M4_ROTOR_ROTATE
 					)(this, &result, v);
 
@@ -142,7 +142,7 @@ namespace fdm
 			nlohmann::json toJson()
 			{
 				nlohmann::json result{};
-				reinterpret_cast<nlohmann::json(__thiscall*)(m4::Mat5* self, nlohmann::json* result)>(FUNC_M4_MAT5_TOJSON)(this, &result);
+				return reinterpret_cast<nlohmann::json(__thiscall*)(m4::Mat5* self, nlohmann::json* result)>(FUNC_M4_MAT5_TOJSON)(this, &result);
 				return result;
 			}
 			inline static Mat5 identity()
@@ -176,7 +176,7 @@ namespace fdm
 			glm::vec4 multiply(const glm::vec4& v, float finalComp)
 			{
 				glm::vec4 result{};
-				reinterpret_cast<glm::vec4(__thiscall*)(Mat5*, glm::vec4*, const glm::vec4&, float)>(
+				return reinterpret_cast<glm::vec4(__thiscall*)(Mat5*, glm::vec4*, const glm::vec4&, float)>(
 					FUNC_M4_MAT5_MULTIPLY
 					)(this, &result, v, finalComp);
 				return result;
@@ -207,7 +207,7 @@ namespace fdm
 				return value[index];
 			}
 
-			// uhh.
+			// uhh. helpful little function i made
 			inline static Mat5 inverse(Mat5 m)
 			{
 				Mat5 s{ 1 };

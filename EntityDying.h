@@ -21,7 +21,7 @@ namespace fdm
 		std::string getName() override
 		{
 			std::string result;
-			reinterpret_cast<std::string (__thiscall*)(EntityDying* self, std::string* result)>(FUNC_ENTITYDYING_GETNAME)(this, &result);
+			return reinterpret_cast<std::string (__thiscall*)(EntityDying* self, std::string* result)>(FUNC_ENTITYDYING_GETNAME)(this, &result);
 			return result;
 		}
 		void update(World* world, double dt) override
@@ -35,7 +35,7 @@ namespace fdm
 		nlohmann::json getServerUpdateAttributes() override
 		{
 			nlohmann::json result;
-			reinterpret_cast<nlohmann::json (__thiscall*)(EntityDying* self, nlohmann::json* result)>(FUNC_ENTITYDYING_GETSERVERUPDATEATTRIBUTES)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityDying* self, nlohmann::json* result)>(FUNC_ENTITYDYING_GETSERVERUPDATEATTRIBUTES)(this, &result);
 			return result;
 		}
 		void applyServerUpdate(const nlohmann::json& j, World* world) override
@@ -45,7 +45,7 @@ namespace fdm
 		glm::vec4 getPos() override
 		{
 			glm::vec4 result;
-			reinterpret_cast<glm::vec4 (__thiscall*)(EntityDying* self, glm::vec4* result)>(FUNC_ENTITYDYING_GETPOS)(this, &result);
+			return reinterpret_cast<glm::vec4 (__thiscall*)(EntityDying* self, glm::vec4* result)>(FUNC_ENTITYDYING_GETPOS)(this, &result);
 			return result;
 		}
 		void setPos(const glm::vec4& pos) override

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "4dm.h"
+#include "Player.h"
 
 namespace fdm 
 {
@@ -29,7 +30,8 @@ namespace fdm
 		}
 		nlohmann::json saveAttributes() override
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(ItemBlock* self, nlohmann::json& result)>(FUNC_ITEMBLOCK_SAVEATTRIBUTES)(this, result);
+			nlohmann::json result;
+			return reinterpret_cast<nlohmann::json (__thiscall*)(ItemBlock* self, nlohmann::json* result)>(FUNC_ITEMBLOCK_SAVEATTRIBUTES)(this, &result);
 		}
 		bool action(World* world, Player* player, int action) override
 		{
@@ -39,9 +41,10 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(ItemBlock* self, World* world, Player* player, int action)>(FUNC_ITEMBLOCK_POSTACTION)(this, world, player, action);
 		}
-		std::unique_ptr<Item,std::default_delete<Item> > clone() override
+		std::unique_ptr<Item> clone() override
 		{
-			return reinterpret_cast<std::unique_ptr<Item,std::default_delete<Item> > (__thiscall*)(ItemBlock* self, std::unique_ptr<Item>& result)>(FUNC_ITEMBLOCK_CLONE)(this, result);
+			std::unique_ptr<Item> item;
+			return reinterpret_cast<std::unique_ptr<Item> (__thiscall*)(ItemBlock* self, std::unique_ptr<Item>* result)>(FUNC_ITEMBLOCK_CLONE)(this, &item);
 		}
 	};
 }

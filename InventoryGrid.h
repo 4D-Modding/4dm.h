@@ -68,7 +68,7 @@ namespace fdm
 		Inventory::iterator end() override
 		{
 			iterator result;
-			reinterpret_cast<Inventory::iterator (__thiscall*)(InventoryGrid* self, Inventory::iterator* result)>(FUNC_INVENTORYGRID_END)(this, &result);
+			return reinterpret_cast<Inventory::iterator (__thiscall*)(InventoryGrid* self, Inventory::iterator* result)>(FUNC_INVENTORYGRID_END)(this, &result);
 			return result;
 		}
 		void load(nlohmann::json& j) 

@@ -17,7 +17,7 @@ namespace fdm
 		Inventory::iterator begin() override
 		{
 			iterator result;
-			reinterpret_cast<Inventory::iterator (__thiscall*)(InventoryPlayer* self, Inventory::iterator* result)>(FUNC_INVENTORYPLAYER_BEGIN)(this, &result);
+			return reinterpret_cast<Inventory::iterator (__thiscall*)(InventoryPlayer* self, Inventory::iterator* result)>(FUNC_INVENTORYPLAYER_BEGIN)(this, &result);
 			return result;
 		}
 		void render(const glm::ivec2& cursorPos) override
@@ -47,7 +47,7 @@ namespace fdm
 		Inventory::iterator end() override
 		{
 			iterator result;
-			reinterpret_cast<Inventory::iterator (__thiscall*)(InventoryPlayer* self, Inventory::iterator* result)>(FUNC_INVENTORYPLAYER_END)(this, &result);
+			return reinterpret_cast<Inventory::iterator (__thiscall*)(InventoryPlayer* self, Inventory::iterator* result)>(FUNC_INVENTORYPLAYER_END)(this, &result);
 			return result;
 		}
 	};

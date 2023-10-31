@@ -40,7 +40,7 @@ namespace fdm
 		std::string getName() override
 		{
 			std::string result;
-			reinterpret_cast<std::string (__thiscall*)(EntityButterfly* self, std::string* result)>(FUNC_ENTITYBUTTERFLY_GETNAME)(this, &result);
+			return reinterpret_cast<std::string (__thiscall*)(EntityButterfly* self, std::string* result)>(FUNC_ENTITYBUTTERFLY_GETNAME)(this, &result);
 			return result;
 		}
 		void update(World* world, double dt) override
@@ -54,7 +54,7 @@ namespace fdm
 		nlohmann::json getServerUpdateAttributes() override
 		{
 			nlohmann::json result;
-			reinterpret_cast<nlohmann::json (__thiscall*)(EntityButterfly* self, nlohmann::json* result)>(FUNC_ENTITYBUTTERFLY_GETSERVERUPDATEATTRIBUTES)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityButterfly* self, nlohmann::json* result)>(FUNC_ENTITYBUTTERFLY_GETSERVERUPDATEATTRIBUTES)(this, &result);
 			return result;
 		}
 		void applyServerUpdate(const nlohmann::json& j, World* world) override
