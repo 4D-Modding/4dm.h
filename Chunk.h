@@ -9,6 +9,7 @@ namespace fdm
 	public:
 		class ChunkMesh : public Mesh 
 		{
+		public:
 			struct VertData 
 			{
 				glm::u8vec4 vert; 
@@ -36,9 +37,9 @@ namespace fdm
 			{
 				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex)>(FUNC_CHUNK_CHUNKMESH_ATTRCOUNT)(this, buffIndex);
 			}
-			int attrType(int buffIndex, int attrIndex) const override
+			unsigned int attrType(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(FUNC_CHUNK_CHUNKMESH_ATTRTYPE)(this, buffIndex, attrIndex);
+				return reinterpret_cast<unsigned int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(FUNC_CHUNK_CHUNKMESH_ATTRTYPE)(this, buffIndex, attrIndex);
 			}
 			int attrSize(int buffIndex, int attrIndex) const override
 			{
@@ -68,7 +69,7 @@ namespace fdm
 		inline static const uint32_t SIZE = 8; 
 		inline static const uint32_t HEIGHT = 128; 
 		inline static const uint32_t BLOCK_DATA_SIZE = 128000; 
-		unsigned char blocks[SIZE][SIZE][SIZE][HEIGHT];
+		unsigned char blocks[SIZE + 2][SIZE + 2][SIZE + 2][HEIGHT];
 		unsigned char lightingHeightMap[SIZE][SIZE][SIZE];
 		glm::i64vec3 pos; // 0x1F7E8
 		bool saved; // 0x1F800
