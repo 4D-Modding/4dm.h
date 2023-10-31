@@ -449,6 +449,16 @@
 #define FUNC_M4_BIVECTOR4_TOJSON (base + idaOffsetFix(0xA9940))
 #define FUNC_M4_BIVECTOR4_NORMALIZE (base + idaOffsetFix(0xA9AD0))
 
+// m4::
+
+#define FUNC_M4_I64VEC3TOJSON (base + idaOffsetFix(0x3EC70))
+#define FUNC_M4_IVEC4TOJSON (base + idaOffsetFix(0x25BA0))
+//#define FUNC_M4_IVEC4FROMJSON (base + idaOffsetFix(0x25BA0))
+#define FUNC_M4_VEC4TOJSON (base + idaOffsetFix(0x2B1F0))
+#define FUNC_M4_VEC4FROMJSON (base + idaOffsetFix(0x2AFC0))
+#define FUNC_M4_CROSS (base + idaOffsetFix(0xA94D0))
+#define FUNC_M4_ADJUSTTOMAXHORIZSPEED (base + idaOffsetFix(0xAB700))
+
 // Item
 
 #define FUNC_ITEM_LOADITEMINFO (base + idaOffsetFix(0x99CD0))

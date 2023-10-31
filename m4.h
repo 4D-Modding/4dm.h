@@ -48,7 +48,7 @@ namespace fdm
 		inline glm::vec4 cross(const glm::vec4& u, const glm::vec4& v, const glm::vec4& w)
 		{
 			glm::vec4 result(0.0f);
-			return reinterpret_cast<glm::vec4& (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
+			return reinterpret_cast<glm::vec4 (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
 				FUNC_M4_CROSS
 				)(&result, u, v, w);
 			return result;
@@ -94,7 +94,7 @@ namespace fdm
 			glm::vec4 rotate(const glm::vec4& v)
 			{
 				glm::vec4 result{};
-				return reinterpret_cast<void(__thiscall*)(Rotor*, glm::vec4*, const glm::vec4&)>(
+				return reinterpret_cast<glm::vec4(__thiscall*)(Rotor*, glm::vec4*, const glm::vec4&)>(
 					FUNC_M4_ROTOR_ROTATE
 					)(this, &result, v);
 
@@ -103,7 +103,7 @@ namespace fdm
 			glm::vec4 rotate(const glm::vec4& v) const
 			{
 				glm::vec4 result{};
-				return reinterpret_cast<void(__thiscall*)(const Rotor*, glm::vec4*, const glm::vec4&)>(
+				return reinterpret_cast<glm::vec4(__thiscall*)(const Rotor*, glm::vec4*, const glm::vec4&)>(
 					FUNC_M4_ROTOR_ROTATE
 					)(this, &result, v);
 
@@ -318,10 +318,10 @@ namespace fdm
 		{
 			return reinterpret_cast<nlohmann::json(__fastcall*)(const glm::ivec4 & vec)>(FUNC_M4_IVEC4TOJSON)(vec);
 		}
-		inline glm::ivec4 ivec4FromJson(const nlohmann::json& j)
-		{
-			return reinterpret_cast<glm::ivec4(__fastcall*)(const nlohmann::json & j)>(FUNC_M4_IVEC4FROMJSON)(j);
-		}
+		//inline glm::ivec4 ivec4FromJson(const nlohmann::json& j)
+		//{
+		//	return reinterpret_cast<glm::ivec4(__fastcall*)(const nlohmann::json & j)>(FUNC_M4_IVEC4FROMJSON)(j);
+		//}
 		inline nlohmann::json vec4ToJson(const glm::vec4& vec)
 		{
 			return reinterpret_cast<nlohmann::json(__fastcall*)(const glm::vec4 & vec)>(FUNC_M4_VEC4TOJSON)(vec);
