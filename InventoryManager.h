@@ -6,6 +6,7 @@
 
 namespace fdm 
 {
+	using InventoryUpdateCallback = std::add_pointer<bool(nlohmann::json& action, void* user)>::type;
 	class InventoryManager 
 	{
 	public:
@@ -40,7 +41,7 @@ namespace fdm
 		gui::Text craftingText; // 0xC8
 		gui::ContentBox craftingMenuBox; // 0x120
 		CraftingMenu craftingMenu; // 0x1A0
-		bool* callback; // 0x1F0
+		InventoryUpdateCallback callback = NULL; // 0x1F0
 		void* user; // 0x1F8
 
 		InventoryManager(){}
