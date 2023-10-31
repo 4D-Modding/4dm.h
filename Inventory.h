@@ -20,14 +20,14 @@ namespace fdm
 
 		// VIRTUAL FUNCS
 
-		virtual void render(const glm::ivec2& cursorPos) = NULL;
-		virtual bool addItem(std::unique_ptr<Item>& item) = NULL;
-		virtual bool combineItem(std::unique_ptr<Item>& item) = NULL;
-		virtual bool placeItem(std::unique_ptr<Item>& item) = NULL;
-		virtual int getSlotIndex(const glm::ivec2 &) = NULL;
-		virtual uint32_t getSlotCount() = NULL;
-		virtual std::unique_ptr<Item,std::default_delete<Item> > getSlot(int index) = NULL;
-		virtual Inventory::iterator begin() = NULL;
-		virtual Inventory::iterator end() = NULL;
+		virtual void render(const glm::ivec2& cursorPos) {}
+		virtual bool addItem(std::unique_ptr<Item>& item) { return false; }
+		virtual bool combineItem(std::unique_ptr<Item>& item) { return false; }
+		virtual bool placeItem(std::unique_ptr<Item>& item) { return false; }
+		virtual int getSlotIndex(const glm::ivec2 &) { return 0; }
+		virtual uint32_t getSlotCount() { return 0; }
+		virtual std::unique_ptr<Item>& getSlot(int index) { return NULL; }
+		virtual Inventory::iterator begin() { return { nullptr, 0 }; }
+		virtual Inventory::iterator end() { return { nullptr, 0 }; }
 	};
 }

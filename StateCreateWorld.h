@@ -36,7 +36,7 @@ namespace fdm
 
 		StateCreateWorld() 
 		{
-			return reinterpret_cast<void(__thiscall*)(StateCreateWorld* self)>(FUNC_STATECREATEWORLD_STATECREATEWORLD)(this);
+			reinterpret_cast<void(__thiscall*)(StateCreateWorld* self)>(FUNC_STATECREATEWORLD_STATECREATEWORLD)(this);
 		}
 		void init(StateManager& s) override
 		{
@@ -66,17 +66,17 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, double xoffset, double yoffset)>(FUNC_STATECREATEWORLD_SCROLLINPUT)(this, s, xoffset, yoffset);
 		}
-		void keyInput(StateManager& s, uint32_t key, uint32_t scancode, int action, int mods) override
+		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, uint32_t key, uint32_t scancode, int action, int mods)>(FUNC_STATECREATEWORLD_KEYINPUT)(this, s, key, scancode, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATECREATEWORLD_KEYINPUT)(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
 			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, int width, int height)>(FUNC_STATECREATEWORLD_WINDOWRESIZE)(this, s, width, height);
 		}
-		void charInput(StateManager& s, __int64 codepoint) override
+		void charInput(StateManager& s, uint32_t codepoint) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, __int64 codepoint)>(FUNC_STATECREATEWORLD_CHARINPUT)(this, s, codepoint);
+			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, uint32_t codepoint)>(FUNC_STATECREATEWORLD_CHARINPUT)(this, s, codepoint);
 		}
 		inline static void createNewWorld(std::vector<Chunk *>* user) 
 		{

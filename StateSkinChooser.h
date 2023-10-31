@@ -32,13 +32,13 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateSkinChooser* self, StateManager& s, double xoffset, double yoffset)>(FUNC_STATESKINCHOOSER_SCROLLINPUT)(this, s, xoffset, yoffset);
 		}
-		void keyInput(StateManager& s, uint32_t key, uint32_t scancode, int action, int mods) override
+		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
 			return reinterpret_cast<void (__thiscall*)(StateSkinChooser* self, StateManager& s, uint32_t key, uint32_t scancode, int action, int mods)>(FUNC_STATESKINCHOOSER_KEYINPUT)(this, s, key, scancode, action, mods);
 		}
 		StateSkinChooser() 
 		{
-			return reinterpret_cast<void(__thiscall*)(StateSkinChooser* self)>(FUNC_STATESKINCHOOSER_STATESKINCHOOSER)(this);
+			reinterpret_cast<void(__thiscall*)(StateSkinChooser* self)>(FUNC_STATESKINCHOOSER_STATESKINCHOOSER)(this);
 		}
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{
@@ -74,15 +74,16 @@ namespace fdm
 		}
 		void fileDrop(StateManager& s, int path_count, const char* *paths) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSkinChooser* self, StateManager& s, int path_count, const char* *paths)>(FUNC_STATESKINCHOOSER_FILEDROP)(this, s, path_count, *paths);
+			return reinterpret_cast<void (__thiscall*)(StateSkinChooser* self, StateManager& s, int path_count, const char* *paths)>(FUNC_STATESKINCHOOSER_FILEDROP)(this, s, path_count, paths);
 		}
 		Connection::OutMessage getSkinMessage() 
 		{
-			return reinterpret_cast<Connection::OutMessage (__thiscall*)(StateSkinChooser* self, Connection::OutMessage* result)>(FUNC_STATESKINCHOOSER_GETSKINMESSAGE)(this, result);
+			Connection::OutMessage result;
+			return reinterpret_cast<Connection::OutMessage (__thiscall*)(StateSkinChooser* self, Connection::OutMessage* result)>(FUNC_STATESKINCHOOSER_GETSKINMESSAGE)(this, &result);
 		}
-		bool loadSkin(path* path) 
+		bool loadSkin(path* p) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(StateSkinChooser* self, path* path)>(FUNC_STATESKINCHOOSER_LOADSKIN)(this, path);
+			return reinterpret_cast<bool (__thiscall*)(StateSkinChooser* self, path* p)>(FUNC_STATESKINCHOOSER_LOADSKIN)(this, p);
 		}
 	};
 }

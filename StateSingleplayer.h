@@ -23,9 +23,9 @@ namespace fdm
 		std::vector<std::string,std::allocator<std::string > > worldPaths; // 0x340
 		bool shouldLoadWorld; // 0x358
 
-		void mouseButtonInput(StateManager& s, uint32_t button, uint32_t action, int mods) override
+		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s, uint32_t button, uint32_t action, int mods)>(FUNC_STATESINGLEPLAYER_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s, int button, int action, int mods)>(FUNC_STATESINGLEPLAYER_MOUSEBUTTONINPUT)(this, s, button, action, mods);
 		}
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{
@@ -33,7 +33,7 @@ namespace fdm
 		}
 		StateSingleplayer() 
 		{
-			return reinterpret_cast<void(__thiscall*)(StateSingleplayer* self)>(FUNC_STATESINGLEPLAYER_STATESINGLEPLAYER)(this);
+			reinterpret_cast<void(__thiscall*)(StateSingleplayer* self)>(FUNC_STATESINGLEPLAYER_STATESINGLEPLAYER)(this);
 		}
 		void updateWorldListContainer(int wWidth, int wHeight) 
 		{

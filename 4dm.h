@@ -141,6 +141,7 @@ namespace fdm
 #include "WorldManager.h"
 #include "WorldServer.h"
 #include "WorldSingleplayer.h"
+#include "WorldTitleScreen.h"
 #include "Player.h"
 #include "Chunk.h"
 #include "ChunkLoader.h"

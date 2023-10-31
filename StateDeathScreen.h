@@ -17,8 +17,8 @@ namespace fdm
 		PAD(0x7);
 		gui::Button retryButton; // 0x170
 		gui::Button quitButton; // 0x1C8
-		inline static const float bgFadeTime = 1f; 
-		inline static const float skullFadeTime = 1f; 
+		inline static const float bgFadeTime = 1.f; 
+		inline static const float skullFadeTime = 1.f; 
 		float animationStartTime; // 0x220
 
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
@@ -53,13 +53,13 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateDeathScreen* self, StateManager& s, double xoffset, double yoffset)>(FUNC_STATEDEATHSCREEN_SCROLLINPUT)(this, s, xoffset, yoffset);
 		}
-		void mouseButtonInput(StateManager& s, uint32_t button, uint32_t action, int mods) override
+		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateDeathScreen* self, StateManager& s, uint32_t button, uint32_t action, int mods)>(FUNC_STATEDEATHSCREEN_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateDeathScreen* self, StateManager& s, int button, int action, int mods)>(FUNC_STATEDEATHSCREEN_MOUSEBUTTONINPUT)(this, s, button, action, mods);
 		}
-		void keyInput(StateManager& s, uint32_t key, uint32_t scancode, int action, int mods) override
+		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateDeathScreen* self, StateManager& s, uint32_t key, uint32_t scancode, int action, int mods)>(FUNC_STATEDEATHSCREEN_KEYINPUT)(this, s, key, scancode, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateDeathScreen* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATEDEATHSCREEN_KEYINPUT)(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{

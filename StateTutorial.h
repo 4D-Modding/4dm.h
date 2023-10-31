@@ -7,6 +7,19 @@ namespace fdm
 	class StateTutorial : public State 
 	{
 	public:
+		enum PlayerState
+		{
+			PLAYER_IDLE = 0x0,
+			PLAYER_WALKING = 0x1,
+			PLAYER_FALLING = 0x2,
+		};
+
+		enum PlayerDirection
+		{
+			PLAYER_DIRECTION_RIGHT = 0x0,
+			PLAYER_DIRECTION_LEFT = 0x1,
+		};
+
 		struct blockVert3D 
 		{
 			glm::u8vec3 vert; 
@@ -51,9 +64,6 @@ namespace fdm
 		unsigned char blocks[demo_size][demo_size][demo_size]; 
 		struct 
 		{
-			inline static const float height = NULL; 
-			inline static const float acc = NULL; 
-			inline static const float fric = NULL; 
 			glm::vec3 pos; 
 			float headPos; // 0xC
 			glm::vec3 vel; // 0x10
@@ -87,11 +97,11 @@ namespace fdm
 
 		~StateTutorial() 
 		{
-			return reinterpret_cast<void(__thiscall*)(StateTutorial* self)>(FUNC_STATETUTORIAL_DESTR_STATETUTORIAL)(this);
+			reinterpret_cast<void(__thiscall*)(StateTutorial* self)>(FUNC_STATETUTORIAL_DESTR_STATETUTORIAL)(this);
 		}
 		StateTutorial() 
 		{
-			return reinterpret_cast<void(__thiscall*)(StateTutorial* self)>(FUNC_STATETUTORIAL_STATETUTORIAL)(this);
+			reinterpret_cast<void(__thiscall*)(StateTutorial* self)>(FUNC_STATETUTORIAL_STATETUTORIAL)(this);
 		}
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{
@@ -161,21 +171,21 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, double xoffset, double yoffset)>(FUNC_STATETUTORIAL_SCROLLINPUT)(this, s, xoffset, yoffset);
 		}
-		void mouseButtonInput(StateManager& s, uint32_t button, uint32_t action, int mods) override
+		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, uint32_t button, uint32_t action, int mods)>(FUNC_STATETUTORIAL_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, int button, int action, int mods)>(FUNC_STATETUTORIAL_MOUSEBUTTONINPUT)(this, s, button, action, mods);
 		}
-		void keyInput(StateManager& s, __int64 key, int scancode, int action) override
+		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, __int64 key, int scancode, int action)>(FUNC_STATETUTORIAL_KEYINPUT)(this, s, key, scancode, action);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATETUTORIAL_KEYINPUT)(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
 			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, int width, int height)>(FUNC_STATETUTORIAL_WINDOWRESIZE)(this, s, width, height);
 		}
-		void charInput(StateManager& s, __int64 codepoint) override
+		void charInput(StateManager& s, uint32_t codepoint) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, __int64 codepoint)>(FUNC_STATETUTORIAL_CHARINPUT)(this, s, codepoint);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, uint32_t codepoint)>(FUNC_STATETUTORIAL_CHARINPUT)(this, s, codepoint);
 		}
 		void updateViewport(GLFWwindow* w, const glm::ivec4& pos, const glm::ivec2& scroll) 
 		{

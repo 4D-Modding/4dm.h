@@ -37,9 +37,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s)>(FUNC_STATEERRORSCREEN_RENDER)(this, s);
 		}
-		void mouseButtonInput(StateManager& s, uint32_t button, uint32_t action, int mods) override
+		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s, uint32_t button, uint32_t action, int mods)>(FUNC_STATEERRORSCREEN_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s, int button, int action, int mods)>(FUNC_STATEERRORSCREEN_MOUSEBUTTONINPUT)(this, s, button, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{

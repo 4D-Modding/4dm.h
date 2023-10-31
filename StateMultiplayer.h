@@ -12,7 +12,7 @@ namespace fdm
 		QuadRenderer qr; // 0xA8
 		Shader* qs; // 0xD0
 		std::shared_ptr<Connection::Client> client; // 0xD8
-		std::unique_ptr<WorldClient,std::default_delete<WorldClient> > world; // 0xE8
+		std::unique_ptr<WorldClient> world; // 0xE8
 		bool loggedIn; // 0xF0
 		PAD(0x3);
 		int queuePos; // 0xF4
@@ -38,11 +38,11 @@ namespace fdm
 
 		~StateMultiplayer() 
 		{
-			return reinterpret_cast<void(__thiscall*)(StateMultiplayer* self)>(FUNC_STATEMULTIPLAYER_DESTR_STATEMULTIPLAYER)(this);
+			reinterpret_cast<void(__thiscall*)(StateMultiplayer* self)>(FUNC_STATEMULTIPLAYER_DESTR_STATEMULTIPLAYER)(this);
 		}
 		StateMultiplayer() 
 		{
-			return reinterpret_cast<void(__thiscall*)(StateMultiplayer* self)>(FUNC_STATEMULTIPLAYER_STATEMULTIPLAYER)(this);
+			reinterpret_cast<void(__thiscall*)(StateMultiplayer* self)>(FUNC_STATEMULTIPLAYER_STATEMULTIPLAYER)(this);
 		}
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{
@@ -92,25 +92,25 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, double xoffset, double yoffset)>(FUNC_STATEMULTIPLAYER_SCROLLINPUT)(this, s, xoffset, yoffset);
 		}
-		void mouseButtonInput(StateManager& s, uint32_t button, uint32_t action, int mods) override
+		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, uint32_t button, uint32_t action, int mods)>(FUNC_STATEMULTIPLAYER_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, int button, int action, int mods)>(FUNC_STATEMULTIPLAYER_MOUSEBUTTONINPUT)(this, s, button, action, mods);
 		}
-		void keyInput(StateManager& s, uint32_t key, uint32_t scancode, int action, int mods) override
+		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, uint32_t key, uint32_t scancode, int action, int mods)>(FUNC_STATEMULTIPLAYER_KEYINPUT)(this, s, key, scancode, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATEMULTIPLAYER_KEYINPUT)(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
 			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, int width, int height)>(FUNC_STATEMULTIPLAYER_WINDOWRESIZE)(this, s, width, height);
 		}
-		void charInput(StateManager& s, char codepoint) override
+		void charInput(StateManager& s, uint32_t codepoint) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, char codepoint)>(FUNC_STATEMULTIPLAYER_CHARINPUT)(this, s, codepoint);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, uint32_t codepoint)>(FUNC_STATEMULTIPLAYER_CHARINPUT)(this, s, codepoint);
 		}
-		void rejoin(std::shared_ptr<Connection::Client>* client, std::unique_ptr<WorldClient> world) 
+		void rejoin(std::shared_ptr<Connection::Client> client, const std::unique_ptr<WorldClient>& world) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, std::shared_ptr<Connection::Client>* client, std::unique_ptr<WorldClient> world)>(FUNC_STATEMULTIPLAYER_REJOIN)(this, client, world);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, std::shared_ptr<Connection::Client> client, const std::unique_ptr<WorldClient>& world)>(FUNC_STATEMULTIPLAYER_REJOIN)(this, client, world);
 		}
 		void connect() 
 		{

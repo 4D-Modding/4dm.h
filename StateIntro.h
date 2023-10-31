@@ -10,13 +10,15 @@ namespace fdm
 		inline static StateIntro* instanceObj = reinterpret_cast<StateIntro*>((base + 0x279140));
 		glm::mat4 projection2D; // 0x8
 		glm::mat4 projection3D; // 0x48
-		inline static const char* fileNames[6] = {"logo.png", "moon.png", "sun.png", "crosshair.png", "targetBlock.png", "forg.png"}; // rip "ock.png"
-		inline static const int fileCount = 6; 
+		inline static const int fileCount = 6;
+		inline static const char* fileNames[fileCount] = { "logo.png", "moon.png", "sun.png", "crosshair.png", "targetBlock.png", "forg.png" }; // rip "ock.png"
 		struct 
 		{
-
-		} imageData;
-		PAD(0xE8);
+			unsigned char* data;
+			int width;
+			int height;
+			int channels;
+		} imageData[fileCount];
 		std::atomic<int> filesLoaded; // 0x118
 		float displayProgress; // 0x11C
 		FontRenderer font; // 0x120

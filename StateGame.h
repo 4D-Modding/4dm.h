@@ -1,6 +1,7 @@
 #pragma once
 
 #include "4dm.h"
+#include "CloudManager.h"
 
 namespace fdm 
 {
@@ -41,7 +42,7 @@ namespace fdm
 		bool updateViewFlag; // 0x978
 		inline static const int MESSAGE_DISPLAY_MAX = 100; 
 		PAD(0x7);
-		std::vector<std::unique_ptr<gui::Text,std::default_delete<gui::Text> >,std::allocator<std::unique_ptr<gui::Text,std::default_delete<gui::Text> > > > chatMessages; // 0x980
+		std::vector<std::unique_ptr<gui::Text>> chatMessages; // 0x980
 		gui::ContentBox chatMessageContainer; // 0x998
 		gui::TextInput chatInput; // 0xA18
 		bool chatOpen; // 0xAA8
@@ -51,7 +52,7 @@ namespace fdm
 
 		StateGame() 
 		{
-			return reinterpret_cast<void(__thiscall*)(StateGame* self)>(FUNC_STATEGAME_STATEGAME)(this);
+			reinterpret_cast<void(__thiscall*)(StateGame* self)>(FUNC_STATEGAME_STATEGAME)(this);
 		}
 		void resetMouse(GLFWwindow* w) 
 		{
@@ -105,17 +106,17 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, int button, int action, int mods)>(FUNC_STATEGAME_MOUSEBUTTONINPUT)(this, s, button, action, mods);
 		}
-		void keyInput(StateManager& s, uint32_t key, uint32_t scancode, int action, int mods) override
+		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, uint32_t key, uint32_t scancode, int action, int mods)>(FUNC_STATEGAME_KEYINPUT)(this, s, key, scancode, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATEGAME_KEYINPUT)(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, GLsizei width, GLsizei height) override
 		{
 			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, GLsizei width, GLsizei height)>(FUNC_STATEGAME_WINDOWRESIZE)(this, s, width, height);
 		}
-		void charInput(StateManager& s, __int64 codepoint) override
+		void charInput(StateManager& s, uint32_t codepoint) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, __int64 codepoint)>(FUNC_STATEGAME_CHARINPUT)(this, s, codepoint);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, uint32_t codepoint)>(FUNC_STATEGAME_CHARINPUT)(this, s, codepoint);
 		}
 		void updateProjection(GLsizei width, GLsizei height) 
 		{

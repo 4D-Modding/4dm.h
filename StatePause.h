@@ -23,7 +23,7 @@ namespace fdm
 
 		StatePause() 
 		{
-			return reinterpret_cast<void(__thiscall*)(StatePause* self)>(FUNC_STATEPAUSE_STATEPAUSE)(this);
+			reinterpret_cast<void(__thiscall*)(StatePause* self)>(FUNC_STATEPAUSE_STATEPAUSE)(this);
 		}
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{

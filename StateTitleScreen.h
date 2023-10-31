@@ -44,7 +44,7 @@ namespace fdm
 		}
 		StateTitleScreen() 
 		{
-			return reinterpret_cast<void(__thiscall*)(StateTitleScreen* self)>(FUNC_STATETITLESCREEN_STATETITLESCREEN)(this);
+			reinterpret_cast<void(__thiscall*)(StateTitleScreen* self)>(FUNC_STATETITLESCREEN_STATETITLESCREEN)(this);
 		}
 		void updateProjection(int width, int height) 
 		{
@@ -90,9 +90,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s)>(FUNC_STATETITLESCREEN_RESUME)(this, s);
 		}
-		void keyInput(StateManager& s, uint32_t key, uint32_t scancode, int action, int mods) override
+		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, uint32_t key, uint32_t scancode, int action, int mods)>(FUNC_STATETITLESCREEN_KEYINPUT)(this, s, key, scancode, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATETITLESCREEN_KEYINPUT)(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
@@ -102,9 +102,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, double xpos, double ypos)>(FUNC_STATETITLESCREEN_MOUSEINPUT)(this, s, xpos, ypos);
 		}
-		void mouseButtonInput(StateManager& s, uint32_t button, uint32_t action, int mods) override
+		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, uint32_t button, uint32_t action, int mods)>(FUNC_STATETITLESCREEN_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, int button, int action, int mods)>(FUNC_STATETITLESCREEN_MOUSEBUTTONINPUT)(this, s, button, action, mods);
 		}
 		void renderBackground(int width, int height) 
 		{

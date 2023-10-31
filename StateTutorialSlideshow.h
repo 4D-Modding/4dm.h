@@ -47,11 +47,11 @@ namespace fdm
 
 		~StateTutorialSlideshow() 
 		{
-			return reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow* self)>(FUNC_STATETUTORIALSLIDESHOW_DESTR_STATETUTORIALSLIDESHOW)(this);
+			reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow* self)>(FUNC_STATETUTORIALSLIDESHOW_DESTR_STATETUTORIALSLIDESHOW)(this);
 		}
 		StateTutorialSlideshow() 
 		{
-			return reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow* self)>(FUNC_STATETUTORIALSLIDESHOW_STATETUTORIALSLIDESHOW)(this);
+			reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow* self)>(FUNC_STATETUTORIALSLIDESHOW_STATETUTORIALSLIDESHOW)(this);
 		}
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{

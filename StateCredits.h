@@ -33,9 +33,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s, int width, int height)>(FUNC_STATECREDITS_WINDOWRESIZE_A)(this, s, width, height);
 		}
-		void keyInput(StateManager& s, __int64 key, __int64 scancode, int action) override
+		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s, __int64 key, __int64 scancode, int action)>(FUNC_STATECREDITS_KEYINPUT_A)(this, s, key, scancode, action);
+			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATECREDITS_KEYINPUT_A)(this, s, key, scancode, action, mods);
 		}
 		void updateProjection(int width, int height) 
 		{

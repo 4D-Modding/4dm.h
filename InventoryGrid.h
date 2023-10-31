@@ -21,7 +21,8 @@ namespace fdm
 		{
 			reinterpret_cast<void(__thiscall*)(InventoryGrid* self)>(FUNC_INVENTORYGRID_DESTR_INVENTORYGRID)(this);
 		}
-		InventoryGrid(const glm::ivec2& size = {0}) 
+		InventoryGrid() {}
+		InventoryGrid(const glm::ivec2& size) 
 		{
 			reinterpret_cast<void(__thiscall*)(InventoryGrid* self, const glm::ivec2& size)>(FUNC_INVENTORYGRID_INVENTORYGRID)(this, size);
 		}
@@ -56,9 +57,9 @@ namespace fdm
 		{
 			return reinterpret_cast<uint32_t (__thiscall*)(InventoryGrid* self)>(FUNC_INVENTORYGRID_GETSLOTCOUNT)(this);
 		}
-		std::unique_ptr<Item,std::default_delete<Item> > getSlot(int index) override
+		std::unique_ptr<Item>& getSlot(int index) override
 		{
-			return reinterpret_cast<std::unique_ptr<Item,std::default_delete<Item> > (__thiscall*)(InventoryGrid* self, int index)>(FUNC_INVENTORYGRID_GETSLOT)(this, index);
+			return reinterpret_cast<std::unique_ptr<Item>& (__thiscall*)(InventoryGrid* self, int index)>(FUNC_INVENTORYGRID_GETSLOT)(this, index);
 		}
 		Inventory::iterator begin() override
 		{
