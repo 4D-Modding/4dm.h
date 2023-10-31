@@ -20,6 +20,7 @@ namespace fdm
 				FUNC_SHADER_LOAD
 				)(this, vertexPath, fragmentPath);
 		}
+		// thank you mashed potatoes for this
 		bool load(const std::string& vertexPath, const std::string& geometryPath, const std::string& fragmentPath)
 		{
 			if (ID != 0)

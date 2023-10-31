@@ -12,21 +12,21 @@ namespace fdm
 		inline static glm::vec3** verts = reinterpret_cast<glm::vec3**>((base + 0x2784D0));
 		inline static glm::vec2** uv = reinterpret_cast<glm::vec2**>((base + 0x278680));
 
-		void buffData(int buffIndex) override
+		const void* buffData(int buffIndex) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(Skybox* self, int buffIndex)>(FUNC_SKYBOX_BUFFDATA)(this, buffIndex);
+			return reinterpret_cast<const void* (__thiscall*)(const Skybox* self, int buffIndex)>(FUNC_SKYBOX_BUFFDATA)(this, buffIndex);
 		}
-		int buffSize(int buffIndex) override
+		int buffSize(int buffIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(Skybox* self, int buffIndex)>(FUNC_SKYBOX_BUFFSIZE)(this, buffIndex);
+			return reinterpret_cast<int (__thiscall*)(const Skybox* self, int buffIndex)>(FUNC_SKYBOX_BUFFSIZE)(this, buffIndex);
 		}
-		int attrSize(int buffIndex, int attrIndex) override
+		int attrSize(int buffIndex, int attrIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(Skybox* self, int buffIndex, int attrIndex)>(FUNC_SKYBOX_ATTRSIZE)(this, buffIndex, attrIndex);
+			return reinterpret_cast<int (__thiscall*)(const Skybox* self, int buffIndex, int attrIndex)>(FUNC_SKYBOX_ATTRSIZE)(this, buffIndex, attrIndex);
 		}
-		int vertCount() override
+		int vertCount() const override
 		{
-			return reinterpret_cast<int (__thiscall*)(Skybox* self)>(FUNC_SKYBOX_VERTCOUNT)(this);
+			return reinterpret_cast<int (__thiscall*)(const Skybox* self)>(FUNC_SKYBOX_VERTCOUNT)(this);
 		}
 	};
 }

@@ -4,6 +4,8 @@
 
 namespace fdm 
 {
+	class Entity;
+
 	class EntityManager 
 	{
 	public:

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "4dm.h"
+#include "ChunkLoader.h"
 
 namespace fdm 
 {
@@ -9,33 +10,29 @@ namespace fdm
 	public:
 		struct PlayerInfo 
 		{
+			enum Status
+			{
+				QUEUED = 0x0,
+				JOINING = 0x1,
+				REJOINING = 0x2,
+				JOINED = 0x3
+			};
 			std::unique_ptr<Player,std::default_delete<Player> > player; 
 			uuid id; // 0x8
 			uint32_t handle; // 0x18
 			PAD(0x4);
 			std::string displayName; // 0x20
-			struct 
-			{
-				int QUEUED; 
-				PAD(0xFFFFFFFFFFFFFFFC);
-				int JOINING; 
-				PAD(0xFFFFFFFFFFFFFFFC);
-				int REJOINING; 
-				PAD(0xFFFFFFFFFFFFFFFC);
-				int JOINED; 
-
-			} status;
+			Status status;
 			PAD(0x8);
 			Connection::OutMessage skinMessage; // 0x48
 			std::unordered_set<Chunk *,std::hash<Chunk *>,std::equal_to<Chunk *>,std::allocator<Chunk *> > chunkList; // 0x60
-			float chunkUpdateTime; // 0xA0
+			double chunkUpdateTime; // 0xA0
 			int chunkUpdateCount; // 0xA8
 			PAD(0x4);
-			float chunkRequestTime; // 0xB0
+			double chunkRequestTime; // 0xB0
 			int chunkRequestCount; // 0xB8
 			PAD(0x4);
-			float activityTime; // 0xC0
-
+			double activityTime; // 0xC0
 		};
 		inline static const uint32_t DEFAULT_RENDER_DIST = 3; 
 		PAD(0x8); // --> boost::uuids::random_generator_pure uuidGenerator
@@ -45,9 +42,9 @@ namespace fdm
 		ChunkLoader chunkLoader; // 0x218
 		path playerSavePath; // 0x2B8
 		nlohmann::json playerSaves; // 0x2D8
-		std::unordered_map<uint32_t,WorldServer::PlayerInfo,std::hash<uint32_t>,std::equal_to<uint32_t>,std::allocator<std::pair<uint32_t const ,WorldServer::PlayerInfo> > > players; // 0x2E8
-		PAD(0x40); // --> std::unordered_map<uuid,WorldServer::PlayerInfo *,boost::hash<uuid>,std::equal_to<uuid>,std::allocator<std::pair<uuid const ,WorldServer::PlayerInfo *> > > playerIDs
-		PAD(0x40); // --> std::unordered_map<uuid,WorldServer::PlayerInfo *,boost::hash<uuid>,std::equal_to<uuid>,std::allocator<std::pair<uuid const ,WorldServer::PlayerInfo *> > > entityPlayerIDs
+		std::unordered_map<uint32_t,WorldServer::PlayerInfo> players; // 0x2E8
+		std::unordered_map<uuid, WorldServer::PlayerInfo*> playerIDs;
+		std::unordered_map<uuid, WorldServer::PlayerInfo*> entityPlayerIDs;
 		glm::ivec4 spawnPoint; // 0x3A8
 		int joinedPlayerCount; // 0x3B8
 		int joinedPlayerLimit; // 0x3BC
@@ -63,21 +60,22 @@ namespace fdm
 		std::vector<Chunk *,std::allocator<Chunk *> > newlyLoadedChunks; // 0x4B0
 		int maxRenderDistance; // 0x4C8
 		PAD(0x4);
-		float autosaveInterval; // 0x4D0
-		float autosaveTime; // 0x4D8
-		float restartInterval; // 0x4E0
-		float restartTime; // 0x4E8
-		float restartCountdownTime; // 0x4F0
+		double autosaveInterval; // 0x4D0
+		double autosaveTime; // 0x4D8
+		double restartInterval; // 0x4E0
+		double restartTime; // 0x4E8
+		double restartCountdownTime; // 0x4F0
 		bool restartCountdownStarted; // 0x4F8
 		PAD(0x7);
 		float inactiveTimeLimit; // 0x500
 		int chunkUpdateLimit; // 0x508
 		PAD(0x4);
-		float chunkUpdateInterval; // 0x510
+		double chunkUpdateInterval; // 0x510
 		int chunkRequestLimit; // 0x518
 		PAD(0x4);
-		float chunkRequestInterval; // 0x520
-		std::unordered_map<glm::i64vec3,nlohmann::json,std::hash<glm::i64vec3 >,std::equal_to<glm::i64vec3 >,std::allocator<std::pair<glm::i64vec3 const ,nlohmann::json > > > blockUpdates; // 0x528
+		double chunkRequestInterval; // 0x520
+		std::unordered_map<glm::i64vec3,nlohmann::json> blockUpdates; // 0x528
 
+		// no function were compiled lol
 	};
 }

@@ -29,6 +29,7 @@
 #include "glfw.h"
 #include <mutex>
 #include <set>
+#include <unordered_set>
 
 #include "soil/SOIL.h"
 
@@ -60,6 +61,9 @@ namespace fdm
 #include "Connection/MessageData.h"
 #include "Connection/InMessage.h"
 #include "Connection/OutMessage.h"
+#include "Connection/Server.h"
+#include "Connection/Client.h"
+#include "Packet.h" // thats not in Connection namespace for some reason even tho it relates to networking but k
 
 // fuck boost
 #include "path.h"

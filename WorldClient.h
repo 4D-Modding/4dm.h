@@ -1,6 +1,7 @@
 #pragma once
 
 #include "4dm.h"
+#include "WorldManager.h"
 
 namespace fdm 
 {
@@ -24,7 +25,7 @@ namespace fdm
 
 		~WorldClient() override
 		{
-			return reinterpret_cast<void(__thiscall*)(WorldClient* self)>(FUNC_WORLDCLIENT_DESTR_WORLDCLIENT)(this);
+			reinterpret_cast<void(__thiscall*)(WorldClient* self)>(FUNC_WORLDCLIENT_DESTR_WORLDCLIENT)(this);
 		}
 		bool addEntityToChunk(std::unique_ptr<Entity>& entity, Chunk* c) override
 		{

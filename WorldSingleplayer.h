@@ -19,15 +19,15 @@ namespace fdm
 
 		WorldSingleplayer(const path& worldPath, const path& biomeInfoPath) 
 		{
-			return reinterpret_cast<void(__thiscall*)(WorldSingleplayer* self, const path& worldPath, const path& biomeInfoPath)>(FUNC_WORLDSINGLEPLAYER_WORLDSINGLEPLAYER)(this, worldPath, biomeInfoPath);
+			reinterpret_cast<void(__thiscall*)(WorldSingleplayer* self, const path& worldPath, const path& biomeInfoPath)>(FUNC_WORLDSINGLEPLAYER_WORLDSINGLEPLAYER)(this, worldPath, biomeInfoPath);
 		}
 		~WorldSingleplayer() override
 		{
-			return reinterpret_cast<void(__thiscall*)(WorldSingleplayer* self)>(FUNC_WORLDSINGLEPLAYER_DESTR_WORLDSINGLEPLAYER)(this);
+			reinterpret_cast<void(__thiscall*)(WorldSingleplayer* self)>(FUNC_WORLDSINGLEPLAYER_DESTR_WORLDSINGLEPLAYER)(this);
 		}
-		void localPlayerEvent(Player* player, __int64 eventType, __int64 eventValue, EntityItem* data) override
+		void localPlayerEvent(Player* player, Packet::ClientPacket eventType, int64_t eventValue, void* data) override
 		{
-			return reinterpret_cast<void (__thiscall*)(WorldSingleplayer* self, Player* player, __int64 eventType, __int64 eventValue, EntityItem* data)>(FUNC_WORLDSINGLEPLAYER_LOCALPLAYEREVENT)(this, player, eventType, eventValue, data);
+			return reinterpret_cast<void (__thiscall*)(WorldSingleplayer* self, Player* player, Packet::ClientPacket eventType, int64_t eventValue, void* data)>(FUNC_WORLDSINGLEPLAYER_LOCALPLAYEREVENT)(this, player, eventType, eventValue, data);
 		}
 		void updateLocal(StateManager& s, Player* player, double dt) override
 		{

@@ -38,6 +38,13 @@
 #define FUNC_CONNECTION_OUTMESSAGE_OUTMESSAGE (base + idaOffsetFix(0x4FB00))
 #define FUNC_CONNECTION_OUTMESSAGE_RELEASEHEAPMESSAGEDATA (base + idaOffsetFix(0x4FC00))
 
+// Connection::Client
+
+#define FUNC_CONNECTION_CLIENT_UPDATE (base + idaOffsetFix(0x55EE0))
+#define FUNC_CONNECTION_CLIENT_RESOLVEHOST (base + idaOffsetFix(0x56000))
+#define FUNC_CONNECTION_CLIENT_CLEANUP (base + idaOffsetFix(0x567B0))
+#define FUNC_CONNECTION_CLIENT_CONNECTIONSTATUSCHANGEDCALLBACK (base + idaOffsetFix(0x56940))
+
 // FontRenderer
 
 #define FUNC_FONTRENDERER_FONTRENDERER (base + idaOffsetFix(0x7B650))
@@ -742,6 +749,7 @@
 // ShaderManager
 
 #define FUNC_SHADERMANAGER_LOADFROMSHADERLIST (base + idaOffsetFix(0xCA290))
+#define FUNC_SHADERMANAGER_GET (base + idaOffsetFix(0xCA200))
 
 // Shader
 

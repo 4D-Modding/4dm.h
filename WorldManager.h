@@ -1,6 +1,7 @@
 #pragma once
 
 #include "4dm.h"
+#include "StateManager.h"
 
 namespace fdm 
 {
@@ -15,7 +16,7 @@ namespace fdm
 
 		~WorldManager() override
 		{
-			return reinterpret_cast<void(__thiscall*)(WorldManager* self)>(FUNC_WORLDMANAGER_DESTR_WORLDMANAGER)(this);
+			reinterpret_cast<void(__thiscall*)(WorldManager* self)>(FUNC_WORLDMANAGER_DESTR_WORLDMANAGER)(this);
 		}
 		void updateRenderFrustum(const glm::mat4& p) 
 		{
@@ -25,9 +26,20 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(WorldManager* self, const glm::ivec4& block, unsigned char value)>(FUNC_WORLDMANAGER_SETBLOCKUPDATE)(this, block, value);
 		}
-		void render(const m4::Mat5& MV, bool glasses, glm::vec3& worldColor) override
+		
+
+		virtual void render(const m4::Mat5& MV, bool glasses, glm::vec3& worldColor)
 		{
-			return reinterpret_cast<void (__thiscall*)(WorldManager* self, const m4::Mat5& MV, bool glasses, glm::vec3& worldColor)>(FUNC_WORLDMANAGER_RENDER)(this, MV, glasses, worldColor);
+			return reinterpret_cast<void(__thiscall*)(WorldManager * self, const m4::Mat5 & MV, bool glasses, glm::vec3 & worldColor)>(FUNC_WORLDMANAGER_RENDER)(this, MV, glasses, worldColor);
 		}
+		virtual void updateLocal(StateManager& s, Player* player, double dt) {}
+		virtual void cleanupLocal(Player* player) {}
+		virtual void setRenderDistanceLocal(Player* player, unsigned char distance) {}
+		virtual void setDifficultyLocal(Player* player, int diff) {}
+		virtual void setSkinVisibility(bool visible) {}
+		virtual void localPlayerInit(Player* player) {}
+		virtual void localPlayerRespawn(StateManager&, Player*) {}
+		virtual void sendChatMessage(Player* player, const std::string&) {}
+		virtual void handleLightingOptionsUpdate() {}
 	};
 }
