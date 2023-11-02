@@ -97,7 +97,7 @@ namespace fdm
 			}
 			void offsetY(int offset) override
 			{
-				this->yOffset = offset
+				this->yOffset = offset;
 			}
 			void alignX(gui::AlignmentX a)
 			{
