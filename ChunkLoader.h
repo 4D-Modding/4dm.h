@@ -25,20 +25,20 @@ namespace fdm
 			float moisture; // 0x30
 			glm::vec2 mapPos; // 0x34
 			PAD(0x4);
-			std::vector<uint8_t,std::allocator<uint8_t> > layers; // 0x40
-			std::vector<enum ChunkLoader::BiomeInfo::TreeType,std::allocator<enum ChunkLoader::BiomeInfo::TreeType> > trees; // 0x58
+			std::vector<uint8_t> layers; // 0x40
+			std::vector<ChunkLoader::BiomeInfo::TreeType> trees; // 0x58
 			int treeAbundance; // 0x70
 			PAD(0x4);
-			std::vector<uint8_t,std::allocator<uint8_t> > decorations; // 0x78
+			std::vector<uint8_t> decorations; // 0x78
 			int decorationAbundance; // 0x90
 
 			~BiomeInfo() 
 			{
 				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self)>(FUNC_CHUNKLOADER_BIOMEINFO_DESTR_BIOMEINFO)(this);
 			}
-			BiomeInfo(ChunkLoader::BiomeInfo&& __that) noexcept 
+			BiomeInfo(const ChunkLoader::BiomeInfo& __that) noexcept 
 			{
-				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self, ChunkLoader::BiomeInfo&& __that)>(FUNC_CHUNKLOADER_BIOMEINFO_BIOMEINFO)(this, __that);
+				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self, const ChunkLoader::BiomeInfo & __that)>(FUNC_CHUNKLOADER_BIOMEINFO_BIOMEINFO)(this, __that);
 			}
 		};
 		struct BiomeMapPixel 
@@ -64,7 +64,7 @@ namespace fdm
 		bool shouldSaveUnmodifiedChunks; // 0x79
 		PAD(0x2);
 		int difficulty; // 0x7C
-		std::vector<ChunkLoader::BiomeInfo,std::allocator<ChunkLoader::BiomeInfo> > biomes; // 0x80
+		std::vector<ChunkLoader::BiomeInfo> biomes; // 0x80
 		std::unique_ptr<ChunkLoader::BiomeMapPixel*> biomeMap; // 0x98
 
 		bool init(const path& worldPath, const path& biomeInfoPath) 
@@ -89,7 +89,7 @@ namespace fdm
 		}
 		ChunkLoader::BiomeMapPixel getBiome(int x, int z, int w) 
 		{
-			return reinterpret_cast<ChunkLoader::BiomeMapPixel (__thiscall*)(ChunkLoader* self, ChunkLoader::BiomeMapPixel* result, int x, int z, int w)>(FUNC_CHUNKLOADER_GETBIOME)(this, result, x, z, w);
+			return reinterpret_cast<ChunkLoader::BiomeMapPixel (__thiscall*)(ChunkLoader* self, int x, int z, int w)>(FUNC_CHUNKLOADER_GETBIOME)(this, x, z, w);
 		}
 		void generateTree(unsigned char* blocks, const glm::i64vec3& chunkPos, bool dark) 
 		{

@@ -18,7 +18,7 @@ namespace fdm
 		gui::Button backButton; // 0x1A0
 		gui::Button exitButton; // 0x1F8
 		inline static const int slide_box_count = 4; 
-		gui::ContentBox* slides; // 0x250
+		gui::ContentBox slides[4]; // 0x250
 		int currentSlide; // 0x450
 		PAD(0x4);
 		gui::Text slide0_text1; // 0x458

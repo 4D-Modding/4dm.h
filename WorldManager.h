@@ -8,11 +8,11 @@ namespace fdm
 	class WorldManager : public World 
 	{
 	public:
-		std::atomic<int> numChunksLoaded; // 0x168
+		std::atomic_int numChunksLoaded; // 0x168
 		Frustum frustum; // 0x16C
-		std::atomic<bool> smoothLighting; // 0x1CC
-		std::atomic<bool> shadows; // 0x1CD
-		std::atomic<bool> lights; // 0x1CE
+		std::atomic_bool smoothLighting; // 0x1CC
+		std::atomic_bool shadows; // 0x1CD
+		std::atomic_bool lights; // 0x1CE
 
 		~WorldManager() override
 		{

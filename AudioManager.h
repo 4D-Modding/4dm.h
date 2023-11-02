@@ -16,7 +16,7 @@ namespace fdm
 		//inline static SoLoud::Soloud *soloud = reinterpret_cast<SoLoud::Soloud*>((base + 0x29BD00)); 
 		inline static std::map<std::string,AudioManager::voiceGroupInfo>* voiceGroups = reinterpret_cast<std::map<std::string,AudioManager::voiceGroupInfo>*>((base + 0x29BCE0));
 		//inline static std::map<std::string,SoLoud::Wav,std::less<std::string >,std::allocator<std::pair<std::string const ,SoLoud::Wav> > > sounds = reinterpret_cast<std::map<std::string,SoLoud::Wav,std::less<std::string >,std::allocator<std::pair<std::string const ,SoLoud::Wav> > >*>((base + 0x29BCF0)); 
-		inline static std::vector<std::string,std::allocator<std::string > >* BGMList = reinterpret_cast<std::vector<std::string,std::allocator<std::string > >*>((base + 0x2C3E38));
+		inline static std::vector<std::string>* BGMList = reinterpret_cast<std::vector<std::string>*>((base + 0x2C3E38));
 		inline static float* BGMVolume = reinterpret_cast<float*>((base + 0x2783B0));
 		inline static int* BGMNextIndex = reinterpret_cast<int*>((base + 0x29B3C0));
 		inline static uint32_t* currentBGM = reinterpret_cast<uint32_t*>((base + 0x29B3C4));

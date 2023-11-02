@@ -19,8 +19,8 @@ namespace fdm
 		gui::ContentBox worldListContainer; // 0x1F8
 		gui::Text yourWorlds; // 0x278
 		gui::Text noWorlds; // 0x2D0
-		std::vector<gui::Button,std::allocator<gui::Button> > worldButtons; // 0x328
-		std::vector<std::string,std::allocator<std::string > > worldPaths; // 0x340
+		std::vector<gui::Button> worldButtons; // 0x328
+		std::vector<std::string> worldPaths; // 0x340
 		bool shouldLoadWorld; // 0x358
 
 		void mouseButtonInput(StateManager& s, int button, int action, int mods) override

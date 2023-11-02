@@ -25,8 +25,8 @@ namespace fdm
 			glm::u8vec3 vert; 
 			glm::u8vec3 uv; // 0x3
 			uint32_t lighting; // 0x6
-
 		};
+
 		inline static const float _zero = 1e-08f; 
 		inline static StateTutorial* instanceObj = reinterpret_cast<StateTutorial*>((base + 0x2C2860));
 		bool updateViewFlag; // 0x8
@@ -37,27 +37,27 @@ namespace fdm
 		FontRenderer font; // 0x90
 		TexRenderer forgRenderer; // 0x130
 		QuadRenderer qr; // 0x158
-		Shader* qs; // 0x180
+		const Shader* qs; // 0x180
 		gui::Interface ui; // 0x188
 		gui::Button backButton; // 0x1F0
 		gui::Button nextButton; // 0x248
-		std::vector<StateTutorial::blockVert3D,std::allocator<StateTutorial::blockVert3D> > block_verts_3d; // 0x2A0
-		std::vector<uint32_t,std::allocator<uint32_t> > block_indices_3d; // 0x2B8
+		std::vector<StateTutorial::blockVert3D> block_verts_3d; // 0x2A0
+		std::vector<uint32_t> block_indices_3d; // 0x2B8
 		MeshBuilder mesh3d; // 0x2D0
 		MeshRenderer mr3d; // 0x308
 		MeshBuilder worldCubeMesh; // 0x328
 		MeshRenderer worldCubeRenderer; // 0x360
-		glm::i8vec3* forg_verts; // 0x380
-		glm::u8vec3* forg_uvs; // 0x392
-		glm::u8vec3* forg_outline_uvs; // 0x3A4
+		glm::i8vec3 forg_verts[6]; // 0x380
+		glm::u8vec3 forg_uvs[6]; // 0x392
+		glm::u8vec3 forg_outline_uvs[6]; // 0x3A4
 		PAD(0x2);
 		MeshBuilder forgMesh3D; // 0x3B8
 		MeshRenderer forgRenderer3D; // 0x3F0
 		MeshBuilder forgOutlineMesh3D; // 0x410
 		MeshRenderer forgOutlineRenderer3D; // 0x448
-		std::vector<glm::u8vec3,std::allocator<glm::u8vec3 > > block_verts_2d; // 0x468
-		std::vector<glm::u8vec4,std::allocator<glm::u8vec4 > > block_tuvs_2d; // 0x480
-		std::vector<uint32_t,std::allocator<uint32_t> > block_indices_2d; // 0x498
+		std::vector<glm::u8vec3> block_verts_2d; // 0x468
+		std::vector<glm::u8vec4> block_tuvs_2d; // 0x480
+		std::vector<uint32_t> block_indices_2d; // 0x498
 		MeshBuilder mesh2d; // 0x4B0
 		MeshRenderer mr2d; // 0x4E8
 		inline static const int demo_size = 16; 
@@ -77,8 +77,7 @@ namespace fdm
 			StateTutorial::PlayerState currentState; // 0x9C
 			StateTutorial::PlayerDirection currentDirection; // 0xA0
 			PAD(0x4);
-			float stateStartTime; // 0xA8
-
+			double stateStartTime; // 0xA8
 		} player;
 		struct 
 		{
@@ -87,9 +86,8 @@ namespace fdm
 			bool s; // 0x2
 			bool d; // 0x3
 			bool space; // 0x4
-
 		} keys;
-		PAD(0xB8);
+		PAD(0x3);
 		glm::vec2 rotation3D; // 0x15C0
 		bool mouseDown3D; // 0x15C8
 		PAD(0x3);

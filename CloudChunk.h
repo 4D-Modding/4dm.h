@@ -9,12 +9,13 @@ namespace fdm
 	public:
 		class CloudChunkMesh : public Mesh 
 		{
+		public:
 			inline static const int TRUNCATED_OCTAHEDRON_VERT_COUNT = 25; 
 			inline static glm::vec4** truncated_octahedron_verts = reinterpret_cast<glm::vec4**>((base + 0x2ACCE0));
 			inline static const int TRUNCATED_OCTAHEDRON_INDEX_COUNT = 176; 
 			inline static uint32_t** truncated_octahedron_indices = reinterpret_cast<uint32_t**>((base + 0x2ACE70));
-			std::vector<glm::vec4,std::allocator<glm::vec4 > > verts; // 0x8
-			std::vector<uint32_t,std::allocator<uint32_t> > indices; // 0x20
+			std::vector<glm::vec4> verts; // 0x8
+			std::vector<uint32_t> indices; // 0x20
 
 			int indexBuffSize() const override
 			{
@@ -49,9 +50,9 @@ namespace fdm
 		CloudChunk::CloudChunkMesh activeMesh; // 0x218
 		MeshRenderer meshRenderer; // 0x250
 		bool meshUpdated; // 0x270
-		std::atomic<bool> meshReady; // 0x271
-		std::atomic<bool> meshNew; // 0x272
-		std::atomic<bool> inBounds; // 0x273
+		std::atomic_bool meshReady; // 0x271
+		std::atomic_bool meshNew; // 0x272
+		std::atomic_bool inBounds; // 0x273
 
 		void generateMesh() 
 		{

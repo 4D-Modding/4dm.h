@@ -14,8 +14,8 @@ namespace fdm
 		FontRenderer font; // 0x50
 		QuadRenderer qr; // 0xF0
 		Shader* qs; // 0x118
-		std::vector<Tex2D,std::allocator<Tex2D> > supporters; // 0x120
-		std::vector<Tex2D,std::allocator<Tex2D> > hyperSupporters; // 0x138
+		std::vector<Tex2D> supporters; // 0x120
+		std::vector<Tex2D> hyperSupporters; // 0x138
 
 		void init(StateManager& s) override
 		{

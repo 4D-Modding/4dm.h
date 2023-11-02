@@ -40,9 +40,9 @@ namespace fdm
 		{
 			return reinterpret_cast<uint32_t (__thiscall*)(InventoryPlayer* self)>(FUNC_INVENTORYPLAYER_GETSLOTCOUNT)(this);
 		}
-		std::unique_ptr<Item>& getSlot(int index) override
+		std::unique_ptr<Item>* getSlot(int index) override
 		{
-			return reinterpret_cast<std::unique_ptr<Item>& (__thiscall*)(InventoryPlayer* self, uint32_t index)>(FUNC_INVENTORYPLAYER_GETSLOT)(this, index);
+			return reinterpret_cast<std::unique_ptr<Item>* (__thiscall*)(InventoryPlayer* self, uint32_t index)>(FUNC_INVENTORYPLAYER_GETSLOT)(this, index);
 		}
 		Inventory::iterator end() override
 		{

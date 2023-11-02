@@ -12,14 +12,14 @@ namespace fdm
 		PAD(0x1); // --> boost::uuids::string_generator uuidParser
 		PAD(0x7);
 		std::shared_ptr<Connection::Client> client; // 0x1D8
-		std::atomic<bool> chunksReady; // 0x1E8
-		std::atomic<bool> shouldStopLoading; // 0x1E9
+		std::atomic_bool chunksReady; // 0x1E8
+		std::atomic_bool shouldStopLoading; // 0x1E9
 		PAD(0x6);
-		std::vector<Chunk *,std::allocator<Chunk *> > newChunks; // 0x1F0
+		std::vector<Chunk*> newChunks; // 0x1F0
 		std::mutex updatedNeighborsMutex; // 0x208
-		std::vector<Chunk *,std::allocator<Chunk *> > updatedNeighbors; // 0x258
-		float oldestChunkTime; // 0x270
-		float lastUpdateTime; // 0x278
+		std::vector<Chunk*> updatedNeighbors; // 0x258
+		double oldestChunkTime; // 0x270
+		double lastUpdateTime; // 0x278
 		std::thread meshGeneratingThread; // 0x280
 		std::thread meshRegeneratingThread; // 0x290
 

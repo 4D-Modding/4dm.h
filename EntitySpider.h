@@ -36,13 +36,13 @@ namespace fdm
 		PAD(0x1);
 		glm::vec4 horizAcc; // 0x8C
 		float health; // 0x9C
-		float hitTime; // 0xA0
+		double hitTime; // 0xA0
 		inline static const float hitDelay = 0.7f; 
 		uuid target; // 0xA8
 		inline static const float updateDelay = 2.f; 
-		float lastUpdateTime; // 0xB8
+		double lastUpdateTime; // 0xB8
 		inline static const float serverUpdateDelay = 0.5f; 
-		float lastServerUpdateTime; // 0xC0
+		double lastServerUpdateTime; // 0xC0
 		inline static MeshRenderer* wireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279D48));
 
 		bool isIntersectingRay(const Entity::Ray& ray) override

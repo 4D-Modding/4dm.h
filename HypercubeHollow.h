@@ -13,7 +13,7 @@ namespace fdm
 			glm::vec3 t; // 0x10
 
 		};
-		std::vector<HypercubeHollow::VertData,std::allocator<HypercubeHollow::VertData> > vertices; // 0x8
+		std::vector<HypercubeHollow::VertData> vertices; // 0x8
 
 		int attrSize(int buffIndex, int attrIndex) const override
 		{
@@ -25,7 +25,7 @@ namespace fdm
 		}
 		HypercubeHollow(float distance) 
 		{
-			return reinterpret_cast<void(__thiscall*)(HypercubeHollow* self, float distance)>(FUNC_HYPERCUBEHOLLOW_HYPERCUBEHOLLOW)(this, distance);
+			reinterpret_cast<void(__thiscall*)(HypercubeHollow* self, float distance)>(FUNC_HYPERCUBEHOLLOW_HYPERCUBEHOLLOW)(this, distance);
 		}
 		void addCubeSide(const glm::vec4* cube_ptr, const glm::vec4* inner, int i0, int i1, int i2, int i3) 
 		{

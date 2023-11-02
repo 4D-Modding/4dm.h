@@ -24,7 +24,19 @@ namespace fdm::gui
 		}
 		void offsetX(int offset) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Text* self, int offset)>(FUNC_GUI_TEXT_OFFSETX)(this, offset);
+			this->xOffset = offset;
+		}
+		void offsetY(int offset) override
+		{
+			this->yOffset = offset
+		}
+		void alignX(gui::AlignmentX a)
+		{
+			this->xAlign = a;
+		}
+		void alignY(gui::AlignmentY a)
+		{
+			this->yAlign = a;
 		}
 		void getPos(gui::Window* w, int* x, int* y) override
 		{

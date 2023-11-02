@@ -17,7 +17,7 @@ namespace fdm
 				REJOINING = 0x2,
 				JOINED = 0x3
 			};
-			std::unique_ptr<Player,std::default_delete<Player> > player; 
+			std::unique_ptr<Player> player; 
 			uuid id; // 0x8
 			uint32_t handle; // 0x18
 			PAD(0x4);
@@ -50,14 +50,14 @@ namespace fdm
 		int joinedPlayerLimit; // 0x3BC
 		int queuedPlayerLimit; // 0x3C0
 		PAD(0x4);
-		std::vector<uint32_t,std::allocator<uint32_t> > queue; // 0x3C8
-		std::atomic<bool> shouldStopLoading; // 0x3E0
+		std::vector<uint32_t> queue; // 0x3C8
+		std::atomic_bool shouldStopLoading; // 0x3E0
 		PAD(0x7);
 		std::thread chunkLoadingThread; // 0x3E8
 		std::mutex newChunksMutex; // 0x3F8
-		std::vector<Chunk *,std::allocator<Chunk *> > newChunks; // 0x448
+		std::vector<Chunk*> newChunks; // 0x448
 		std::mutex newlyLoadedChunkMutex; // 0x460
-		std::vector<Chunk *,std::allocator<Chunk *> > newlyLoadedChunks; // 0x4B0
+		std::vector<Chunk*> newlyLoadedChunks; // 0x4B0
 		int maxRenderDistance; // 0x4C8
 		PAD(0x4);
 		double autosaveInterval; // 0x4D0

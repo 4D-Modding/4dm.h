@@ -9,7 +9,7 @@ namespace fdm
 	public:
 		std::vector<Chunk *> chunksToLoad; // 0x1D0
 		ChunkLoader chunkLoader; // 0x1E8
-		std::atomic<bool> chunksReady; // 0x288
+		std::atomic_bool chunksReady; // 0x288
 
 		bool loadCube(const glm::vec4& pos, unsigned char distance) 
 		{

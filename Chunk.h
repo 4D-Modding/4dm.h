@@ -1,9 +1,15 @@
 #pragma once
 
 #include "4dm.h"
+#include "Entity.h"
+#include "World.h"
+#include "EntityManager.h"
 
 namespace fdm 
 {
+	class Entity;
+	class World;
+	class EntityManager;
 	class Chunk 
 	{
 	public:
@@ -17,8 +23,8 @@ namespace fdm
 				BlockInfo::VertLighting lighting; // 0x8
 
 			};
-			std::vector<Chunk::ChunkMesh::VertData,std::allocator<Chunk::ChunkMesh::VertData> > verts; // 0x8
-			std::vector<uint32_t,std::allocator<uint32_t> > indices; // 0x20
+			std::vector<Chunk::ChunkMesh::VertData> verts; // 0x8
+			std::vector<uint32_t> indices; // 0x20
 			bool updateQueued; // 0x38
 
 			~ChunkMesh() 
@@ -70,7 +76,7 @@ namespace fdm
 		inline static const uint32_t HEIGHT = 128; 
 		inline static const uint32_t BLOCK_DATA_SIZE = 128000; 
 		unsigned char blocks[SIZE + 2][SIZE + 2][SIZE + 2][HEIGHT];
-		unsigned char lightingHeightMap[SIZE][SIZE][SIZE];
+		unsigned char lightingHeightMap[SIZE + 2][SIZE + 2][SIZE + 2];
 		glm::i64vec3 pos; // 0x1F7E8
 		bool saved; // 0x1F800
 		inline static const uint32_t MESH_COUNT = 8; 
@@ -81,16 +87,16 @@ namespace fdm
 		PAD(0x7);
 		std::mutex meshMutex; // 0x1FB10
 		bool meshUpdated; // 0x1FB60
-		std::atomic<bool> meshReady; // 0x1FB61
-		std::atomic<bool> meshOutdated; // 0x1FB62
-		std::atomic<bool> inBounds; // 0x1FB63
-		std::atomic<bool> generatingMeshes; // 0x1FB64
-		std::atomic<bool> loaded; // 0x1FB65
+		std::atomic_bool meshReady; // 0x1FB61
+		std::atomic_bool meshOutdated; // 0x1FB62
+		std::atomic_bool inBounds; // 0x1FB63
+		std::atomic_bool generatingMeshes; // 0x1FB64
+		std::atomic_bool loaded; // 0x1FB65
 		PAD(0x2);
-		std::vector<Entity *,std::allocator<Entity *> > entities; // 0x1FB68
+		std::vector<Entity*> entities; // 0x1FB68
 		int prevEntityCount; // 0x1FB80
 		PAD(0x4);
-		std::set<uint32_t,std::less<uint32_t>,std::allocator<uint32_t> > ownerPlayers; // 0x1FB88
+		std::set<uint32_t> ownerPlayers; // 0x1FB88
 
 		Chunk(const glm::i64vec3& pos) 
 		{

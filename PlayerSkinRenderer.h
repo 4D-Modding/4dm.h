@@ -9,14 +9,14 @@ namespace fdm
 	{
 	public:
 		inline static MeshRenderer* wireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x278B80));
-		m4::Mat5* transformations; 
+		m4::Mat5 transformations[10]; 
 		glm::vec4 vel; // 0x3E8
 		glm::vec4 walkDir; // 0x3F8
 		m4::Mat5 orientationDst; // 0x408
 		m4::Mat5 orientationHead; // 0x46C
 		m4::Mat5 orientationBody; // 0x4D0
 		PAD(0x4);
-		float walkAnimProgress; // 0x538
+		double walkAnimProgress; // 0x538
 		inline static const float thighAnimDefault = -0.3333333f; 
 		float thighAnimL; // 0x540
 		float thighAnimR; // 0x544
@@ -35,11 +35,11 @@ namespace fdm
 		bool hitting; // 0x568
 		PAD(0x3);
 		float hittingVal; // 0x56C
-		float hitStartTime; // 0x570
+		double hitStartTime; // 0x570
 		bool performingAction; // 0x578
 		bool dead; // 0x579
 		PAD(0x6);
-		float damageStartTime; // 0x580
+		double damageStartTime; // 0x580
 		PlayerSkin* skin; // 0x588
 
 		PlayerSkinRenderer(){}

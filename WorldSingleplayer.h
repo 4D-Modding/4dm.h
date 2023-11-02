@@ -8,12 +8,12 @@ namespace fdm
 	{
 	public:
 		ChunkLoader chunkLoader; // 0x1D0
-		std::atomic<bool> chunksReady; // 0x270
-		std::atomic<bool> shouldStopLoading; // 0x271
+		std::atomic_bool chunksReady; // 0x270
+		std::atomic_bool shouldStopLoading; // 0x271
 		PAD(0x6);
-		std::vector<Chunk *,std::allocator<Chunk *> > newChunks; // 0x278
+		std::vector<Chunk*> newChunks; // 0x278
 		std::mutex updatedNeighborsMutex; // 0x290
-		std::vector<Chunk *,std::allocator<Chunk *> > updatedNeighbors; // 0x2E0
+		std::vector<Chunk*> updatedNeighbors; // 0x2E0
 		std::thread chunkLoadingThread; // 0x2F8
 		std::thread meshRegeneratingThread; // 0x308
 

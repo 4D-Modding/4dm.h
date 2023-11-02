@@ -20,7 +20,7 @@ namespace fdm
 		glm::vec4 direction; // 0x70
 		float health; // 0x80
 		PAD(0x4);
-		float hitTime; // 0x88
+		double hitTime; // 0x88
 		inline static const float hitDelay = 0.7f; 
 		inline static const int NUM_TYPES = 4; 
 		inline static EntityButterfly::ButterflyType** ButterflyTypes = reinterpret_cast<EntityButterfly::ButterflyType**>((base + 0x2783C0));
@@ -30,7 +30,7 @@ namespace fdm
 		inline static const float minFlapDelay = NULL; 
 		inline static const float maxFlapDelay = NULL; 
 		PAD(0x4);
-		float remainingFlapTime; // 0x98
+		double remainingFlapTime; // 0x98
 		bool shouldUpdate; // 0xA0
 		PAD(0x3);
 		float flapAnimProgress; // 0xA4

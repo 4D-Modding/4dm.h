@@ -1,9 +1,11 @@
 #pragma once
 
 #include "4dm.h"
+#include "Shader.h"
 
 namespace fdm 
 {
+	class Shader;
 	class ShaderManager 
 	{
 	public:

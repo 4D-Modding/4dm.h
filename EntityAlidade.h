@@ -17,8 +17,8 @@ namespace fdm
 		{
 			int edges; 
 			PAD(0x4);
-			std::vector<float,std::allocator<float> > sinVert; // 0x8
-			std::vector<float,std::allocator<float> > cosVert; // 0x20
+			std::vector<float> sinVert; // 0x8
+			std::vector<float> cosVert; // 0x20
 
 			SPInfo() 
 			{

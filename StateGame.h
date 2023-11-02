@@ -122,9 +122,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateGame* self, GLsizei width, GLsizei height)>(FUNC_STATEGAME_UPDATEPROJECTION)(this, width, height);
 		}
-		void setWorld(std::unique_ptr<WorldManager> world) 
+		void setWorld(std::unique_ptr<WorldManager>& world) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, std::unique_ptr<WorldManager> world)>(FUNC_STATEGAME_SETWORLD)(this, world);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, std::unique_ptr<WorldManager>& world)>(FUNC_STATEGAME_SETWORLD)(this, world);
 		}
 		void addChatMessage(Player* player, const std::string& message, uint32_t color) 
 		{

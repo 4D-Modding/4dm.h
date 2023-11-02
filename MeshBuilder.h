@@ -4,7 +4,7 @@
 
 namespace fdm
 {
-	struct Mesh;
+	class Mesh;
 	class MeshBuilder : public Mesh
 	{
 	public:

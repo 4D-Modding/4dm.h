@@ -15,7 +15,8 @@
 #include <utility>
 #include <stdio.h>
 #include <iostream>
-#include <windows.h>
+#include <Windows.h>
+#include <cstdint>
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -126,6 +127,8 @@ namespace fdm
 #include "EntitySpider.h"
 #include "EntityManager.h"
 
+#include "GUI/gui.h"
+
 // inventory related stuff
 #include "Inventory.h"
 #include "InventoryGrid.h"
@@ -144,9 +147,9 @@ namespace fdm
 #include "WorldTitleScreen.h"
 #include "Player.h"
 #include "Chunk.h"
+#include "CloudChunk.h"
+#include "CloudManager.h"
 #include "ChunkLoader.h"
-
-#include "GUI/gui.h"
 
 // states
 #include "State.h"
@@ -169,8 +172,5 @@ namespace fdm
 
 extern "C" inline __declspec(dllexport) const char* getModName() { return MOD_NAME; }
 extern "C" inline __declspec(dllexport) const char* getModVer() { return MOD_VER; }
-
-//extern "C" __declspec(dllexport) void setModName(const char* newName) { fdm::modName = newName; }
-//extern "C" __declspec(dllexport) void setModVer(const char* newVer) { fdm::modVer = newVer; }
 
 #endif

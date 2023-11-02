@@ -2,6 +2,7 @@
 
 #include "4dm.h"
 #include "InventoryCursor.h"
+#include "GUI/Window.h"
 #include "GUI/Element.h"
 
 namespace fdm 
@@ -9,6 +10,10 @@ namespace fdm
 	using CraftingMenuCallback = std::add_pointer<bool(int reciperIndex, void* user)>::type;
 
 	class InventoryManager;
+	class InventoryCursor;
+	class gui::Window;
+	class gui::Element;
+	class Item;
 
 	class CraftingMenu : public gui::Element 
 	{
@@ -17,8 +22,8 @@ namespace fdm
 		{
 			int recipeIndex; 
 			PAD(0x4);
-			std::vector<std::unique_ptr<Item,std::default_delete<Item> >,std::allocator<std::unique_ptr<Item,std::default_delete<Item> > > > recipe; // 0x8
-			std::unique_ptr<Item,std::default_delete<Item> > result; // 0x20
+			std::vector<std::unique_ptr<Item>> recipe; // 0x8
+			std::unique_ptr<Item> result; // 0x20
 			int availableCount; // 0x28
 
 			~CraftableRecipe() 
@@ -33,7 +38,7 @@ namespace fdm
 		inline static nlohmann::json* recipes = reinterpret_cast<nlohmann::json*>((base + 0x2BDF90));
 		InventoryManager* Interface; // 0x8
 		InventoryCursor* cursor; // 0x10
-		std::vector<CraftingMenu::CraftableRecipe,std::allocator<CraftingMenu::CraftableRecipe> > craftableRecipes; // 0x18
+		std::vector<CraftingMenu::CraftableRecipe> craftableRecipes; // 0x18
 		int xOffset; // 0x30
 		int yOffset; // 0x34
 		gui::AlignmentX xAlign; // 0x38

@@ -30,7 +30,7 @@ namespace fdm
 
 		};
 		inline static const float radius = 3.702459f; 
-		std::vector<glm::vec4,std::allocator<glm::vec4 > > v; // 0x8
+		std::vector<glm::vec4> v; // 0x8
 
 		void generateMesh() 
 		{

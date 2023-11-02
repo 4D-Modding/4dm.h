@@ -17,11 +17,19 @@ namespace fdm::gui
 
 		void offsetX(int offset) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Image* self, int offset)>(FUNC_GUI_IMAGE_OFFSETX)(this, offset);
+			this->xOffset = offset;
 		}
 		void offsetY(int offset) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Image* self, int offset)>(FUNC_GUI_IMAGE_OFFSETY)(this, offset);
+			this->yOffset = offset
+		}
+		void alignX(gui::AlignmentX a)
+		{
+			this->xAlign = a;
+		}
+		void alignY(gui::AlignmentY a)
+		{
+			this->yAlign = a;
 		}
 		void render(gui::Window* w) override
 		{

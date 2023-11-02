@@ -13,7 +13,7 @@ namespace fdm
 			glm::vec3 t; // 0x10
 
 		};
-		std::vector<PentachoronHollow::VertData,std::allocator<PentachoronHollow::VertData> > vertices; // 0x8
+		std::vector<PentachoronHollow::VertData> vertices; // 0x8
 
 		const void* buffData(int buffIndex) const override
 		{

@@ -52,10 +52,10 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(ItemMaterial* self, World* world, Player* player, int action)>(FUNC_ITEMMATERIAL_POSTACTION)(this, world, player, action);
 		}
-		std::unique_ptr<Item,std::default_delete<Item> > clone() override
+		std::unique_ptr<Item> clone() override
 		{
 			std::unique_ptr<Item> result;
-			return reinterpret_cast<std::unique_ptr<Item,std::default_delete<Item> > (__thiscall*)(ItemMaterial* self, std::unique_ptr<Item>* result)>(FUNC_ITEMMATERIAL_CLONE)(this, &result);
+			return reinterpret_cast<std::unique_ptr<Item> (__thiscall*)(ItemMaterial* self, std::unique_ptr<Item>* result)>(FUNC_ITEMMATERIAL_CLONE)(this, &result);
 		}
 	};
 }

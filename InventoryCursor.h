@@ -7,7 +7,7 @@ namespace fdm
 	class InventoryCursor 
 	{
 	public:
-		std::unique_ptr<Item,std::default_delete<Item> > item; 
+		std::unique_ptr<Item> item; 
 		glm::ivec2 pos; // 0x8
 
 	};

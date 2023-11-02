@@ -23,7 +23,6 @@ namespace fdm
 		public:
 			InventoryManager* Interface; 
 			int index; // 0x8
-
 		};
 		inline static const int scale = 2; 
 		Inventory* primary; 
@@ -36,7 +35,7 @@ namespace fdm
 		inline static FontRenderer* font = reinterpret_cast<FontRenderer*>((base + 0x279400));
 		PAD(0x4);
 		QuadRenderer qr; // 0x30
-		Shader* qs; // 0x58
+		const Shader* qs; // 0x58
 		gui::Interface ui; // 0x60
 		gui::Text craftingText; // 0xC8
 		gui::ContentBox craftingMenuBox; // 0x120

@@ -5,7 +5,7 @@
 namespace fdm::gui
 {
 	using ButtonCallback = std::add_pointer<void(void* user)>::type;
-	class Button : public gui::Element 
+	class Button : public gui::Element
 	{
 	public:
 		std::string text; // 0x8
@@ -23,25 +23,37 @@ namespace fdm::gui
 		void* user; // 0x48
 		ButtonCallback callback = NULL; // 0x50
 
-		~Button() 
+		~Button()
 		{
-			reinterpret_cast<void (__thiscall*)(gui::Button* self)>(FUNC_GUI_BUTTON_DESTR_BUTTON)(this);
+			reinterpret_cast<void(__thiscall*)(gui::Button * self)>(FUNC_GUI_BUTTON_DESTR_BUTTON)(this);
 		}
 		void render(gui::Window* w) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Button* self, gui::Window* w)>(FUNC_GUI_BUTTON_RENDER)(this, w);
+			return reinterpret_cast<void(__thiscall*)(gui::Button * self, gui::Window * w)>(FUNC_GUI_BUTTON_RENDER)(this, w);
 		}
 		bool mouseButtonInput(gui::Window* w, int button, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::Button* self, gui::Window* w, int button, int action, int mods)>(FUNC_GUI_BUTTON_MOUSEBUTTONINPUT)(this, w, button, action, mods);
+			return reinterpret_cast<bool(__thiscall*)(gui::Button * self, gui::Window * w, int button, int action, int mods)>(FUNC_GUI_BUTTON_MOUSEBUTTONINPUT)(this, w, button, action, mods);
 		}
 		bool keyInput(gui::Window* w, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::Button* self, gui::Window* w, int key, int scancode, int action, int mods)>(FUNC_GUI_BUTTON_KEYINPUT)(this, w, key, scancode, action, mods);
+			return reinterpret_cast<bool(__thiscall*)(gui::Button * self, gui::Window * w, int key, int scancode, int action, int mods)>(FUNC_GUI_BUTTON_KEYINPUT)(this, w, key, scancode, action, mods);
 		}
 		void offsetX(int offset) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Button* self, int offset)>(FUNC_GUI_BUTTON_OFFSETX)(this, offset);
+			this->xOffset = offset;
+		}
+		void offsetY(int offset) override
+		{
+			this->yOffset = offset
+		}
+		void alignX(gui::AlignmentX a)
+		{
+			this->xAlign = a;
+		}
+		void alignY(gui::AlignmentY a)
+		{
+			this->yAlign = a;
 		}
 		bool enabled() override
 		{

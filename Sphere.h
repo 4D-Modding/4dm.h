@@ -7,8 +7,8 @@ namespace fdm
 	class Sphere : public Mesh 
 	{
 	public:
-		std::vector<glm::vec4,std::allocator<glm::vec4 > > s; // 0x8
-		std::vector<glm::vec3,std::allocator<glm::vec3 > > t; // 0x20
+		std::vector<glm::vec4> s; // 0x8
+		std::vector<glm::vec3> t; // 0x20
 
 		int vertCount() const override
 		{

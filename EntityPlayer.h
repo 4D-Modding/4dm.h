@@ -2,9 +2,21 @@
 
 #include "4dm.h"
 #include "Player.h"
+#include "PlayerSkin.h"
+#include "PlayerSkinRenderer.h"
+#include "FontRenderer.h"
+#include "World.h"
+#include "Entity.h"
 
 namespace fdm 
 {
+	class Player;
+	class PlayerSkin;
+	class PlayerSkinRenderer;
+	class FontRenderer;
+	class World;
+	class Entity;
+
 	class EntityPlayer : public Entity 
 	{
 	public:
@@ -12,10 +24,9 @@ namespace fdm
 		{
 			uuid id; 
 			uint32_t* skinData; // 0x10
-
 		};
 		Player* player; // 0x20
-		std::unique_ptr<Player,std::default_delete<Player> > ownedPlayer; // 0x28
+		std::unique_ptr<Player> ownedPlayer; // 0x28
 		inline static PlayerSkin* defaultSkin = reinterpret_cast<PlayerSkin*>((base + 0x2797A0)); // lmfao it was "defualtSkin" in game :misinformation:
 		PlayerSkin skin; // 0x30
 		PlayerSkinRenderer skinRenderer; // 0x180
@@ -24,15 +35,15 @@ namespace fdm
 		inline static int* wHeight = reinterpret_cast<int*>((base + 0x29B3F0));
 		inline static FontRenderer* fr = reinterpret_cast<FontRenderer*>((base + 0x279700));
 		std::string displayName; // 0x710
-		float lastMovementUpdateTime; // 0x730
+		double lastMovementUpdateTime; // 0x730
 		bool justDamaged; // 0x738
 		PAD(0x3);
 		glm::vec4 interpEndpoint; // 0x73C
 		glm::vec4 interpVel; // 0x74C
 
-		inline static std::unique_ptr<Entity,std::default_delete<Entity> > createFromPlayer(Player* p) 
+		inline static std::unique_ptr<Entity> createFromPlayer(Player* p) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity,std::default_delete<Entity> > (__fastcall*)(Player* p)>(FUNC_ENTITYPLAYER_CREATEFROMPLAYER)(p);
+			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(Player* p)>(FUNC_ENTITYPLAYER_CREATEFROMPLAYER)(p);
 		}
 		EntityPlayer(nlohmann::json& j) 
 		{

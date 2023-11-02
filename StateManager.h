@@ -4,6 +4,7 @@
 
 namespace fdm 
 {
+	class State;
 	class StateManager 
 	{
 	public:
@@ -12,7 +13,7 @@ namespace fdm
 
 		void pushState(State* state) 
 		{
-			return reinterpret_cast<void (__fastcall*)(StateManager* self, State* state)>(FUNC_STATEMANAGER_PUSHSTATE)(this, state);
+			return reinterpret_cast<void (__thiscall*)(StateManager* self, State* state)>(FUNC_STATEMANAGER_PUSHSTATE)(this, state);
 		}
 	};
 }

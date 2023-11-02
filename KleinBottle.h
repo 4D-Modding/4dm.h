@@ -7,8 +7,8 @@ namespace fdm
 	class KleinBottle : public Mesh 
 	{
 	public:
-		std::vector<glm::vec4,std::allocator<glm::vec4 > > verts; // 0x8
-		std::vector<glm::vec3,std::allocator<glm::vec3 > > colors; // 0x20
+		std::vector<glm::vec4> verts; // 0x8
+		std::vector<glm::vec3> colors; // 0x20
 
 		const void* buffData(int buffIndex) const override
 		{

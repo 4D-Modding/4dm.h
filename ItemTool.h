@@ -59,10 +59,10 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(ItemTool* self, World* world, Player* player, Entity* entity, int action)>(FUNC_ITEMTOOL_ENTITYACTION)(this, world, player, entity, action);
 		}
-		std::unique_ptr<Item,std::default_delete<Item> > clone() override
+		std::unique_ptr<Item> clone() override
 		{
 			std::unique_ptr<Item> result;
-			return reinterpret_cast<std::unique_ptr<Item,std::default_delete<Item> > (__thiscall*)(ItemTool* self, std::unique_ptr<Item>* result)>(FUNC_ITEMTOOL_CLONE)(this, &result);
+			return reinterpret_cast<std::unique_ptr<Item> (__thiscall*)(ItemTool* self, std::unique_ptr<Item>* result)>(FUNC_ITEMTOOL_CLONE)(this, &result);
 		}
 	};
 }

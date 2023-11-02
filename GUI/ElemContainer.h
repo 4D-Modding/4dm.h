@@ -4,14 +4,15 @@
 
 namespace fdm::gui
 {
+	class Element;
 	class ElemContainer 
 	{
 	public:
 		// VIRTUAL FUNCS
-		virtual void addElement(gui::Element * element) = NULL;
-		virtual bool removeElement(gui::Element * element) = NULL;
-		virtual bool selectElement(gui::Element * element) = NULL;
-		virtual void clear() = NULL;
-		virtual bool empty() = NULL;
+		virtual void addElement(gui::Element * element) { }
+		virtual bool removeElement(gui::Element * element) { return false; }
+		virtual bool selectElement(gui::Element * element) { return false; }
+		virtual void clear() { }
+		virtual bool empty() { return false; }
 	};
 }

@@ -7,8 +7,8 @@ namespace fdm
 	class Coil : public Mesh 
 	{
 	public:
-		std::vector<glm::vec4,std::allocator<glm::vec4 > > verts; // 0x8
-		std::vector<float,std::allocator<float> > normals; // 0x20
+		std::vector<glm::vec4> verts; // 0x8
+		std::vector<float> normals; // 0x20
 
 		Coil(int n, int s, float r, float w, float h) 
 		{

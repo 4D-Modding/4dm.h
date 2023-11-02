@@ -1,13 +1,27 @@
 #pragma once
 
 #include "4dm.h"
-#include "EntityPlayer.h"
 #include "InventoryGrid.h"
 #include "InventoryManager.h"
 #include "InventoryPlayer.h"
+#include "m4.h"
+#include "MeshRenderer.h"
+#include "TexRenderer.h"
+#include "FontRenderer.h"
 
 namespace fdm 
 {
+	class EntityPlayer;
+	class InventoryGrid;
+	class InventoryManager;
+	class InventoryPlayer;
+	class m4::Mat5;
+	class MeshRenderer;
+	class TexRenderer;
+	class FontRenderer;
+	class World;
+	class Item;
+
 	class Player 
 	{
 	public:
@@ -40,11 +54,9 @@ namespace fdm
 			bool leftMouseDown; // 0xC
 			bool rightMouseDown; // 0xD
 			bool middleMouseDown; // 0xE
-
 		} keys;
-		PAD(0xF);
 		bool touchingGround; // 0x1F
-		uint32_t groundBlock; // 0x20
+		uint8_t groundBlock; // 0x20
 		bool crouching; // 0x21
 		bool sprinting; // 0x22
 		bool walking; // 0x23
@@ -54,10 +66,10 @@ namespace fdm
 		float headPos; // 0x38
 		glm::vec4 cameraPos; // 0x3C
 		PAD(0x4);
-		float walkStartTime; // 0x50
+		double walkStartTime; // 0x50
 		float walkAnimOffset; // 0x58
 		float walkAnimTheta; // 0x5C
-		float mineStartTime; // 0x60
+		double mineStartTime; // 0x60
 		float mineAnimTheta; // 0x68
 		glm::ivec4 currentBlock; // 0x6C
 		glm::vec4 forward; // 0x7C
@@ -66,19 +78,19 @@ namespace fdm
 		glm::vec4 over; // 0xAC
 		glm::vec3 anchorPoint; // 0xBC
 		glm::vec4 lastChunkPos; // 0xC8
-		float lastChunkUpdateTime; // 0xD8
+		double lastChunkUpdateTime; // 0xD8
 		bool hyperplaneUpdateFlag; // 0xE0
 		PAD(0x3);
 		glm::vec4 lastChunkOver; // 0xE4
-		uint32_t renderDistance; // 0xF4
+		uint8_t renderDistance; // 0xF4
 		PAD(0x3);
 		m4::Mat5 orientation; // 0xF8
 		glm::vec4 vel; // 0x15C
 		glm::vec4 deltaVel; // 0x16C
 		float angleToRotate; // 0x17C
-		float mouseX; // 0x180
-		float mouseY; // 0x188
-		float mouseDownTime; // 0x190
+		double mouseX; // 0x180
+		double mouseY; // 0x188
+		double mouseDownTime; // 0x190
 		glm::ivec4 targetBlock; // 0x198
 		bool targetingBlock; // 0x1A8
 		PAD(0x3);
@@ -99,11 +111,11 @@ namespace fdm
 		inline static const float maxHealth = 100.f; 
 		PAD(0x3);
 		float health; // 0x5DC
-		inline static const float leftClickActionCooldown = 0.8f; 
-		inline static const float rightClickActionCooldown = 0.5f; 
-		float leftClickActionTime; // 0x5E0
-		float rightClickActionTime; // 0x5E8
-		float damageTime; // 0x5F0
+		inline static const double leftClickActionCooldown = 0.8f;
+		inline static const double rightClickActionCooldown = 0.5f;
+		double leftClickActionTime; // 0x5E0
+		double rightClickActionTime; // 0x5E8
+		double damageTime; // 0x5F0
 		inline static MeshRenderer* targetBlockRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279640));
 		inline static TexRenderer* healthRenderer = reinterpret_cast<TexRenderer*>((base + 0x2BFA80));
 		inline static FontRenderer* fr = reinterpret_cast<FontRenderer*>((base + 0x279660));

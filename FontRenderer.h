@@ -2,8 +2,13 @@
 
 #include "4dm.h"
 
+#include "Tex2D.h"
+#include "Shader.h"
+
 namespace fdm 
 {
+	class Shader;
+	class Tex2D;
 	class FontRenderer 
 	{
 	public:

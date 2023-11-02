@@ -7,16 +7,16 @@ namespace fdm
 	class EntityDying : public Entity 
 	{
 	public:
-		std::unique_ptr<Entity,std::default_delete<Entity> > entity; // 0x20
+		std::unique_ptr<Entity> entity; // 0x20
 		float deathTime; // 0x28
 
 		float deathTimer() override
 		{
 			return reinterpret_cast<float (__thiscall*)(EntityDying* self)>(FUNC_ENTITYDYING_DEATHTIMER)(this);
 		}
-		inline static std::unique_ptr<Entity,std::default_delete<Entity> > createWithEntity(const std::unique_ptr<Entity>& entity, uuid* id) 
+		inline static std::unique_ptr<Entity> createWithEntity(const std::unique_ptr<Entity>& entity, uuid* id) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity,std::default_delete<Entity> > (__fastcall*)(const std::unique_ptr<Entity>&entity, uuid* id)>(FUNC_ENTITYDYING_CREATEWITHENTITY)(entity, id);
+			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const std::unique_ptr<Entity>&entity, uuid* id)>(FUNC_ENTITYDYING_CREATEWITHENTITY)(entity, id);
 		}
 		std::string getName() override
 		{

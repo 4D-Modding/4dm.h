@@ -9,8 +9,8 @@ namespace fdm
 	public:
 		struct VertInfo 
 		{
-			std::vector<glm::vec4,std::allocator<glm::vec4 > > s; 
-			std::vector<glm::vec3,std::allocator<glm::vec3 > > t; // 0x18
+			std::vector<glm::vec4> s; 
+			std::vector<glm::vec3> t; // 0x18
 
 			VertInfo() 
 			{
@@ -33,8 +33,8 @@ namespace fdm
 		{
 			int edges; 
 			PAD(0x4);
-			std::vector<float,std::allocator<float> > sinVert; // 0x8
-			std::vector<float,std::allocator<float> > cosVert; // 0x20
+			std::vector<float> sinVert; // 0x8
+			std::vector<float> cosVert; // 0x20
 
 		};
 		Hypersphere::VertInfo v; // 0x8

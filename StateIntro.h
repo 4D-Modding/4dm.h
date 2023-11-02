@@ -19,7 +19,7 @@ namespace fdm
 			int height;
 			int channels;
 		} imageData[fileCount];
-		std::atomic<int> filesLoaded; // 0x118
+		std::atomic_int filesLoaded; // 0x118
 		float displayProgress; // 0x11C
 		FontRenderer font; // 0x120
 		Shader* hypercubeShader; // 0x1C0

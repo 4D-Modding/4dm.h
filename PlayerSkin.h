@@ -39,8 +39,8 @@ namespace fdm
 				glm::u8vec3 lowerBound; // 0x3
 
 			};
-			std::vector<PlayerSkin::SkinMesh::VertInfo,std::allocator<PlayerSkin::SkinMesh::VertInfo> > verts; // 0x8
-			std::vector<uint32_t,std::allocator<uint32_t> > indices; // 0x20
+			std::vector<PlayerSkin::SkinMesh::VertInfo> verts; // 0x8
+			std::vector<uint32_t> indices; // 0x20
 
 			int vertCount() const override
 			{
@@ -84,7 +84,7 @@ namespace fdm
 		inline static const int DEPTH = 42; 
 		inline static PlayerSkin::MeshBounds** meshBounds = reinterpret_cast<PlayerSkin::MeshBounds**>((base + 0x2B2F10));
 		Tex2D tex; 
-		MeshRenderer* meshComps; // 0x10
+		MeshRenderer meshComps[10]; // 0x10
 
 		bool load(std::string& path) 
 		{

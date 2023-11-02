@@ -31,11 +31,11 @@ namespace fdm
 
 		};
 		inline static const float radius = 3.702459f; 
-		std::vector<glm::vec4,std::allocator<glm::vec4 > > v; // 0x8
-		std::vector<glm::vec3,std::allocator<glm::vec3 > > t; // 0x20
+		std::vector<glm::vec4> v; // 0x8
+		std::vector<glm::vec3> t; // 0x20
 		bool usingNormals; // 0x38
 		PAD(0x7);
-		std::vector<glm::vec4,std::allocator<glm::vec4 > > n; // 0x40
+		std::vector<glm::vec4> n; // 0x40
 
 		int buffCount() const override
 		{

@@ -8,19 +8,19 @@ namespace fdm
 	{
 	public:
 		inline static const float COLLECTION_DIST = 0.8f; 
-		std::unique_ptr<Item,std::default_delete<Item> > item; // 0x20
+		std::unique_ptr<Item> item; // 0x20
 		inline static const float hitboxRadius = 0.1f; 
 		Hitbox hitbox; // 0x28
 		float rotation; // 0x78
 		inline static MeshRenderer* wireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279540));
 		PAD(0x4);
-		float spawnTime; // 0x80
+		double spawnTime; // 0x80
 		inline static const float serverUpdateDelay = 0.5f; 
-		float lastServerUpdateTime; // 0x88
+		double lastServerUpdateTime; // 0x88
 
-		inline static std::unique_ptr<Entity,std::default_delete<Entity> > createWithItem(const std::unique_ptr<Item>& item, const glm::vec4& pos, const glm::vec4& vel) 
+		inline static std::unique_ptr<Entity> createWithItem(const std::unique_ptr<Item>& item, const glm::vec4& pos, const glm::vec4& vel) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity,std::default_delete<Entity> > (__fastcall*)(const std::unique_ptr<Item>& item, const glm::vec4& pos, const glm::vec4& vel)>(FUNC_ENTITYITEM_CREATEWITHITEM)(item, pos, vel);
+			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const std::unique_ptr<Item>& item, const glm::vec4& pos, const glm::vec4& vel)>(FUNC_ENTITYITEM_CREATEWITHITEM)(item, pos, vel);
 		}
 		std::string getName() override
 		{

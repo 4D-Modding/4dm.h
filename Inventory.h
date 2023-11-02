@@ -1,9 +1,11 @@
 #pragma once
 
 #include "4dm.h"
+#include "Item.h"
 
 namespace fdm 
 {
+	class Item;
 	class Inventory 
 	{
 	public:
@@ -26,7 +28,7 @@ namespace fdm
 		virtual bool placeItem(std::unique_ptr<Item>& item) { return false; }
 		virtual int getSlotIndex(const glm::ivec2 &) { return 0; }
 		virtual uint32_t getSlotCount() { return 0; }
-		virtual std::unique_ptr<Item>& getSlot(int index) { return NULL; }
+		virtual std::unique_ptr<Item>* getSlot(int index) { return NULL; }
 		virtual Inventory::iterator begin() { return { nullptr, 0 }; }
 		virtual Inventory::iterator end() { return { nullptr, 0 }; }
 	};

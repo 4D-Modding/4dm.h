@@ -24,6 +24,22 @@ namespace fdm::gui
 		CheckBoxCallback callback = NULL; // 0x48
 		bool checked; // 0x50
 
+		void offsetX(int offset) override
+		{
+			this->xOffset = offset;
+		}
+		void offsetY(int offset) override
+		{
+			this->yOffset = offset
+		}
+		void alignX(gui::AlignmentX a)
+		{
+			this->xAlign = a;
+		}
+		void alignY(gui::AlignmentY a)
+		{
+			this->yAlign = a;
+		}
 		void render(gui::Window* w) override
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::CheckBox* self, gui::Window* w)>(FUNC_GUI_CHECKBOX_RENDER)(this, w);

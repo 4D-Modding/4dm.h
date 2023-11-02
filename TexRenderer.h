@@ -7,10 +7,10 @@ namespace fdm
 	class TexRenderer 
 	{
 	public:
-		Tex2D* texture; 
-		Shader* shader; // 0x8
+		const Tex2D* texture; 
+		const Shader* shader; // 0x8
 		uint32_t VAO; // 0x10
-		uint32_t* buffers; // 0x14
+		uint32_t buffers[5]; // 0x14
 
 		~TexRenderer() 
 		{

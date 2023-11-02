@@ -2,9 +2,17 @@
 
 #include "4dm.h"
 #include "Inventory.h"
+#include "TexRenderer.h"
+#include "FontRenderer.h"
+#include "Item.h"
 
 namespace fdm 
 {
+	class Inventory;
+	class TexRenderer;
+	class FontRenderer;
+	class Item;
+
 	class InventoryGrid : public Inventory 
 	{
 	public:
@@ -15,7 +23,7 @@ namespace fdm
 		int selectedIndex; // 0x40
 		PAD(0x4);
 		std::string label; // 0x48
-		std::vector<std::unique_ptr<Item,std::default_delete<Item> >,std::allocator<std::unique_ptr<Item,std::default_delete<Item> > > > slots; // 0x68
+		std::vector<std::unique_ptr<Item>> slots; // 0x68
 
 		~InventoryGrid() 
 		{
@@ -57,14 +65,14 @@ namespace fdm
 		{
 			return reinterpret_cast<uint32_t (__thiscall*)(InventoryGrid* self)>(FUNC_INVENTORYGRID_GETSLOTCOUNT)(this);
 		}
-		std::unique_ptr<Item>& getSlot(int index) override
+		std::unique_ptr<Item>* getSlot(int index) override
 		{
-			return reinterpret_cast<std::unique_ptr<Item>& (__thiscall*)(InventoryGrid* self, int index)>(FUNC_INVENTORYGRID_GETSLOT)(this, index);
+			return reinterpret_cast<std::unique_ptr<Item>* (__thiscall*)(InventoryGrid* self, int index)>(FUNC_INVENTORYGRID_GETSLOT)(this, index);
 		}
 		Inventory::iterator begin() override
 		{
 			// bruh. 3:39 btw
-			return { this, 0 };
+			return Inventory::iterator{ this, 0 };
 		}
 		Inventory::iterator end() override
 		{
