@@ -15,7 +15,7 @@
 #include <utility>
 #include <stdio.h>
 #include <iostream>
-#include <Windows.h>
+#include <windows.h>
 #include <cstdint>
 #include <stdio.h>
 #include <string>
