@@ -2,7 +2,7 @@
 #ifndef HOOK_H
 #define HOOK_H
 
-#include <Windows.h>
+#include <windows.h>
 
 // 4DModLoader-Core hooking stuff for multihooking yea
 
