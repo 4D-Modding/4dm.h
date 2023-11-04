@@ -10,7 +10,7 @@ namespace fdm::gui
 	public:
 		inline static const int height = 50; 
 		std::string text; // 0x8
-		bool clickable; // 0x28
+		bool clickable = true; // 0x28
 		bool mouseDown; // 0x29
 		bool selected; // 0x2A
 		PAD(0x1);

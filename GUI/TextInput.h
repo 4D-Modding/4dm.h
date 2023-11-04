@@ -9,8 +9,8 @@ namespace fdm::gui
 	{
 	public:
 		std::string text; // 0x8
-		bool enabled; // 0x28
-		bool editable; // 0x29
+		bool enabled = true; // 0x28
+		bool editable = true; // 0x29
 		bool mouseDown; // 0x2A
 		bool active; // 0x2B
 		bool highlight; // 0x2C
