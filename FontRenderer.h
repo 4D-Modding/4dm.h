@@ -1,58 +1,53 @@
 #pragma once
-#ifndef FONTRENDERER_H
-#define FONTRENDERER_H
-#include "4dm.h"
-namespace fdm
-{
-	class Tex2D;
-	class Shader;
 
-	class FontRenderer
+#include "4dm.h"
+
+#include "Tex2D.h"
+#include "Shader.h"
+
+namespace fdm 
+{
+	class Shader;
+	class Tex2D;
+	class FontRenderer 
 	{
 	public:
-		std::string text;
-		glm::ivec2 charSize;
-		int fontSize = 1;
-		glm::ivec2 pos;
-		glm::vec4 color{1.0f};
-		glm::mat4 model;
-		bool centered;
-		PAD(3);
-		const Tex2D* texture;
-		const Shader* shader;
-		unsigned int VAO;
-		unsigned int charVBO;
+		std::string text; 
+		glm::ivec2 charSize; // 0x20
+		int fontSize; // 0x28
+		glm::ivec2 pos; // 0x2C
+		glm::vec4 color; // 0x34
+		glm::mat4 model; // 0x44
+		bool centered; // 0x84
+		PAD(0x3);
+		Tex2D* texture; // 0x88
+		Shader* shader; // 0x90
+		uint32_t VAO; // 0x98
+		uint32_t charVBO; // 0x9C
 
-		FontRenderer(){}
-		FontRenderer(const Tex2D* texture, const Shader* shader) {
-			reinterpret_cast<void(__thiscall*)(FontRenderer*, const Tex2D*, const Shader*)>(
-				FUNC_FONTRENDERER_FONTRENDERER
-				)(this, texture, shader);
-		}
-		FontRenderer* operator=(FontRenderer* other) 
+		FontRenderer(const Tex2D* texture, const Shader* shader) 
 		{
-			return reinterpret_cast<FontRenderer*(__thiscall*)(FontRenderer*, FontRenderer*)>(
-				FUNC_FONTRENDERER_OPERATOR_EQ
-				)(this, other);
+			reinterpret_cast<void(__thiscall*)(FontRenderer* self, const Tex2D* texture, const Shader* shader)>(FUNC_FONTRENDERER_FONTRENDERER)(this, texture, shader);
 		}
-		void setText(const std::string& text)
+		FontRenderer() 
 		{
-			return reinterpret_cast<void (__thiscall*)(FontRenderer*, const std::string&)>(
-				FUNC_FONTRENDERER_SETTEXT
-				)(this, text);
+			reinterpret_cast<void(__thiscall*)(FontRenderer* self)>(FUNC_FONTRENDERER_FONTRENDERER_A)(this);
 		}
-		void render(void) 
+		void setText(const std::string& text) 
 		{
-			return reinterpret_cast<void(__thiscall*)(FontRenderer*)>(
-				FUNC_FONTRENDERER_RENDER
-				)(this);
+			return reinterpret_cast<void (__thiscall*)(FontRenderer* self, const std::string& text)>(FUNC_FONTRENDERER_SETTEXT)(this, text);
 		}
-		void updateModel(void)
+		void render() 
 		{
-			return reinterpret_cast<void(__thiscall*)(FontRenderer*)>(
-				FUNC_FONTRENDERER_UPDATEMODEL
-				)(this);
+			return reinterpret_cast<void (__thiscall*)(FontRenderer* self)>(FUNC_FONTRENDERER_RENDER)(this);
+		}
+		void updateModel() 
+		{
+			return reinterpret_cast<void (__thiscall*)(FontRenderer* self)>(FUNC_FONTRENDERER_UPDATEMODEL)(this);
+		}
+		void move(FontRenderer& other) 
+		{
+			return reinterpret_cast<void (__thiscall*)(FontRenderer* self, FontRenderer& other)>(FUNC_FONTRENDERER_MOVE)(this, other);
 		}
 	};
 }
-#endif

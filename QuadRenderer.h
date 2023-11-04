@@ -1,47 +1,43 @@
 #pragma once
-#ifndef QUADRENDERER_H
-#define QUADRENDERER_H
+
 #include "4dm.h"
-namespace fdm
+
+namespace fdm 
 {
 	class Shader;
-	class QuadRenderer
+	class QuadRenderer 
 	{
 	public:
-		const Shader* shader;
-		unsigned int VAO;
-		unsigned int buffers[4];
-		unsigned int mode = 4;
-		unsigned int elementCount = 6;
+		const Shader* shader; 
+		unsigned int VAO; // 0x8
+		unsigned int buffers[4]; // 0xC
+		unsigned int mode; // 0x1C
+		unsigned int elementCount; // 0x20
+
 		~QuadRenderer()
 		{
 			glBindVertexArray(this->VAO);
 			glDeleteBuffers(4, this->buffers);
 			glDeleteVertexArrays(1, &this->VAO);
 		}
-		QuadRenderer(){}
+		QuadRenderer() {}
 		QuadRenderer(const Shader* shader)
 		{
 			this->shader = shader;
 		}
-		bool init(void) 
+		bool init() 
 		{
-			return reinterpret_cast<bool(__thiscall*)(QuadRenderer*)>(
-				FUNC_QUADRENDERER_INIT
-				)(this);
+			return reinterpret_cast<bool (__thiscall*)(QuadRenderer* self)>(FUNC_QUADRENDERER_INIT)(this);
 		}
-		void setColor(float r, float g, float b, float a)
+		void setColor(float r, float g, float b, int a) 
 		{
-			return reinterpret_cast<void(__thiscall*)(QuadRenderer*, float, float, float, float)>(
-				FUNC_QUADRENDERER_SETCOLOR
-				)(this, r, g, b, a);
+			return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, float r, float g, float b, int a)>(FUNC_QUADRENDERER_SETCOLOR)(this, r, g, b, a);
 		}
 		void setPos(int x, int y, int w, int h)
 		{
-			return reinterpret_cast<void(__thiscall*)(QuadRenderer*, int, int, int, int)>(
-				FUNC_QUADRENDERER_SETPOS
-				)(this, x, y, w, h);
+			return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, int x, int y, int w, int h)>(FUNC_QUADRENDERER_SETPOS)(this, x, y, w, h);
 		}
+
 		// thx compiler for removing that and thx to mashpoe for telling me that it exists
 		void render()
 		{
@@ -73,4 +69,3 @@ namespace fdm
 		}
 	};
 }
-#endif

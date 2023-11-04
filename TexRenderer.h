@@ -1,79 +1,41 @@
 #pragma once
-#ifndef TEXRENDERER_H
-#define TEXRENDERER_H
+
 #include "4dm.h"
+
 namespace fdm 
 {
-	class Tex2D;
-	class Shader;
-	class TexRenderer
+	class TexRenderer 
 	{
 	public:
-		const Tex2D* texture;
-		const Shader* shader;
-		unsigned int VAO;
-		unsigned int buffers[5];
+		const Tex2D* texture; 
+		const Shader* shader; // 0x8
+		uint32_t VAO; // 0x10
+		uint32_t buffers[5]; // 0x14
 
 		~TexRenderer() 
 		{
-			reinterpret_cast<void(__thiscall*)(TexRenderer*)>(
-				FUNC_TEXRENDERER_DTEXRENDERER
-				)(this);
+			reinterpret_cast<void(__thiscall*)(TexRenderer* self)>(FUNC_TEXRENDERER_DESTR_TEXRENDERER)(this);
 		}
-		TexRenderer(){}
-		TexRenderer(const Tex2D* texture, const Shader* shader)
+		TexRenderer& operator=(TexRenderer& other) 
 		{
-			this->texture = texture;
-			this->shader = shader;
-		}
-		TexRenderer* operator=(TexRenderer* other) noexcept
-		{
-			glBindVertexArray(this->VAO);
-			glDeleteBuffers(5, this->buffers);
-			glDeleteVertexArrays(1, &this->VAO);
-
-			this->texture = other->texture;
-			other->texture = 0;
-			this->shader = other->shader;
-			other->shader = 0;
-			this->VAO = other->VAO;
-			other->VAO = 0;
-			this->buffers[0] = other->buffers[0];
-			other->buffers[0] = 0;
-			this->buffers[1] = other->buffers[1];
-			other->buffers[1] = 0;
-			this->buffers[2] = other->buffers[2];
-			other->buffers[2] = 0;
-			this->buffers[3] = other->buffers[3];
-			other->buffers[3] = 0;
-			this->buffers[4] = other->buffers[4];
-			other->buffers[4] = 0;
-
-			return this;
+			reinterpret_cast<TexRenderer& (__thiscall*)(TexRenderer* self, TexRenderer& other)>(FUNC_TEXRENDERER_OPERATOREQ)(this, other);
+			return *this;
 		}
 		bool init() 
 		{
-			return reinterpret_cast<bool(__thiscall*)(TexRenderer*)>(
-				FUNC_TEXRENDERER_INIT
-				)(this);
+			return reinterpret_cast<bool (__thiscall*)(TexRenderer* self)>(FUNC_TEXRENDERER_INIT)(this);
 		}
-		void setClip(int x, int y, unsigned int w, unsigned int h)
+		void setClip(int x, int y, int w, int h)
 		{
-			return reinterpret_cast<void(__thiscall*)(TexRenderer*, int, int, unsigned int, unsigned int)>(
-				FUNC_TEXRENDERER_SETCLIP
-				)(this, x, y, w, h);
+			return reinterpret_cast<void (__thiscall*)(TexRenderer* self, int x, int y, int w, int h)>(FUNC_TEXRENDERER_SETCLIP)(this, x, y, w, h);
 		}
-		void setColor(float r, float g, float b, float a)
+		void setColor(float r, float g, float b, int a) 
 		{
-			return reinterpret_cast<void(__thiscall*)(TexRenderer*, float, float, float, float)>(
-				FUNC_TEXRENDERER_SETCOLOR
-				)(this, r, g, b, a);
+			return reinterpret_cast<void (__thiscall*)(TexRenderer* self, float r, float g, float b, int a)>(FUNC_TEXRENDERER_SETCOLOR)(this, r, g, b, a);
 		}
 		void setPos(int x, int y, int w, int h)
 		{
-			return reinterpret_cast<void(__thiscall*)(TexRenderer*, int, int, int, int)>(
-				FUNC_TEXRENDERER_SETPOS
-				)(this, x, y, w, h);
+			return reinterpret_cast<void (__thiscall*)(TexRenderer* self, int x, int y, int w, int h)>(FUNC_TEXRENDERER_SETPOS)(this, x, y, w, h);
 		}
 		// thx compiler for removing that and thx to mashpoe for telling me that it exists
 		void render()
@@ -96,4 +58,3 @@ namespace fdm
 		}
 	};
 }
-#endif

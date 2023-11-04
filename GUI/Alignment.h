@@ -1,7 +1,7 @@
 #pragma once
-#ifndef GUI_ALIGNMENT_H
-#define GUI_ALIGNMENT_H
+
 #include "gui.h"
+
 namespace fdm
 {
 	namespace gui
@@ -20,4 +20,3 @@ namespace fdm
 		};
 	}
 }
-#endif

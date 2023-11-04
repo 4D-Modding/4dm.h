@@ -1,21 +1,18 @@
 #pragma once
-#ifndef GUI_ELEMCONTAINER_H
-#define GUI_ELEMCONTAINER_H
+
 #include "gui.h"
-namespace fdm
+
+namespace fdm::gui
 {
-	namespace gui
+	class Element;
+	class ElemContainer 
 	{
-		class Element;
-		class ElemContainer
-		{
-		public:
-			virtual void addElement(Element*) {};
-			virtual bool removeElement(Element*) { return NULL; };
-			virtual bool selectElement(Element*) { return NULL; };
-			virtual void clear() {};
-			virtual bool empty() { return NULL; };
-		};
-	}
+	public:
+		// VIRTUAL FUNCS
+		virtual void addElement(gui::Element * element) { }
+		virtual bool removeElement(gui::Element * element) { return false; }
+		virtual bool selectElement(gui::Element * element) { return false; }
+		virtual void clear() { }
+		virtual bool empty() { return false; }
+	};
 }
-#endif

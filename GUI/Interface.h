@@ -1,9 +1,8 @@
 #pragma once
-#ifndef GUI_INTERFACE_H
-#define GUI_INTERFACE_H
+#include "Window.h"
+
 #include "gui.h"
-#include "../Shader.h"
-#include "../ShaderManager.h"
+
 namespace fdm
 {
 	class QuadRenderer;
@@ -12,120 +11,98 @@ namespace fdm
 	{
 		using ViewportCallback = std::add_pointer<void(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>::type;
 
-		class Window;
-		class ElemContainer;
 		class Element;
+		class ElemContainer;
+		class Window;
 
-		class Interface : public Window, public ElemContainer
+		class Interface : public gui::Window, public gui::ElemContainer
 		{
 		public:
-			std::vector<Element*> elements;
-			int selectedElemIndex;
-			PAD(4);
-			QuadRenderer* qr;
-			FontRenderer* font;
-			GLFWwindow* window;
-			ViewportCallback viewportCallback = NULL;
-			void* viewportUser;
-			bool viewUpdateFlag;
-
+			std::vector<gui::Element*> elements; // 0x10
+			int selectedElemIndex; // 0x28
+			PAD(0x4);
+			QuadRenderer* qr; // 0x30
+			FontRenderer* font; // 0x38
+			GLFWwindow* window; // 0x40
+			ViewportCallback viewportCallback = NULL; // 0x48
+			void* viewportUser; // 0x50
+			bool viewUpdateFlag; // 0x58
+			PAD(0x3);
+			int currentCursorType; // 0x5C
+			GLFWcursor* cursor; // 0x60
+			Interface() {}
+			Interface(GLFWwindow* window)
+			{
+				reinterpret_cast<void(__thiscall*)(gui::Interface * self, GLFWwindow * window)>(FUNC_GUI_INTERFACE_INTERFACE)(this, window);
+			}
 			~Interface()
 			{
-				reinterpret_cast<void(__thiscall*)(Interface*)>(
-					FUNC_GUI_INTERFACE_DINTERFACE
-					)(this);
+				reinterpret_cast<void(__thiscall*)(gui::Interface * self)>(FUNC_GUI_INTERFACE_DESTR_INTERFACE)(this);
 			}
 			void render()
 			{
-				reinterpret_cast<void(__thiscall*)(Interface*)>(
-					FUNC_GUI_INTERFACE_RENDER
-					)(this);
+				return reinterpret_cast<void(__thiscall*)(gui::Interface * self)>(FUNC_GUI_INTERFACE_RENDER)(this);
 			}
-			void mouseInput(double xPos, double yPos)
+			void mouseInput(double xpos, double ypos)
 			{
-				reinterpret_cast<void(__thiscall*)(Interface*, double, double)>(
-					FUNC_GUI_INTERFACE_MOUSEINPUT
-					)(this, xPos, yPos);
+				return reinterpret_cast<void(__thiscall*)(gui::Interface * self, double xpos, double ypos)>(FUNC_GUI_INTERFACE_MOUSEINPUT)(this, xpos, ypos);
 			}
-			bool scrollInput(double xOff, double yOff)
+			bool scrollInput(double xoffset, double yoffset)
 			{
-				return reinterpret_cast<bool(__thiscall*)(Interface*, double, double)>(
-					FUNC_GUI_INTERFACE_SCROLLINPUT
-					)(this, xOff, yOff);
+				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, double xoffset, double yoffset)>(FUNC_GUI_INTERFACE_SCROLLINPUT)(this, xoffset, yoffset);
 			}
 			bool mouseButtonInput(int button, int action, int mods)
 			{
-				return reinterpret_cast<bool(__thiscall*)(Interface*, int, int, int)>(
-					FUNC_GUI_INTERFACE_MOUSEBUTTONINPUT
-					)(this, button, action, mods);
+				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, int button, int action, int mods)>(FUNC_GUI_INTERFACE_MOUSEBUTTONINPUT)(this, button, action, mods);
 			}
 			bool keyInput(int key, int scancode, int action, int mods)
 			{
-				return reinterpret_cast<bool(__thiscall*)(Interface*, int, int, int, int)>(
-					FUNC_GUI_INTERFACE_KEYINPUT
-					)(this, key, scancode, action, mods);
+				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, int key, int scancode, int action, int mods)>(FUNC_GUI_INTERFACE_KEYINPUT)(this, key, scancode, action, mods);
 			}
 			QuadRenderer* getQuadRenderer() override
 			{
-				return reinterpret_cast<QuadRenderer * (__thiscall*)(Interface*)>(
-					FUNC_GUI_INTERFACE_GETQUADRENDERER
-					)(this);
+				return reinterpret_cast<QuadRenderer * (__thiscall*)(gui::Interface * self)>(FUNC_GUI_INTERFACE_GETQUADRENDERER)(this);
 			}
 			FontRenderer* getFont() override
 			{
-				return reinterpret_cast<FontRenderer * (__thiscall*)(Interface*)>(
-					FUNC_GUI_INTERFACE_GETFONT
-					)(this);
+				return reinterpret_cast<FontRenderer * (__thiscall*)(gui::Interface * self)>(FUNC_GUI_INTERFACE_GETFONT)(this);
 			}
 			GLFWwindow* getGLFWwindow() override
 			{
-				return reinterpret_cast<GLFWwindow * (__thiscall*)(Interface*)>(
-					FUNC_GUI_INTERFACE_GETGLFWWINDOW
-					)(this);
+				return reinterpret_cast<GLFWwindow * (__thiscall*)(gui::Interface * self)>(FUNC_GUI_INTERFACE_GETGLFWWINDOW)(this);
 			}
 			void getCursorPos(int* x, int* y) override
 			{
-				reinterpret_cast<void(__thiscall*)(Interface*, int*, int*)>(
-					FUNC_GUI_INTERFACE_GETCURSORPOS
-					)(this, x, y);
+				return reinterpret_cast<void(__thiscall*)(gui::Interface * self, int* x, int* y)>(FUNC_GUI_INTERFACE_GETCURSORPOS)(this, x, y);
 			}
-			void getSize(int* w, int* h) override
+			void getSize(int* x, int* y) override
 			{
-				reinterpret_cast<void(__thiscall*)(Interface*, int*, int*)>(
-					FUNC_GUI_INTERFACE_GETSIZE
-					)(this, w, h);
+				return reinterpret_cast<void(__thiscall*)(gui::Interface * self, int* x, int* y)>(FUNC_GUI_INTERFACE_GETSIZE)(this, x, y);
 			}
 			void changeViewport(const glm::ivec4& pos, const glm::ivec2& scroll) override
 			{
-				reinterpret_cast<void(__thiscall*)(Interface*, const glm::ivec4&, const glm::ivec2&)>(
-					FUNC_GUI_INTERFACE_CHANGEVIEWPORT
-					)(this, pos, scroll);
+				return reinterpret_cast<void(__thiscall*)(gui::Interface * self, const glm::ivec4 & pos, const glm::ivec2 & scroll)>(FUNC_GUI_INTERFACE_CHANGEVIEWPORT)(this, pos, scroll);
 			}
-			void addElement(Element* e) override
+			void addElement(gui::Element* e) override
 			{
-				elements.push_back(e);
+				return reinterpret_cast<void(__thiscall*)(gui::Interface * self, gui::Element * e)>(FUNC_GUI_INTERFACE_ADDELEMENT)(this, e);
 			}
-			bool removeElement(Element* e) override
+			bool removeElement(gui::Element* e) override
 			{
-				return reinterpret_cast<bool(__thiscall*)(Interface*, Element*)> (
-					FUNC_GUI_INTERFACE_REMOVEELEMENT
-					)(this, e);
+				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, gui::Element * e)>(FUNC_GUI_INTERFACE_REMOVEELEMENT)(this, e);
 			}
-			bool selectElement(Element* e) override
+			bool selectElement(gui::Element* e) override
 			{
-				return reinterpret_cast<bool(__thiscall*)(Interface*, Element*)> (
-					FUNC_GUI_INTERFACE_SELECTELEMENT
-					)(this, e);
+				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, gui::Element * e)>(FUNC_GUI_INTERFACE_SELECTELEMENT)(this, e);
 			}
 			void clear() override
 			{
-				elements.clear();
+				return reinterpret_cast<void(__thiscall*)(gui::Interface * self)>(FUNC_GUI_INTERFACE_CLEAR)(this);
 			}
 			bool empty() override
 			{
-				return elements.empty();
+				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self)>(FUNC_GUI_INTERFACE_EMPTY)(this);
 			}
 		};
 	}
 }
-#endif

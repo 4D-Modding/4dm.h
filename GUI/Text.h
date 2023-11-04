@@ -1,76 +1,58 @@
 #pragma once
-#ifndef GUI_TEXT_H
-#define GUI_TEXT_H
+
 #include "gui.h"
-namespace fdm
+
+namespace fdm::gui
 {
-	namespace gui
+	class Text : public gui::Element 
 	{
-		class Element;
-		enum AlignmentX;
-		enum AlignmentY;
+	public:
+		std::string text; // 0x8
+		int xOffset; // 0x28
+		int yOffset; // 0x2C
+		gui::AlignmentX xAlign; // 0x30
+		gui::AlignmentY yAlign; // 0x34
+		glm::vec4 color{1}; // 0x38
+		uint32_t size; // 0x48
+		uint32_t wrapWidth; // 0x4C
+		bool shadow; // 0x50
+		bool fancy; // 0x51
 
-		class Text : public Element
+		void render(gui::Window* w) override
 		{
-		public:
-			std::string text;
-			int xOffset;
-			int yOffset;
-			AlignmentX xAlign;
-			AlignmentY yAlign;
-			glm::vec4 color = glm::vec4{ 1.0f };
-			unsigned int size;
-			unsigned int wrapWidth;
-			bool shadow;
-			bool fancy;
-
-			void render(gui::Window* w) override 
-			{
-				reinterpret_cast<void(__thiscall*)(gui::Text*, gui::Window*)>(
-					FUNC_GUI_TEXT_RENDER
-					)(this, w);
-			}
-			void offsetX(int offset) override
-			{
-				this->xOffset = offset;
-			}
-			void offsetY(int offset) override
-			{
-				this->yOffset = offset;
-			}
-			void alignX(AlignmentX a) override
-			{
-				this->xAlign = a;
-			}
-			void alignY(AlignmentY a) override
-			{
-				this->yAlign = a;
-			}
-			void getPos(const gui::Window* w, int* x, int* y) override
-			{
-				reinterpret_cast<void(__thiscall*)(gui::Text*, const gui::Window*, int*, int*)>(
-					FUNC_GUI_TEXT_GETPOS
-					)(this, w, x, y);
-			}
-			void getSize(const gui::Window* w, int* width, int* height) override
-			{
-				reinterpret_cast<void(__thiscall*)(gui::Text*, const gui::Window*, int*, int*)>(
-					FUNC_GUI_TEXT_GETSIZE
-					)(this, w, width, height);
-			}
-			void setText(const std::string& text)
-			{
-				reinterpret_cast<void(__thiscall*)(gui::Text*, const std::string&)>(
-					FUNC_GUI_TEXT_SETTEXT
-					)(this, text);
-			}
-			void renderText(gui::Window* w, const std::string& text, int x, int y, bool align)
-			{
-				reinterpret_cast<void(__thiscall*)(gui::Text*, gui::Window*, const std::string&, int, int, bool)>(
-					FUNC_GUI_TEXT_RENDERTEXT
-					)(this, w, text, x, y, align);
-			}
-		};
-	}
+			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w)>(FUNC_GUI_TEXT_RENDER)(this, w);
+		}
+		void offsetX(int offset) override
+		{
+			this->xOffset = offset;
+		}
+		void offsetY(int offset) override
+		{
+			this->yOffset = offset;
+		}
+		void alignX(gui::AlignmentX a)
+		{
+			this->xAlign = a;
+		}
+		void alignY(gui::AlignmentY a)
+		{
+			this->yAlign = a;
+		}
+		void getPos(gui::Window* w, int* x, int* y) override
+		{
+			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w, int* x, int* y)>(FUNC_GUI_TEXT_GETPOS)(this, w, x, y);
+		}
+		void getSize(gui::Window* w, int* width, int* height) override
+		{
+			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w, int* width, int* height)>(FUNC_GUI_TEXT_GETSIZE)(this, w, width, height);
+		}
+		void setText(const std::string& text) 
+		{
+			return reinterpret_cast<void (__thiscall*)(gui::Text* self, const std::string& text)>(FUNC_GUI_TEXT_SETTEXT)(this, text);
+		}
+		void renderText(gui::Window* w, FontRenderer* text, int x, int y, bool align) 
+		{
+			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w, FontRenderer* text, int x, int y, bool align)>(FUNC_GUI_TEXT_RENDERTEXT)(this, w, text, x, y, align);
+		}
+	};
 }
-#endif

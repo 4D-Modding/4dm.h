@@ -1,10 +1,9 @@
 #pragma once
-#ifndef GUI_H
-#define GUI_H
+
 #include "../4dm.h"
 #include "Alignment.h"
-#include "Element.h"
 #include "Window.h"
+#include "Element.h"
 #include "ElemContainer.h"
 #include "Interface.h"
 #include "Text.h"
@@ -14,12 +13,13 @@
 #include "CheckBox.h"
 #include "TextInput.h"
 #include "Image.h"
-
-namespace fdm 
+/*
+namespace fdm
 {
-	namespace gui 
+	namespace gui
 	{
-		enum Alignment;
+		enum AlignmentX;
+		enum AlignmentY;
 		class Element;
 		class Window;
 		class ElemContainer;
@@ -33,4 +33,4 @@ namespace fdm
 		class Image;
 	}
 }
-#endif
+*/

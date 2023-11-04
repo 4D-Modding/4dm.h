@@ -1,27 +1,43 @@
 #pragma once
-#ifndef M4_H
-#define M4_H
+
 #include "4dm.h"
+
 namespace fdm
 {
 	namespace m4
 	{
 		struct BiVector4
 		{
-		public:
 			float b01;
 			float b02;
 			float b03;
 			float b12;
 			float b13;
 			float b23;
-			
+
+			BiVector4(float b01 = 0.f, float b02 = 0.f, float b03 = 0.f, float b12 = 0.f, float b13 = 0.f, float b23 = 0.f) : b01(b01), b02(b02), b03(b03), b12(b12), b13(b13), b23(b23) {}
+
+			BiVector4(const nlohmann::json& j)
+			{
+				reinterpret_cast<void(__thiscall*)(BiVector4*, const nlohmann::json & j)>(
+					FUNC_M4_BIVECTOR4_BIVECTOR4_A
+					)(this, j);
+			}
+
+			nlohmann::json toJson()
+			{
+				nlohmann::json result{};
+				return reinterpret_cast<nlohmann::json(__thiscall*)(m4::BiVector4 * self, nlohmann::json * result)>(FUNC_M4_BIVECTOR4_TOJSON)(this, &result);
+				return result;
+			}
+
 			void normalize()
 			{
 				return reinterpret_cast<void(__thiscall*)(BiVector4*)>(
 					FUNC_M4_BIVECTOR4_NORMALIZE
 					)(this);
 			}
+
 			BiVector4 normalized() const
 			{
 				BiVector4 b = *this;
@@ -31,41 +47,69 @@ namespace fdm
 		};
 		inline glm::vec4 cross(const glm::vec4& u, const glm::vec4& v, const glm::vec4& w)
 		{
-			return reinterpret_cast<glm::vec4& (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
+			glm::vec4 result(0.0f);
+			return reinterpret_cast<glm::vec4 (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
 				FUNC_M4_CROSS
-				)(nullptr, u, v, w);
+				)(&result, u, v, w);
+			return result;
 		}
 		inline BiVector4 wedge(const glm::vec4& u, const glm::vec4& v)
 		{
-			return reinterpret_cast<BiVector4 & (__fastcall*)(BiVector4* result, const glm::vec4&, const glm::vec4&)>(
-				FUNC_M4_WEDGE
-				)(nullptr, u, v);
+			BiVector4 result{};
+
+			result.b01 = u.x * v.y - u.y * v.x;
+			result.b02 = v.z * u.x - u.z * v.x;
+			result.b03 = u.x * v.w - u.w * v.x;
+			result.b12 = v.z * u.y - v.y * u.z;
+			result.b13 = v.w * u.y - u.w * v.y;
+			result.b23 = v.w * u.z - u.w * v.z;
+
+			return result.normalized();
 		}
-		class Rotor 
+		class Rotor
 		{
 		public:
 			float a;
-			struct BiVector4 b;
+			BiVector4 b;
 			float b0123;
-			Rotor(const BiVector4& plane, float radians) 
+			Rotor(const BiVector4& plane, float radians)
 			{
 				reinterpret_cast<void(__thiscall*)(Rotor*, const BiVector4&, float)>(
-					FUNC_M4_ROTOR_ROTOR
+					FUNC_M4_ROTOR_ROTOR_A
 					)(this, plane, radians);
 			}
-			void operator*=(const Rotor& r) 
+			Rotor(const glm::vec4& from, const glm::vec4& to)
 			{
-				return reinterpret_cast<void(__thiscall*)(Rotor*, const Rotor&)>(
-					FUNC_M4_ROTOR_OPERATOR_MULT_EQ
-					)(this, r);
+				reinterpret_cast<void(__thiscall*)(Rotor*, const glm::vec4 & from, const glm::vec4 & to)>(
+					FUNC_M4_ROTOR_ROTOR
+					)(this, from, to);
 			}
-			glm::vec4 rotate(const glm::vec4& v) 
+			Rotor& operator*=(const Rotor& r)
 			{
+				reinterpret_cast<void(__thiscall*)(Rotor*, const Rotor&)>(
+					FUNC_M4_ROTOR_OPERATORMULTEQ
+					)(this, r);
+				return *this;
+			}
+			glm::vec4 rotate(const glm::vec4& v)
+			{
+				glm::vec4 result{};
 				return reinterpret_cast<glm::vec4(__thiscall*)(Rotor*, glm::vec4*, const glm::vec4&)>(
 					FUNC_M4_ROTOR_ROTATE
-					)(this, nullptr, v);
+					)(this, &result, v);
+
+				return result;
 			}
-			void normalize() 
+			glm::vec4 rotate(const glm::vec4& v) const
+			{
+				glm::vec4 result{};
+				return reinterpret_cast<glm::vec4(__thiscall*)(const Rotor*, glm::vec4*, const glm::vec4&)>(
+					FUNC_M4_ROTOR_ROTATE
+					)(this, &result, v);
+
+				return result;
+			}
+			void normalize()
 			{
 				return reinterpret_cast<void(__thiscall*)(Rotor*)>(
 					FUNC_M4_ROTOR_NORMALIZE
@@ -77,7 +121,7 @@ namespace fdm
 		public:
 			float value[5][5];
 			// 0.0
-			Mat5() 
+			Mat5()
 			{
 				reinterpret_cast<void(__thiscall*)(Mat5*, float)>(
 					FUNC_M4_MAT5_MAT5
@@ -89,23 +133,53 @@ namespace fdm
 					FUNC_M4_MAT5_MAT5
 					)(this, x);
 			}
-			Mat5 operator*(const Mat5& other)
+			Mat5(nlohmann::json& j)
 			{
-				return reinterpret_cast<Mat5(__thiscall*)(Mat5*, Mat5*, const Mat5&)>(
-					FUNC_M4_MAT5_OPERATOR_MULT
-					)(this, nullptr, other);
+				reinterpret_cast<void(__thiscall*)(Mat5*, nlohmann::json&)>(
+					FUNC_M4_MAT5_MAT5_A
+					)(this, j);
 			}
-			Mat5 operator*=(const Mat5& other)
+			nlohmann::json toJson()
 			{
-				return reinterpret_cast<Mat5(__thiscall*)(Mat5*, Mat5*, const Mat5&)>(
-					FUNC_M4_MAT5_OPERATOR_MULT_EQ
-					)(this, nullptr, other);
+				nlohmann::json result{};
+				return reinterpret_cast<nlohmann::json(__thiscall*)(m4::Mat5* self, nlohmann::json* result)>(FUNC_M4_MAT5_TOJSON)(this, &result);
+				return result;
+			}
+			inline static Mat5 identity()
+			{
+				return { 1 };
+			}
+			Mat5& operator*(const Mat5& other) const
+			{
+				Mat5 result{ 1 };
+
+				for (int i = 0; i < 5; i++)
+				{
+					for (int j = 0; j < 5; j++)
+					{
+						result[i][j] = 0.f;
+						for (int k = 0; k < 5; k++)
+							result[i][j] += this->value[i][k] * other.value[k][j];
+					}
+				}
+
+				return result;
+			}
+			Mat5& operator*=(const Mat5& other)
+			{
+				Mat5 result = *this * other;
+
+				std::swap(this->value, result.value);
+
+				return *this;
 			}
 			glm::vec4 multiply(const glm::vec4& v, float finalComp)
 			{
+				glm::vec4 result{};
 				return reinterpret_cast<glm::vec4(__thiscall*)(Mat5*, glm::vec4*, const glm::vec4&, float)>(
 					FUNC_M4_MAT5_MULTIPLY
-					)(this, nullptr, v, finalComp);
+					)(this, &result, v, finalComp);
+				return result;
 			}
 			glm::vec4 operator*(const glm::vec4& v)
 			{
@@ -123,9 +197,81 @@ namespace fdm
 					FUNC_M4_MAT5_SCALE
 					)(this, s);
 			}
+
 			float* operator[](int index)
 			{
 				return value[index];
+			}
+			const float* operator[](int index) const
+			{
+				return value[index];
+			}
+
+			// uhh. helpful little function i made
+			inline static Mat5 inverse(Mat5 m)
+			{
+				Mat5 s{ 1 };
+				Mat5 t{ m };
+
+				// Forward elimination
+				for (int i = 0; i < 5 - 1; ++i) {
+					int pivot = i;
+					float pivotsize = t[i][i];
+
+					for (int j = i + 1; j < 5; ++j) {
+						float tmp = t[j][i];
+						if (fabs(tmp) > fabs(pivotsize)) {
+							pivotsize = tmp;
+							pivot = j;
+						}
+					}
+
+					if (pivotsize == 0.0f) return s;
+
+					if (pivot != i) {
+						for (int j = 0; j < 5; ++j) {
+							float tmp;
+							tmp = t[i][j];
+							t[i][j] = t[pivot][j];
+							t[pivot][j] = tmp;
+							tmp = s[i][j];
+							s[i][j] = s[pivot][j];
+							s[pivot][j] = tmp;
+						}
+					}
+
+					for (int j = i + 1; j < 5; ++j) {
+						float f = t[j][i] / t[i][i];
+						for (int k = i + 1; k < 5; ++k) {
+							t[j][k] -= f * t[i][k];
+						}
+						for (int k = 0; k < 5; ++k) {
+							s[j][k] -= f * s[i][k];
+						}
+						t[j][i] = 0.0f;
+					}
+				}
+
+				// Backward substitution
+				for (int i = 0; i < 5; ++i) {
+					float f = t[i][i];
+					if (f == 0.0f) return m4::Mat5{ 1 };
+
+					for (int j = 0; j < 5; ++j) {
+						t[i][j] /= f;
+						s[i][j] /= f;
+					}
+
+					for (int j = 0; j < i; ++j) {
+						f = t[j][i];
+						for (int k = 0; k < 5; ++k) {
+							t[j][k] -= f * t[i][k];
+							s[j][k] -= f * s[i][k];
+						}
+					}
+				}
+
+				return s;
 			}
 		};
 		inline Mat5 createCamera(const glm::vec4& eye, const glm::vec4& forward, const glm::vec4& up, const glm::vec4& left, const glm::vec4& over)
@@ -159,10 +305,40 @@ namespace fdm
 		}
 		inline glm::vec4 adjustToMaxHorizSpeed(const glm::vec4& vel, const glm::vec4& deltaVel, float maxHorizSpeed)
 		{
-			return reinterpret_cast<glm::vec4& (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, float)>(
+			return reinterpret_cast<glm::vec4 & (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, float)>(
 				FUNC_M4_ADJUSTTOMAXHORIZSPEED
 				)(nullptr, vel, deltaVel, maxHorizSpeed);
 		}
+
+		inline nlohmann::json i64vec3ToJson(const glm::i64vec3& vec)
+		{
+			return reinterpret_cast<nlohmann::json(__fastcall*)(const glm::i64vec3 & vec)>(FUNC_M4_I64VEC3TOJSON)(vec);
+		}
+		inline nlohmann::json ivec4ToJson(const glm::ivec4& vec)
+		{
+			return reinterpret_cast<nlohmann::json(__fastcall*)(const glm::ivec4 & vec)>(FUNC_M4_IVEC4TOJSON)(vec);
+		}
+		//inline glm::ivec4 ivec4FromJson(const nlohmann::json& j)
+		//{
+		//	return reinterpret_cast<glm::ivec4(__fastcall*)(const nlohmann::json & j)>(FUNC_M4_IVEC4FROMJSON)(j);
+		//}
+		inline nlohmann::json vec4ToJson(const glm::vec4& vec)
+		{
+			return reinterpret_cast<nlohmann::json(__fastcall*)(const glm::vec4 & vec)>(FUNC_M4_VEC4TOJSON)(vec);
+		}
+		inline glm::vec4 vec4FromJson(const nlohmann::json& j)
+		{
+			return reinterpret_cast<glm::vec4(__fastcall*)(const nlohmann::json & j)>(FUNC_M4_VEC4FROMJSON)(j);
+		}
+
+		inline void printMat5(const Mat5& m)
+		{
+			printf("%f;%f;%f;%f;%f;\n%f;%f;%f;%f;%f;\n%f;%f;%f;%f;%f;\n%f;%f;%f;%f;%f;\n%f;%f;%f;%f;%f;\n\n",
+				m[0][0], m[0][1], m[0][2], m[0][3], m[0][4],
+				m[1][0], m[1][1], m[1][2], m[1][3], m[1][4],
+				m[2][0], m[2][1], m[2][2], m[2][3], m[2][4],
+				m[3][0], m[3][1], m[3][2], m[3][3], m[3][4],
+				m[4][0], m[4][1], m[4][2], m[4][3], m[4][4]);
+		}
 	}
 }
-#endif
