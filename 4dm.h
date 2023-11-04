@@ -51,6 +51,14 @@
 
 #include "hook.h"
 
+void patchMemory(uintptr_t addressToWrite, byte* valueToWrite, int byteNum)
+{
+	unsigned long OldProtection;
+	VirtualProtect((LPVOID)(addressToWrite), byteNum, PAGE_EXECUTE_READWRITE, &OldProtection);
+	memcpy((LPVOID)addressToWrite, valueToWrite, byteNum);
+	VirtualProtect((LPVOID)(addressToWrite), byteNum, OldProtection, NULL);
+}
+
 namespace fdm
 {
 	inline uintptr_t base = reinterpret_cast<uintptr_t>(GetModuleHandle(0));
