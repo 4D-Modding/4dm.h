@@ -100,7 +100,6 @@ namespace fdm
 #include "Shader.h"
 #include "ResourceManager.h"
 #include "ShaderManager.h"
-#include "Hitbox.h"
 
 // audio lol!!!
 #include "AudioManager.h"
@@ -112,6 +111,8 @@ namespace fdm
 #include "CompassRenderer.h"
 #include "MeshRenderer.h"
 
+#include "GUI/gui.h"
+#include "Hitbox.h"
 
 // PlayerSkin
 #include "PlayerSkin.h"
@@ -134,8 +135,6 @@ namespace fdm
 #include "EntityPlayer.h"
 #include "EntitySpider.h"
 #include "EntityManager.h"
-
-#include "GUI/gui.h"
 
 // inventory related stuff
 #include "Inventory.h"
