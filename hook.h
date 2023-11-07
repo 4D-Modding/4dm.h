@@ -10,8 +10,8 @@ inline void Hook(LPVOID target, LPVOID detour, LPVOID* original)
 {
 	reinterpret_cast<void(__stdcall*)(LPVOID target, LPVOID detour, LPVOID * original)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "Hook"))(target, detour, original);
 }
-template<typename T> inline void Hook( unsigned long long target, T detour, T* original ) {
-	static_assert( std::is_function<typename std::remove_pointer<T>::type>::value, "Hook must be called with a function and a pointer to a function of identical signature");
+template<typename Function> inline void Hook( unsigned long long target, Function detour, Function* original ) {
+	static_assert( std::is_function<typename std::remove_pointer<Function>::type>::value, "Hook must be called with a function and a pointer to a function of identical signature");
 	Hook( reinterpret_cast<LPVOID>(target), reinterpret_cast<LPVOID>(detour), reinterpret_cast<LPVOID*>(original) );
 }
 
