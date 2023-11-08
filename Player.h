@@ -15,7 +15,6 @@ namespace fdm
 	class InventoryGrid;
 	class InventoryManager;
 	class InventoryPlayer;
-	class m4::Mat5;
 	class MeshRenderer;
 	class TexRenderer;
 	class FontRenderer;
