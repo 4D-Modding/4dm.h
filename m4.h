@@ -149,7 +149,7 @@ namespace fdm
 			{
 				return { 1 };
 			}
-			Mat5& operator*(const Mat5& other) const
+			Mat5 operator*(const Mat5& other) const
 			{
 				Mat5 result{ 1 };
 
