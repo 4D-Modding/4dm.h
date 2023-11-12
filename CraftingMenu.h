@@ -11,8 +11,6 @@ namespace fdm
 
 	class InventoryManager;
 	class InventoryCursor;
-	class gui::Window;
-	class gui::Element;
 	class Item;
 
 	class CraftingMenu : public gui::Element 

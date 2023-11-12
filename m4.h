@@ -48,7 +48,7 @@ namespace fdm
 		inline glm::vec4 cross(const glm::vec4& u, const glm::vec4& v, const glm::vec4& w)
 		{
 			glm::vec4 result(0.0f);
-			return reinterpret_cast<glm::vec4 (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
+			reinterpret_cast<glm::vec4& (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
 				FUNC_M4_CROSS
 				)(&result, u, v, w);
 			return result;
@@ -149,7 +149,7 @@ namespace fdm
 			{
 				return { 1 };
 			}
-			Mat5& operator*(const Mat5& other) const
+			Mat5 operator*(const Mat5& other) const
 			{
 				Mat5 result{ 1 };
 
