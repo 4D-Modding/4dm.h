@@ -51,7 +51,7 @@
 
 #include "hook.h"
 
-void patchMemory(uintptr_t addressToWrite, byte* valueToWrite, int byteNum)
+void patchMemory(uintptr_t addressToWrite, unsigned char* valueToWrite, int byteNum)
 {
 	unsigned long OldProtection;
 	VirtualProtect((LPVOID)(addressToWrite), byteNum, PAGE_EXECUTE_READWRITE, &OldProtection);

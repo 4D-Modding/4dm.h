@@ -9,7 +9,7 @@ namespace fdm
 	{
 	public:
 		inline static StateGame* instanceObj = reinterpret_cast<StateGame*>((base + 0x2BE5E0));
-		std::unique_ptr<WorldManager,std::default_delete<WorldManager> > world; // 0x8
+		std::unique_ptr<WorldManager> world; // 0x8
 		CloudManager clouds; // 0x10
 		glm::mat4 projection2D; // 0xB0
 		glm::mat4 projection3D; // 0xF0
@@ -48,7 +48,7 @@ namespace fdm
 		bool chatOpen; // 0xAA8
 		bool chatReady; // 0xAA9
 		PAD(0x6);
-		float lastChatMessageTime; // 0xAB0
+		double lastChatMessageTime; // 0xAB0
 
 		StateGame() 
 		{

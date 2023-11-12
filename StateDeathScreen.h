@@ -19,7 +19,7 @@ namespace fdm
 		gui::Button quitButton; // 0x1C8
 		inline static const float bgFadeTime = 1.f; 
 		inline static const float skullFadeTime = 1.f; 
-		float animationStartTime; // 0x220
+		double animationStartTime; // 0x220
 
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{
