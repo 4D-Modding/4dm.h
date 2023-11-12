@@ -9,5 +9,5 @@ Inspired by [gd.h](https://github.com/HJfod/gd.h "gd.h") (Geometry Dash modding 
 
 ## Links:
  - [4DMod Example](https://github.com/4D-Modding/4dmod-example)
- - [4D-Modding web-site](https://gdpseditor.com/4dmodding/)
+ - [4D-Modding web-site](https://www.4dmodding.me/)
  - [4D-Modding Discord Server](https://discord.gg/AmGKpYXBwX)
