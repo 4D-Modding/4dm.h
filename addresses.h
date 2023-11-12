@@ -473,6 +473,7 @@
 #define FUNC_M4_VEC4FROMJSON (base + idaOffsetFix(0x2AFC0))
 #define FUNC_M4_CROSS (base + idaOffsetFix(0xA94D0))
 #define FUNC_M4_ADJUSTTOMAXHORIZSPEED (base + idaOffsetFix(0xAB700))
+#define FUNC_M4_CREATECAMERA (base + idaOffsetFix(0xAB4B0))
 
 // Item
 
