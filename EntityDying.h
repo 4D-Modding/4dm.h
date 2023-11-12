@@ -8,7 +8,7 @@ namespace fdm
 	{
 	public:
 		std::unique_ptr<Entity> entity; // 0x20
-		float deathTime; // 0x28
+		double deathTime; // 0x28
 
 		float deathTimer() override
 		{

@@ -1,6 +1,10 @@
 #ifndef __4DM_H__
 #define __4DM_H__
 
+#pragma warning(disable: 26495)
+#pragma warning(disable: 4819)
+#pragma warning(disable: 26444)
+
 #ifndef MOD_NAME
 #define MOD_NAME "Unknown Mod"
 #endif
