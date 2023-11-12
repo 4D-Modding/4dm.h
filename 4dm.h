@@ -1,6 +1,10 @@
 #ifndef __4DM_H__
 #define __4DM_H__
 
+#pragma warning(disable: 26495)
+#pragma warning(disable: 4819)
+#pragma warning(disable: 26444)
+
 #ifndef MOD_NAME
 #define MOD_NAME "Unknown Mod"
 #endif
@@ -15,7 +19,7 @@
 #include <utility>
 #include <stdio.h>
 #include <iostream>
-#include <Windows.h>
+#include <windows.h>
 #include <cstdint>
 #include <stdio.h>
 #include <string>
@@ -51,7 +55,7 @@
 
 #include "hook.h"
 
-void patchMemory(uintptr_t addressToWrite, unsigned char* valueToWrite, int byteNum)
+inline void patchMemory(uintptr_t addressToWrite, byte* valueToWrite, int byteNum)
 {
 	unsigned long OldProtection;
 	VirtualProtect((LPVOID)(addressToWrite), byteNum, PAGE_EXECUTE_READWRITE, &OldProtection);
