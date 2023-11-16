@@ -94,7 +94,7 @@ namespace fdm
 			glm::vec4 rotate(const glm::vec4& v)
 			{
 				glm::vec4 result{};
-				return reinterpret_cast<glm::vec4(__thiscall*)(Rotor*, glm::vec4*, const glm::vec4&)>(
+				return reinterpret_cast<glm::vec4&(__thiscall*)(Rotor*, glm::vec4*, const glm::vec4&)>(
 					FUNC_M4_ROTOR_ROTATE
 					)(this, &result, v);
 
@@ -103,7 +103,7 @@ namespace fdm
 			glm::vec4 rotate(const glm::vec4& v) const
 			{
 				glm::vec4 result{};
-				return reinterpret_cast<glm::vec4(__thiscall*)(const Rotor*, glm::vec4*, const glm::vec4&)>(
+				return reinterpret_cast<glm::vec4&(__thiscall*)(const Rotor*, glm::vec4*, const glm::vec4&)>(
 					FUNC_M4_ROTOR_ROTATE
 					)(this, &result, v);
 
@@ -123,18 +123,24 @@ namespace fdm
 			// 0.0
 			Mat5()
 			{
+				memset(value, 0, 5 * 5 * sizeof(float));
+
 				reinterpret_cast<void(__thiscall*)(Mat5*, float)>(
 					FUNC_M4_MAT5_MAT5
 					)(this, 0.0);
 			}
 			Mat5(float x)
 			{
+				memset(value, 0, 5 * 5 * sizeof(float));
+
 				reinterpret_cast<void(__thiscall*)(Mat5*, float)>(
 					FUNC_M4_MAT5_MAT5
 					)(this, x);
 			}
 			Mat5(nlohmann::json& j)
 			{
+				memset(value, 0, 5 * 5 * sizeof(float));
+
 				reinterpret_cast<void(__thiscall*)(Mat5*, nlohmann::json&)>(
 					FUNC_M4_MAT5_MAT5_A
 					)(this, j);
@@ -142,7 +148,7 @@ namespace fdm
 			Mat5(const Rotor& rotor)
 			{
 				memset(value, 0, 5 * 5 * sizeof(float));
-			
+
 				glm::vec4 x = rotor.rotate({ 1, 0, 0, 0 });
 				value[0][0] = x[0];
 				value[0][1] = x[1];
@@ -163,7 +169,7 @@ namespace fdm
 				value[3][1] = w[1];
 				value[3][2] = w[2];
 				value[3][3] = w[3];
-			
+
 				value[4][4] = 1.0;
 			}
 			nlohmann::json toJson()
