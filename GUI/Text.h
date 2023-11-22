@@ -18,6 +18,7 @@ namespace fdm::gui
 		bool shadow; // 0x50
 		bool fancy; // 0x51
 
+		bool enabled() override {return false;}
 		void render(gui::Window* w) override
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w)>(FUNC_GUI_TEXT_RENDER)(this, w);
