@@ -83,13 +83,13 @@ namespace fdm
 			{
 				return reinterpret_cast<void(__thiscall*)(gui::Interface * self, const glm::ivec4 & pos, const glm::ivec2 & scroll)>(FUNC_GUI_INTERFACE_CHANGEVIEWPORT)(this, pos, scroll);
 			}
-			void addElement(gui::Element* e) override
-			{
-				return reinterpret_cast<void(__thiscall*)(gui::Interface * self, gui::Element * e)>(FUNC_GUI_INTERFACE_ADDELEMENT)(this, e);
+			void addElement(gui::Element* e) override {
+				// return reinterpret_cast<void(__thiscall*)(gui::Interface * self, gui::Element * e)>(FUNC_GUI_INTERFACE_ADDELEMENT)(this, e);
+				this->elements.push_back(e);
 			}
-			bool removeElement(gui::Element* e) override
-			{
-				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, gui::Element * e)>(FUNC_GUI_INTERFACE_REMOVEELEMENT)(this, e);
+			bool removeElement(gui::Element* e) override {
+				// return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, gui::Element * e)>(FUNC_GUI_INTERFACE_REMOVEELEMENT)(this, e);
+				return std::erase(this->elements,e);
 			}
 			bool selectElement(gui::Element* e) override
 			{
