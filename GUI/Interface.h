@@ -85,11 +85,11 @@ namespace fdm
 			}
 			void addElement(gui::Element* e) override {
 				// return reinterpret_cast<void(__thiscall*)(gui::Interface * self, gui::Element * e)>(FUNC_GUI_INTERFACE_ADDELEMENT)(this, e);
-				this->elements.push_back(e);
+				elements.push_back(e);
 			}
 			bool removeElement(gui::Element* e) override {
 				// return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, gui::Element * e)>(FUNC_GUI_INTERFACE_REMOVEELEMENT)(this, e);
-				return std::erase(this->elements,e);
+				return std::erase(elements,e);
 			}
 			bool selectElement(gui::Element* e) override
 			{
