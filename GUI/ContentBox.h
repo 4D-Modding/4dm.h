@@ -179,7 +179,7 @@ namespace fdm
 			}
 			bool removeElement(gui::Element* e) override
 			{
-				return elements.erase(std::remove(elements.begin(), elements.end(), e), elements.end()) != elements.end();
+				return std::erase(elements,e);
 			}
 			bool selectElement(gui::Element* e) override
 			{
