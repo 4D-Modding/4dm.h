@@ -1395,6 +1395,30 @@ to call the original function, do `original(self, <all of the you have arguments
 	inline returnType __fastcall fdmHooks::cl::CONCAT(function, H)::hook(fdm::cl* self, __VA_ARGS__)
 
 /*
+creates a hook for a member function (__thiscall) using Func namespace. Useful for hooking functions of classes inside classes/namespaces (like gui classes). Because it turned out to not work properly with those (yea i havent tested it properly previously bruh)
+to call the original function, do `original(self, <all of the you have arguments>)`
+`this` pointer is called `self`
+*/
+#define $hookByFunc(returnType, className, func, ...) \
+	namespace fdmHooks::func \
+	{ \
+		class CONCAT(className, H) \
+		{ \
+		public: \
+			inline static returnType(__thiscall* original)(fdm::className* self, __VA_ARGS__) = nullptr; \
+			static returnType __fastcall hook(fdm::className* self, __VA_ARGS__); \
+		}; \
+	} \
+	$exec \
+	{ \
+		uint64_t hookAddr = getFuncAddr((int)(fdm::func)); \
+		if(hookAddr <= 0) { printf("Failed To Hook " #func "\n"); return; } \
+		Hook(hookAddr, &fdmHooks::cl::CONCAT(function, H)::hook, &fdmHooks::cl::CONCAT(function, H)::original); \
+		EnableHook(); \
+	} \
+	inline returnType __fastcall fdmHooks::func::CONCAT(className, H)::hook(fdm::className* self, __VA_ARGS__)
+
+/*
 creates a hook for a static function (__fastcall)
 to call the original function, do `original(<all of the you have arguments>)`
 */
@@ -1416,6 +1440,29 @@ to call the original function, do `original(<all of the you have arguments>)`
 		EnableHook(); \
 	} \
 	inline returnType __fastcall fdmHooks::cl::CONCAT(function, H)::hook(__VA_ARGS__)
+
+/*
+creates a hook for a static function (__fastcall) using Func namespace. Useful for hooking functions of classes inside classes/namespaces (like gui classes). Because it turned out to not work properly with those (yea i havent tested it properly previously bruh)
+to call the original function, do `original(<all of the you have arguments>)`
+*/
+#define $hookStaticByFunc(returnType, className, func, ...) \
+	namespace fdmHooks::func \
+	{ \
+		class CONCAT(className, H) \
+		{ \
+		public: \
+			inline static returnType(__fastcall* original)(__VA_ARGS__) = nullptr; \
+			static returnType __fastcall hook(__VA_ARGS__); \
+		}; \
+	} \
+	$exec \
+	{ \
+		uint64_t hookAddr = getFuncAddr((int)(fdm::func)); \
+		if(hookAddr <= 0) { printf("Failed To Hook " #func "\n"); return; } \
+		Hook(hookAddr, &fdmHooks::cl::CONCAT(function, H)::hook, &fdmHooks::cl::CONCAT(function, H)::original); \
+		EnableHook(); \
+	} \
+	inline returnType __fastcall fdmHooks::func::CONCAT(className, H)::hook(__VA_ARGS__)
 
 #ifdef DEBUG_CONSOLE
 #define initDLL \
