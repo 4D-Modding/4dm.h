@@ -1400,7 +1400,7 @@ to call the original function, do `original(self, <all of the you have arguments
 `this` pointer is called `self`
 */
 #define $hookByFunc(returnType, className, func, ...) \
-	namespace fdmHooks::func::className \
+	namespace CONCAT(fdmHooks, __LINE__) \
 	{ \
 		class H \
 		{ \
@@ -1413,10 +1413,10 @@ to call the original function, do `original(self, <all of the you have arguments
 	{ \
 		uint64_t hookAddr = getFuncAddr((int)(fdm::func)); \
 		if(hookAddr <= 0) { printf("Failed To Hook " #func "\n"); return; } \
-		Hook(hookAddr, &fdmHooks::func::className::H::hook, &fdmHooks::func::className::H::original); \
+		Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original); \
 		EnableHook(); \
 	} \
-	inline returnType __fastcall fdmHooks::func::className::H::hook(fdm::className* self, __VA_ARGS__)
+	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(fdm::className* self, __VA_ARGS__)
 
 /*
 creates a hook for a static function (__fastcall)
@@ -1446,7 +1446,7 @@ creates a hook for a static function (__fastcall) using Func namespace. Useful f
 to call the original function, do `original(<all of the you have arguments>)`
 */
 #define $hookStaticByFunc(returnType, className, func, ...) \
-	namespace fdmHooks::func::className \
+	namespace CONCAT(fdmHooks, __LINE__) \
 	{ \
 		class H \
 		{ \
@@ -1459,10 +1459,10 @@ to call the original function, do `original(<all of the you have arguments>)`
 	{ \
 		uint64_t hookAddr = getFuncAddr((int)(fdm::func)); \
 		if(hookAddr <= 0) { printf("Failed To Hook " #func "\n"); return; } \
-		Hook(hookAddr, &fdmHooks::func::className::H::hook, &fdmHooks::func::className::H::original); \
+		Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original); \
 		EnableHook(); \
 	} \
-	inline returnType __fastcall fdmHooks::func::className::H::hook(__VA_ARGS__)
+	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(__VA_ARGS__)
 
 #ifdef DEBUG_CONSOLE
 #define initDLL \
