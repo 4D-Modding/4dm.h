@@ -1413,7 +1413,7 @@ to call the original function, do `original(self, <all of the you have arguments
 	{ \
 		uint64_t hookAddr = getFuncAddr((int)(fdm::func)); \
 		if(hookAddr <= 0) { printf("Failed To Hook " #func "\n"); return; } \
-		Hook(hookAddr, &fdmHooks::cl::CONCAT(function, H)::hook, &fdmHooks::cl::CONCAT(function, H)::original); \
+		Hook(hookAddr, &fdmHooks::func::CONCAT(className, H)::hook, &fdmHooks::func::CONCAT(className, H)::original); \
 		EnableHook(); \
 	} \
 	inline returnType __fastcall fdmHooks::func::CONCAT(className, H)::hook(fdm::className* self, __VA_ARGS__)
@@ -1436,7 +1436,7 @@ to call the original function, do `original(<all of the you have arguments>)`
 	{ \
 		uint64_t hookAddr = getFuncAddr((int)(fdm::Func::cl::function)); \
 		if(hookAddr <= 0) { printf("Failed To Hook " #cl "::" #function "\n"); return; } \
-		Hook(hookAddr, &fdmHooks::func::CONCAT(className, H)::hook, &fdmHooks::func::CONCAT(className, H)::original); \
+		Hook(hookAddr, &fdmHooks::cl::CONCAT(function, H)::hook, &fdmHooks::cl::CONCAT(function, H)::original); \
 		EnableHook(); \
 	} \
 	inline returnType __fastcall fdmHooks::cl::CONCAT(function, H)::hook(__VA_ARGS__)
