@@ -91,179 +91,179 @@ namespace fdm
 
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(FUNC_STATESETTINGS_UPDATEPROJECTION)(this, size, translate2D);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(getFuncAddr((int)Func::StateSettings::updateProjection))(this, size, translate2D);
 		}
 		~StateSettings() 
 		{
-			reinterpret_cast<void(__thiscall*)(StateSettings* self)>(FUNC_STATESETTINGS_DESTR_STATESETTINGS)(this);
+			reinterpret_cast<void(__thiscall*)(StateSettings* self)>(getFuncAddr((int)Func::StateSettings::destr_StateSettings))(this);
 		}
 		StateSettings() 
 		{
-			reinterpret_cast<void(__thiscall*)(StateSettings* self)>(FUNC_STATESETTINGS_STATESETTINGS)(this);
+			reinterpret_cast<void(__thiscall*)(StateSettings* self)>(getFuncAddr((int)Func::StateSettings::StateSettings))(this);
 		}
 		nlohmann::json getSetting(std::string& settingName, nlohmann::json& settings, const nlohmann::json& defaultSettings) 
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(StateSettings* self, std::string& settingName, nlohmann::json& settings, const nlohmann::json& defaultSettings)>(FUNC_STATESETTINGS_GETSETTING)(this, settingName, settings, defaultSettings);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(StateSettings* self, std::string& settingName, nlohmann::json& settings, const nlohmann::json& defaultSettings)>(getFuncAddr((int)Func::StateSettings::getSetting))(this, settingName, settings, defaultSettings);
 		}
 		inline static void renderDistanceSliderCallback(void* user, int value) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(FUNC_STATESETTINGS_RENDERDISTANCESLIDERCALLBACK)(user, value);
+			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(getFuncAddr((int)Func::StateSettings::renderDistanceSliderCallback))(user, value);
 		}
 		inline static void scrollSensitivitySliderCallback(void* user, int value) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(FUNC_STATESETTINGS_SCROLLSENSITIVITYSLIDERCALLBACK)(user, value);
+			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(getFuncAddr((int)Func::StateSettings::scrollSensitivitySliderCallback))(user, value);
 		}
 		inline static void lookSensitivitySliderCallback(void* user, int value) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(FUNC_STATESETTINGS_LOOKSENSITIVITYSLIDERCALLBACK)(user, value);
+			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(getFuncAddr((int)Func::StateSettings::lookSensitivitySliderCallback))(user, value);
 		}
 		inline static void xInvertCheckBoxCallback(void* user, bool checked) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(FUNC_STATESETTINGS_XINVERTCHECKBOXCALLBACK)(user, checked);
+			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(getFuncAddr((int)Func::StateSettings::xInvertCheckBoxCallback))(user, checked);
 		}
 		inline static void yInvertCheckBoxCallback(void* user, bool checked) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(FUNC_STATESETTINGS_YINVERTCHECKBOXCALLBACK)(user, checked);
+			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(getFuncAddr((int)Func::StateSettings::yInvertCheckBoxCallback))(user, checked);
 		}
 		inline static void fovSliderCallback(void* user, int value) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(FUNC_STATESETTINGS_FOVSLIDERCALLBACK)(user, value);
+			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(getFuncAddr((int)Func::StateSettings::fovSliderCallback))(user, value);
 		}
 		inline static void globalVolumeSliderCallback(void* user, int value) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(FUNC_STATESETTINGS_GLOBALVOLUMESLIDERCALLBACK)(user, value);
+			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(getFuncAddr((int)Func::StateSettings::globalVolumeSliderCallback))(user, value);
 		}
 		inline static void musicVolumeSliderCallback(void* user, int value) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(FUNC_STATESETTINGS_MUSICVOLUMESLIDERCALLBACK)(user, value);
+			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(getFuncAddr((int)Func::StateSettings::musicVolumeSliderCallback))(user, value);
 		}
 		inline static void creatureVolumeSliderCallback(void* user, int value) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(FUNC_STATESETTINGS_CREATUREVOLUMESLIDERCALLBACK)(user, value);
+			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(getFuncAddr((int)Func::StateSettings::creatureVolumeSliderCallback))(user, value);
 		}
 		inline static void ambienceVolumeSliderCallback(void* user, int value) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(FUNC_STATESETTINGS_AMBIENCEVOLUMESLIDERCALLBACK)(user, value);
+			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(getFuncAddr((int)Func::StateSettings::ambienceVolumeSliderCallback))(user, value);
 		}
 		inline static void controlsButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATESETTINGS_CONTROLSBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateSettings::controlsButtonCallback))(user);
 		}
 		inline static void controlsOkButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATESETTINGS_CONTROLSOKBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateSettings::controlsOkButtonCallback))(user);
 		}
 		inline static void fullscreenButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATESETTINGS_FULLSCREENBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateSettings::fullscreenButtonCallback))(user);
 		}
 		inline static void difficultySliderCallback(void* user, int value) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(FUNC_STATESETTINGS_DIFFICULTYSLIDERCALLBACK)(user, value);
+			return reinterpret_cast<void (__fastcall*)(void* user, int value)>(getFuncAddr((int)Func::StateSettings::difficultySliderCallback))(user, value);
 		}
 		inline static void smoothLightingCheckBoxCallback(void* user, bool checked) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(FUNC_STATESETTINGS_SMOOTHLIGHTINGCHECKBOXCALLBACK)(user, checked);
+			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(getFuncAddr((int)Func::StateSettings::smoothLightingCheckBoxCallback))(user, checked);
 		}
 		inline static void shadowsCheckBoxCallback(void* user, bool checked) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(FUNC_STATESETTINGS_SHADOWSCHECKBOXCALLBACK)(user, checked);
+			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(getFuncAddr((int)Func::StateSettings::shadowsCheckBoxCallback))(user, checked);
 		}
 		inline static void lightsCheckBoxCallback(void* user, bool checked) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(FUNC_STATESETTINGS_LIGHTSCHECKBOXCALLBACK)(user, checked);
+			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(getFuncAddr((int)Func::StateSettings::lightsCheckBoxCallback))(user, checked);
 		}
 		inline static void chatCheckBoxCallback(void* user, bool checked) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(FUNC_STATESETTINGS_CHATCHECKBOXCALLBACK)(user, checked);
+			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(getFuncAddr((int)Func::StateSettings::chatCheckBoxCallback))(user, checked);
 		}
 		inline static void nametagsCheckBoxCallback(void* user, bool checked) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(FUNC_STATESETTINGS_NAMETAGSCHECKBOXCALLBACK)(user, checked);
+			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(getFuncAddr((int)Func::StateSettings::nametagsCheckBoxCallback))(user, checked);
 		}
 		inline static void skinsCheckBoxCallback(void* user, bool checked) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(FUNC_STATESETTINGS_SKINSCHECKBOXCALLBACK)(user, checked);
+			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(getFuncAddr((int)Func::StateSettings::skinsCheckBoxCallback))(user, checked);
 		}
 		inline static void secretButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATESETTINGS_SECRETBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateSettings::secretButtonCallback))(user);
 		}
 		inline static void viewportCallback(void* user, const glm::ivec4& pos, const glm::ivec2& scroll) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>(FUNC_STATESETTINGS_VIEWPORTCALLBACK)(user, pos, scroll);
+			return reinterpret_cast<void (__fastcall*)(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>(getFuncAddr((int)Func::StateSettings::viewportCallback))(user, pos, scroll);
 		}
 		void updateStateGame() 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self)>(FUNC_STATESETTINGS_UPDATESTATEGAME)(this);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self)>(getFuncAddr((int)Func::StateSettings::updateStateGame))(this);
 		}
 		void updateVolume() 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self)>(FUNC_STATESETTINGS_UPDATEVOLUME)(this);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self)>(getFuncAddr((int)Func::StateSettings::updateVolume))(this);
 		}
 		void load(GLFWwindow* window) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, GLFWwindow* window)>(FUNC_STATESETTINGS_LOAD)(this, window);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, GLFWwindow* window)>(getFuncAddr((int)Func::StateSettings::load))(this, window);
 		}
 		void save() 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self)>(FUNC_STATESETTINGS_SAVE)(this);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self)>(getFuncAddr((int)Func::StateSettings::save))(this);
 		}
 		void init(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s)>(FUNC_STATESETTINGS_INIT)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s)>(getFuncAddr((int)Func::StateSettings::init))(this, s);
 		}
 		void close(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s)>(FUNC_STATESETTINGS_CLOSE)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s)>(getFuncAddr((int)Func::StateSettings::close))(this, s);
 		}
 		void render(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s)>(FUNC_STATESETTINGS_RENDER)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s)>(getFuncAddr((int)Func::StateSettings::render))(this, s);
 		}
 		void mouseInput(StateManager& s, double xpos, double ypos) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s, double xpos, double ypos)>(FUNC_STATESETTINGS_MOUSEINPUT)(this, s, xpos, ypos);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s, double xpos, double ypos)>(getFuncAddr((int)Func::StateSettings::mouseInput))(this, s, xpos, ypos);
 		}
 		void scrollInput(StateManager& s, double xoffset, double yoffset) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s, double xoffset, double yoffset)>(FUNC_STATESETTINGS_SCROLLINPUT)(this, s, xoffset, yoffset);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s, double xoffset, double yoffset)>(getFuncAddr((int)Func::StateSettings::scrollInput))(this, s, xoffset, yoffset);
 		}
 		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s, int button, int action, int mods)>(FUNC_STATESETTINGS_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s, int button, int action, int mods)>(getFuncAddr((int)Func::StateSettings::mouseButtonInput))(this, s, button, action, mods);
 		}
 		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATESETTINGS_KEYINPUT)(this, s, key, scancode, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::StateSettings::keyInput))(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s, int width, int height)>(FUNC_STATESETTINGS_WINDOWRESIZE)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StateSettings::windowResize))(this, s, width, height);
 		}
 		void updateRenderDistance(int value) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, int value)>(FUNC_STATESETTINGS_UPDATERENDERDISTANCE)(this, value);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, int value)>(getFuncAddr((int)Func::StateSettings::updateRenderDistance))(this, value);
 		}
 		void updateFOV(int value) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, int value)>(FUNC_STATESETTINGS_UPDATEFOV)(this, value);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, int value)>(getFuncAddr((int)Func::StateSettings::updateFOV))(this, value);
 		}
 		void updateCreatureVolume(int value) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, int value)>(FUNC_STATESETTINGS_UPDATECREATUREVOLUME)(this, value);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, int value)>(getFuncAddr((int)Func::StateSettings::updateCreatureVolume))(this, value);
 		}
 		void updateAmbienceVolume(int value) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, int value)>(FUNC_STATESETTINGS_UPDATEAMBIENCEVOLUME)(this, value);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, int value)>(getFuncAddr((int)Func::StateSettings::updateAmbienceVolume))(this, value);
 		}
 		void updateDifficulty(int value) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, int value)>(FUNC_STATESETTINGS_UPDATEDIFFICULTY)(this, value);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, int value)>(getFuncAddr((int)Func::StateSettings::updateDifficulty))(this, value);
 		}
 		void setFullscreenMode(GLFWwindow* window, bool fullscreenMode) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSettings* self, GLFWwindow* window, bool fullscreenMode)>(FUNC_STATESETTINGS_SETFULLSCREENMODE)(this, window, fullscreenMode);
+			return reinterpret_cast<void (__thiscall*)(StateSettings* self, GLFWwindow* window, bool fullscreenMode)>(getFuncAddr((int)Func::StateSettings::setFullscreenMode))(this, window, fullscreenMode);
 		}
 	};
 }

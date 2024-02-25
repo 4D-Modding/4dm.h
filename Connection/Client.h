@@ -31,19 +31,19 @@ namespace fdm::Connection
 
 		void update()
 		{
-			return reinterpret_cast<void(__thiscall*)(Client * self)>(FUNC_CONNECTION_CLIENT_UPDATE)(this);
+			return reinterpret_cast<void(__thiscall*)(Client * self)>(getFuncAddr((int)Func::Connection_Nested::Client::update))(this);
 		}
 		void resolveHost(std::string& host)
 		{
-			return reinterpret_cast<void(__thiscall*)(Client * self, std::string& host)>(FUNC_CONNECTION_CLIENT_RESOLVEHOST)(this, host);
+			return reinterpret_cast<void(__thiscall*)(Client * self, std::string& host)>(getFuncAddr((int)Func::Connection_Nested::Client::resolveHost))(this, host);
 		}
 		void cleanup()
 		{
-			return reinterpret_cast<void(__thiscall*)(Client * self)>(FUNC_CONNECTION_CLIENT_CLEANUP)(this);
+			return reinterpret_cast<void(__thiscall*)(Client * self)>(getFuncAddr((int)Func::Connection_Nested::Client::cleanup))(this);
 		}
 		inline static void connectionStatusChangedCallback(SteamNetConnectionStatusChangedCallback_t* info)
 		{
-			return reinterpret_cast<void(__fastcall*)(SteamNetConnectionStatusChangedCallback_t * info)>(FUNC_CONNECTION_CLIENT_CONNECTIONSTATUSCHANGEDCALLBACK)(info);
+			return reinterpret_cast<void(__fastcall*)(SteamNetConnectionStatusChangedCallback_t * info)>(getFuncAddr((int)Func::Connection_Nested::Client::connectionStatusChangedCallback))(info);
 		}
 	};
 }

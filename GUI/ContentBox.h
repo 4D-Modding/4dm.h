@@ -58,29 +58,37 @@ namespace fdm
 			}
 			~ContentBox()
 			{
-				reinterpret_cast<void(__thiscall*)(gui::ContentBox * self)>(FUNC_GUI_CONTENTBOX_DESTR_CONTENTBOX)(this);
+				if (!this->elements.empty())
+				{
+					for (auto it = this->elements.begin(); it != this->elements.end(); ++it)
+					{
+						delete* it;
+					}
+
+					this->elements.clear();
+				}
 			}
-			QuadRenderer* getQuadRenderer() override
+			QuadRenderer* getQuadRenderer() const override
 			{
 				return parent->getQuadRenderer();
 			}
-			FontRenderer* getFont() override
+			FontRenderer* getFont() const override
 			{
 				return parent->getFont();
 			}
-			GLFWwindow* getGLFWwindow() override
+			GLFWwindow* getGLFWwindow() const override
 			{
 				return parent->getGLFWwindow();
 			}
-			void getCursorPos(int* x, int* y) override
+			void getCursorPos(int* x, int* y) const override
 			{
 				int startX, startY;
 				getPos(parent, &startX, &startY);
 				parent->getCursorPos(x, y);
 				*x -= xScroll + startX;
-				*y -= xScroll + startY;
+				*y -= yScroll + startY;
 			}
-			void getSize(int* x, int* y) override
+			void getSize(int* x, int* y) const override
 			{
 				*x = width;
 				*y = height;
@@ -113,25 +121,26 @@ namespace fdm
 				);
 				viewUpdateFlag = true;
 			}
-			void getPos(gui::Window* w, int* x, int* y) override
+			void getPos(const gui::Window* w, int* x, int* y) const override
 			{
-				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self, gui::Window * w, int* x, int* y)>(FUNC_GUI_CONTENTBOX_GETPOS)(this, w, x, y);
+				return reinterpret_cast<void(__thiscall*)(const gui::ContentBox * self, const gui::Window * w, int* x, int* y)>(getFuncAddr((int)Func::gui_Nested::ContentBox::getPos))(this, w, x, y);
 			}
-			void getSize(gui::Window* w, int* width, int* height) override
+			void getSize(const gui::Window* w, int* width, int* height) const override
 			{
-				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self, gui::Window * w, int* width, int* height)>(FUNC_GUI_CONTENTBOX_GETSIZE_A)(this, w, width, height);
+				*width = this->width;
+				*height = this->height;
 			}
 			bool touchingMouse()
 			{
-				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self)>(FUNC_GUI_CONTENTBOX_TOUCHINGMOUSE)(this);
+				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self)>(getFuncAddr((int)Func::gui_Nested::ContentBox::touchingMouse))(this);
 			}
 			void resetViewport(bool applyScroll)
 			{
-				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self, bool applyScroll)>(FUNC_GUI_CONTENTBOX_RESETVIEWPORT)(this, applyScroll);
+				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self, bool applyScroll)>(getFuncAddr((int)Func::gui_Nested::ContentBox::resetViewport))(this, applyScroll);
 			}
 			void render(gui::Window* w) override
 			{
-				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self, gui::Window * w)>(FUNC_GUI_CONTENTBOX_RENDER)(this, w);
+				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self, gui::Window * w)>(getFuncAddr((int)Func::gui_Nested::ContentBox::render))(this, w);
 			}
 			void offsetX(int offset) override
 			{
@@ -149,29 +158,78 @@ namespace fdm
 			{
 				this->yAlign = a;
 			}
-			bool mouseInput(gui::Window* w, double xpos, double ypos) override
+			bool mouseInput(const gui::Window* w, double xpos, double ypos) override
 			{
-				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, gui::Window * w, double xpos, double ypos)>(FUNC_GUI_CONTENTBOX_MOUSEINPUT)(this, w, xpos, ypos);
+				int mx, my;
+				getCursorPos(&mx, &my);
+
+				// i dont even fucking know. i tried to decompile it and get it to work. this is what i ended up with
+				if (scrollingX && scrollW >= 0)
+				{
+					int off = (width - 2);
+					if (scrollH != 0)
+						off -= 16;
+
+					int t = (int)((float)off - (float)(((float)width / ((float)width + (float)abs(scrollW))) * (float)off));
+					int scroll = (mx - scrollbarClickPos);
+
+					scroll = (int)(((float)scroll / (float)t) * (float)-scrollW);
+
+					xScroll = std::clamp(scroll, -scrollW, 0);
+					return false;
+				}
+				else if (scrollingY && scrollH >= 0)
+				{
+					int off = (height - 2);
+					if (scrollW != 0)
+						off -= 16;
+
+					int t = (int)((float)off - (float)(((float)height / ((float)height + (float)abs(scrollH))) * (float)off));
+					int scroll = (my - scrollbarClickPos);
+
+					scroll = (int)(((float)scroll / (float)t) * (float)-scrollH);
+
+					yScroll = std::clamp(scroll, -scrollH, 0);
+					return false;
+				}
+				else
+				{
+					if (!elements.empty())
+					{
+						for (auto& el : elements)
+						{
+							bool r = el->mouseInput(this, xpos, ypos);
+							if (r)
+							{
+								this->currentCursorType = el->getCursorType();
+								return true;
+							}
+						}
+					}
+				}
+
+				return false;
+				//return reinterpret_cast<bool(__thiscall*)(const gui::ContentBox * self, const gui::Window * w, double xpos, double ypos)>(getFuncAddr((int)Func::gui_Nested::ContentBox::mouseInput))(this, w, xpos, ypos);
 			}
-			bool scrollInput(gui::Window* w, double xoffset, double yoffset) override
+			bool scrollInput(const gui::Window* w, double xoffset, double yoffset) override
 			{
-				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, gui::Window * w, double xoffset, double yoffset)>(FUNC_GUI_CONTENTBOX_SCROLLINPUT)(this, w, xoffset, yoffset);
+				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, const gui::Window * w, double xoffset, double yoffset)>(getFuncAddr((int)Func::gui_Nested::ContentBox::scrollInput))(this, w, xoffset, yoffset);
 			}
-			bool mouseButtonInput(gui::Window* w, int button, int action, int mods) override
+			bool mouseButtonInput(const gui::Window* w, int button, int action, int mods) override
 			{
-				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, gui::Window * w, int button, int action, int mods)>(FUNC_GUI_CONTENTBOX_MOUSEBUTTONINPUT)(this, w, button, action, mods);
+				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, const gui::Window * w, int button, int action, int mods)>(getFuncAddr((int)Func::gui_Nested::ContentBox::mouseButtonInput))(this, w, button, action, mods);
 			}
-			bool keyInput(gui::Window* w, int key, int scancode, int action, int mods) override
+			bool keyInput(const gui::Window* w, int key, int scancode, int action, int mods) override
 			{
-				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, gui::Window * w, int key, int scancode, int action, int mods)>(FUNC_GUI_CONTENTBOX_KEYINPUT)(this, w, key, scancode, action, mods);
+				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, const gui::Window * w, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::gui_Nested::ContentBox::keyInput))(this, w, key, scancode, action, mods);
 			}
 			void select() override
 			{
-				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self)>(FUNC_GUI_CONTENTBOX_SELECT)(this);
+				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self)>(getFuncAddr((int)Func::gui_Nested::ContentBox::select))(this);
 			}
 			void deselect() override
 			{
-				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self)>(FUNC_GUI_CONTENTBOX_DESELECT)(this);
+				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self)>(getFuncAddr((int)Func::gui_Nested::ContentBox::deselect))(this);
 			}
 			void addElement(gui::Element* e) override
 			{

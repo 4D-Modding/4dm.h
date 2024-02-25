@@ -8,17 +8,20 @@ namespace fdm
 	class QuadRenderer 
 	{
 	public:
-		const Shader* shader; 
-		unsigned int VAO; // 0x8
-		unsigned int buffers[4]; // 0xC
-		unsigned int mode; // 0x1C
-		unsigned int elementCount; // 0x20
+		const Shader* shader = nullptr;
+		unsigned int VAO = 0; // 0x8
+		unsigned int buffers[4] = { 0 }; // 0xC
+		unsigned int mode = 4; // 0x1C
+		unsigned int elementCount = 6; // 0x20
 
 		~QuadRenderer()
 		{
-			glBindVertexArray(this->VAO);
-			glDeleteBuffers(4, this->buffers);
-			glDeleteVertexArrays(1, &this->VAO);
+			if (VAO)
+			{
+				glBindVertexArray(this->VAO);
+				glDeleteBuffers(4, this->buffers);
+				glDeleteVertexArrays(1, &this->VAO);
+			}
 		}
 		QuadRenderer() {}
 		QuadRenderer(const Shader* shader)
@@ -27,15 +30,15 @@ namespace fdm
 		}
 		bool init() 
 		{
-			return reinterpret_cast<bool (__thiscall*)(QuadRenderer* self)>(FUNC_QUADRENDERER_INIT)(this);
+			return reinterpret_cast<bool (__thiscall*)(QuadRenderer* self)>(getFuncAddr((int)Func::QuadRenderer::init))(this);
 		}
-		void setColor(float r, float g, float b, float a) 
+		void setColor(float r, float g, float b, float a)
 		{
-			return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, float r, float g, float b, float a)>(FUNC_QUADRENDERER_SETCOLOR)(this, r, g, b, a);
+			return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, float r, float g, float b, float a)>(getFuncAddr((int)Func::QuadRenderer::setColor))(this, r, g, b, a);
 		}
 		void setPos(int x, int y, int w, int h)
 		{
-			return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, int x, int y, int w, int h)>(FUNC_QUADRENDERER_SETPOS)(this, x, y, w, h);
+			return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, int x, int y, int w, int h)>(getFuncAddr((int)Func::QuadRenderer::setPos))(this, x, y, w, h);
 		}
 
 		// thx compiler for removing that and thx to mashpoe for telling me that it exists
@@ -45,7 +48,7 @@ namespace fdm
 			{
 				if (VAO)
 				{
-					int data[5] = { 0, 1, 2, 2, 3 };
+					constexpr const int data[6] = { 0, 1, 2, 2, 3, 0 };
 					glBindVertexArray(VAO);
 					glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 					glBufferData(GL_ARRAY_BUFFER, 24, data, GL_STATIC_DRAW);
@@ -54,7 +57,7 @@ namespace fdm
 				mode = 4;
 				elementCount = 6;
 			}
-			glUseProgram(shader->id());
+			shader->use();
 			glBindVertexArray(VAO);
 			glDrawElements(mode, elementCount, GL_UNSIGNED_INT, 0);
 			glBindVertexArray(NULL);

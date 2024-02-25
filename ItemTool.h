@@ -29,40 +29,40 @@ namespace fdm
 
 		void render(const glm::ivec2& pos) override
 		{
-			return reinterpret_cast<void (__thiscall*)(ItemTool* self, const glm::ivec2& pos)>(FUNC_ITEMTOOL_RENDER)(this, pos);
+			return reinterpret_cast<void (__thiscall*)(ItemTool* self, const glm::ivec2& pos)>(getFuncAddr((int)Func::ItemTool::render))(this, pos);
 		}
 		void renderEntity(const m4::Mat5& mat, bool inHand, const glm::vec4& lightDir) override
 		{
-			return reinterpret_cast<void (__thiscall*)(ItemTool* self, const m4::Mat5& mat, bool inHand, const glm::vec4& lightDir)>(FUNC_ITEMTOOL_RENDERENTITY)(this, mat, inHand, lightDir);
+			return reinterpret_cast<void (__thiscall*)(ItemTool* self, const m4::Mat5& mat, bool inHand, const glm::vec4& lightDir)>(getFuncAddr((int)Func::ItemTool::renderEntity))(this, mat, inHand, lightDir);
 		}
 		bool isDeadly() override
 		{
-			return reinterpret_cast<bool (__thiscall*)(ItemTool* self)>(FUNC_ITEMTOOL_ISDEADLY)(this);
+			return reinterpret_cast<bool (__thiscall*)(ItemTool* self)>(getFuncAddr((int)Func::ItemTool::isDeadly))(this);
 		}
 		bool isCompatible(const std::unique_ptr<Item>& other) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(ItemTool* self, const std::unique_ptr<Item>& other)>(FUNC_ITEMTOOL_ISCOMPATIBLE)(this, other);
+			return reinterpret_cast<bool (__thiscall*)(ItemTool* self, const std::unique_ptr<Item>& other)>(getFuncAddr((int)Func::ItemTool::isCompatible))(this, other);
 		}
 		uint32_t getStackLimit() override
 		{
-			return reinterpret_cast<uint32_t (__thiscall*)(ItemTool* self)>(FUNC_ITEMTOOL_GETSTACKLIMIT)(this);
+			return reinterpret_cast<uint32_t (__thiscall*)(ItemTool* self)>(getFuncAddr((int)Func::ItemTool::getStackLimit))(this);
 		}
 		bool action(World* world, Player* player, int action) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(ItemTool* self, World* world, Player* player, int action)>(FUNC_ITEMTOOL_ACTION)(this, world, player, action);
+			return reinterpret_cast<bool (__thiscall*)(ItemTool* self, World* world, Player* player, int action)>(getFuncAddr((int)Func::ItemTool::action))(this, world, player, action);
 		}
 		bool breakBlock(World* world, Player* player, unsigned char block, const glm::ivec4& blockPos) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(ItemTool* self, World* world, Player* player, unsigned char block, const glm::ivec4& blockPos)>(FUNC_ITEMTOOL_BREAKBLOCK)(this, world, player, block, blockPos);
+			return reinterpret_cast<bool (__thiscall*)(ItemTool* self, World* world, Player* player, unsigned char block, const glm::ivec4& blockPos)>(getFuncAddr((int)Func::ItemTool::breakBlock))(this, world, player, block, blockPos);
 		}
 		bool entityAction(World* world, Player* player, Entity* entity, int action) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(ItemTool* self, World* world, Player* player, Entity* entity, int action)>(FUNC_ITEMTOOL_ENTITYACTION)(this, world, player, entity, action);
+			return reinterpret_cast<bool (__thiscall*)(ItemTool* self, World* world, Player* player, Entity* entity, int action)>(getFuncAddr((int)Func::ItemTool::entityAction))(this, world, player, entity, action);
 		}
 		std::unique_ptr<Item> clone() override
 		{
 			std::unique_ptr<Item> result;
-			return reinterpret_cast<std::unique_ptr<Item> (__thiscall*)(ItemTool* self, std::unique_ptr<Item>* result)>(FUNC_ITEMTOOL_CLONE)(this, &result);
+			return reinterpret_cast<std::unique_ptr<Item> (__thiscall*)(ItemTool* self, std::unique_ptr<Item>* result)>(getFuncAddr((int)Func::ItemTool::clone))(this, &result);
 		}
 	};
 }

@@ -37,11 +37,11 @@ namespace fdm
 
 		inline static void renderHand(const glm::mat4& mat) 
 		{
-			return reinterpret_cast<void (__fastcall*)(const glm::mat4& mat)>(FUNC_COMPASSRENDERER_RENDERHAND)(mat);
+			return reinterpret_cast<void (__fastcall*)(const glm::mat4& mat)>(getFuncAddr((int)Func::CompassRenderer::renderHand))(mat);
 		}
 		inline static void renderItemDrop(const m4::Mat5& mat, const glm::vec4& lightDir) 
 		{
-			return reinterpret_cast<void (__fastcall*)(const m4::Mat5& mat, const glm::vec4& lightDir)>(FUNC_COMPASSRENDERER_RENDERITEMDROP)(mat, lightDir);
+			return reinterpret_cast<void (__fastcall*)(const m4::Mat5& mat, const glm::vec4& lightDir)>(getFuncAddr((int)Func::CompassRenderer::renderItemDrop))(mat, lightDir);
 		}
 	};
 }

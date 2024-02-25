@@ -25,27 +25,27 @@ namespace fdm
 
 		~CloudManager() 
 		{
-			reinterpret_cast<void(__thiscall*)(CloudManager* self)>(FUNC_CLOUDMANAGER_DESTR_CLOUDMANAGER)(this);
+			reinterpret_cast<void(__thiscall*)(CloudManager* self)>(getFuncAddr((int)Func::CloudManager::destr_CloudManager))(this);
 		}
 		void render(const m4::Mat5& MV, const glm::mat4& P, int matUniformID) 
 		{
-			return reinterpret_cast<void (__thiscall*)(CloudManager* self, const m4::Mat5& MV, const glm::mat4& P, int matUniformID)>(FUNC_CLOUDMANAGER_RENDER)(this, MV, P, matUniformID);
+			return reinterpret_cast<void (__thiscall*)(CloudManager* self, const m4::Mat5& MV, const glm::mat4& P, int matUniformID)>(getFuncAddr((int)Func::CloudManager::render))(this, MV, P, matUniformID);
 		}
 		void updateChunks(const glm::vec4& pos, const glm::vec4& over, unsigned char renderDistance) 
 		{
-			return reinterpret_cast<void (__thiscall*)(CloudManager* self, const glm::vec4& pos, const glm::vec4& over, unsigned char renderDistance)>(FUNC_CLOUDMANAGER_UPDATECHUNKS)(this, pos, over, renderDistance);
+			return reinterpret_cast<void (__thiscall*)(CloudManager* self, const glm::vec4& pos, const glm::vec4& over, unsigned char renderDistance)>(getFuncAddr((int)Func::CloudManager::updateChunks))(this, pos, over, renderDistance);
 		}
 		void unloadAllChunks() 
 		{
-			return reinterpret_cast<void (__thiscall*)(CloudManager* self)>(FUNC_CLOUDMANAGER_UNLOADALLCHUNKS)(this);
+			return reinterpret_cast<void (__thiscall*)(CloudManager* self)>(getFuncAddr((int)Func::CloudManager::unloadAllChunks))(this);
 		}
 		void loadChunks() 
 		{
-			return reinterpret_cast<void (__thiscall*)(CloudManager* self)>(FUNC_CLOUDMANAGER_LOADCHUNKS)(this);
+			return reinterpret_cast<void (__thiscall*)(CloudManager* self)>(getFuncAddr((int)Func::CloudManager::loadChunks))(this);
 		}
 		void updateChunk(const glm::i64vec3& coords) 
 		{
-			return reinterpret_cast<void (__thiscall*)(CloudManager* self, const glm::i64vec3& coords)>(FUNC_CLOUDMANAGER_UPDATECHUNK)(this, coords);
+			return reinterpret_cast<void (__thiscall*)(CloudManager* self, const glm::i64vec3& coords)>(getFuncAddr((int)Func::CloudManager::updateChunk))(this, coords);
 		}
 	};
 }

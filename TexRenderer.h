@@ -14,28 +14,34 @@ namespace fdm
 
 		~TexRenderer() 
 		{
-			reinterpret_cast<void(__thiscall*)(TexRenderer* self)>(FUNC_TEXRENDERER_DESTR_TEXRENDERER)(this);
+			reinterpret_cast<void(__thiscall*)(TexRenderer* self)>(getFuncAddr((int)Func::TexRenderer::destr_TexRenderer))(this);
+		}
+		TexRenderer() {}
+		TexRenderer(const Tex2D* texture, const Shader* shader)
+		{
+			this->texture = texture;
+			this->shader = shader;
 		}
 		TexRenderer& operator=(TexRenderer& other) 
 		{
-			reinterpret_cast<TexRenderer& (__thiscall*)(TexRenderer* self, TexRenderer& other)>(FUNC_TEXRENDERER_OPERATOREQ)(this, other);
+			reinterpret_cast<TexRenderer& (__thiscall*)(TexRenderer* self, TexRenderer& other)>(getFuncAddr((int)Func::TexRenderer::operatorEq))(this, other);
 			return *this;
 		}
 		bool init() 
 		{
-			return reinterpret_cast<bool (__thiscall*)(TexRenderer* self)>(FUNC_TEXRENDERER_INIT)(this);
+			return reinterpret_cast<bool (__thiscall*)(TexRenderer* self)>(getFuncAddr((int)Func::TexRenderer::init))(this);
 		}
 		void setClip(int x, int y, int w, int h)
 		{
-			return reinterpret_cast<void (__thiscall*)(TexRenderer* self, int x, int y, int w, int h)>(FUNC_TEXRENDERER_SETCLIP)(this, x, y, w, h);
+			return reinterpret_cast<void (__thiscall*)(TexRenderer* self, int x, int y, int w, int h)>(getFuncAddr((int)Func::TexRenderer::setClip))(this, x, y, w, h);
 		}
-		void setColor(float r, float g, float b, float a) 
+		void setColor(float r, float g, float b, int a) 
 		{
-			return reinterpret_cast<void (__thiscall*)(TexRenderer* self, float r, float g, float b, float a)>(FUNC_TEXRENDERER_SETCOLOR)(this, r, g, b, a);
+			return reinterpret_cast<void (__thiscall*)(TexRenderer* self, float r, float g, float b, int a)>(getFuncAddr((int)Func::TexRenderer::setColor))(this, r, g, b, a);
 		}
 		void setPos(int x, int y, int w, int h)
 		{
-			return reinterpret_cast<void (__thiscall*)(TexRenderer* self, int x, int y, int w, int h)>(FUNC_TEXRENDERER_SETPOS)(this, x, y, w, h);
+			return reinterpret_cast<void (__thiscall*)(TexRenderer* self, int x, int y, int w, int h)>(getFuncAddr((int)Func::TexRenderer::setPos))(this, x, y, w, h);
 		}
 		// thx compiler for removing that and thx to mashpoe for telling me that it exists
 		void render()

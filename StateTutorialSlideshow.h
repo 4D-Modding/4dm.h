@@ -47,55 +47,55 @@ namespace fdm
 
 		~StateTutorialSlideshow() 
 		{
-			reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow* self)>(FUNC_STATETUTORIALSLIDESHOW_DESTR_STATETUTORIALSLIDESHOW)(this);
+			reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow* self)>(getFuncAddr((int)Func::StateTutorialSlideshow::destr_StateTutorialSlideshow))(this);
 		}
 		StateTutorialSlideshow() 
 		{
-			reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow* self)>(FUNC_STATETUTORIALSLIDESHOW_STATETUTORIALSLIDESHOW)(this);
+			reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow* self)>(getFuncAddr((int)Func::StateTutorialSlideshow::StateTutorialSlideshow))(this);
 		}
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(FUNC_STATETUTORIALSLIDESHOW_UPDATEPROJECTION)(this, size, translate2D);
+			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(getFuncAddr((int)Func::StateTutorialSlideshow::updateProjection))(this, size, translate2D);
 		}
 		void updateSlideSize(int width, int height) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, int width, int height)>(FUNC_STATETUTORIALSLIDESHOW_UPDATESLIDESIZE)(this, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, int width, int height)>(getFuncAddr((int)Func::StateTutorialSlideshow::updateSlideSize))(this, width, height);
 		}
 		inline static void viewportCallback(void* user, const glm::ivec4& pos, const glm::ivec2& scroll) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>(FUNC_STATETUTORIALSLIDESHOW_VIEWPORTCALLBACK)(user, pos, scroll);
+			return reinterpret_cast<void (__fastcall*)(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>(getFuncAddr((int)Func::StateTutorialSlideshow::viewportCallback))(user, pos, scroll);
 		}
 		void init(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s)>(FUNC_STATETUTORIALSLIDESHOW_INIT)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s)>(getFuncAddr((int)Func::StateTutorialSlideshow::init))(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s, double dt)>(FUNC_STATETUTORIALSLIDESHOW_UPDATE)(this, s, dt);
+			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s, double dt)>(getFuncAddr((int)Func::StateTutorialSlideshow::update))(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s)>(FUNC_STATETUTORIALSLIDESHOW_RENDER)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s)>(getFuncAddr((int)Func::StateTutorialSlideshow::render))(this, s);
 		}
 		void resume(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s)>(FUNC_STATETUTORIALSLIDESHOW_RESUME)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s)>(getFuncAddr((int)Func::StateTutorialSlideshow::resume))(this, s);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s, int width, int height)>(FUNC_STATETUTORIALSLIDESHOW_WINDOWRESIZE)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StateTutorialSlideshow::windowResize))(this, s, width, height);
 		}
 		inline static void continueButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATETUTORIALSLIDESHOW_CONTINUEBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateTutorialSlideshow::continueButtonCallback))(user);
 		}
 		inline static void backButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATETUTORIALSLIDESHOW_BACKBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateTutorialSlideshow::backButtonCallback))(user);
 		}
 		void setSlide(StateManager& s, int index) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s, int index)>(FUNC_STATETUTORIALSLIDESHOW_SETSLIDE)(this, s, index);
+			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s, int index)>(getFuncAddr((int)Func::StateTutorialSlideshow::setSlide))(this, s, index);
 		}
 	};
 }

@@ -13,7 +13,7 @@ namespace fdm
 
 		~InventorySession() 
 		{
-			reinterpret_cast<void(__thiscall*)(InventorySession* self)>(FUNC_INVENTORYSESSION_DESTR_INVENTORYSESSION)(this);
+			reinterpret_cast<void(__thiscall*)(InventorySession* self)>(getFuncAddr((int)Func::InventorySession::destr_InventorySession))(this);
 		}
 	};
 }

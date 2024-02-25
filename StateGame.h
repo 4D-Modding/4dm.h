@@ -52,83 +52,83 @@ namespace fdm
 
 		StateGame() 
 		{
-			reinterpret_cast<void(__thiscall*)(StateGame* self)>(FUNC_STATEGAME_STATEGAME)(this);
+			reinterpret_cast<void(__thiscall*)(StateGame* self)>(getFuncAddr((int)Func::StateGame::StateGame))(this);
 		}
 		void resetMouse(GLFWwindow* w) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, GLFWwindow* w)>(FUNC_STATEGAME_RESETMOUSE)(this, w);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, GLFWwindow* w)>(getFuncAddr((int)Func::StateGame::resetMouse))(this, w);
 		}
 		void updateProjection2D(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(FUNC_STATEGAME_UPDATEPROJECTION2D)(this, size, translate2D);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(getFuncAddr((int)Func::StateGame::updateProjection2D))(this, size, translate2D);
 		}
 		inline static void viewportCallback(void* user, const glm::ivec4& pos, const glm::ivec2& scroll) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>(FUNC_STATEGAME_VIEWPORTCALLBACK)(user, pos, scroll);
+			return reinterpret_cast<void (__fastcall*)(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>(getFuncAddr((int)Func::StateGame::viewportCallback))(user, pos, scroll);
 		}
 		void updateChatMessages() 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self)>(FUNC_STATEGAME_UPDATECHATMESSAGES)(this);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self)>(getFuncAddr((int)Func::StateGame::updateChatMessages))(this);
 		}
 		void init(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s)>(FUNC_STATEGAME_INIT)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s)>(getFuncAddr((int)Func::StateGame::init))(this, s);
 		}
 		void close(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s)>(FUNC_STATEGAME_CLOSE)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s)>(getFuncAddr((int)Func::StateGame::close))(this, s);
 		}
 		void pause(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s)>(FUNC_STATEGAME_PAUSE)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s)>(getFuncAddr((int)Func::StateGame::pause))(this, s);
 		}
 		void resume(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s)>(FUNC_STATEGAME_RESUME)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s)>(getFuncAddr((int)Func::StateGame::resume))(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, double dt)>(FUNC_STATEGAME_UPDATE)(this, s, dt);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, double dt)>(getFuncAddr((int)Func::StateGame::update))(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s)>(FUNC_STATEGAME_RENDER)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s)>(getFuncAddr((int)Func::StateGame::render))(this, s);
 		}
 		void mouseInput(StateManager& s, double xpos, double ypos) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, double xpos, double ypos)>(FUNC_STATEGAME_MOUSEINPUT)(this, s, xpos, ypos);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, double xpos, double ypos)>(getFuncAddr((int)Func::StateGame::mouseInput))(this, s, xpos, ypos);
 		}
 		void scrollInput(StateManager& s, double xoffset, double yoffset) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, double xoffset, double yoffset)>(FUNC_STATEGAME_SCROLLINPUT)(this, s, xoffset, yoffset);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, double xoffset, double yoffset)>(getFuncAddr((int)Func::StateGame::scrollInput))(this, s, xoffset, yoffset);
 		}
 		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, int button, int action, int mods)>(FUNC_STATEGAME_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, int button, int action, int mods)>(getFuncAddr((int)Func::StateGame::mouseButtonInput))(this, s, button, action, mods);
 		}
 		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATEGAME_KEYINPUT)(this, s, key, scancode, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::StateGame::keyInput))(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, GLsizei width, GLsizei height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, GLsizei width, GLsizei height)>(FUNC_STATEGAME_WINDOWRESIZE)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, GLsizei width, GLsizei height)>(getFuncAddr((int)Func::StateGame::windowResize))(this, s, width, height);
 		}
 		void charInput(StateManager& s, uint32_t codepoint) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, uint32_t codepoint)>(FUNC_STATEGAME_CHARINPUT)(this, s, codepoint);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, StateManager& s, uint32_t codepoint)>(getFuncAddr((int)Func::StateGame::charInput))(this, s, codepoint);
 		}
 		void updateProjection(GLsizei width, GLsizei height) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, GLsizei width, GLsizei height)>(FUNC_STATEGAME_UPDATEPROJECTION)(this, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, GLsizei width, GLsizei height)>(getFuncAddr((int)Func::StateGame::updateProjection))(this, width, height);
 		}
 		void setWorld(std::unique_ptr<WorldManager>& world) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, std::unique_ptr<WorldManager>& world)>(FUNC_STATEGAME_SETWORLD)(this, world);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, std::unique_ptr<WorldManager>& world)>(getFuncAddr((int)Func::StateGame::setWorld))(this, world);
 		}
 		void addChatMessage(Player* player, const std::string& message, uint32_t color) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, Player* player, const std::string& message, uint32_t color)>(FUNC_STATEGAME_ADDCHATMESSAGE)(this, player, message, color);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, Player* player, const std::string& message, uint32_t color)>(getFuncAddr((int)Func::StateGame::addChatMessage))(this, player, message, color);
 		}
 	};
 }

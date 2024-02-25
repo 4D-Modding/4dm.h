@@ -12,19 +12,19 @@ namespace fdm
 
 		int vertCount() const override
 		{
-			return reinterpret_cast<int (__thiscall*)(const Sphere* self)>(FUNC_SPHERE_VERTCOUNT)(this);
+			return reinterpret_cast<int (__thiscall*)(const Sphere* self)>(getFuncAddr((int)Func::Sphere::vertCount))(this);
 		}
 		int buffSize(int buffIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(const Sphere* self, int buffIndex)>(FUNC_SPHERE_BUFFSIZE)(this, buffIndex);
+			return reinterpret_cast<int (__thiscall*)(const Sphere* self, int buffIndex)>(getFuncAddr((int)Func::Sphere::buffSize))(this, buffIndex);
 		}
 		Sphere(int edges) 
 		{
-			reinterpret_cast<void(__thiscall*)(Sphere* self, int edges)>(FUNC_SPHERE_SPHERE)(this, edges);
+			reinterpret_cast<void(__thiscall*)(Sphere* self, int edges)>(getFuncAddr((int)Func::Sphere::Sphere))(this, edges);
 		}
 		inline static void generateCirclePolygons(int wi, std::vector<glm::vec4>* verts, std::vector<glm::vec3>* tuvs, const std::vector<float>* sinVert, const std::vector<float>* cosVert) 
 		{
-			return reinterpret_cast<void (__fastcall*)(int wi, std::vector<glm::vec4>* verts, std::vector<glm::vec3>* tuvs, const std::vector<float>* sinVert, const std::vector<float>* cosVert)>(FUNC_SPHERE_GENERATECIRCLEPOLYGONS)(wi, verts, tuvs, sinVert, cosVert);
+			return reinterpret_cast<void (__fastcall*)(int wi, std::vector<glm::vec4>* verts, std::vector<glm::vec3>* tuvs, const std::vector<float>* sinVert, const std::vector<float>* cosVert)>(getFuncAddr((int)Func::Sphere::generateCirclePolygons))(wi, verts, tuvs, sinVert, cosVert);
 		}
 	};
 }

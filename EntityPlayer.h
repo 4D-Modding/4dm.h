@@ -43,65 +43,65 @@ namespace fdm
 
 		inline static std::unique_ptr<Entity> createFromPlayer(Player* p) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(Player* p)>(FUNC_ENTITYPLAYER_CREATEFROMPLAYER)(p);
+			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(Player* p)>(getFuncAddr((int)Func::EntityPlayer::createFromPlayer))(p);
 		}
 		EntityPlayer(nlohmann::json& j) 
 		{
-			reinterpret_cast<void(__thiscall*)(EntityPlayer* self, nlohmann::json& j)>(FUNC_ENTITYPLAYER_ENTITYPLAYER)(this, j);
+			reinterpret_cast<void(__thiscall*)(EntityPlayer* self, nlohmann::json& j)>(getFuncAddr((int)Func::EntityPlayer::EntityPlayer))(this, j);
 		}
 		std::string getName() override
 		{
 			std::string result;
-			return reinterpret_cast<std::string (__thiscall*)(EntityPlayer* self, std::string* result)>(FUNC_ENTITYPLAYER_GETNAME)(this, &result);
+			return reinterpret_cast<std::string (__thiscall*)(EntityPlayer* self, std::string* result)>(getFuncAddr((int)Func::EntityPlayer::getName))(this, &result);
 			return result;
 		}
 		void update(World* world, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, World* world, double dt)>(FUNC_ENTITYPLAYER_UPDATE)(this, world, dt);
+			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, World* world, double dt)>(getFuncAddr((int)Func::EntityPlayer::update))(this, world, dt);
 		}
 		void render(const World* world, const m4::Mat5& MV, bool glasses) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, const World* world, const m4::Mat5& MV, bool glasses)>(FUNC_ENTITYPLAYER_RENDER)(this, world, MV, glasses);
+			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, const World* world, const m4::Mat5& MV, bool glasses)>(getFuncAddr((int)Func::EntityPlayer::render))(this, world, MV, glasses);
 		}
 		nlohmann::json saveAttributes() override
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityPlayer* self, nlohmann::json* result)>(FUNC_ENTITYPLAYER_SAVEATTRIBUTES)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityPlayer* self, nlohmann::json* result)>(getFuncAddr((int)Func::EntityPlayer::saveAttributes))(this, &result);
 			return result;
 		}
 		void applyServerUpdate(const nlohmann::json& j, World* world) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, const nlohmann::json& j, World* world)>(FUNC_ENTITYPLAYER_APPLYSERVERUPDATE)(this, j, world);
+			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, const nlohmann::json& j, World* world)>(getFuncAddr((int)Func::EntityPlayer::applyServerUpdate))(this, j, world);
 		}
 		glm::vec4 getPos() override
 		{
 			glm::vec4 result;
-			return reinterpret_cast<glm::vec4 (__thiscall*)(EntityPlayer* self, glm::vec4* result)>(FUNC_ENTITYPLAYER_GETPOS)(this, &result);
+			return reinterpret_cast<glm::vec4 (__thiscall*)(EntityPlayer* self, glm::vec4* result)>(getFuncAddr((int)Func::EntityPlayer::getPos))(this, &result);
 			return result;
 		}
 		void setPos(const glm::vec4& pos) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, const glm::vec4& pos)>(FUNC_ENTITYPLAYER_SETPOS)(this, pos);
+			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, const glm::vec4& pos)>(getFuncAddr((int)Func::EntityPlayer::setPos))(this, pos);
 		}
 		bool isIntersectingRay(const Entity::Ray& ray) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(EntityPlayer* self, const Entity::Ray& ray)>(FUNC_ENTITYPLAYER_ISINTERSECTINGRAY)(this, ray);
+			return reinterpret_cast<bool (__thiscall*)(EntityPlayer* self, const Entity::Ray& ray)>(getFuncAddr((int)Func::EntityPlayer::isIntersectingRay))(this, ray);
 		}
 		void takeDamage(float damage, World* world) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, float damage, World* world)>(FUNC_ENTITYPLAYER_TAKEDAMAGE)(this, damage, world);
+			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, float damage, World* world)>(getFuncAddr((int)Func::EntityPlayer::takeDamage))(this, damage, world);
 		}
 		float deathTimer() override
 		{
-			return reinterpret_cast<float (__thiscall*)(EntityPlayer* self)>(FUNC_ENTITYPLAYER_DEATHTIMER)(this);
+			return reinterpret_cast<float (__thiscall*)(EntityPlayer* self)>(getFuncAddr((int)Func::EntityPlayer::deathTimer))(this);
 		}
 		void applyMovementUpdate(nlohmann::json& j) 
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, nlohmann::json& j)>(FUNC_ENTITYPLAYER_APPLYMOVEMENTUPDATE)(this, j);
+			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, nlohmann::json& j)>(getFuncAddr((int)Func::EntityPlayer::applyMovementUpdate))(this, j);
 		}
 		void collectItems(World* world) 
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, World* world)>(FUNC_ENTITYPLAYER_COLLECTITEMS)(this, world);
+			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, World* world)>(getFuncAddr((int)Func::EntityPlayer::collectItems))(this, world);
 		}
 	};
 }

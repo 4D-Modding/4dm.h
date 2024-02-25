@@ -36,63 +36,63 @@ namespace fdm
 
 		StateCreateWorld() 
 		{
-			reinterpret_cast<void(__thiscall*)(StateCreateWorld* self)>(FUNC_STATECREATEWORLD_STATECREATEWORLD)(this);
+			reinterpret_cast<void(__thiscall*)(StateCreateWorld* self)>(getFuncAddr((int)Func::StateCreateWorld::StateCreateWorld))(this);
 		}
 		void init(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s)>(FUNC_STATECREATEWORLD_INIT)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s)>(getFuncAddr((int)Func::StateCreateWorld::init))(this, s);
 		}
 		void close(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s)>(FUNC_STATECREATEWORLD_CLOSE)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s)>(getFuncAddr((int)Func::StateCreateWorld::close))(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, double dt)>(FUNC_STATECREATEWORLD_UPDATE)(this, s, dt);
+			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, double dt)>(getFuncAddr((int)Func::StateCreateWorld::update))(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s)>(FUNC_STATECREATEWORLD_RENDER)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s)>(getFuncAddr((int)Func::StateCreateWorld::render))(this, s);
 		}
 		void resume(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s)>(FUNC_STATECREATEWORLD_RESUME)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s)>(getFuncAddr((int)Func::StateCreateWorld::resume))(this, s);
 		}
 		void mouseInput(StateManager& s, double xpos, double ypos) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, double xpos, double ypos)>(FUNC_STATECREATEWORLD_MOUSEINPUT)(this, s, xpos, ypos);
+			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, double xpos, double ypos)>(getFuncAddr((int)Func::StateCreateWorld::mouseInput))(this, s, xpos, ypos);
 		}
 		void scrollInput(StateManager& s, double xoffset, double yoffset) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, double xoffset, double yoffset)>(FUNC_STATECREATEWORLD_SCROLLINPUT)(this, s, xoffset, yoffset);
+			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, double xoffset, double yoffset)>(getFuncAddr((int)Func::StateCreateWorld::scrollInput))(this, s, xoffset, yoffset);
 		}
 		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATECREATEWORLD_KEYINPUT)(this, s, key, scancode, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::StateCreateWorld::keyInput))(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, int width, int height)>(FUNC_STATECREATEWORLD_WINDOWRESIZE)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StateCreateWorld::windowResize))(this, s, width, height);
 		}
 		void charInput(StateManager& s, uint32_t codepoint) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, uint32_t codepoint)>(FUNC_STATECREATEWORLD_CHARINPUT)(this, s, codepoint);
+			return reinterpret_cast<void (__thiscall*)(StateCreateWorld* self, StateManager& s, uint32_t codepoint)>(getFuncAddr((int)Func::StateCreateWorld::charInput))(this, s, codepoint);
 		}
 		inline static void createNewWorld(std::vector<Chunk *>* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(std::vector<Chunk *>* user)>(FUNC_STATECREATEWORLD_CREATENEWWORLD)(user);
+			return reinterpret_cast<void (__fastcall*)(std::vector<Chunk *>* user)>(getFuncAddr((int)Func::StateCreateWorld::createNewWorld))(user);
 		}
 		inline static void viewportCallback(void* user, const glm::ivec4& pos, const glm::ivec2& scroll) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>(FUNC_STATECREATEWORLD_VIEWPORTCALLBACK)(user, pos, scroll);
+			return reinterpret_cast<void (__fastcall*)(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>(getFuncAddr((int)Func::StateCreateWorld::viewportCallback))(user, pos, scroll);
 		}
 		inline static void caveCheckboxCallback(void* user, bool checked) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(FUNC_STATECREATEWORLD_CAVECHECKBOXCALLBACK)(user, checked);
+			return reinterpret_cast<void (__fastcall*)(void* user, bool checked)>(getFuncAddr((int)Func::StateCreateWorld::caveCheckboxCallback))(user, checked);
 		}
 		bool handleCreateButton() 
 		{
-			return reinterpret_cast<bool (__thiscall*)(StateCreateWorld* self)>(FUNC_STATECREATEWORLD_HANDLECREATEBUTTON)(this);
+			return reinterpret_cast<bool (__thiscall*)(StateCreateWorld* self)>(getFuncAddr((int)Func::StateCreateWorld::handleCreateButton))(this);
 		}
 	};
 }

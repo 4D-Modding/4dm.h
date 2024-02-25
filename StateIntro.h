@@ -31,27 +31,27 @@ namespace fdm
 
 		void updateProjection(int width, int height) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateIntro* self, int width, int height)>(FUNC_STATEINTRO_UPDATEPROJECTION)(this, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateIntro* self, int width, int height)>(getFuncAddr((int)Func::StateIntro::updateProjection))(this, width, height);
 		}
 		void loadFiles() 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateIntro* self)>(FUNC_STATEINTRO_LOADFILES)(this);
+			return reinterpret_cast<void (__thiscall*)(StateIntro* self)>(getFuncAddr((int)Func::StateIntro::loadFiles))(this);
 		}
 		void init(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateIntro* self, StateManager& s)>(FUNC_STATEINTRO_INIT)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateIntro* self, StateManager& s)>(getFuncAddr((int)Func::StateIntro::init))(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateIntro* self, StateManager& s, double dt)>(FUNC_STATEINTRO_UPDATE)(this, s, dt);
+			return reinterpret_cast<void (__thiscall*)(StateIntro* self, StateManager& s, double dt)>(getFuncAddr((int)Func::StateIntro::update))(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateIntro* self, StateManager& s)>(FUNC_STATEINTRO_RENDER)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateIntro* self, StateManager& s)>(getFuncAddr((int)Func::StateIntro::render))(this, s);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateIntro* self, StateManager& s, int width, int height)>(FUNC_STATEINTRO_WINDOWRESIZE)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateIntro* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StateIntro::windowResize))(this, s, width, height);
 		}
 	};
 }

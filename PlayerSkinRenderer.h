@@ -45,19 +45,19 @@ namespace fdm
 		PlayerSkinRenderer(){}
 		PlayerSkinRenderer(const PlayerSkin* skin) 
 		{
-			reinterpret_cast<void(__thiscall*)(PlayerSkinRenderer* self, const PlayerSkin* skin)>(FUNC_PLAYERSKINRENDERER_PLAYERSKINRENDERER)(this, skin);
+			reinterpret_cast<void(__thiscall*)(PlayerSkinRenderer* self, const PlayerSkin* skin)>(getFuncAddr((int)Func::PlayerSkinRenderer::PlayerSkinRenderer))(this, skin);
 		}
 		void render(const m4::Mat5& MV, const glm::vec4& lightDir, const std::unique_ptr<Item>* handSlot, const std::unique_ptr<Item>* equipmentSlot, bool glasses) 
 		{
-			return reinterpret_cast<void (__thiscall*)(PlayerSkinRenderer* self, const m4::Mat5& MV, const glm::vec4& lightDir, const std::unique_ptr<Item>* handSlot, const std::unique_ptr<Item>* equipmentSlot, bool glasses)>(FUNC_PLAYERSKINRENDERER_RENDER)(this, MV, lightDir, handSlot, equipmentSlot, glasses);
+			return reinterpret_cast<void (__thiscall*)(PlayerSkinRenderer* self, const m4::Mat5& MV, const glm::vec4& lightDir, const std::unique_ptr<Item>* handSlot, const std::unique_ptr<Item>* equipmentSlot, bool glasses)>(getFuncAddr((int)Func::PlayerSkinRenderer::render))(this, MV, lightDir, handSlot, equipmentSlot, glasses);
 		}
 		void updateAnimation(double dt) 
 		{
-			return reinterpret_cast<void (__thiscall*)(PlayerSkinRenderer* self, double dt)>(FUNC_PLAYERSKINRENDERER_UPDATEANIMATION)(this, dt);
+			return reinterpret_cast<void (__thiscall*)(PlayerSkinRenderer* self, double dt)>(getFuncAddr((int)Func::PlayerSkinRenderer::updateAnimation))(this, dt);
 		}
 		void resetTransformations() 
 		{
-			return reinterpret_cast<void (__thiscall*)(PlayerSkinRenderer* self)>(FUNC_PLAYERSKINRENDERER_RESETTRANSFORMATIONS)(this);
+			return reinterpret_cast<void (__thiscall*)(PlayerSkinRenderer* self)>(getFuncAddr((int)Func::PlayerSkinRenderer::resetTransformations))(this);
 		}
 	};
 }

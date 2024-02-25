@@ -39,39 +39,39 @@ namespace fdm
 
 		int buffCount() const override
 		{
-			return reinterpret_cast<int (__thiscall*)(const Dodecaplex* self)>(FUNC_DODECAPLEX_BUFFCOUNT)(this);
+			return reinterpret_cast<int (__thiscall*)(const Dodecaplex* self)>(getFuncAddr((int)Func::Dodecaplex::buffCount))(this);
 		}
 		const void* buffData(int buffIndex) const override
 		{
-			return reinterpret_cast<const void* (__thiscall*)(const Dodecaplex* self, int buffIndex)>(FUNC_DODECAPLEX_BUFFDATA)(this, buffIndex);
+			return reinterpret_cast<const void* (__thiscall*)(const Dodecaplex* self, int buffIndex)>(getFuncAddr((int)Func::Dodecaplex::buffData))(this, buffIndex);
 		}
 		int buffSize(int buffIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(const Dodecaplex* self, int buffIndex)>(FUNC_DODECAPLEX_BUFFSIZE)(this, buffIndex);
+			return reinterpret_cast<int (__thiscall*)(const Dodecaplex* self, int buffIndex)>(getFuncAddr((int)Func::Dodecaplex::buffSize))(this, buffIndex);
 		}
 		int attrSize(int buffIndex, int attrIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(const Dodecaplex* self, int buffIndex, int attrIndex)>(FUNC_DODECAPLEX_ATTRSIZE)(this, buffIndex, attrIndex);
+			return reinterpret_cast<int (__thiscall*)(const Dodecaplex* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::Dodecaplex::attrSize))(this, buffIndex, attrIndex);
 		}
 		void generateMesh(bool hollow, float distance, bool generateInner, const glm::vec3& colors, bool spider) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, bool hollow, float distance, bool generateInner, const glm::vec3& colors, bool spider)>(FUNC_DODECAPLEX_GENERATEMESH)(this, hollow, distance, generateInner, colors, spider);
+			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, bool hollow, float distance, bool generateInner, const glm::vec3& colors, bool spider)>(getFuncAddr((int)Func::Dodecaplex::generateMesh))(this, hollow, distance, generateInner, colors, spider);
 		}
 		void generateCellColors(std::vector<glm::vec3>& colors) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, std::vector<glm::vec3>& colors)>(FUNC_DODECAPLEX_GENERATECELLCOLORS)(this, colors);
+			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, std::vector<glm::vec3>& colors)>(getFuncAddr((int)Func::Dodecaplex::generateCellColors))(this, colors);
 		}
 		void addFaces(Dodecaplex::Face* face, std::vector<DodecaplexWireframe::Face>* list, int recurse_limit) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, Dodecaplex::Face* face, std::vector<DodecaplexWireframe::Face>* list, int recurse_limit)>(FUNC_DODECAPLEX_ADDFACES)(this, face, list, recurse_limit);
+			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, Dodecaplex::Face* face, std::vector<DodecaplexWireframe::Face>* list, int recurse_limit)>(getFuncAddr((int)Func::Dodecaplex::addFaces))(this, face, list, recurse_limit);
 		}
 		void addCells(Dodecaplex::Cell* cell, std::vector<DodecaplexWireframe::Cell>* list, int recurse_limit) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, Dodecaplex::Cell* cell, std::vector<DodecaplexWireframe::Cell>* list, int recurse_limit)>(FUNC_DODECAPLEX_ADDCELLS)(this, cell, list, recurse_limit);
+			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, Dodecaplex::Cell* cell, std::vector<DodecaplexWireframe::Cell>* list, int recurse_limit)>(getFuncAddr((int)Func::Dodecaplex::addCells))(this, cell, list, recurse_limit);
 		}
 		~Dodecaplex() 
 		{
-			reinterpret_cast<void(__thiscall*)(Dodecaplex* self)>(FUNC_DODECAPLEX_DESTR_DODECAPLEX)(this);
+			reinterpret_cast<void(__thiscall*)(Dodecaplex* self)>(getFuncAddr((int)Func::Dodecaplex::destr_Dodecaplex))(this);
 		}
 
 		int attrCount(int buffIndex) const { return 0; }

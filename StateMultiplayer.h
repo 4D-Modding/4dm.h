@@ -38,87 +38,87 @@ namespace fdm
 
 		~StateMultiplayer() 
 		{
-			reinterpret_cast<void(__thiscall*)(StateMultiplayer* self)>(FUNC_STATEMULTIPLAYER_DESTR_STATEMULTIPLAYER)(this);
+			reinterpret_cast<void(__thiscall*)(StateMultiplayer* self)>(getFuncAddr((int)Func::StateMultiplayer::destr_StateMultiplayer))(this);
 		}
 		StateMultiplayer() 
 		{
-			reinterpret_cast<void(__thiscall*)(StateMultiplayer* self)>(FUNC_STATEMULTIPLAYER_STATEMULTIPLAYER)(this);
+			reinterpret_cast<void(__thiscall*)(StateMultiplayer* self)>(getFuncAddr((int)Func::StateMultiplayer::StateMultiplayer))(this);
 		}
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(FUNC_STATEMULTIPLAYER_UPDATEPROJECTION)(this, size, translate2D);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(getFuncAddr((int)Func::StateMultiplayer::updateProjection))(this, size, translate2D);
 		}
 		inline static void cancelButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATEMULTIPLAYER_CANCELBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateMultiplayer::cancelButtonCallback))(user);
 		}
 		inline static void changeSkinButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATEMULTIPLAYER_CHANGESKINBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateMultiplayer::changeSkinButtonCallback))(user);
 		}
 		inline static void joinButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATEMULTIPLAYER_JOINBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateMultiplayer::joinButtonCallback))(user);
 		}
 		inline static void viewportCallback(void* user, const glm::ivec4& pos, const glm::ivec2& scroll) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>(FUNC_STATEMULTIPLAYER_VIEWPORTCALLBACK)(user, pos, scroll);
+			return reinterpret_cast<void (__fastcall*)(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>(getFuncAddr((int)Func::StateMultiplayer::viewportCallback))(user, pos, scroll);
 		}
 		inline static void uuidCopyButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATEMULTIPLAYER_UUIDCOPYBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateMultiplayer::uuidCopyButtonCallback))(user);
 		}
 		void init(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s)>(FUNC_STATEMULTIPLAYER_INIT)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s)>(getFuncAddr((int)Func::StateMultiplayer::init))(this, s);
 		}
 		void close(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s)>(FUNC_STATEMULTIPLAYER_CLOSE)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s)>(getFuncAddr((int)Func::StateMultiplayer::close))(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, double dt)>(FUNC_STATEMULTIPLAYER_UPDATE)(this, s, dt);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, double dt)>(getFuncAddr((int)Func::StateMultiplayer::update))(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s)>(FUNC_STATEMULTIPLAYER_RENDER)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s)>(getFuncAddr((int)Func::StateMultiplayer::render))(this, s);
 		}
 		void mouseInput(StateManager& s, double xpos, double ypos) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, double xpos, double ypos)>(FUNC_STATEMULTIPLAYER_MOUSEINPUT)(this, s, xpos, ypos);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, double xpos, double ypos)>(getFuncAddr((int)Func::StateMultiplayer::mouseInput))(this, s, xpos, ypos);
 		}
 		void scrollInput(StateManager& s, double xoffset, double yoffset) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, double xoffset, double yoffset)>(FUNC_STATEMULTIPLAYER_SCROLLINPUT)(this, s, xoffset, yoffset);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, double xoffset, double yoffset)>(getFuncAddr((int)Func::StateMultiplayer::scrollInput))(this, s, xoffset, yoffset);
 		}
 		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, int button, int action, int mods)>(FUNC_STATEMULTIPLAYER_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, int button, int action, int mods)>(getFuncAddr((int)Func::StateMultiplayer::mouseButtonInput))(this, s, button, action, mods);
 		}
 		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATEMULTIPLAYER_KEYINPUT)(this, s, key, scancode, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::StateMultiplayer::keyInput))(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, int width, int height)>(FUNC_STATEMULTIPLAYER_WINDOWRESIZE)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StateMultiplayer::windowResize))(this, s, width, height);
 		}
 		void charInput(StateManager& s, uint32_t codepoint) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, uint32_t codepoint)>(FUNC_STATEMULTIPLAYER_CHARINPUT)(this, s, codepoint);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, StateManager& s, uint32_t codepoint)>(getFuncAddr((int)Func::StateMultiplayer::charInput))(this, s, codepoint);
 		}
 		void rejoin(std::shared_ptr<Connection::Client> client, const std::unique_ptr<WorldClient>& world) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, std::shared_ptr<Connection::Client> client, const std::unique_ptr<WorldClient>& world)>(FUNC_STATEMULTIPLAYER_REJOIN)(this, client, world);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self, std::shared_ptr<Connection::Client> client, const std::unique_ptr<WorldClient>& world)>(getFuncAddr((int)Func::StateMultiplayer::rejoin))(this, client, world);
 		}
 		void connect() 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self)>(FUNC_STATEMULTIPLAYER_CONNECT)(this);
+			return reinterpret_cast<void (__thiscall*)(StateMultiplayer* self)>(getFuncAddr((int)Func::StateMultiplayer::connect))(this);
 		}
 		inline static void connectionErrorOkButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATEMULTIPLAYER_CONNECTIONERROROKBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateMultiplayer::connectionErrorOkButtonCallback))(user);
 		}
 	};
 }

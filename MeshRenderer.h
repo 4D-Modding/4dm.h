@@ -17,35 +17,35 @@ namespace fdm
 
 		MeshRenderer() 
 		{
-			reinterpret_cast<void(__thiscall*)(MeshRenderer* self)>(FUNC_MESHRENDERER_MESHRENDERER)(this);
+			reinterpret_cast<void(__thiscall*)(MeshRenderer* self)>(getFuncAddr((int)Func::MeshRenderer::MeshRenderer))(this);
 		}
 		void setMesh(Mesh* mesh) 
 		{
-			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, Mesh* mesh)>(FUNC_MESHRENDERER_SETMESH)(this, mesh);
+			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, Mesh* mesh)>(getFuncAddr((int)Func::MeshRenderer::setMesh))(this, mesh);
 		}
 		void updateMesh(Mesh* mesh) 
 		{
-			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, Mesh* mesh)>(FUNC_MESHRENDERER_UPDATEMESH)(this, mesh);
+			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, Mesh* mesh)>(getFuncAddr((int)Func::MeshRenderer::updateMesh))(this, mesh);
 		}
 		~MeshRenderer() 
 		{
-			reinterpret_cast<void(__thiscall*)(MeshRenderer* self)>(FUNC_MESHRENDERER_DESTR_MESHRENDERER)(this);
+			reinterpret_cast<void(__thiscall*)(MeshRenderer* self)>(getFuncAddr((int)Func::MeshRenderer::destr_MeshRenderer))(this);
 		}
 		void render() 
 		{
-			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self)>(FUNC_MESHRENDERER_RENDER)(this);
+			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self)>(getFuncAddr((int)Func::MeshRenderer::render))(this);
 		}
 		void init(Mesh* mesh) 
 		{
-			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, Mesh* mesh)>(FUNC_MESHRENDERER_INIT)(this, mesh);
+			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, Mesh* mesh)>(getFuncAddr((int)Func::MeshRenderer::init))(this, mesh);
 		}
 		void cleanup() 
 		{
-			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self)>(FUNC_MESHRENDERER_CLEANUP)(this);
+			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self)>(getFuncAddr((int)Func::MeshRenderer::cleanup))(this);
 		}
 		void initAttrs(Mesh* mesh) 
 		{
-			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, Mesh* mesh)>(FUNC_MESHRENDERER_INITATTRS)(this, mesh);
+			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, Mesh* mesh)>(getFuncAddr((int)Func::MeshRenderer::initAttrs))(this, mesh);
 		}
 	};
 }

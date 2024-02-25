@@ -36,79 +36,79 @@ namespace fdm
 
 		inline static void quitGameButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATETITLESCREEN_QUITGAMEBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateTitleScreen::quitGameButtonCallback))(user);
 		}
 		inline static void settingsButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATETITLESCREEN_SETTINGSBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateTitleScreen::settingsButtonCallback))(user);
 		}
 		StateTitleScreen() 
 		{
-			reinterpret_cast<void(__thiscall*)(StateTitleScreen* self)>(FUNC_STATETITLESCREEN_STATETITLESCREEN)(this);
+			reinterpret_cast<void(__thiscall*)(StateTitleScreen* self)>(getFuncAddr((int)Func::StateTitleScreen::StateTitleScreen))(this);
 		}
 		void updateProjection(int width, int height) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, int width, int height)>(FUNC_STATETITLESCREEN_UPDATEPROJECTION)(this, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, int width, int height)>(getFuncAddr((int)Func::StateTitleScreen::updateProjection))(this, width, height);
 		}
 		inline static void singleplayerButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATETITLESCREEN_SINGLEPLAYERBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateTitleScreen::singleplayerButtonCallback))(user);
 		}
 		inline static void multiplayerplayerButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATETITLESCREEN_MULTIPLAYERPLAYERBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateTitleScreen::multiplayerplayerButtonCallback))(user);
 		}
 		inline static void creditsButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATETITLESCREEN_CREDITSBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateTitleScreen::creditsButtonCallback))(user);
 		}
 		inline static void tutorialButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATETITLESCREEN_TUTORIALBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateTitleScreen::tutorialButtonCallback))(user);
 		}
 		void init(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s)>(FUNC_STATETITLESCREEN_INIT)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s)>(getFuncAddr((int)Func::StateTitleScreen::init))(this, s);
 		}
 		void close(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s)>(FUNC_STATETITLESCREEN_CLOSE)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s)>(getFuncAddr((int)Func::StateTitleScreen::close))(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, double dt)>(FUNC_STATETITLESCREEN_UPDATE)(this, s, dt);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, double dt)>(getFuncAddr((int)Func::StateTitleScreen::update))(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s)>(FUNC_STATETITLESCREEN_RENDER)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s)>(getFuncAddr((int)Func::StateTitleScreen::render))(this, s);
 		}
 		void pause(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s)>(FUNC_STATETITLESCREEN_PAUSE)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s)>(getFuncAddr((int)Func::StateTitleScreen::pause))(this, s);
 		}
 		void resume(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s)>(FUNC_STATETITLESCREEN_RESUME)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s)>(getFuncAddr((int)Func::StateTitleScreen::resume))(this, s);
 		}
 		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATETITLESCREEN_KEYINPUT)(this, s, key, scancode, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::StateTitleScreen::keyInput))(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, int width, int height)>(FUNC_STATETITLESCREEN_WINDOWRESIZE)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StateTitleScreen::windowResize))(this, s, width, height);
 		}
 		void mouseInput(StateManager& s, double xpos, double ypos) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, double xpos, double ypos)>(FUNC_STATETITLESCREEN_MOUSEINPUT)(this, s, xpos, ypos);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, double xpos, double ypos)>(getFuncAddr((int)Func::StateTitleScreen::mouseInput))(this, s, xpos, ypos);
 		}
 		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, int button, int action, int mods)>(FUNC_STATETITLESCREEN_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, StateManager& s, int button, int action, int mods)>(getFuncAddr((int)Func::StateTitleScreen::mouseButtonInput))(this, s, button, action, mods);
 		}
 		void renderBackground(int width, int height) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, int width, int height)>(FUNC_STATETITLESCREEN_RENDERBACKGROUND)(this, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateTitleScreen* self, int width, int height)>(getFuncAddr((int)Func::StateTitleScreen::renderBackground))(this, width, height);
 		}
 	};
 }

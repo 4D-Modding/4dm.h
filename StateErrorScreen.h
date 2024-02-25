@@ -19,31 +19,31 @@ namespace fdm
 
 		inline static void okButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATEERRORSCREEN_OKBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateErrorScreen::okButtonCallback))(user);
 		}
 		void init(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s)>(FUNC_STATEERRORSCREEN_INIT)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s)>(getFuncAddr((int)Func::StateErrorScreen::init))(this, s);
 		}
 		void close(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s)>(FUNC_STATEERRORSCREEN_CLOSE)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s)>(getFuncAddr((int)Func::StateErrorScreen::close))(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s, double dt)>(FUNC_STATEERRORSCREEN_UPDATE)(this, s, dt);
+			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s, double dt)>(getFuncAddr((int)Func::StateErrorScreen::update))(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s)>(FUNC_STATEERRORSCREEN_RENDER)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s)>(getFuncAddr((int)Func::StateErrorScreen::render))(this, s);
 		}
 		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s, int button, int action, int mods)>(FUNC_STATEERRORSCREEN_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s, int button, int action, int mods)>(getFuncAddr((int)Func::StateErrorScreen::mouseButtonInput))(this, s, button, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s, int width, int height)>(FUNC_STATEERRORSCREEN_WINDOWRESIZE)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateErrorScreen* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StateErrorScreen::windowResize))(this, s, width, height);
 		}
 	};
 }

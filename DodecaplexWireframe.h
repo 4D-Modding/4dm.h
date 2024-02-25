@@ -34,15 +34,15 @@ namespace fdm
 
 		void generateMesh() 
 		{
-			return reinterpret_cast<void (__thiscall*)(DodecaplexWireframe* self)>(FUNC_DODECAPLEXWIREFRAME_GENERATEMESH)(this);
+			return reinterpret_cast<void (__thiscall*)(DodecaplexWireframe* self)>(getFuncAddr((int)Func::DodecaplexWireframe::generateMesh))(this);
 		}
 		void addFaces(DodecaplexWireframe::Face* face, std::vector<DodecaplexWireframe::Face>* list, int recurse_limit) 
 		{
-			return reinterpret_cast<void (__thiscall*)(DodecaplexWireframe* self, DodecaplexWireframe::Face* face, std::vector<DodecaplexWireframe::Face>* list, int recurse_limit)>(FUNC_DODECAPLEXWIREFRAME_ADDFACES)(this, face, list, recurse_limit);
+			return reinterpret_cast<void (__thiscall*)(DodecaplexWireframe* self, DodecaplexWireframe::Face* face, std::vector<DodecaplexWireframe::Face>* list, int recurse_limit)>(getFuncAddr((int)Func::DodecaplexWireframe::addFaces))(this, face, list, recurse_limit);
 		}
 		void addCells(DodecaplexWireframe::Cell* cell, std::vector<DodecaplexWireframe::Cell>* list, int recurse_limit) 
 		{
-			return reinterpret_cast<void (__thiscall*)(DodecaplexWireframe* self, DodecaplexWireframe::Cell* cell, std::vector<DodecaplexWireframe::Cell>* list, int recurse_limit)>(FUNC_DODECAPLEXWIREFRAME_ADDCELLS)(this, cell, list, recurse_limit);
+			return reinterpret_cast<void (__thiscall*)(DodecaplexWireframe* self, DodecaplexWireframe::Cell* cell, std::vector<DodecaplexWireframe::Cell>* list, int recurse_limit)>(getFuncAddr((int)Func::DodecaplexWireframe::addCells))(this, cell, list, recurse_limit);
 		}
 	};
 }

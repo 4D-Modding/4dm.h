@@ -15,6 +15,7 @@ namespace fdm
 	class InventoryGrid;
 	class InventoryManager;
 	class InventoryPlayer;
+	class m4::Mat5;
 	class MeshRenderer;
 	class TexRenderer;
 	class FontRenderer;
@@ -122,147 +123,147 @@ namespace fdm
 
 		~Player() 
 		{
-			reinterpret_cast<void(__thiscall*)(Player* self)>(FUNC_PLAYER_DESTR_PLAYER)(this);
+			reinterpret_cast<void(__thiscall*)(Player* self)>(getFuncAddr((int)Func::Player::destr_Player))(this);
 		}
 		Player() 
 		{
-			reinterpret_cast<void(__thiscall*)(Player* self)>(FUNC_PLAYER_PLAYER)(this);
+			reinterpret_cast<void(__thiscall*)(Player* self)>(getFuncAddr((int)Func::Player::Player))(this);
 		}
 		void updatePos(World* world, double dt) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, double dt)>(FUNC_PLAYER_UPDATEPOS)(this, world, dt);
+			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, double dt)>(getFuncAddr((int)Func::Player::updatePos))(this, world, dt);
 		}
 		void updateCurrentBlock() 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self)>(FUNC_PLAYER_UPDATECURRENTBLOCK)(this);
+			return reinterpret_cast<void (__thiscall*)(Player* self)>(getFuncAddr((int)Func::Player::updateCurrentBlock))(this);
 		}
 		void handleCollision(World* world) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, World* world)>(FUNC_PLAYER_HANDLECOLLISION)(this, world);
+			return reinterpret_cast<void (__thiscall*)(Player* self, World* world)>(getFuncAddr((int)Func::Player::handleCollision))(this, world);
 		}
 		void updateComponentVectors() 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self)>(FUNC_PLAYER_UPDATECOMPONENTVECTORS)(this);
+			return reinterpret_cast<void (__thiscall*)(Player* self)>(getFuncAddr((int)Func::Player::updateComponentVectors))(this);
 		}
 		void updateAllComponentVectors() 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self)>(FUNC_PLAYER_UPDATEALLCOMPONENTVECTORS)(this);
+			return reinterpret_cast<void (__thiscall*)(Player* self)>(getFuncAddr((int)Func::Player::updateAllComponentVectors))(this);
 		}
 		void removeVelComp(uint32_t comp) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, uint32_t comp)>(FUNC_PLAYER_REMOVEVELCOMP)(this, comp);
+			return reinterpret_cast<void (__thiscall*)(Player* self, uint32_t comp)>(getFuncAddr((int)Func::Player::removeVelComp))(this, comp);
 		}
 		void updateTargetBlock(World* world, float maxDist) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, float maxDist)>(FUNC_PLAYER_UPDATETARGETBLOCK)(this, world, maxDist);
+			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, float maxDist)>(getFuncAddr((int)Func::Player::updateTargetBlock))(this, world, maxDist);
 		}
 		void init(const glm::ivec4& spawnPoint) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, const glm::ivec4& spawnPoint)>(FUNC_PLAYER_INIT)(this, spawnPoint);
+			return reinterpret_cast<void (__thiscall*)(Player* self, const glm::ivec4& spawnPoint)>(getFuncAddr((int)Func::Player::init))(this, spawnPoint);
 		}
 		void renderHud(GLFWwindow* window) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, GLFWwindow* window)>(FUNC_PLAYER_RENDERHUD)(this, window);
+			return reinterpret_cast<void (__thiscall*)(Player* self, GLFWwindow* window)>(getFuncAddr((int)Func::Player::renderHud))(this, window);
 		}
 		void renderTargetBlock(const m4::Mat5& MV, bool renderBG) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, const m4::Mat5& MV, bool renderBG)>(FUNC_PLAYER_RENDERTARGETBLOCK)(this, MV, renderBG);
+			return reinterpret_cast<void (__thiscall*)(Player* self, const m4::Mat5& MV, bool renderBG)>(getFuncAddr((int)Func::Player::renderTargetBlock))(this, MV, renderBG);
 		}
 		nlohmann::json getMovementUpdate() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(FUNC_PLAYER_GETMOVEMENTUPDATE)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::getMovementUpdate))(this, &result);
 		}
 		void setMovementBehavior(nlohmann::json& movementKeys, bool keepOnEdge) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, nlohmann::json& movementKeys, bool keepOnEdge)>(FUNC_PLAYER_SETMOVEMENTBEHAVIOR)(this, movementKeys, keepOnEdge);
+			return reinterpret_cast<void (__thiscall*)(Player* self, nlohmann::json& movementKeys, bool keepOnEdge)>(getFuncAddr((int)Func::Player::setMovementBehavior))(this, movementKeys, keepOnEdge);
 		}
 		void hitTargetBlock(World* world) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, World* world)>(FUNC_PLAYER_HITTARGETBLOCK)(this, world);
+			return reinterpret_cast<void (__thiscall*)(Player* self, World* world)>(getFuncAddr((int)Func::Player::hitTargetBlock))(this, world);
 		}
 		bool breakBlock(World* world) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(Player* self, World* world)>(FUNC_PLAYER_BREAKBLOCK)(this, world);
+			return reinterpret_cast<bool (__thiscall*)(Player* self, World* world)>(getFuncAddr((int)Func::Player::breakBlock))(this, world);
 		}
 		void throwItem(World* world, std::unique_ptr<Item>& item, uint32_t maxCount) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, std::unique_ptr<Item>& item, uint32_t maxCount)>(FUNC_PLAYER_THROWITEM)(this, world, item, maxCount);
+			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, std::unique_ptr<Item>& item, uint32_t maxCount)>(getFuncAddr((int)Func::Player::throwItem))(this, world, item, maxCount);
 		}
 		void update(World* world, double dt, EntityPlayer* entityPlayer) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, double dt, EntityPlayer* entityPlayer)>(FUNC_PLAYER_UPDATE)(this, world, dt, entityPlayer);
+			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, double dt, EntityPlayer* entityPlayer)>(getFuncAddr((int)Func::Player::update))(this, world, dt, entityPlayer);
 		}
 		void updateLocal(World* world, double dt, GLFWwindow* window) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, double dt, GLFWwindow* window)>(FUNC_PLAYER_UPDATELOCAL)(this, world, dt, window);
+			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, double dt, GLFWwindow* window)>(getFuncAddr((int)Func::Player::updateLocal))(this, world, dt, window);
 		}
 		void updateCameraPos(World* world) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, World* world)>(FUNC_PLAYER_UPDATECAMERAPOS)(this, world);
+			return reinterpret_cast<void (__thiscall*)(Player* self, World* world)>(getFuncAddr((int)Func::Player::updateCameraPos))(this, world);
 		}
 		void resetMouse(GLFWwindow* window) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, GLFWwindow* window)>(FUNC_PLAYER_RESETMOUSE)(this, window);
+			return reinterpret_cast<void (__thiscall*)(Player* self, GLFWwindow* window)>(getFuncAddr((int)Func::Player::resetMouse))(this, window);
 		}
 		bool keyInput(GLFWwindow* window, World* world, int key, int scancode, int action, char mods) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(Player* self, GLFWwindow* window, World* world, int key, int scancode, int action, char mods)>(FUNC_PLAYER_KEYINPUT)(this, window, world, key, scancode, action, mods);
+			return reinterpret_cast<bool (__thiscall*)(Player* self, GLFWwindow* window, World* world, int key, int scancode, int action, char mods)>(getFuncAddr((int)Func::Player::keyInput))(this, window, world, key, scancode, action, mods);
 		}
 		void mouseInput(GLFWwindow* window, World* world, double xpos, double ypos) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, GLFWwindow* window, World* world, double xpos, double ypos)>(FUNC_PLAYER_MOUSEINPUT)(this, window, world, xpos, ypos);
+			return reinterpret_cast<void (__thiscall*)(Player* self, GLFWwindow* window, World* world, double xpos, double ypos)>(getFuncAddr((int)Func::Player::mouseInput))(this, window, world, xpos, ypos);
 		}
 		void mouseButtonInput(GLFWwindow* window, World* world, int button, int action, int mods) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, GLFWwindow* window, World* world, int button, int action, int mods)>(FUNC_PLAYER_MOUSEBUTTONINPUT)(this, window, world, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(Player* self, GLFWwindow* window, World* world, int button, int action, int mods)>(getFuncAddr((int)Func::Player::mouseButtonInput))(this, window, world, button, action, mods);
 		}
 		bool isHoldingGlasses() 
 		{
-			return reinterpret_cast<bool (__thiscall*)(Player* self)>(FUNC_PLAYER_ISHOLDINGGLASSES)(this);
+			return reinterpret_cast<bool (__thiscall*)(Player* self)>(getFuncAddr((int)Func::Player::isHoldingGlasses))(this);
 		}
 		bool isHoldingCompass() 
 		{
-			return reinterpret_cast<bool (__thiscall*)(Player* self)>(FUNC_PLAYER_ISHOLDINGCOMPASS)(this);
+			return reinterpret_cast<bool (__thiscall*)(Player* self)>(getFuncAddr((int)Func::Player::isHoldingCompass))(this);
 		}
 		bool isHoldingCollector() 
 		{
-			return reinterpret_cast<bool (__thiscall*)(Player* self)>(FUNC_PLAYER_ISHOLDINGCOLLECTOR)(this);
+			return reinterpret_cast<bool (__thiscall*)(Player* self)>(getFuncAddr((int)Func::Player::isHoldingCollector))(this);
 		}
 		bool headIsInBlock() 
 		{
-			return reinterpret_cast<bool (__thiscall*)(Player* self)>(FUNC_PLAYER_HEADISINBLOCK)(this);
+			return reinterpret_cast<bool (__thiscall*)(Player* self)>(getFuncAddr((int)Func::Player::headIsInBlock))(this);
 		}
 		uint32_t getHeadBlock() 
 		{
-			return reinterpret_cast<uint32_t (__thiscall*)(Player* self)>(FUNC_PLAYER_GETHEADBLOCK)(this);
+			return reinterpret_cast<uint32_t (__thiscall*)(Player* self)>(getFuncAddr((int)Func::Player::getHeadBlock))(this);
 		}
 		void respawn(World* world, const glm::ivec4& spawnPoint) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, const glm::ivec4& spawnPoint)>(FUNC_PLAYER_RESPAWN)(this, world, spawnPoint);
+			return reinterpret_cast<void (__thiscall*)(Player* self, World* world, const glm::ivec4& spawnPoint)>(getFuncAddr((int)Func::Player::respawn))(this, world, spawnPoint);
 		}
 		void load(nlohmann::json& j) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, nlohmann::json& j)>(FUNC_PLAYER_LOAD)(this, j);
+			return reinterpret_cast<void (__thiscall*)(Player* self, nlohmann::json& j)>(getFuncAddr((int)Func::Player::load))(this, j);
 		}
 		nlohmann::json save() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(FUNC_PLAYER_SAVE)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::save))(this, &result);
 		}
 		void loadClientData(nlohmann::json& j) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Player* self, nlohmann::json& j)>(FUNC_PLAYER_LOADCLIENTDATA)(this, j);
+			return reinterpret_cast<void (__thiscall*)(Player* self, nlohmann::json& j)>(getFuncAddr((int)Func::Player::loadClientData))(this, j);
 		}
 		nlohmann::json saveClientData() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(FUNC_PLAYER_SAVECLIENTDATA)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::saveClientData))(this, &result);
 		}
 		nlohmann::json saveOrientation() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(FUNC_PLAYER_SAVEORIENTATION)(this,& result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::saveOrientation))(this,& result);
 		}
 	};
 }

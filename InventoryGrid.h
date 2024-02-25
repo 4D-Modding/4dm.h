@@ -27,12 +27,12 @@ namespace fdm
 
 		~InventoryGrid() 
 		{
-			reinterpret_cast<void(__thiscall*)(InventoryGrid* self)>(FUNC_INVENTORYGRID_DESTR_INVENTORYGRID)(this);
+			reinterpret_cast<void(__thiscall*)(InventoryGrid* self)>(getFuncAddr((int)Func::InventoryGrid::destr_InventoryGrid))(this);
 		}
 		InventoryGrid() {}
 		InventoryGrid(const glm::ivec2& size) 
 		{
-			reinterpret_cast<void(__thiscall*)(InventoryGrid* self, const glm::ivec2& size)>(FUNC_INVENTORYGRID_INVENTORYGRID)(this, size);
+			reinterpret_cast<void(__thiscall*)(InventoryGrid* self, const glm::ivec2& size)>(getFuncAddr((int)Func::InventoryGrid::InventoryGrid))(this, size);
 		}
 		bool addItem(std::unique_ptr<Item>& item) override
 		{
@@ -47,27 +47,27 @@ namespace fdm
 		}
 		void render(const glm::ivec2& cursorPos) override
 		{
-			return reinterpret_cast<void (__thiscall*)(InventoryGrid* self, const glm::ivec2& cursorPos)>(FUNC_INVENTORYGRID_RENDER)(this, cursorPos);
+			return reinterpret_cast<void (__thiscall*)(InventoryGrid* self, const glm::ivec2& cursorPos)>(getFuncAddr((int)Func::InventoryGrid::render))(this, cursorPos);
 		}
 		bool combineItem(std::unique_ptr<Item>& item) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(InventoryGrid* self, std::unique_ptr<Item>& item)>(FUNC_INVENTORYGRID_COMBINEITEM)(this, item);
+			return reinterpret_cast<bool (__thiscall*)(InventoryGrid* self, std::unique_ptr<Item>& item)>(getFuncAddr((int)Func::InventoryGrid::combineItem))(this, item);
 		}
 		bool placeItem(std::unique_ptr<Item>& item) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(InventoryGrid* self, std::unique_ptr<Item>& item)>(FUNC_INVENTORYGRID_PLACEITEM)(this, item);
+			return reinterpret_cast<bool (__thiscall*)(InventoryGrid* self, std::unique_ptr<Item>& item)>(getFuncAddr((int)Func::InventoryGrid::placeItem))(this, item);
 		}
 		int getSlotIndex(const glm::ivec2& cursorPos) override
 		{
-			return reinterpret_cast<int (__thiscall*)(InventoryGrid* self, const glm::ivec2& cursorPos)>(FUNC_INVENTORYGRID_GETSLOTINDEX)(this, cursorPos);
+			return reinterpret_cast<int (__thiscall*)(InventoryGrid* self, const glm::ivec2& cursorPos)>(getFuncAddr((int)Func::InventoryGrid::getSlotIndex))(this, cursorPos);
 		}
 		uint32_t getSlotCount() override
 		{
-			return reinterpret_cast<uint32_t (__thiscall*)(InventoryGrid* self)>(FUNC_INVENTORYGRID_GETSLOTCOUNT)(this);
+			return reinterpret_cast<uint32_t (__thiscall*)(InventoryGrid* self)>(getFuncAddr((int)Func::InventoryGrid::getSlotCount))(this);
 		}
 		std::unique_ptr<Item>* getSlot(int index) override
 		{
-			return reinterpret_cast<std::unique_ptr<Item>* (__thiscall*)(InventoryGrid* self, int index)>(FUNC_INVENTORYGRID_GETSLOT)(this, index);
+			return reinterpret_cast<std::unique_ptr<Item>* (__thiscall*)(InventoryGrid* self, int index)>(getFuncAddr((int)Func::InventoryGrid::getSlot))(this, index);
 		}
 		Inventory::iterator begin() override
 		{
@@ -77,17 +77,17 @@ namespace fdm
 		Inventory::iterator end() override
 		{
 			iterator result;
-			return reinterpret_cast<Inventory::iterator (__thiscall*)(InventoryGrid* self, Inventory::iterator* result)>(FUNC_INVENTORYGRID_END)(this, &result);
+			return reinterpret_cast<Inventory::iterator (__thiscall*)(InventoryGrid* self, Inventory::iterator* result)>(getFuncAddr((int)Func::InventoryGrid::end))(this, &result);
 			return result;
 		}
 		void load(nlohmann::json& j) 
 		{
-			return reinterpret_cast<void (__thiscall*)(InventoryGrid* self, nlohmann::json& j)>(FUNC_INVENTORYGRID_LOAD)(this, j);
+			return reinterpret_cast<void (__thiscall*)(InventoryGrid* self, nlohmann::json& j)>(getFuncAddr((int)Func::InventoryGrid::load))(this, j);
 		}
 		nlohmann::json save() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(InventoryGrid* self, nlohmann::json* result)>(FUNC_INVENTORYGRID_SAVE)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(InventoryGrid* self, nlohmann::json* result)>(getFuncAddr((int)Func::InventoryGrid::save))(this, &result);
 			return result;
 		}
 	};

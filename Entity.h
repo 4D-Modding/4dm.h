@@ -28,7 +28,7 @@ namespace fdm
 		//PAD(0x1); // --> inline static boost::uuids::string_generator *uuidParser = reinterpret_cast<boost::uuids::string_generator*>((base + 0x29B3E0))
 		inline static TexRenderer* ftr = NULL; 
 		inline static FontRenderer* fr = NULL; 
-		inline static nlohmann::json* blueprints = reinterpret_cast<nlohmann::json*>((base + 0x2BE5A8));
+		inline static nlohmann::json* blueprints = reinterpret_cast<nlohmann::json*>((base + 0x4E5A8 + 0x270000));
 		uuid id; // 0x8
 		bool dead; // 0x18
 
@@ -36,33 +36,33 @@ namespace fdm
 
 		inline static bool loadEntityInfo() 
 		{
-			return reinterpret_cast<bool (__fastcall*)()>(FUNC_ENTITY_LOADENTITYINFO)();
+			return reinterpret_cast<bool (__fastcall*)()>(getFuncAddr((int)Func::Entity::loadEntityInfo))();
 		}
 		inline static std::unique_ptr<Entity> createFromJson(nlohmann::json& j) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)( nlohmann::json& j)>(FUNC_ENTITY_CREATEFROMJSON)(j);
+			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)( nlohmann::json& j)>(getFuncAddr((int)Func::Entity::createFromJson))(j);
 		}
 		inline static std::unique_ptr<Entity> createWithAttributes(std::string& entityName, std::string& pos, nlohmann::json& attributes) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(std::string& entityName, std::string& pos, nlohmann::json& attributes)>(FUNC_ENTITY_CREATEWITHATTRIBUTES)(entityName, pos, attributes);
+			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(std::string& entityName, std::string& pos, nlohmann::json& attributes)>(getFuncAddr((int)Func::Entity::createWithAttributes))(entityName, pos, attributes);
 		}
 		nlohmann::json save() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Entity* self, nlohmann::json* result)>(FUNC_ENTITY_SAVE)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(Entity* self, nlohmann::json* result)>(getFuncAddr((int)Func::Entity::save))(this, &result);
 			return result;
 		}
 		inline static std::unique_ptr<Entity> instantiateEntity(const std::string& itemName, const uuid& id, glm::vec4& pos, const std::string& type, nlohmann::json& attributes) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const std::string& itemName, const uuid& id, glm::vec4& pos, const std::string& type, nlohmann::json& attributes)>(FUNC_ENTITY_INSTANTIATEENTITY)(itemName, id, pos, type, attributes);
+			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const std::string& itemName, const uuid& id, glm::vec4& pos, const std::string& type, nlohmann::json& attributes)>(getFuncAddr((int)Func::Entity::instantiateEntity))(itemName, id, pos, type, attributes);
 		}
 		inline static nlohmann::json combineEntityAttributes(nlohmann::json& baseAttributes, nlohmann::json& additions) 
 		{
-			return reinterpret_cast<nlohmann::json (__fastcall*)(nlohmann::json& baseAttributes, nlohmann::json& additions)>(FUNC_ENTITY_COMBINEENTITYATTRIBUTES)(baseAttributes, additions);
+			return reinterpret_cast<nlohmann::json (__fastcall*)(nlohmann::json& baseAttributes, nlohmann::json& additions)>(getFuncAddr((int)Func::Entity::combineEntityAttributes))(baseAttributes, additions);
 		}
 		virtual ~Entity()
 		{
-			reinterpret_cast<void(__thiscall*)(Entity* self)>(FUNC_ENTITY_DESTR_ENTITY)(this);
+			reinterpret_cast<void(__thiscall*)(Entity* self)>(getFuncAddr((int)Func::Entity::destr_Entity))(this);
 		}
 
 		// VIRTUAL FUNCS

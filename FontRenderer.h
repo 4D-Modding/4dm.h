@@ -20,34 +20,34 @@ namespace fdm
 		glm::mat4 model; // 0x44
 		bool centered; // 0x84
 		PAD(0x3);
-		Tex2D* texture; // 0x88
-		Shader* shader; // 0x90
-		uint32_t VAO; // 0x98
-		uint32_t charVBO; // 0x9C
+		const Tex2D* texture; // 0x88
+		const Shader* shader; // 0x90
+		unsigned int VAO; // 0x98
+		unsigned int charVBO; // 0x9C
 
 		FontRenderer(const Tex2D* texture, const Shader* shader) 
 		{
-			reinterpret_cast<void(__thiscall*)(FontRenderer* self, const Tex2D* texture, const Shader* shader)>(FUNC_FONTRENDERER_FONTRENDERER)(this, texture, shader);
+			reinterpret_cast<void(__thiscall*)(FontRenderer* self, const Tex2D* texture, const Shader* shader)>(getFuncAddr((int)Func::FontRenderer::FontRenderer))(this, texture, shader);
 		}
 		FontRenderer() 
 		{
-			reinterpret_cast<void(__thiscall*)(FontRenderer* self)>(FUNC_FONTRENDERER_FONTRENDERER_A)(this);
+			reinterpret_cast<void(__thiscall*)(FontRenderer* self)>(getFuncAddr((int)Func::FontRenderer::FontRendererA))(this);
 		}
 		void setText(const std::string& text) 
 		{
-			return reinterpret_cast<void (__thiscall*)(FontRenderer* self, const std::string& text)>(FUNC_FONTRENDERER_SETTEXT)(this, text);
+			return reinterpret_cast<void (__thiscall*)(FontRenderer* self, const std::string& text)>(getFuncAddr((int)Func::FontRenderer::setText))(this, text);
 		}
 		void render() 
 		{
-			return reinterpret_cast<void (__thiscall*)(FontRenderer* self)>(FUNC_FONTRENDERER_RENDER)(this);
+			return reinterpret_cast<void (__thiscall*)(FontRenderer* self)>(getFuncAddr((int)Func::FontRenderer::render))(this);
 		}
 		void updateModel() 
 		{
-			return reinterpret_cast<void (__thiscall*)(FontRenderer* self)>(FUNC_FONTRENDERER_UPDATEMODEL)(this);
+			return reinterpret_cast<void (__thiscall*)(FontRenderer* self)>(getFuncAddr((int)Func::FontRenderer::updateModel))(this);
 		}
 		void move(FontRenderer& other) 
 		{
-			return reinterpret_cast<void (__thiscall*)(FontRenderer* self, FontRenderer& other)>(FUNC_FONTRENDERER_MOVE)(this, other);
+			return reinterpret_cast<void (__thiscall*)(FontRenderer* self, FontRenderer& other)>(getFuncAddr((int)Func::FontRenderer::move))(this, other);
 		}
 	};
 }

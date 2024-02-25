@@ -1,10 +1,10 @@
 #pragma once
 
 #include "4dm.h"
-#include "StateManager.h"
 
 namespace fdm 
 {
+	class StateManager;
 	class State 
 	{
 	public:

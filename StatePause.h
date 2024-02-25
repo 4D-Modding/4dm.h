@@ -23,31 +23,31 @@ namespace fdm
 
 		StatePause() 
 		{
-			reinterpret_cast<void(__thiscall*)(StatePause* self)>(FUNC_STATEPAUSE_STATEPAUSE)(this);
+			reinterpret_cast<void(__thiscall*)(StatePause* self)>(getFuncAddr((int)Func::StatePause::StatePause))(this);
 		}
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StatePause* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(FUNC_STATEPAUSE_UPDATEPROJECTION)(this, size, translate2D);
+			return reinterpret_cast<void (__thiscall*)(StatePause* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(getFuncAddr((int)Func::StatePause::updateProjection))(this, size, translate2D);
 		}
 		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StatePause* self, StateManager& s, double dt)>(FUNC_STATEPAUSE_UPDATE)(this, s, dt);
+			return reinterpret_cast<void (__thiscall*)(StatePause* self, StateManager& s, double dt)>(getFuncAddr((int)Func::StatePause::update))(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StatePause* self, StateManager& s)>(FUNC_STATEPAUSE_RENDER)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StatePause* self, StateManager& s)>(getFuncAddr((int)Func::StatePause::render))(this, s);
 		}
 		void pause(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StatePause* self, StateManager& s)>(FUNC_STATEPAUSE_PAUSE)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StatePause* self, StateManager& s)>(getFuncAddr((int)Func::StatePause::pause))(this, s);
 		}
 		void resume(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StatePause* self, StateManager& s)>(FUNC_STATEPAUSE_RESUME)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StatePause* self, StateManager& s)>(getFuncAddr((int)Func::StatePause::resume))(this, s);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StatePause* self, StateManager& s, int width, int height)>(FUNC_STATEPAUSE_WINDOWRESIZE)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StatePause* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StatePause::windowResize))(this, s, width, height);
 		}
 	};
 }

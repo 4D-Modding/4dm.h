@@ -95,99 +95,99 @@ namespace fdm
 
 		~StateTutorial() 
 		{
-			reinterpret_cast<void(__thiscall*)(StateTutorial* self)>(FUNC_STATETUTORIAL_DESTR_STATETUTORIAL)(this);
+			reinterpret_cast<void(__thiscall*)(StateTutorial* self)>(getFuncAddr((int)Func::StateTutorial::destr_StateTutorial))(this);
 		}
 		StateTutorial() 
 		{
-			reinterpret_cast<void(__thiscall*)(StateTutorial* self)>(FUNC_STATETUTORIAL_STATETUTORIAL)(this);
+			reinterpret_cast<void(__thiscall*)(StateTutorial* self)>(getFuncAddr((int)Func::StateTutorial::StateTutorial))(this);
 		}
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(FUNC_STATETUTORIAL_UPDATEPROJECTION)(this, size, translate2D);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(getFuncAddr((int)Func::StateTutorial::updateProjection))(this, size, translate2D);
 		}
 		inline static void backButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATETUTORIAL_BACKBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateTutorial::backButtonCallback))(user);
 		}
 		inline static void nextButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATETUTORIAL_NEXTBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateTutorial::nextButtonCallback))(user);
 		}
 		void generateMesh() 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self)>(FUNC_STATETUTORIAL_GENERATEMESH)(this);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self)>(getFuncAddr((int)Func::StateTutorial::generateMesh))(this);
 		}
 		void getSmoothLighting(const glm::ivec3& block, unsigned char face, unsigned char* lighting) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, const glm::ivec3& block, unsigned char face, unsigned char* lighting)>(FUNC_STATETUTORIAL_GETSMOOTHLIGHTING)(this, block, face, lighting);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, const glm::ivec3& block, unsigned char face, unsigned char* lighting)>(getFuncAddr((int)Func::StateTutorial::getSmoothLighting))(this, block, face, lighting);
 		}
 		void updatePlayerComponentVectors() 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self)>(FUNC_STATETUTORIAL_UPDATEPLAYERCOMPONENTVECTORS)(this);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self)>(getFuncAddr((int)Func::StateTutorial::updatePlayerComponentVectors))(this);
 		}
 		void updatePlayerPos() 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self)>(FUNC_STATETUTORIAL_UPDATEPLAYERPOS)(this);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self)>(getFuncAddr((int)Func::StateTutorial::updatePlayerPos))(this);
 		}
 		void updateCurrentBlock() 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self)>(FUNC_STATETUTORIAL_UPDATECURRENTBLOCK)(this);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self)>(getFuncAddr((int)Func::StateTutorial::updateCurrentBlock))(this);
 		}
 		bool handleCollision(const glm::vec3& foot, const glm::vec3& head, uint32_t face) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(StateTutorial* self, const glm::vec3& foot, const glm::vec3& head, uint32_t face)>(FUNC_STATETUTORIAL_HANDLECOLLISION)(this, foot, head, face);
+			return reinterpret_cast<bool (__thiscall*)(StateTutorial* self, const glm::vec3& foot, const glm::vec3& head, uint32_t face)>(getFuncAddr((int)Func::StateTutorial::handleCollision))(this, foot, head, face);
 		}
 		void setForgSprite(int x, int y) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, int x, int y)>(FUNC_STATETUTORIAL_SETFORGSPRITE)(this, x, y);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, int x, int y)>(getFuncAddr((int)Func::StateTutorial::setForgSprite))(this, x, y);
 		}
 		void init(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s)>(FUNC_STATETUTORIAL_INIT)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s)>(getFuncAddr((int)Func::StateTutorial::init))(this, s);
 		}
 		void close(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s)>(FUNC_STATETUTORIAL_CLOSE)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s)>(getFuncAddr((int)Func::StateTutorial::close))(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, double dt)>(FUNC_STATETUTORIAL_UPDATE)(this, s, dt);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, double dt)>(getFuncAddr((int)Func::StateTutorial::update))(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s)>(FUNC_STATETUTORIAL_RENDER)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s)>(getFuncAddr((int)Func::StateTutorial::render))(this, s);
 		}
 		void resume(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s)>(FUNC_STATETUTORIAL_RESUME)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s)>(getFuncAddr((int)Func::StateTutorial::resume))(this, s);
 		}
 		void mouseInput(StateManager& s, double xpos, double ypos) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, double xpos, double ypos)>(FUNC_STATETUTORIAL_MOUSEINPUT)(this, s, xpos, ypos);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, double xpos, double ypos)>(getFuncAddr((int)Func::StateTutorial::mouseInput))(this, s, xpos, ypos);
 		}
 		void scrollInput(StateManager& s, double xoffset, double yoffset) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, double xoffset, double yoffset)>(FUNC_STATETUTORIAL_SCROLLINPUT)(this, s, xoffset, yoffset);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, double xoffset, double yoffset)>(getFuncAddr((int)Func::StateTutorial::scrollInput))(this, s, xoffset, yoffset);
 		}
 		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, int button, int action, int mods)>(FUNC_STATETUTORIAL_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, int button, int action, int mods)>(getFuncAddr((int)Func::StateTutorial::mouseButtonInput))(this, s, button, action, mods);
 		}
 		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATETUTORIAL_KEYINPUT)(this, s, key, scancode, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::StateTutorial::keyInput))(this, s, key, scancode, action, mods);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, int width, int height)>(FUNC_STATETUTORIAL_WINDOWRESIZE)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StateTutorial::windowResize))(this, s, width, height);
 		}
 		void charInput(StateManager& s, uint32_t codepoint) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, uint32_t codepoint)>(FUNC_STATETUTORIAL_CHARINPUT)(this, s, codepoint);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, StateManager& s, uint32_t codepoint)>(getFuncAddr((int)Func::StateTutorial::charInput))(this, s, codepoint);
 		}
 		void updateViewport(GLFWwindow* w, const glm::ivec4& pos, const glm::ivec2& scroll) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, GLFWwindow* w, const glm::ivec4& pos, const glm::ivec2& scroll)>(FUNC_STATETUTORIAL_UPDATEVIEWPORT)(this, w, pos, scroll);
+			return reinterpret_cast<void (__thiscall*)(StateTutorial* self, GLFWwindow* w, const glm::ivec4& pos, const glm::ivec2& scroll)>(getFuncAddr((int)Func::StateTutorial::updateViewport))(this, w, pos, scroll);
 		}
 	};
 }

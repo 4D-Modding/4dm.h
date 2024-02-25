@@ -22,23 +22,23 @@ namespace fdm
 
 		void updateProjection(int width, int height) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateWorldGen* self, int width, int height)>(FUNC_STATEWORLDGEN_UPDATEPROJECTION)(this, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateWorldGen* self, int width, int height)>(getFuncAddr((int)Func::StateWorldGen::updateProjection))(this, width, height);
 		}
 		void init(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateWorldGen* self, StateManager& s)>(FUNC_STATEWORLDGEN_INIT)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateWorldGen* self, StateManager& s)>(getFuncAddr((int)Func::StateWorldGen::init))(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateWorldGen* self, StateManager& s, double dt)>(FUNC_STATEWORLDGEN_UPDATE)(this, s, dt);
+			return reinterpret_cast<void (__thiscall*)(StateWorldGen* self, StateManager& s, double dt)>(getFuncAddr((int)Func::StateWorldGen::update))(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateWorldGen* self, StateManager& s)>(FUNC_STATEWORLDGEN_RENDER)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateWorldGen* self, StateManager& s)>(getFuncAddr((int)Func::StateWorldGen::render))(this, s);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateWorldGen* self, StateManager& s, int width, int height)>(FUNC_STATEWORLDGEN_WINDOWRESIZE)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateWorldGen* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StateWorldGen::windowResize))(this, s, width, height);
 		}
 	};
 }

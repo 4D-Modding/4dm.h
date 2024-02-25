@@ -14,19 +14,19 @@ namespace fdm
 
 			VertInfo() 
 			{
-				reinterpret_cast<void(__thiscall*)(Hypersphere::VertInfo* self)>(FUNC_HYPERSPHERE_VERTINFO_VERTINFO)(this);
+				reinterpret_cast<void(__thiscall*)(Hypersphere::VertInfo* self)>(getFuncAddr((int)Func::Hypersphere_Nested::VertInfo::VertInfo))(this);
 			}
 			~VertInfo() 
 			{
-				reinterpret_cast<void(__thiscall*)(Hypersphere::VertInfo* self)>(FUNC_HYPERSPHERE_VERTINFO_DESTR_VERTINFO)(this);
+				reinterpret_cast<void(__thiscall*)(Hypersphere::VertInfo* self)>(getFuncAddr((int)Func::Hypersphere_Nested::VertInfo::destr_VertInfo))(this);
 			}
 			void add(const glm::vec4& vert, MeshBuilder::AttrInfo* tuv) 
 			{
-				return reinterpret_cast<void (__thiscall*)(Hypersphere::VertInfo* self, const glm::vec4& vert, MeshBuilder::AttrInfo* tuv)>(FUNC_HYPERSPHERE_VERTINFO_ADD)(this, vert, tuv);
+				return reinterpret_cast<void (__thiscall*)(Hypersphere::VertInfo* self, const glm::vec4& vert, MeshBuilder::AttrInfo* tuv)>(getFuncAddr((int)Func::Hypersphere_Nested::VertInfo::add))(this, vert, tuv);
 			}
 			void add(const Hypersphere::VertInfo* v, int index) 
 			{
-				return reinterpret_cast<void (__thiscall*)(Hypersphere::VertInfo* self, const Hypersphere::VertInfo* v, int index)>(FUNC_HYPERSPHERE_VERTINFO_ADD_A)(this, v, index);
+				return reinterpret_cast<void (__thiscall*)(Hypersphere::VertInfo* self, const Hypersphere::VertInfo* v, int index)>(getFuncAddr((int)Func::Hypersphere_Nested::VertInfo::addA))(this, v, index);
 			}
 		};
 		struct HSInfo 
@@ -41,35 +41,35 @@ namespace fdm
 
 		int attrCount(int buffIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(const Hypersphere* self, int buffIndex)>(FUNC_HYPERSPHERE_ATTRCOUNT)(this, buffIndex);
+			return reinterpret_cast<int (__thiscall*)(const Hypersphere* self, int buffIndex)>(getFuncAddr((int)Func::Hypersphere::attrCount))(this, buffIndex);
 		}
 		uint32_t attrType(int buffIndex, int attrIndex) const override
 		{
-			return reinterpret_cast<uint32_t (__thiscall*)(const Hypersphere* self, int buffIndex, int attrIndex)>(FUNC_HYPERSPHERE_ATTRTYPE)(this, buffIndex, attrIndex);
+			return reinterpret_cast<uint32_t (__thiscall*)(const Hypersphere* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::Hypersphere::attrType))(this, buffIndex, attrIndex);
 		}
 		int buffCount() const override
 		{
-			return reinterpret_cast<int (__thiscall*)(const Hypersphere* self)>(FUNC_HYPERSPHERE_BUFFCOUNT)(this);
+			return reinterpret_cast<int (__thiscall*)(const Hypersphere* self)>(getFuncAddr((int)Func::Hypersphere::buffCount))(this);
 		}
 		Hypersphere(int edges) 
 		{
-			reinterpret_cast<void(__thiscall*)(Hypersphere* self, int edges)>(FUNC_HYPERSPHERE_HYPERSPHERE)(this, edges);
+			reinterpret_cast<void(__thiscall*)(Hypersphere* self, int edges)>(getFuncAddr((int)Func::Hypersphere::Hypersphere))(this, edges);
 		}
 		Hypersphere(int edges, float distance) 
 		{
-			reinterpret_cast<void(__thiscall*)(Hypersphere* self, int edges, float distance)>(FUNC_HYPERSPHERE_HYPERSPHERE_A)(this, edges, distance);
+			reinterpret_cast<void(__thiscall*)(Hypersphere* self, int edges, float distance)>(getFuncAddr((int)Func::Hypersphere::HypersphereA))(this, edges, distance);
 		}
 		inline static void generateSpherePolygons(Hypersphere::VertInfo* triangles, Hypersphere::VertInfo* trapezoids, const Hypersphere::HSInfo* hsi, int wi) 
 		{
-			return reinterpret_cast<void (__fastcall*)(Hypersphere::VertInfo* triangles, Hypersphere::VertInfo* trapezoids, const Hypersphere::HSInfo* hsi, int wi)>(FUNC_HYPERSPHERE_GENERATESPHEREPOLYGONS)(triangles, trapezoids, hsi, wi);
+			return reinterpret_cast<void (__fastcall*)(Hypersphere::VertInfo* triangles, Hypersphere::VertInfo* trapezoids, const Hypersphere::HSInfo* hsi, int wi)>(getFuncAddr((int)Func::Hypersphere::generateSpherePolygons))(triangles, trapezoids, hsi, wi);
 		}
 		void addWedgeSide(const Hypersphere::VertInfo* outer, const Hypersphere::VertInfo* inner, int i0, int i1, int i2) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Hypersphere* self, const Hypersphere::VertInfo* outer, const Hypersphere::VertInfo* inner, int i0, int i1, int i2)>(FUNC_HYPERSPHERE_ADDWEDGESIDE)(this, outer, inner, i0, i1, i2);
+			return reinterpret_cast<void (__thiscall*)(Hypersphere* self, const Hypersphere::VertInfo* outer, const Hypersphere::VertInfo* inner, int i0, int i1, int i2)>(getFuncAddr((int)Func::Hypersphere::addWedgeSide))(this, outer, inner, i0, i1, i2);
 		}
 		void addCubeSide(const Hypersphere::VertInfo* outer, const Hypersphere::VertInfo* inner, int i0, int i1, int i2, int i3) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Hypersphere* self, const Hypersphere::VertInfo* outer, const Hypersphere::VertInfo* inner, int i0, int i1, int i2, int i3)>(FUNC_HYPERSPHERE_ADDCUBESIDE)(this, outer, inner, i0, i1, i2, i3);
+			return reinterpret_cast<void (__thiscall*)(Hypersphere* self, const Hypersphere::VertInfo* outer, const Hypersphere::VertInfo* inner, int i0, int i1, int i2, int i3)>(getFuncAddr((int)Func::Hypersphere::addCubeSide))(this, outer, inner, i0, i1, i2, i3);
 		}
 	};
 }

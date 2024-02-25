@@ -25,55 +25,55 @@ namespace fdm
 
 		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s, int button, int action, int mods)>(FUNC_STATESINGLEPLAYER_MOUSEBUTTONINPUT)(this, s, button, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s, int button, int action, int mods)>(getFuncAddr((int)Func::StateSingleplayer::mouseButtonInput))(this, s, button, action, mods);
 		}
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(FUNC_STATESINGLEPLAYER_UPDATEPROJECTION)(this, size, translate2D);
+			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(getFuncAddr((int)Func::StateSingleplayer::updateProjection))(this, size, translate2D);
 		}
 		StateSingleplayer() 
 		{
-			reinterpret_cast<void(__thiscall*)(StateSingleplayer* self)>(FUNC_STATESINGLEPLAYER_STATESINGLEPLAYER)(this);
+			reinterpret_cast<void(__thiscall*)(StateSingleplayer* self)>(getFuncAddr((int)Func::StateSingleplayer::StateSingleplayer))(this);
 		}
 		void updateWorldListContainer(int wWidth, int wHeight) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, int wWidth, int wHeight)>(FUNC_STATESINGLEPLAYER_UPDATEWORLDLISTCONTAINER)(this, wWidth, wHeight);
+			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, int wWidth, int wHeight)>(getFuncAddr((int)Func::StateSingleplayer::updateWorldListContainer))(this, wWidth, wHeight);
 		}
 		inline static void createCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATESINGLEPLAYER_CREATECALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateSingleplayer::createCallback))(user);
 		}
 		inline static void viewportCallback(void* user, const glm::ivec4& pos, const glm::ivec2& scroll) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>(FUNC_STATESINGLEPLAYER_VIEWPORTCALLBACK)(user, pos, scroll);
+			return reinterpret_cast<void (__fastcall*)(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>(getFuncAddr((int)Func::StateSingleplayer::viewportCallback))(user, pos, scroll);
 		}
 		inline static void worldButtonCallback(void* user) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user)>(FUNC_STATESINGLEPLAYER_WORLDBUTTONCALLBACK)(user);
+			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateSingleplayer::worldButtonCallback))(user);
 		}
 		void init(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s)>(FUNC_STATESINGLEPLAYER_INIT)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s)>(getFuncAddr((int)Func::StateSingleplayer::init))(this, s);
 		}
 		void close(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s)>(FUNC_STATESINGLEPLAYER_CLOSE)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s)>(getFuncAddr((int)Func::StateSingleplayer::close))(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s, double dt)>(FUNC_STATESINGLEPLAYER_UPDATE)(this, s, dt);
+			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s, double dt)>(getFuncAddr((int)Func::StateSingleplayer::update))(this, s, dt);
 		}
 		void resume(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s)>(FUNC_STATESINGLEPLAYER_RESUME)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s)>(getFuncAddr((int)Func::StateSingleplayer::resume))(this, s);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s, int width, int height)>(FUNC_STATESINGLEPLAYER_WINDOWRESIZE)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StateSingleplayer::windowResize))(this, s, width, height);
 		}
 		void queueWorldLoad(std::string& path) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, std::string& path)>(FUNC_STATESINGLEPLAYER_QUEUEWORLDLOAD)(this, path);
+			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, std::string& path)>(getFuncAddr((int)Func::StateSingleplayer::queueWorldLoad))(this, path);
 		}
 	};
 }

@@ -22,11 +22,11 @@ namespace fdm
 
 			SPInfo() 
 			{
-				reinterpret_cast<void(__thiscall*)(EntityAlidade::SPInfo* self)>(FUNC_ENTITYALIDADE_SPINFO_SPINFO)(this);
+				reinterpret_cast<void(__thiscall*)(EntityAlidade::SPInfo* self)>(getFuncAddr((int)Func::EntityAlidade_Nested::SPInfo::SPInfo))(this);
 			}
 			~SPInfo() 
 			{
-				reinterpret_cast<void(__thiscall*)(EntityAlidade::SPInfo* self)>(FUNC_ENTITYALIDADE_SPINFO_DESTR_SPINFO)(this);
+				reinterpret_cast<void(__thiscall*)(EntityAlidade::SPInfo* self)>(getFuncAddr((int)Func::EntityAlidade_Nested::SPInfo::destr_SPInfo))(this);
 			}
 		};
 		inline static MeshRenderer *telescopeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x278828)); 
@@ -44,56 +44,56 @@ namespace fdm
 		std::string getName() override
 		{
 			std::string result;
-			return reinterpret_cast<std::string (__thiscall*)(EntityAlidade* self, std::string* result)>(FUNC_ENTITYALIDADE_GETNAME)(this, &result);
+			return reinterpret_cast<std::string (__thiscall*)(EntityAlidade* self, std::string* result)>(getFuncAddr((int)Func::EntityAlidade::getName))(this, &result);
 			return result;
 		}
 		void update(World* world, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityAlidade* self, World* world, double dt)>(FUNC_ENTITYALIDADE_UPDATE)(this, world, dt);
+			return reinterpret_cast<void (__thiscall*)(EntityAlidade* self, World* world, double dt)>(getFuncAddr((int)Func::EntityAlidade::update))(this, world, dt);
 		}
 		void render(const World* world, const m4::Mat5& MV, bool glasses) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityAlidade* self, const World* world, const m4::Mat5& MV, bool glasses)>(FUNC_ENTITYALIDADE_RENDER)(this, world, MV, glasses);
+			return reinterpret_cast<void (__thiscall*)(EntityAlidade* self, const World* world, const m4::Mat5& MV, bool glasses)>(getFuncAddr((int)Func::EntityAlidade::render))(this, world, MV, glasses);
 		}
 		nlohmann::json saveAttributes() override
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityAlidade* self, nlohmann::json* result)>(FUNC_ENTITYALIDADE_SAVEATTRIBUTES)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityAlidade* self, nlohmann::json* result)>(getFuncAddr((int)Func::EntityAlidade::saveAttributes))(this, &result);
 			return result;
 		}
 		glm::vec4 getPos() override
 		{
 			glm::vec4 result;
-			return reinterpret_cast<glm::vec4 (__thiscall*)(EntityAlidade* self, glm::vec4* result)>(FUNC_ENTITYALIDADE_GETPOS)(this, &result);
+			return reinterpret_cast<glm::vec4 (__thiscall*)(EntityAlidade* self, glm::vec4* result)>(getFuncAddr((int)Func::EntityAlidade::getPos))(this, &result);
 			return result;
 		}
 		void setPos(const glm::vec4& pos) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityAlidade* self, const glm::vec4& pos)>(FUNC_ENTITYALIDADE_SETPOS)(this, pos);
+			return reinterpret_cast<void (__thiscall*)(EntityAlidade* self, const glm::vec4& pos)>(getFuncAddr((int)Func::EntityAlidade::setPos))(this, pos);
 		}
 		void takeDamage(float damage, World* world) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityAlidade* self, float damage, World* world)>(FUNC_ENTITYALIDADE_TAKEDAMAGE)(this, damage, world);
+			return reinterpret_cast<void (__thiscall*)(EntityAlidade* self, float damage, World* world)>(getFuncAddr((int)Func::EntityAlidade::takeDamage))(this, damage, world);
 		}
 		bool action(World* world, Entity* actor, int action, const nlohmann::json& details) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(EntityAlidade* self, World* world, Entity* actor, int action, const nlohmann::json & details)>(FUNC_ENTITYALIDADE_ACTION)(this, world, actor, action, details);
+			return reinterpret_cast<bool (__thiscall*)(EntityAlidade* self, World* world, Entity* actor, int action, const nlohmann::json & details)>(getFuncAddr((int)Func::EntityAlidade::action))(this, world, actor, action, details);
 		}
 		void postAction(World* world, Entity* actor, int action) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntityAlidade* self, World* world, Entity* actor, int action)>(FUNC_ENTITYALIDADE_POSTACTION)(this, world, actor, action);
+			return reinterpret_cast<void (__thiscall*)(EntityAlidade* self, World* world, Entity* actor, int action)>(getFuncAddr((int)Func::EntityAlidade::postAction))(this, world, actor, action);
 		}
 		inline static void generateSpherinder(MeshRenderer* r, int edges, float height, double diameter) 
 		{
-			return reinterpret_cast<void (__fastcall*)(MeshRenderer* r, int edges, float height, double diameter)>(FUNC_ENTITYALIDADE_GENERATESPHERINDER)(r, edges, height, diameter);
+			return reinterpret_cast<void (__fastcall*)(MeshRenderer* r, int edges, float height, double diameter)>(getFuncAddr((int)Func::EntityAlidade::generateSpherinder))(r, edges, height, diameter);
 		}
 		inline static void generateSpherinderHollow(MeshRenderer* r, int edges, float height, double diameter, float holeDiameter) 
 		{
-			return reinterpret_cast<void (__fastcall*)(MeshRenderer* r, int edges, float height, double diameter, float holeDiameter)>(FUNC_ENTITYALIDADE_GENERATESPHERINDERHOLLOW)(r, edges, height, diameter, holeDiameter);
+			return reinterpret_cast<void (__fastcall*)(MeshRenderer* r, int edges, float height, double diameter, float holeDiameter)>(getFuncAddr((int)Func::EntityAlidade::generateSpherinderHollow))(r, edges, height, diameter, holeDiameter);
 		}
 		inline static void generateSemicircle(MeshRenderer* r, int edges, float diameter, float innerThickness, float sideThickness) 
 		{
-			return reinterpret_cast<void (__fastcall*)(MeshRenderer* r, int edges, float diameter, float innerThickness, float sideThickness)>(FUNC_ENTITYALIDADE_GENERATESEMICIRCLE)(r, edges, diameter, innerThickness, sideThickness);
+			return reinterpret_cast<void (__fastcall*)(MeshRenderer* r, int edges, float diameter, float innerThickness, float sideThickness)>(getFuncAddr((int)Func::EntityAlidade::generateSemicircle))(r, edges, diameter, innerThickness, sideThickness);
 		}
 	};
 }

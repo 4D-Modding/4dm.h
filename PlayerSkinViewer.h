@@ -20,39 +20,39 @@ namespace fdm
 
 		void render(gui::Window* w) override
 		{
-			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, gui::Window* w)>(FUNC_PLAYERSKINVIEWER_RENDER)(this, w);
+			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, gui::Window* w)>(getFuncAddr((int)Func::PlayerSkinViewer::render))(this, w);
 		}
 		void alignX(gui::AlignmentX a) override
 		{
-			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, gui::AlignmentX a)>(FUNC_PLAYERSKINVIEWER_ALIGNX)(this, a);
+			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, gui::AlignmentX a)>(getFuncAddr((int)Func::PlayerSkinViewer::alignX))(this, a);
 		}
 		void alignY(gui::AlignmentY a) override
 		{
-			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, gui::AlignmentY a)>(FUNC_PLAYERSKINVIEWER_ALIGNY)(this, a);
+			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, gui::AlignmentY a)>(getFuncAddr((int)Func::PlayerSkinViewer::alignY))(this, a);
 		}
-		void getPos(gui::Window* w, int* x, int* y) override
+		void getPos(const gui::Window* w, int* x, int* y) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, gui::Window* w, int* x, int* y)>(FUNC_PLAYERSKINVIEWER_GETPOS)(this, w, x, y);
+			return reinterpret_cast<void (__thiscall*)(const PlayerSkinViewer* self, const gui::Window* w, int* x, int* y)>(getFuncAddr((int)Func::PlayerSkinViewer::getPos))(this, w, x, y);
 		}
-		void getSize(gui::Window* w, int* width, int* height) override
+		void getSize(const gui::Window* w, int* width, int* height) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, gui::Window* w, int* width, int* height)>(FUNC_PLAYERSKINVIEWER_GETSIZE)(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(const PlayerSkinViewer* self, const gui::Window* w, int* width, int* height)>(getFuncAddr((int)Func::PlayerSkinViewer::getSize))(this, w, width, height);
 		}
-		bool mouseInput(gui::Window* w, double xpos, double ypos) override
+		bool mouseInput(const gui::Window* w, double xpos, double ypos) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(PlayerSkinViewer* self, gui::Window* w, double xpos, double ypos)>(FUNC_PLAYERSKINVIEWER_MOUSEINPUT)(this, w, xpos, ypos);
+			return reinterpret_cast<bool (__thiscall*)(PlayerSkinViewer* self, const gui::Window* w, double xpos, double ypos)>(getFuncAddr((int)Func::PlayerSkinViewer::mouseInput))(this, w, xpos, ypos);
 		}
 		int getCursorType() override
 		{
-			return reinterpret_cast<int (__thiscall*)(PlayerSkinViewer* self)>(FUNC_PLAYERSKINVIEWER_GETCURSORTYPE)(this);
+			return reinterpret_cast<int (__thiscall*)(PlayerSkinViewer* self)>(getFuncAddr((int)Func::PlayerSkinViewer::getCursorType))(this);
 		}
 		void init(PlayerSkinRenderer* skinRenderer) 
 		{
-			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, PlayerSkinRenderer* skinRenderer)>(FUNC_PLAYERSKINVIEWER_INIT)(this, skinRenderer);
+			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, PlayerSkinRenderer* skinRenderer)>(getFuncAddr((int)Func::PlayerSkinViewer::init))(this, skinRenderer);
 		}
 		void setupFrameBuffer() 
 		{
-			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self)>(FUNC_PLAYERSKINVIEWER_SETUPFRAMEBUFFER)(this);
+			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self)>(getFuncAddr((int)Func::PlayerSkinViewer::setupFrameBuffer))(this);
 		}
 	};
 }

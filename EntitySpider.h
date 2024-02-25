@@ -16,7 +16,7 @@ namespace fdm
 
 			~SpiderType() 
 			{
-				reinterpret_cast<void(__thiscall*)(EntitySpider::SpiderType* self)>(FUNC_ENTITYSPIDER_SPIDERTYPE_DESTR_SPIDERTYPE)(this);
+				reinterpret_cast<void(__thiscall*)(EntitySpider::SpiderType* self)>(getFuncAddr((int)Func::EntitySpider_Nested::SpiderType::destr_SpiderType))(this);
 			}
 		};
 		inline static const float hitboxRadius = 0.6f; 
@@ -47,71 +47,71 @@ namespace fdm
 
 		bool isIntersectingRay(const Entity::Ray& ray) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(EntitySpider* self, const Entity::Ray& ray)>(FUNC_ENTITYSPIDER_ISINTERSECTINGRAY)(this, ray);
+			return reinterpret_cast<bool (__thiscall*)(EntitySpider* self, const Entity::Ray& ray)>(getFuncAddr((int)Func::EntitySpider::isIntersectingRay))(this, ray);
 		}
 		glm::vec4 getPos() override
 		{
 			glm::vec4 result;
-			return reinterpret_cast<glm::vec4 (__thiscall*)(EntitySpider* self, glm::vec4* result)>(FUNC_ENTITYSPIDER_GETPOS)(this, &result);
+			return reinterpret_cast<glm::vec4 (__thiscall*)(EntitySpider* self, glm::vec4* result)>(getFuncAddr((int)Func::EntitySpider::getPos))(this, &result);
 			return result;
 		}
 		void setPos(const glm::vec4& pos) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, const glm::vec4& pos)>(FUNC_ENTITYSPIDER_SETPOS)(this, pos);
+			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, const glm::vec4& pos)>(getFuncAddr((int)Func::EntitySpider::setPos))(this, pos);
 		}
 		std::string getName() override
 		{
 			std::string result;
-			return reinterpret_cast<std::string (__thiscall*)(EntitySpider* self, std::string* result)>(FUNC_ENTITYSPIDER_GETNAME)(this, &result);
+			return reinterpret_cast<std::string (__thiscall*)(EntitySpider* self, std::string* result)>(getFuncAddr((int)Func::EntitySpider::getName))(this, &result);
 			return result;
 		}
 		void update(World* world, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, World* world, double dt)>(FUNC_ENTITYSPIDER_UPDATE)(this, world, dt);
+			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, World* world, double dt)>(getFuncAddr((int)Func::EntitySpider::update))(this, world, dt);
 		}
 		void render(const World* world, const m4::Mat5& MV, bool glasses) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, const World* world, const m4::Mat5& MV, bool glasses)>(FUNC_ENTITYSPIDER_RENDER)(this, world, MV, glasses);
+			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, const World* world, const m4::Mat5& MV, bool glasses)>(getFuncAddr((int)Func::EntitySpider::render))(this, world, MV, glasses);
 		}
 		nlohmann::json saveAttributes() override
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(EntitySpider* self, nlohmann::json* result)>(FUNC_ENTITYSPIDER_SAVEATTRIBUTES)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(EntitySpider* self, nlohmann::json* result)>(getFuncAddr((int)Func::EntitySpider::saveAttributes))(this, &result);
 			return result;
 		}
 		nlohmann::json getServerUpdateAttributes() override
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(EntitySpider* self, nlohmann::json* result)>(FUNC_ENTITYSPIDER_GETSERVERUPDATEATTRIBUTES)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(EntitySpider* self, nlohmann::json* result)>(getFuncAddr((int)Func::EntitySpider::getServerUpdateAttributes))(this, &result);
 			return result;
 		}
 		void applyServerUpdate(const nlohmann::json& j, World* world) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, const nlohmann::json& j, World* world)>(FUNC_ENTITYSPIDER_APPLYSERVERUPDATE)(this, j, world);
+			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, const nlohmann::json& j, World* world)>(getFuncAddr((int)Func::EntitySpider::applyServerUpdate))(this, j, world);
 		}
 		void takeDamage(float damage, World* world) override
 		{
-			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, float damage, World* world)>(FUNC_ENTITYSPIDER_TAKEDAMAGE)(this, damage, world);
+			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, float damage, World* world)>(getFuncAddr((int)Func::EntitySpider::takeDamage))(this, damage, world);
 		}
 		void playHitSound() 
 		{
-			return reinterpret_cast<void (__thiscall*)(EntitySpider* self)>(FUNC_ENTITYSPIDER_PLAYHITSOUND)(this);
+			return reinterpret_cast<void (__thiscall*)(EntitySpider* self)>(getFuncAddr((int)Func::EntitySpider::playHitSound))(this);
 		}
 		void playDeathSound() 
 		{
-			return reinterpret_cast<void (__thiscall*)(EntitySpider* self)>(FUNC_ENTITYSPIDER_PLAYDEATHSOUND)(this);
+			return reinterpret_cast<void (__thiscall*)(EntitySpider* self)>(getFuncAddr((int)Func::EntitySpider::playDeathSound))(this);
 		}
 		inline static void collisionCallback(void* user, Hitbox* hitbox, World* world, const glm::ivec4& collisionBlock, int collisionComp) 
 		{
-			return reinterpret_cast<void (__fastcall*)(void* user, Hitbox* hitbox, World* world, const glm::ivec4& collisionBlock, int collisionComp)>(FUNC_ENTITYSPIDER_COLLISIONCALLBACK)(user, hitbox, world, collisionBlock, collisionComp);
+			return reinterpret_cast<void (__fastcall*)(void* user, Hitbox* hitbox, World* world, const glm::ivec4& collisionBlock, int collisionComp)>(getFuncAddr((int)Func::EntitySpider::collisionCallback))(user, hitbox, world, collisionBlock, collisionComp);
 		}
 		EntityPlayer* findPlayer(World* world) 
 		{
-			return reinterpret_cast<EntityPlayer* (__thiscall*)(EntitySpider* self, World* world)>(FUNC_ENTITYSPIDER_FINDPLAYER)(this, world);
+			return reinterpret_cast<EntityPlayer* (__thiscall*)(EntitySpider* self, World* world)>(getFuncAddr((int)Func::EntitySpider::findPlayer))(this, world);
 		}
 		void persuePlayer(World* world, double dt, EntityPlayer* player) 
 		{
-			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, World* world, double dt, EntityPlayer* player)>(FUNC_ENTITYSPIDER_PERSUEPLAYER)(this, world, dt, player);
+			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, World* world, double dt, EntityPlayer* player)>(getFuncAddr((int)Func::EntitySpider::persuePlayer))(this, world, dt, player);
 		}
 	};
 }

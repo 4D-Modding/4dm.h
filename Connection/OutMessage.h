@@ -16,17 +16,17 @@ namespace fdm::Connection
 
 		SteamNetworkingMessage_t* createMessage(unsigned int recipient, int sendFlags)
 		{
-			return reinterpret_cast<SteamNetworkingMessage_t* (__thiscall*)(Connection::OutMessage*, unsigned int, int)>(FUNC_CONNECTION_OUTMESSAGE_CREATEMESSAGE)(this, recipient, sendFlags);
+			return reinterpret_cast<SteamNetworkingMessage_t* (__thiscall*)(Connection::OutMessage*, unsigned int, int)>(getFuncAddr((int)Func::Connection_Nested::OutMessage::createMessage))(this, recipient, sendFlags);
 		}
 		OutMessage(unsigned short type, const std::string& content) : data(nullptr, ReleaseHeapMessageData)
 		{
-			reinterpret_cast<void(__thiscall*)(Connection::OutMessage*, unsigned short type, const std::string& content)>(FUNC_CONNECTION_OUTMESSAGE_OUTMESSAGE)(this, type, content);
+			reinterpret_cast<void(__thiscall*)(Connection::OutMessage*, unsigned short type, const std::string& content)>(getFuncAddr((int)Func::Connection_Nested::OutMessage::OutMessage))(this, type, content);
 		}
 		OutMessage() : data(nullptr, ReleaseHeapMessageData){}
 		OutMessage(Connection::MessageData* msgData) : data(msgData, ReleaseHeapMessageData){}
 		inline static void ReleaseHeapMessageData(Connection::MessageData* data)
 		{
-			reinterpret_cast<void(__fastcall*)(Connection::MessageData* data)>(FUNC_CONNECTION_OUTMESSAGE_RELEASEHEAPMESSAGEDATA)(data);
+			reinterpret_cast<void(__fastcall*)(Connection::MessageData* data)>(getFuncAddr((int)Func::Connection_Nested::OutMessage::ReleaseHeapMessageData))(data);
 		}
 	};
 }

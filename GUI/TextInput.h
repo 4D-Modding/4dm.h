@@ -37,77 +37,77 @@ namespace fdm::gui
 
 		void render(gui::Window* w) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::Window* w)>(FUNC_GUI_TEXTINPUT_RENDER)(this, w);
+			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::Window* w)>(getFuncAddr((int)Func::gui_Nested::TextInput::render))(this, w);
 		}
 		void alignX(gui::AlignmentX a) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::AlignmentX a)>(FUNC_GUI_TEXTINPUT_ALIGNX)(this, a);
+			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::AlignmentX a)>(getFuncAddr((int)Func::gui_Nested::TextInput::alignX))(this, a);
 		}
 		void alignY(gui::AlignmentY a) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::AlignmentY a)>(FUNC_GUI_TEXTINPUT_ALIGNY)(this, a);
+			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::AlignmentY a)>(getFuncAddr((int)Func::gui_Nested::TextInput::alignY))(this, a);
 		}
 		void offsetX(int offset) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, int offset)>(FUNC_GUI_TEXTINPUT_OFFSETX)(this, offset);
+			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, int offset)>(getFuncAddr((int)Func::gui_Nested::TextInput::offsetX))(this, offset);
 		}
 		void offsetY(int offset) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, int offset)>(FUNC_GUI_TEXTINPUT_OFFSETY)(this, offset);
+			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, int offset)>(getFuncAddr((int)Func::gui_Nested::TextInput::offsetY))(this, offset);
 		}
-		bool mouseButtonInput(gui::Window* w, int button, int action, int mods) override
+		bool mouseButtonInput(const gui::Window* w, int button, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, gui::Window* w, int button, int action, int mods)>(FUNC_GUI_TEXTINPUT_MOUSEBUTTONINPUT)(this, w, button, action, mods);
+			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, const gui::Window* w, int button, int action, int mods)>(getFuncAddr((int)Func::gui_Nested::TextInput::mouseButtonInput))(this, w, button, action, mods);
 		}
-		bool mouseInput(gui::Window* w, double xpos, double ypos) override
+		bool mouseInput(const gui::Window* w, double xpos, double ypos) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, gui::Window* w, double xpos, double ypos)>(FUNC_GUI_TEXTINPUT_MOUSEINPUT)(this, w, xpos, ypos);
+			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, const gui::Window* w, double xpos, double ypos)>(getFuncAddr((int)Func::gui_Nested::TextInput::mouseInput))(this, w, xpos, ypos);
 		}
-		bool keyInput(gui::Window* w, int key, int scancode, int action, int mods) override
+		bool keyInput(const gui::Window* w, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, gui::Window* w, int key, int scancode, int action, char mods)>(FUNC_GUI_TEXTINPUT_KEYINPUT)(this, w, key, scancode, action, mods);
+			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, const gui::Window* w, int key, int scancode, int action, char mods)>(getFuncAddr((int)Func::gui_Nested::TextInput::keyInput))(this, w, key, scancode, action, mods);
 		}
-		bool charInput(gui::Window* w, uint32_t codepoint) override
+		bool charInput(const gui::Window* w, uint32_t codepoint) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, gui::Window* w, uint32_t codepoint)>(FUNC_GUI_TEXTINPUT_CHARINPUT)(this, w, codepoint);
+			return reinterpret_cast<bool (__thiscall*)(gui::TextInput* self, const gui::Window* w, uint32_t codepoint)>(getFuncAddr((int)Func::gui_Nested::TextInput::charInput))(this, w, codepoint);
 		}
 		int getCursorType() override
 		{
-			return reinterpret_cast<int (__thiscall*)(gui::TextInput* self)>(FUNC_GUI_TEXTINPUT_GETCURSORTYPE)(this);
+			return reinterpret_cast<int (__thiscall*)(gui::TextInput* self)>(getFuncAddr((int)Func::gui_Nested::TextInput::getCursorType))(this);
 		}
 		void select() override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self)>(FUNC_GUI_TEXTINPUT_SELECT)(this);
+			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self)>(getFuncAddr((int)Func::gui_Nested::TextInput::select))(this);
 		}
 		void deselect() override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self)>(FUNC_GUI_TEXTINPUT_DESELECT)(this);
+			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self)>(getFuncAddr((int)Func::gui_Nested::TextInput::deselect))(this);
 		}
 		void updatePasswordVisualText() 
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self)>(FUNC_GUI_TEXTINPUT_UPDATEPASSWORDVISUALTEXT)(this);
+			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self)>(getFuncAddr((int)Func::gui_Nested::TextInput::updatePasswordVisualText))(this);
 		}
-		void updateScrollPos(gui::Window* w) 
+		void updateScrollPos(const gui::Window* w)
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::Window* w)>(FUNC_GUI_TEXTINPUT_UPDATESCROLLPOS)(this, w);
+			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, const gui::Window* w)>(getFuncAddr((int)Func::gui_Nested::TextInput::updateScrollPos))(this, w);
 		}
-		void getPos(gui::Window* w, int* x, int* y) override
+		void getPos(const gui::Window* w, int* x, int* y) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::Window* w, int* x, int* y)>(FUNC_GUI_TEXTINPUT_GETPOS)(this, w, x, y);
-		}
-		void getSize(gui::Window* w, int* width, int* height) override
+			return reinterpret_cast<void (__thiscall*)(const gui::TextInput* self, const gui::Window* w, int* x, int* y)>(getFuncAddr((int)Func::gui_Nested::TextInput::getPos))(this, w, x, y);
+		} 
+		void getSize(const gui::Window* w, int* width, int* height) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::Window* w, int* width, int* height)>(FUNC_GUI_TEXTINPUT_GETSIZE)(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(const gui::TextInput* self, const gui::Window* w, int* width, int* height)>(getFuncAddr((int)Func::gui_Nested::TextInput::getSize))(this, w, width, height);
 		}
 		std::string removeInvalidChars(const char* str) 
 		{
 			std::string result;
-			reinterpret_cast<std::string (__thiscall*)(gui::TextInput* self, std::string* result, const char* str)>(FUNC_GUI_TEXTINPUT_REMOVEINVALIDCHARS)(this, &result, str);
+			reinterpret_cast<std::string (__thiscall*)(gui::TextInput* self, std::string* result, const char* str)>(getFuncAddr((int)Func::gui_Nested::TextInput::removeInvalidChars))(this, &result, str);
 			return result;
 		}
 		void removeHighlightedText() 
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self)>(FUNC_GUI_TEXTINPUT_REMOVEHIGHLIGHTEDTEXT)(this);
+			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self)>(getFuncAddr((int)Func::gui_Nested::TextInput::removeHighlightedText))(this);
 		}
 	};
 }

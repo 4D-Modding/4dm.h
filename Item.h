@@ -20,53 +20,53 @@ namespace fdm
 
 		inline static bool loadItemInfo() 
 		{
-			return reinterpret_cast<bool (__fastcall*)()>(FUNC_ITEM_LOADITEMINFO)();
+			return reinterpret_cast<bool (__fastcall*)()>(getFuncAddr((int)Func::Item::loadItemInfo))();
 		}
 		inline static void renderItem(std::unique_ptr<Item>& item, const glm::ivec2& pos) 
 		{
-			return reinterpret_cast<void (__fastcall*)(std::unique_ptr<Item>& item, const glm::ivec2& pos)>(FUNC_ITEM_RENDERITEM)(item, pos);
+			return reinterpret_cast<void (__fastcall*)(std::unique_ptr<Item>& item, const glm::ivec2& pos)>(getFuncAddr((int)Func::Item::renderItem))(item, pos);
 		}
 		inline static void renderItemDescription(std::unique_ptr<Item>& item, const glm::ivec2& pos) 
 		{
-			return reinterpret_cast<void (__fastcall*)(std::unique_ptr<Item>& item, const glm::ivec2& pos)>(FUNC_ITEM_RENDERITEMDESCRIPTION)(item, pos);
+			return reinterpret_cast<void (__fastcall*)(std::unique_ptr<Item>& item, const glm::ivec2& pos)>(getFuncAddr((int)Func::Item::renderItemDescription))(item, pos);
 		}
 		inline static std::unique_ptr<Item> createFromJson(nlohmann::json& j) 
 		{
-			return reinterpret_cast<std::unique_ptr<Item> (__fastcall*)(nlohmann::json& j)>(FUNC_ITEM_CREATEFROMJSON)(j);
+			return reinterpret_cast<std::unique_ptr<Item> (__fastcall*)(nlohmann::json& j)>(getFuncAddr((int)Func::Item::createFromJson))(j);
 		}
 		inline static bool giveMax(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to) 
 		{
-			return reinterpret_cast<bool (__fastcall*)(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to)>(FUNC_ITEM_GIVEMAX)(from, to);
+			return reinterpret_cast<bool (__fastcall*)(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to)>(getFuncAddr((int)Func::Item::giveMax))(from, to);
 		}
 		inline static bool giveOne(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to) 
 		{
-			return reinterpret_cast<bool (__fastcall*)(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to)>(FUNC_ITEM_GIVEONE)(from, to);
+			return reinterpret_cast<bool (__fastcall*)(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to)>(getFuncAddr((int)Func::Item::giveOne))(from, to);
 		}
 		inline static std::unique_ptr<Item> instantiateItem(const std::string& itemName, uint32_t count, const std::string& type, nlohmann::json& attributes) 
 		{
-			return reinterpret_cast<std::unique_ptr<Item> (__fastcall*)(const std::string& itemName, uint32_t count, const std::string& type, nlohmann::json& attributes)>(FUNC_ITEM_INSTANTIATEITEM)(itemName, count, type, attributes);
+			return reinterpret_cast<std::unique_ptr<Item> (__fastcall*)(const std::string& itemName, uint32_t count, const std::string& type, nlohmann::json& attributes)>(getFuncAddr((int)Func::Item::instantiateItem))(itemName, count, type, attributes);
 		}
 		inline static nlohmann::json combineItemAttributes(nlohmann::json& baseAttributes, nlohmann::json& additions) 
 		{
-			return reinterpret_cast<nlohmann::json (__fastcall*)(nlohmann::json& baseAttributes, nlohmann::json& additions)>(FUNC_ITEM_COMBINEITEMATTRIBUTES)(baseAttributes, additions);
+			return reinterpret_cast<nlohmann::json (__fastcall*)(nlohmann::json& baseAttributes, nlohmann::json& additions)>(getFuncAddr((int)Func::Item::combineItemAttributes))(baseAttributes, additions);
 		}
 		nlohmann::json save() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Item* self, nlohmann::json* result)>(FUNC_ITEM_SAVE)(this, &result);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(Item* self, nlohmann::json* result)>(getFuncAddr((int)Func::Item::save))(this, &result);
 			return result;
 		}
-		~Item()
+		virtual ~Item()
 		{
-			reinterpret_cast<void(__thiscall*)(Item* self)>(FUNC_ITEM_DESTR_ITEM)(this);
+			reinterpret_cast<void(__thiscall*)(Item* self)>(getFuncAddr((int)Func::Item::destr_Item))(this);
 		}
 		bool takeMax(std::unique_ptr<Item>& other) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(Item* self, std::unique_ptr<Item>& other)>(FUNC_ITEM_TAKEMAX)(this, other);
+			return reinterpret_cast<bool (__thiscall*)(Item* self, std::unique_ptr<Item>& other)>(getFuncAddr((int)Func::Item::takeMax))(this, other);
 		}
 		bool takeHalf(std::unique_ptr<Item>& other) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(Item* self, std::unique_ptr<Item>& other)>(FUNC_ITEM_TAKEHALF)(this, other);
+			return reinterpret_cast<bool (__thiscall*)(Item* self, std::unique_ptr<Item>& other)>(getFuncAddr((int)Func::Item::takeHalf))(this, other);
 		}
 
 

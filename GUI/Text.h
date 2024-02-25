@@ -7,21 +7,21 @@ namespace fdm::gui
 	class Text : public gui::Element 
 	{
 	public:
-		std::string text; // 0x8
-		int xOffset; // 0x28
-		int yOffset; // 0x2C
-		gui::AlignmentX xAlign; // 0x30
-		gui::AlignmentY yAlign; // 0x34
+		std::string text = ""; // 0x8
+		int xOffset = 0; // 0x28
+		int yOffset = 0; // 0x2C
+		gui::AlignmentX xAlign = ALIGN_LEFT; // 0x30
+		gui::AlignmentY yAlign = ALIGN_TOP;  // 0x34
 		glm::vec4 color{1}; // 0x38
-		uint32_t size; // 0x48
+		uint32_t size = 1; // 0x48
 		uint32_t wrapWidth; // 0x4C
 		bool shadow; // 0x50
 		bool fancy; // 0x51
 
-		bool enabled() override {return false;}
+		bool enabled() override { return false; }
 		void render(gui::Window* w) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w)>(FUNC_GUI_TEXT_RENDER)(this, w);
+			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w)>(getFuncAddr((int)Func::gui_Nested::Text::render))(this, w);
 		}
 		void offsetX(int offset) override
 		{
@@ -39,21 +39,21 @@ namespace fdm::gui
 		{
 			this->yAlign = a;
 		}
-		void getPos(gui::Window* w, int* x, int* y) override
+		void getPos(const gui::Window* w, int* x, int* y) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w, int* x, int* y)>(FUNC_GUI_TEXT_GETPOS)(this, w, x, y);
+			return reinterpret_cast<void (__thiscall*)(const gui::Text* self, const gui::Window* w, int* x, int* y)>(getFuncAddr((int)Func::gui_Nested::Text::getPos))(this, w, x, y);
 		}
-		void getSize(gui::Window* w, int* width, int* height) override
+		void getSize(const gui::Window* w, int* width, int* height) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w, int* width, int* height)>(FUNC_GUI_TEXT_GETSIZE)(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(const gui::Text* self, const gui::Window* w, int* width, int* height)>(getFuncAddr((int)Func::gui_Nested::Text::getSize))(this, w, width, height);
 		}
 		void setText(const std::string& text) 
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Text* self, const std::string& text)>(FUNC_GUI_TEXT_SETTEXT)(this, text);
+			return reinterpret_cast<void (__thiscall*)(gui::Text* self, const std::string& text)>(getFuncAddr((int)Func::gui_Nested::Text::setText))(this, text);
 		}
-		void renderText(gui::Window* w, FontRenderer* text, int x, int y, bool align) 
+		void renderText(gui::Window* w, const std::string& text, int x, int y, bool align) 
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w, FontRenderer* text, int x, int y, bool align)>(FUNC_GUI_TEXT_RENDERTEXT)(this, w, text, x, y, align);
+			return reinterpret_cast<void (__thiscall*)(gui::Text* self, gui::Window* w, const std::string & text, int x, int y, bool align)>(getFuncAddr((int)Func::gui_Nested::Text::renderText))(this, w, text, x, y, align);
 		}
 	};
 }

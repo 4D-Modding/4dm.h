@@ -19,27 +19,27 @@ namespace fdm
 
 		void init(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s)>(FUNC_STATECREDITS_INIT_A)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s)>(getFuncAddr((int)Func::StateCredits::init))(this, s);
 		}
 		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s, double dt)>(FUNC_STATECREDITS_UPDATE_A)(this, s, dt);
+			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s, double dt)>(getFuncAddr((int)Func::StateCredits::update))(this, s, dt);
 		}
 		void render(StateManager& s) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s)>(FUNC_STATECREDITS_RENDER_A)(this, s);
+			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s)>(getFuncAddr((int)Func::StateCredits::render))(this, s);
 		}
 		void windowResize(StateManager& s, int width, int height) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s, int width, int height)>(FUNC_STATECREDITS_WINDOWRESIZE_A)(this, s, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StateCredits::windowResize))(this, s, width, height);
 		}
 		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s, int key, int scancode, int action, int mods)>(FUNC_STATECREDITS_KEYINPUT_A)(this, s, key, scancode, action, mods);
+			return reinterpret_cast<void (__thiscall*)(StateCredits* self, StateManager& s, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::StateCredits::keyInput))(this, s, key, scancode, action, mods);
 		}
 		void updateProjection(int width, int height) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateCredits* self, int width, int height)>(FUNC_STATECREDITS_UPDATEPROJECTION_A)(this, width, height);
+			return reinterpret_cast<void (__thiscall*)(StateCredits* self, int width, int height)>(getFuncAddr((int)Func::StateCredits::updateProjection))(this, width, height);
 		}
 	};
 }
