@@ -1445,7 +1445,7 @@ to call the original function, do `original(<all of the you have arguments>)`
 creates a hook for a static function (__fastcall) using Func namespace. Useful for hooking functions of classes inside classes/namespaces (like gui classes). Because it turned out to not work properly with those (yea i havent tested it properly previously bruh)
 to call the original function, do `original(<all of the you have arguments>)`
 */
-#define $hookStaticByFunc(returnType, className, func, ...) \
+#define $hookStaticByFunc(returnType, func, ...) \
 	namespace CONCAT(fdmHooks, __LINE__) \
 	{ \
 		class H \
