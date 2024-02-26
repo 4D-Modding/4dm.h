@@ -35,9 +35,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(TexRenderer* self, int x, int y, int w, int h)>(getFuncAddr((int)Func::TexRenderer::setClip))(this, x, y, w, h);
 		}
-		void setColor(float r, float g, float b, int a) 
+		void setColor(float r, float g, float b, float a)
 		{
-			return reinterpret_cast<void (__thiscall*)(TexRenderer* self, float r, float g, float b, int a)>(getFuncAddr((int)Func::TexRenderer::setColor))(this, r, g, b, a);
+			return reinterpret_cast<void (__thiscall*)(TexRenderer* self, float r, float g, float b, float a)>(getFuncAddr((int)Func::TexRenderer::setColor))(this, r, g, b, a);
 		}
 		void setPos(int x, int y, int w, int h)
 		{
