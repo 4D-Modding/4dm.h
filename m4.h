@@ -130,6 +130,31 @@ namespace fdm
 					getFuncAddr((int)Func::m4_Nested::Mat5::Mat5A)
 					)(this, j);
 			}
+			Mat5(const Rotor& rotor)
+			{
+				glm::vec4 x = rotor.rotate({ 1, 0, 0, 0 });
+				value[0][0] = x[0];
+				value[0][1] = x[1];
+				value[0][2] = x[2];
+				value[0][3] = x[3];
+				glm::vec4 y = rotor.rotate({ 0, 1, 0, 0 });
+				value[1][0] = y[0];
+				value[1][1] = y[1];
+				value[1][2] = y[2];
+				value[1][3] = y[3];
+				glm::vec4 z = rotor.rotate({ 0, 0, 1, 0 });
+				value[2][0] = z[0];
+				value[2][1] = z[1];
+				value[2][2] = z[2];
+				value[2][3] = z[3];
+				glm::vec4 w = rotor.rotate({ 0, 0, 0, 1 });
+				value[3][0] = w[0];
+				value[3][1] = w[1];
+				value[3][2] = w[2];
+				value[3][3] = w[3];
+
+				value[4][4] = 1.0;
+			}
 			nlohmann::json toJson()
 			{
 				nlohmann::json result{};
