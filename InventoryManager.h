@@ -88,5 +88,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(InventoryManager* self, const glm::ivec2& size, const glm::ivec2& translate2D)>(getFuncAddr((int)Func::InventoryManager::updateProjection))(this, size, translate2D);
 		}
+		bool isOpen()
+		{
+			return primary && secondary;
+		}
 	};
 }
