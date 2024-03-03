@@ -47,8 +47,8 @@ namespace fdm
 		};
 		inline glm::vec4 cross(const glm::vec4& u, const glm::vec4& v, const glm::vec4& w)
 		{
-			glm::vec4 result(0.0f);
-			return reinterpret_cast<glm::vec4 (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
+			glm::vec4 result{};
+			return reinterpret_cast<glm::vec4& (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
 				getFuncAddr((int)Func::m4::cross)
 				)(&result, u, v, w);
 			return result;
