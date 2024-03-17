@@ -1,6 +1,9 @@
 #ifndef __4DM_H__
 #define __4DM_H__
 
+// make debug not change fucking sizes of std types
+#define _ITERATOR_DEBUG_LEVEL 0
+
 #pragma warning(disable: 26495)
 #pragma warning(disable: 4819)
 #pragma warning(disable: 26444)
