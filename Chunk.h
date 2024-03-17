@@ -150,7 +150,7 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, glm::i64vec3* borderingChunkPos)>(getFuncAddr((int)Func::Chunk::updateHeightmapCacheSection))(this, borderingChunkPos);
 		}
-		void generateMeshSection(Chunk::ChunkMesh* mesh, unsigned char startY, bool smoothLighting, bool shadows, bool lights) 
+		void generateMeshSection(Chunk::ChunkMesh& mesh, unsigned char startY, bool smoothLighting, bool shadows, bool lights) 
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, Chunk::ChunkMesh* mesh, unsigned char startY, bool smoothLighting, bool shadows, bool lights)>(getFuncAddr((int)Func::Chunk::generateMeshSection))(this, mesh, startY, smoothLighting, shadows, lights);
 		}
