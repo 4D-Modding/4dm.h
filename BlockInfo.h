@@ -37,6 +37,7 @@ namespace fdm
 			glm::u8vec3 glowColor; // 0x3B
 			PAD(2);
 		};
+		// size is BlockInfo::BLOCK_COUNT
 		inline static const BlockData* Blocks = reinterpret_cast<BlockData*>(base + 0x23F690);
 		struct VertLighting 
 		{

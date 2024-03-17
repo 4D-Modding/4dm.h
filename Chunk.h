@@ -63,11 +63,11 @@ namespace fdm
 			{
 				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, Chunk::ChunkMesh* other)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::move))(this, other);
 			}
-			void addMeshSide(const glm::u8vec4* side, const glm::u8vec4* side_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting[8] lighting) 
+			void addMeshSide(const glm::u8vec4* side, const glm::u8vec4* side_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting lighting[8]) 
 			{
 				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, const glm::u8vec4& side, const glm::u8vec4& side_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting* lighting)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::addMeshSide))(this, side, side_tuvs, pos, lighting);
 			}
-			void addMeshPlant(const glm::u8vec4* plant, const glm::u8vec4* plant_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting[16] lighting) 
+			void addMeshPlant(const glm::u8vec4* plant, const glm::u8vec4* plant_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting lighting[16]) 
 			{
 				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, const glm::u8vec4& plant, const glm::u8vec4& plant_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting* lighting)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::addMeshPlant))(this, plant, plant_tuvs, pos, lighting);
 			}
@@ -154,11 +154,11 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, Chunk::ChunkMesh* mesh, unsigned char startY, bool smoothLighting, bool shadows, bool lights)>(getFuncAddr((int)Func::Chunk::generateMeshSection))(this, mesh, startY, smoothLighting, shadows, lights);
 		}
-		void getSmoothLighting(const glm::ivec4& block, unsigned char face, BlockInfo::VertLighting[8] lighting, bool shadows, bool lights) 
+		void getSmoothLighting(const glm::ivec4& block, unsigned char face, BlockInfo::VertLighting lighting[8], bool shadows, bool lights) 
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, const glm::ivec4& block, unsigned char face, BlockInfo::VertLighting* lighting, bool shadows, bool lights)>(getFuncAddr((int)Func::Chunk::getSmoothLighting))(this, block, face, lighting, shadows, lights);
 		}
-		void getLighting(const glm::ivec4& block, unsigned char face, BlockInfo::VertLighting[8] lighting, bool shadows, bool lights) 
+		void getLighting(const glm::ivec4& block, unsigned char face, BlockInfo::VertLighting lighting[8], bool shadows, bool lights) 
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, const glm::ivec4& block, unsigned char face, BlockInfo::VertLighting* lighting, bool shadows, bool lights)>(getFuncAddr((int)Func::Chunk::getLighting))(this, block, face, lighting, shadows, lights);
 		}
