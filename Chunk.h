@@ -65,11 +65,11 @@ namespace fdm
 			}
 			void addMeshSide(const glm::u8vec4* side, const glm::u8vec4* side_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting lighting[8]) 
 			{
-				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, const glm::u8vec4& side, const glm::u8vec4& side_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting* lighting)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::addMeshSide))(this, side, side_tuvs, pos, lighting);
+				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, const glm::u8vec4* side, const glm::u8vec4* side_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting lighting[8])>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::addMeshSide))(this, side, side_tuvs, pos, lighting);
 			}
 			void addMeshPlant(const glm::u8vec4* plant, const glm::u8vec4* plant_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting lighting[16]) 
 			{
-				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, const glm::u8vec4& plant, const glm::u8vec4& plant_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting* lighting)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::addMeshPlant))(this, plant, plant_tuvs, pos, lighting);
+				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, const glm::u8vec4* plant, const glm::u8vec4* plant_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting lighting[16])>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::addMeshPlant))(this, plant, plant_tuvs, pos, lighting);
 			}
 		};
 		inline static const uint32_t SIZE = 8; 
