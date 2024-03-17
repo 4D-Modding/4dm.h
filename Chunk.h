@@ -112,7 +112,7 @@ namespace fdm
 		}
 		void updateEntitiesClient(World* world, double dt, EntityManager& entityManager) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Chunk* self, World* world, double dt, EntityManager* entityManager)>(getFuncAddr((int)Func::Chunk::updateEntitiesClient))(this, world, dt, entityManager);
+			return reinterpret_cast<void (__thiscall*)(Chunk* self, World* world, double dt, EntityManager& entityManager)>(getFuncAddr((int)Func::Chunk::updateEntitiesClient))(this, world, dt, entityManager);
 		}
 		void clearEntities(EntityManager* entityManager) 
 		{
@@ -120,7 +120,7 @@ namespace fdm
 		}
 		void render(const World* world, const m4::Mat5& MV, const Frustum& frustum) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Chunk* self, const World* world, const m4::Mat5& MV, const Frustum* frustum)>(getFuncAddr((int)Func::Chunk::render))(this, world, MV, frustum);
+			return reinterpret_cast<void (__thiscall*)(Chunk* self, const World* world, const m4::Mat5& MV, const Frustum& frustum)>(getFuncAddr((int)Func::Chunk::render))(this, world, MV, frustum);
 		}
 		void updateLightingHeightMap() 
 		{
@@ -144,15 +144,15 @@ namespace fdm
 		}
 		void updateCacheSection(const Chunk* other, bool shadows) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Chunk* self, const Chunk& other, bool shadows)>(getFuncAddr((int)Func::Chunk::updateCacheSection))(this, other, shadows);
+			return reinterpret_cast<void (__thiscall*)(Chunk* self, const Chunk* other, bool shadows)>(getFuncAddr((int)Func::Chunk::updateCacheSection))(this, other, shadows);
 		}
 		void updateHeightmapCacheSection(glm::i64vec3 borderingChunkPos) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Chunk* self, glm::i64vec3* borderingChunkPos)>(getFuncAddr((int)Func::Chunk::updateHeightmapCacheSection))(this, borderingChunkPos);
+			return reinterpret_cast<void (__thiscall*)(Chunk* self, glm::i64vec3 borderingChunkPos)>(getFuncAddr((int)Func::Chunk::updateHeightmapCacheSection))(this, borderingChunkPos);
 		}
 		void generateMeshSection(Chunk::ChunkMesh& mesh, unsigned char startY, bool smoothLighting, bool shadows, bool lights) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Chunk* self, Chunk::ChunkMesh* mesh, unsigned char startY, bool smoothLighting, bool shadows, bool lights)>(getFuncAddr((int)Func::Chunk::generateMeshSection))(this, mesh, startY, smoothLighting, shadows, lights);
+			return reinterpret_cast<void (__thiscall*)(Chunk* self, Chunk::ChunkMesh& mesh, unsigned char startY, bool smoothLighting, bool shadows, bool lights)>(getFuncAddr((int)Func::Chunk::generateMeshSection))(this, mesh, startY, smoothLighting, shadows, lights);
 		}
 		void getSmoothLighting(const glm::ivec4& block, unsigned char face, BlockInfo::VertLighting lighting[8], bool shadows, bool lights) 
 		{
