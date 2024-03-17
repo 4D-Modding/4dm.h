@@ -110,7 +110,7 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, bool smoothLighting, bool shadows, bool lights)>(getFuncAddr((int)Func::Chunk::generateMesh))(this, smoothLighting, shadows, lights);
 		}
-		void updateEntitiesClient(World* world, double dt, EntityManager* entityManager) 
+		void updateEntitiesClient(World* world, double dt, EntityManager& entityManager) 
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, World* world, double dt, EntityManager* entityManager)>(getFuncAddr((int)Func::Chunk::updateEntitiesClient))(this, world, dt, entityManager);
 		}
@@ -118,7 +118,7 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, EntityManager* entityManager)>(getFuncAddr((int)Func::Chunk::clearEntities))(this, entityManager);
 		}
-		void render(const World* world, const m4::Mat5& MV, const Frustum* frustum) 
+		void render(const World* world, const m4::Mat5& MV, const Frustum& frustum) 
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, const World* world, const m4::Mat5& MV, const Frustum* frustum)>(getFuncAddr((int)Func::Chunk::render))(this, world, MV, frustum);
 		}
@@ -142,11 +142,11 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, const Connection::InMessage& message, World* world)>(getFuncAddr((int)Func::Chunk::loadFromMessage))(this, message, world);
 		}
-		void updateCacheSection(const Chunk& other, bool shadows) 
+		void updateCacheSection(const Chunk* other, bool shadows) 
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, const Chunk& other, bool shadows)>(getFuncAddr((int)Func::Chunk::updateCacheSection))(this, other, shadows);
 		}
-		void updateHeightmapCacheSection(glm::i64vec3* borderingChunkPos) 
+		void updateHeightmapCacheSection(glm::i64vec3 borderingChunkPos) 
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, glm::i64vec3* borderingChunkPos)>(getFuncAddr((int)Func::Chunk::updateHeightmapCacheSection))(this, borderingChunkPos);
 		}
