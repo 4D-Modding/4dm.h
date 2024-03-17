@@ -22,10 +22,26 @@ namespace fdm
 	class BlockInfo 
 	{
 	public:
+		struct BlockData
+		{
+			glm::u8vec4* tuv_top; // 0x0
+			glm::u8vec4* tuv_side; // 0x8
+			glm::u8vec4* tuv_bottom; // 0x10
+			glm::u8vec4* tuv_full_block; // 0x18
+			glm::u8vec4* uv_top; // 0x20
+			glm::u8vec4* uv_side; // 0x28
+			glm::u8vec4* uv_bottom; // 0x30
+			bool solid; // 0x38
+			bool opaque; // 0x39
+			bool plant; // 0x3A
+			glm::u8vec3 glowColor; // 0x3B
+			PAD(2);
+		};
+		inline static const BlockData* Blocks = reinterpret_cast<BlockData*>(base + 0x23F690);
 		struct VertLighting 
 		{
-			uint32_t ambient; 
-			uint32_t shadow; // 0x1
+			uint8_t ambient; 
+			uint8_t shadow; // 0x1
 			glm::u8vec3 glow; // 0x2
 		};
 		struct ItemMesh 
@@ -92,15 +108,12 @@ namespace fdm
 		inline static const int PLANT_VERT_COUNT = 48; 
 		
 		inline static const int BLOCK_COUNT = 34; 
-		inline static const int VISIBLE_BLOCK_COUNT = 31; 
-		/*struct 
-		{
+		inline static const int VISIBLE_BLOCK_COUNT = 31;
 
-		} Blocks;*/
-		inline static glm::u8vec4* *cube_verts_x = reinterpret_cast<glm::u8vec4**>((base + 0x3B570 + 0x200000));
-		inline static glm::u8vec4* *cube_verts_y = reinterpret_cast<glm::u8vec4**>((base + 0x3BD80 + 0x200000));
-		inline static glm::u8vec4* *cube_verts_z = reinterpret_cast<glm::u8vec4**>((base + 0x3A210 + 0x200000));
-		inline static glm::u8vec4* *cube_verts_w = reinterpret_cast<glm::u8vec4**>((base + 0x3AE98 + 0x200000));
+		inline static glm::u8vec4* cube_verts_x = reinterpret_cast<glm::u8vec4*>((base + 0x3B570 + 0x200000));
+		inline static glm::u8vec4* cube_verts_y = reinterpret_cast<glm::u8vec4*>((base + 0x3BD80 + 0x200000));
+		inline static glm::u8vec4* cube_verts_z = reinterpret_cast<glm::u8vec4*>((base + 0x3A210 + 0x200000));
+		inline static glm::u8vec4* cube_verts_w = reinterpret_cast<glm::u8vec4*>((base + 0x3AE98 + 0x200000));
 		inline static const glm::u8vec4 hypercube_full_verts[HYPERCUBE_VERT_COUNT] =
 		{
 			// -x
@@ -288,12 +301,12 @@ namespace fdm
 			_cube_tet_indices(CUBE_VERT_COUNT * 6),
 			_cube_tet_indices(CUBE_VERT_COUNT * 7),
 		};
-		inline static glm::u8vec4** plant_full_verts = reinterpret_cast<glm::u8vec4**>((base + 0x3A790 + 0x200000));
-		inline static glm::vec4** plant_full_normals = reinterpret_cast<glm::vec4**>((base + 0x53E50 + 0x270000));
-		inline static uint32_t** plant_full_indices = reinterpret_cast<uint32_t**>((base + 0x3A260 + 0x200000));
-		inline static glm::u8vec3* *square_verts_x = reinterpret_cast<glm::u8vec3**>((base + 0x3AE88 + 0x200000));
-		inline static glm::u8vec3* *square_verts_y = reinterpret_cast<glm::u8vec3**>((base + 0x3B0C0 + 0x200000));
-		inline static glm::u8vec3* *square_verts_z = reinterpret_cast<glm::u8vec3**>((base + 0x3BC70 + 0x200000));
+		inline static glm::u8vec4* plant_full_verts = reinterpret_cast<glm::u8vec4*>((base + 0x3A790 + 0x200000));
+		inline static glm::vec4* plant_full_normals = reinterpret_cast<glm::vec4*>((base + 0x53E50 + 0x270000));
+		inline static uint32_t* plant_full_indices = reinterpret_cast<uint32_t*>((base + 0x3A260 + 0x200000));
+		inline static glm::u8vec3* square_verts_x = reinterpret_cast<glm::u8vec3*>((base + 0x3AE88 + 0x200000));
+		inline static glm::u8vec3* square_verts_y = reinterpret_cast<glm::u8vec3*>((base + 0x3B0C0 + 0x200000));
+		inline static glm::u8vec3* square_verts_z = reinterpret_cast<glm::u8vec3*>((base + 0x3BC70 + 0x200000));
 		inline static glm::u8vec3 cube_verts[CUBE_VERT_COUNT] =
 		{
 			{ 0, 0, 0 },
@@ -309,11 +322,11 @@ namespace fdm
 		{
 			1, 2, 4, 7, 0, 1, 2, 4, 2, 4, 6, 7, 1, 2, 3, 7, 1, 4, 5, 7
 		};
-		inline static glm::u8vec3* *cube_verts_triangles = reinterpret_cast<glm::u8vec3**>((base + 0x3B2E0 + 0x200000));
-		inline static glm::u8vec3* *cube_verts_lines = reinterpret_cast<glm::u8vec3**>((base + 0x3B1D0 + 0x200000));
+		inline static glm::u8vec3* cube_verts_triangles = reinterpret_cast<glm::u8vec3*>((base + 0x3B2E0 + 0x200000));
+		inline static glm::u8vec3* cube_verts_lines = reinterpret_cast<glm::u8vec3*>((base + 0x3B1D0 + 0x200000));
 		inline static std::unordered_map<std::string,uint8_t>* blockIDs = reinterpret_cast<std::unordered_map<std::string,uint8_t>*>((base + 0x53FD0 + 0x270000));
 		inline static std::unordered_map<uint8_t,std::string>* blockNames = reinterpret_cast<std::unordered_map<uint8_t,std::string>*>((base + 0x54010 + 0x270000));
-		inline static BlockInfo::ItemMesh** itemMeshes = reinterpret_cast<BlockInfo::ItemMesh**>((base + 0x4DB30 + 0x270000));
+		inline static BlockInfo::ItemMesh* itemMeshes = reinterpret_cast<BlockInfo::ItemMesh*>((base + 0x4DB30 + 0x270000));
 
 		inline static void renderItemMesh(uint8_t blockID) 
 		{
