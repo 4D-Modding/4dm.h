@@ -192,7 +192,7 @@ namespace fdm
 			glm::vec4 multiply(const glm::vec4& v, float finalComp)
 			{
 				glm::vec4 result{};
-				return reinterpret_cast<glm::vec4(__thiscall*)(Mat5*, glm::vec4*, const glm::vec4&, float)>(
+				return reinterpret_cast<glm::vec4&(__thiscall*)(Mat5*, glm::vec4*, const glm::vec4&, float)>(
 					getFuncAddr((int)Func::m4_Nested::Mat5::multiply)
 					)(this, &result, v, finalComp);
 				return result;
