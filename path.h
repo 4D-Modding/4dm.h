@@ -1,29 +1,42 @@
 #pragma once
 
 #include "4dm.h"
+
 namespace fdm
 {
     class path
     {
     public:
-        std::string pathName;
+        std::wstring pathName;
         path()
         {
-            pathName = "";
+            pathName = L"";
         }
         path(const path& src)
         {
             pathName = src.pathName;
         }
-        path(const char* src)
+        path(const std::string& src)
         {
-            pathName = std::string(src);
+            pathName = std::wstring(src.begin(), src.end());
         }
-        const std::string string(void)
+        path(const std::wstring& src)
+        {
+            pathName = src;
+        }
+        const std::wstring wstring(void)
         {
             return pathName;
         }
+        const std::string string(void)
+        {
+            return std::string(pathName.begin(), pathName.end());
+        }
         const char* c_str(void)
+        {
+            return string().c_str();
+        }
+        const wchar_t* c_wstr(void)
         {
             return pathName.c_str();
         }
