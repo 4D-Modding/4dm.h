@@ -167,15 +167,16 @@ namespace fdm
 			}
 			Mat5& operator*(const Mat5& other) const
 			{
-				Mat5 result{ 1 };
+				Mat5 result;
 
-				for (int i = 0; i < 5; i++)
+				for (int col = 0; col < 5; ++col)
 				{
-					for (int j = 0; j < 5; j++)
+					for (int row = 0; row < 5; ++row)
 					{
-						result[i][j] = 0.f;
-						for (int k = 0; k < 5; k++)
-							result[i][j] += this->value[i][k] * other.value[k][j];
+						for (int k = 0; k < 5; ++k)
+						{
+							result.value[col][row] += value[k][row] * other.value[col][k];
+						}
 					}
 				}
 
@@ -292,6 +293,13 @@ namespace fdm
 		};
 		inline Mat5 createCamera(const glm::vec4& eye, const glm::vec4& forward, const glm::vec4& up, const glm::vec4& right, const glm::vec4& over)
 		{
+			//Mat5 result;
+
+			//return reinterpret_cast<Mat5 & (__thiscall*)(Mat5*, const glm::vec4 & eye, const glm::vec4 & forward, const glm::vec4 & up, const glm::vec4 & right, const glm::vec4 & over)>(
+				//getFuncAddr((int)Func::m4::createCamera)
+				//)(&result, eye, forward, up, right, over);
+			//return result;
+
 			Mat5 cameraD{ 1 };
 
 			cameraD[0][0] = right.x;
