@@ -293,12 +293,12 @@ namespace fdm
 		};
 		inline Mat5 createCamera(const glm::vec4& eye, const glm::vec4& forward, const glm::vec4& up, const glm::vec4& right, const glm::vec4& over)
 		{
-			//Mat5 result;
+			Mat5 result;
 
-			//return reinterpret_cast<Mat5 & (__thiscall*)(Mat5*, const glm::vec4 & eye, const glm::vec4 & forward, const glm::vec4 & up, const glm::vec4 & right, const glm::vec4 & over)>(
-				//getFuncAddr((int)Func::m4::createCamera)
-				//)(&result, eye, forward, up, right, over);
-			//return result;
+			return reinterpret_cast<Mat5 & (__thiscall*)(Mat5*, const glm::vec4 & eye, const glm::vec4 & forward, const glm::vec4 & up, const glm::vec4 & right, const glm::vec4 & over)>(
+				getFuncAddr((int)Func::m4::createCamera)
+				)(&result, eye, forward, up, right, over);
+			return result;
 
 			Mat5 cameraD{ 1 };
 
