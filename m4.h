@@ -295,11 +295,11 @@ namespace fdm
 		{
 			Mat5 result;
 
-			return reinterpret_cast<Mat5 & (__thiscall*)(Mat5*, const glm::vec4 & eye, const glm::vec4 & forward, const glm::vec4 & up, const glm::vec4 & right, const glm::vec4 & over)>(
+			return reinterpret_cast<Mat5 & (__fastcall*)(Mat5*, const glm::vec4 & eye, const glm::vec4 & forward, const glm::vec4 & up, const glm::vec4 & right, const glm::vec4 & over)>(
 				getFuncAddr((int)Func::m4::createCamera)
 				)(&result, eye, forward, up, right, over);
 			return result;
-
+			/*
 			Mat5 cameraD{ 1 };
 
 			cameraD[0][0] = right.x;
@@ -325,7 +325,7 @@ namespace fdm
 			cameraP[4][2] = -eye.z;
 			cameraP[4][3] = -eye.w;
 
-			return cameraD * cameraP;
+			return cameraD * cameraP;*/
 		}
 		inline glm::vec4 adjustToMaxHorizSpeed(const glm::vec4& vel, const glm::vec4& deltaVel, float maxHorizSpeed)
 		{
