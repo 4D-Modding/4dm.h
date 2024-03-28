@@ -102,7 +102,7 @@ namespace fdm::gui
 		std::string removeInvalidChars(const char* str) 
 		{
 			std::string result;
-			reinterpret_cast<std::string (__thiscall*)(gui::TextInput* self, std::string* result, const char* str)>(getFuncAddr((int)Func::gui_Nested::TextInput::removeInvalidChars))(this, &result, str);
+			reinterpret_cast<std::string& (__thiscall*)(gui::TextInput* self, std::string* result, const char* str)>(getFuncAddr((int)Func::gui_Nested::TextInput::removeInvalidChars))(this, &result, str);
 			return result;
 		}
 		void removeHighlightedText() 

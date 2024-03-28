@@ -77,7 +77,7 @@ namespace fdm
 		Inventory::iterator end() override
 		{
 			iterator result;
-			return reinterpret_cast<Inventory::iterator (__thiscall*)(InventoryGrid* self, Inventory::iterator* result)>(getFuncAddr((int)Func::InventoryGrid::end))(this, &result);
+			return reinterpret_cast<Inventory::iterator& (__thiscall*)(InventoryGrid* self, Inventory::iterator* result)>(getFuncAddr((int)Func::InventoryGrid::end))(this, &result);
 			return result;
 		}
 		void load(nlohmann::json& j) 
@@ -87,7 +87,7 @@ namespace fdm
 		nlohmann::json save() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(InventoryGrid* self, nlohmann::json* result)>(getFuncAddr((int)Func::InventoryGrid::save))(this, &result);
+			return reinterpret_cast<nlohmann::json& (__thiscall*)(InventoryGrid* self, nlohmann::json* result)>(getFuncAddr((int)Func::InventoryGrid::save))(this, &result);
 			return result;
 		}
 	};

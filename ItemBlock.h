@@ -31,7 +31,7 @@ namespace fdm
 		nlohmann::json saveAttributes() override
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(ItemBlock* self, nlohmann::json* result)>(getFuncAddr((int)Func::ItemBlock::saveAttributes))(this, &result);
+			return reinterpret_cast<nlohmann::json& (__thiscall*)(ItemBlock* self, nlohmann::json* result)>(getFuncAddr((int)Func::ItemBlock::saveAttributes))(this, &result);
 		}
 		bool action(World* world, Player* player, int action) override
 		{

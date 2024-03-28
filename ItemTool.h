@@ -62,7 +62,8 @@ namespace fdm
 		std::unique_ptr<Item> clone() override
 		{
 			std::unique_ptr<Item> result;
-			return reinterpret_cast<std::unique_ptr<Item> (__thiscall*)(ItemTool* self, std::unique_ptr<Item>* result)>(getFuncAddr((int)Func::ItemTool::clone))(this, &result);
+			reinterpret_cast<std::unique_ptr<Item>* (__thiscall*)(ItemTool* self, std::unique_ptr<Item>* result)>(getFuncAddr((int)Func::ItemTool::clone))(this, &result);
+			return result;
 		}
 	};
 }

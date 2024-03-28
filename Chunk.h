@@ -173,7 +173,7 @@ namespace fdm
 		std::string getFilenamePrefix() 
 		{
 			std::string result;
-			return reinterpret_cast<std::string (__thiscall*)(Chunk* self, std::string* result)>(getFuncAddr((int)Func::Chunk::getFilenamePrefix))(this, &result);
+			return reinterpret_cast<std::string& (__thiscall*)(Chunk* self, std::string* result)>(getFuncAddr((int)Func::Chunk::getFilenamePrefix))(this, &result);
 			return result;
 		}
 	};

@@ -27,7 +27,7 @@ namespace fdm
 			nlohmann::json toJson()
 			{
 				nlohmann::json result{};
-				return reinterpret_cast<nlohmann::json(__thiscall*)(m4::BiVector4 * self, nlohmann::json * result)>(getFuncAddr((int)Func::m4_Nested::BiVector4::toJson))(this, &result);
+				return reinterpret_cast<nlohmann::json&(__thiscall*)(m4::BiVector4 * self, nlohmann::json * result)>(getFuncAddr((int)Func::m4_Nested::BiVector4::toJson))(this, &result);
 				return result;
 			}
 

@@ -172,7 +172,7 @@ namespace fdm
 		nlohmann::json getMovementUpdate() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::getMovementUpdate))(this, &result);
+			return reinterpret_cast<nlohmann::json& (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::getMovementUpdate))(this, &result);
 		}
 		void setMovementBehavior(nlohmann::json& movementKeys, bool keepOnEdge) 
 		{
@@ -249,7 +249,7 @@ namespace fdm
 		nlohmann::json save() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::save))(this, &result);
+			return reinterpret_cast<nlohmann::json& (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::save))(this, &result);
 		}
 		void loadClientData(nlohmann::json& j) 
 		{
@@ -258,12 +258,12 @@ namespace fdm
 		nlohmann::json saveClientData() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::saveClientData))(this, &result);
+			return reinterpret_cast<nlohmann::json& (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::saveClientData))(this, &result);
 		}
 		nlohmann::json saveOrientation() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::saveOrientation))(this,& result);
+			return reinterpret_cast<nlohmann::json& (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::saveOrientation))(this, &result);
 		}
 	};
 }

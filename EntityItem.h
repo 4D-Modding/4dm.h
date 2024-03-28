@@ -25,7 +25,7 @@ namespace fdm
 		std::string getName() override
 		{
 			std::string result;
-			return reinterpret_cast<std::string (__thiscall*)(EntityItem* self, std::string* result)>(getFuncAddr((int)Func::EntityItem::getName))(this, &result);
+			return reinterpret_cast<std::string& (__thiscall*)(EntityItem* self, std::string* result)>(getFuncAddr((int)Func::EntityItem::getName))(this, &result);
 			return result;
 		}
 		void update(World* world, double dt) override
@@ -39,7 +39,7 @@ namespace fdm
 		nlohmann::json saveAttributes() override
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(EntityItem* self, nlohmann::json* result)>(getFuncAddr((int)Func::EntityItem::saveAttributes))(this, &result);
+			return reinterpret_cast<nlohmann::json& (__thiscall*)(EntityItem* self, nlohmann::json* result)>(getFuncAddr((int)Func::EntityItem::saveAttributes))(this, &result);
 			return result;
 		}
 		void applyServerUpdate(const nlohmann::json& j, World* world) override
@@ -49,7 +49,7 @@ namespace fdm
 		glm::vec4 getPos() override
 		{
 			glm::vec4 result;
-			return reinterpret_cast<glm::vec4 (__thiscall*)(EntityItem* self, glm::vec4* result)>(getFuncAddr((int)Func::EntityItem::getPos))(this, &result);
+			return reinterpret_cast<glm::vec4& (__thiscall*)(EntityItem* self, glm::vec4* result)>(getFuncAddr((int)Func::EntityItem::getPos))(this, &result);
 			return result;
 		}
 		void setPos(const glm::vec4& pos) override

@@ -79,7 +79,8 @@ namespace fdm
 		Connection::OutMessage getSkinMessage() 
 		{
 			Connection::OutMessage result;
-			return reinterpret_cast<Connection::OutMessage (__thiscall*)(StateSkinChooser* self, Connection::OutMessage* result)>(getFuncAddr((int)Func::StateSkinChooser::getSkinMessage))(this, &result);
+			reinterpret_cast<Connection::OutMessage* (__thiscall*)(StateSkinChooser* self, Connection::OutMessage* result)>(getFuncAddr((int)Func::StateSkinChooser::getSkinMessage))(this, &result);
+			return result;
 		}
 		bool loadSkin(path* p) 
 		{

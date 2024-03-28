@@ -49,7 +49,7 @@ namespace fdm
 		nlohmann::json save() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Entity* self, nlohmann::json* result)>(getFuncAddr((int)Func::Entity::save))(this, &result);
+			return reinterpret_cast<nlohmann::json& (__thiscall*)(Entity* self, nlohmann::json* result)>(getFuncAddr((int)Func::Entity::save))(this, &result);
 			return result;
 		}
 		inline static std::unique_ptr<Entity> instantiateEntity(const std::string& itemName, const uuid& id, glm::vec4& pos, const std::string& type, nlohmann::json& attributes) 

@@ -26,7 +26,7 @@ namespace fdm
 		std::string getName() override
 		{
 			std::string result;
-			return reinterpret_cast<std::string (__thiscall*)(ItemMaterial* self, std::string* result)>(getFuncAddr((int)Func::ItemMaterial::getName))(this, &result);
+			return reinterpret_cast<std::string& (__thiscall*)(ItemMaterial* self, std::string* result)>(getFuncAddr((int)Func::ItemMaterial::getName))(this, &result);
 		}
 		void render(const glm::ivec2& pos) override
 		{
@@ -55,7 +55,8 @@ namespace fdm
 		std::unique_ptr<Item> clone() override
 		{
 			std::unique_ptr<Item> result;
-			return reinterpret_cast<std::unique_ptr<Item> (__thiscall*)(ItemMaterial* self, std::unique_ptr<Item>* result)>(getFuncAddr((int)Func::ItemMaterial::clone))(this, &result);
+			reinterpret_cast<std::unique_ptr<Item>* (__thiscall*)(ItemMaterial* self, std::unique_ptr<Item>* result)>(getFuncAddr((int)Func::ItemMaterial::clone))(this, &result);
+			return result;
 		}
 	};
 }

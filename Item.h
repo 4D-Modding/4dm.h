@@ -53,7 +53,7 @@ namespace fdm
 		nlohmann::json save() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json (__thiscall*)(Item* self, nlohmann::json* result)>(getFuncAddr((int)Func::Item::save))(this, &result);
+			return reinterpret_cast<nlohmann::json& (__thiscall*)(Item* self, nlohmann::json* result)>(getFuncAddr((int)Func::Item::save))(this, &result);
 			return result;
 		}
 		virtual ~Item()
