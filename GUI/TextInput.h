@@ -8,25 +8,25 @@ namespace fdm::gui
 	class TextInput : public gui::Element 
 	{
 	public:
-		std::string text; // 0x8
+		std::string text = ""; // 0x8
 		bool enabled = true; // 0x28
 		bool editable = true; // 0x29
 		bool mouseDown; // 0x2A
 		bool active; // 0x2B
-		bool highlight; // 0x2C
-		bool passwordMode; // 0x2D
+		bool highlight = false; // 0x2C
+		bool passwordMode = false; // 0x2D
 		PAD(0x2);
-		std::string passwordVisualText; // 0x30
-		int cursorPos; // 0x50
-		int highlightStart; // 0x54
+		std::string passwordVisualText = ""; // 0x30
+		int cursorPos = 0; // 0x50
+		int highlightStart = 0; // 0x54
 		uint32_t width = 100; // 0x58
 		uint32_t height = 50; // 0x5C
 		inline static const int maxScrollPos = 4; 
-		int scrollPos; // 0x60
+		int scrollPos = 4; // 0x60
 		inline static const float cursorBlinkTime = 0.5f; 
 		float cursorBlinkTimer; // 0x64
 		inline static const float lastTypedCharTime = 0.2f; 
-		float lastTypedCharTimer; // 0x68
+		float lastTypedCharTimer = 0.f; // 0x68
 		int lastTypedCharIndex; // 0x6C
 		int xOffset; // 0x70
 		int yOffset; // 0x74
