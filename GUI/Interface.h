@@ -179,7 +179,8 @@ namespace fdm
 			bool charInput(uint32_t codepoint)
 			{
 				if (!empty() && selectedElemIndex != -1)
-					elements[selectedElemIndex]->charInput(this, codepoint);
+					return elements[selectedElemIndex]->charInput(this, codepoint);
+				return false;
 			}
 		};
 	}
