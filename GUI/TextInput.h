@@ -19,8 +19,8 @@ namespace fdm::gui
 		std::string passwordVisualText; // 0x30
 		int cursorPos; // 0x50
 		int highlightStart; // 0x54
-		uint32_t width; // 0x58
-		uint32_t height; // 0x5C
+		uint32_t width = 100; // 0x58
+		uint32_t height = 50; // 0x5C
 		inline static const int maxScrollPos = 4; 
 		int scrollPos; // 0x60
 		inline static const float cursorBlinkTime = 0.5f; 
