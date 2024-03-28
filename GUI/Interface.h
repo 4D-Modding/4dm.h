@@ -176,6 +176,11 @@ namespace fdm
 			{
 				return elements.empty();
 			}
+			bool charInput(uint32_t codepoint)
+			{
+				if (!empty() && selectedElemIndex != -1)
+					elements[selectedElemIndex]->charInput(this, codepoint);
+			}
 		};
 	}
 }
