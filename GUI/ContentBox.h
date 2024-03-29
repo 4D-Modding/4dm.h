@@ -267,7 +267,7 @@ namespace fdm
 			{
 				return elements.empty();
 			}
-			bool charInput(uint32_t codepoint)
+			bool charInput(const gui::Window* w, uint32_t codepoint) override
 			{
 				if (!empty() && selectedElemIndex != -1)
 					return elements[selectedElemIndex]->charInput(this, codepoint);
