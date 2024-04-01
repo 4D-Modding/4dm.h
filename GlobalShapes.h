@@ -15,7 +15,7 @@ namespace fdm
 	public:
 		inline static const MeshBuilder* pentachoron = reinterpret_cast<const MeshBuilder*>((base + 0x2C0B08));
 		inline static const PentachoronHollow* pentachoronHollow = reinterpret_cast<const PentachoronHollow*>((base + 0x2C0970));
-		inline static glm::vec4 five_cell_normals = reinterpret_cast<glm::vec4*>((base + 0x2C0920));
+		inline static glm::vec4* five_cell_normals = reinterpret_cast<glm::vec4*>((base + 0x2C0920));
 		inline static const MeshBuilder* pentachoronOriginBase = reinterpret_cast<const MeshBuilder*>((base + 0x2BFAA8));
 		inline static const MeshBuilder* spiderLeg = reinterpret_cast<const MeshBuilder*>((base + 0x2C0AD0));
 		inline static glm::vec4* five_cell_tet_origin_base = reinterpret_cast<glm::vec4*>((base + 0x2C0770));
