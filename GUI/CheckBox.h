@@ -24,6 +24,10 @@ namespace fdm::gui
 		CheckBoxCallback callback = NULL; // 0x48
 		bool checked; // 0x50
 
+		void setText(const std::string& text)
+		{
+			this->text = text;
+		}
 		void offsetX(int offset) override
 		{
 			this->xOffset = offset;

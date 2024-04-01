@@ -11,9 +11,9 @@ namespace fdm
 		{
 		public:
 			inline static const int TRUNCATED_OCTAHEDRON_VERT_COUNT = 25; 
-			inline static glm::vec4** truncated_octahedron_verts = reinterpret_cast<glm::vec4**>((base + 0x3CCE0 + 0x200000));
+			inline static glm::vec4* truncated_octahedron_verts = reinterpret_cast<glm::vec4*>((base + 0x3CCE0 + 0x200000));
 			inline static const int TRUNCATED_OCTAHEDRON_INDEX_COUNT = 176; 
-			inline static uint32_t** truncated_octahedron_indices = reinterpret_cast<uint32_t**>((base + 0x3CE70 + 0x200000));
+			inline static uint32_t* truncated_octahedron_indices = reinterpret_cast<uint32_t*>((base + 0x3CE70 + 0x200000));
 			std::vector<glm::vec4> verts; // 0x8
 			std::vector<uint32_t> indices; // 0x20
 

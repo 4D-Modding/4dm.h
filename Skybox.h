@@ -9,8 +9,8 @@ namespace fdm
 	public:
 		inline static Skybox* instance = reinterpret_cast<Skybox*>((base + 0x279138));
 		inline static const int VERTEX_COUNT = 36; 
-		inline static glm::vec3** verts = reinterpret_cast<glm::vec3**>((base + 0x2784D0));
-		inline static glm::vec2** uv = reinterpret_cast<glm::vec2**>((base + 0x278680));
+		inline static glm::vec3* verts = reinterpret_cast<glm::vec3*>((base + 0x2784D0));
+		inline static glm::vec2* uv = reinterpret_cast<glm::vec2*>((base + 0x278680));
 
 		const void* buffData(int buffIndex) const override
 		{

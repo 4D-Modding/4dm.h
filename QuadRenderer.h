@@ -34,29 +34,82 @@ namespace fdm
 		}
 		void setColor(float r, float g, float b, float a)
 		{
-			return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, float r, float g, float b, float a)>(getFuncAddr((int)Func::QuadRenderer::setColor))(this, r, g, b, a);
+			glm::vec4 colors[] = 
+			{
+				{r, g, b, a},
+				{r, g, b, a},
+				{r, g, b, a},
+				{r, g, b, a},
+			};
+			glBindVertexArray(VAO);
+
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, colors, GL_STATIC_DRAW);
+
+			glBindVertexArray(0);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			//return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, float r, float g, float b, float a)>(getFuncAddr((int)Func::QuadRenderer::setColor))(this, r, g, b, a);
+		}
+		void setColor(glm::vec4 colors[4])
+		{
+			glBindVertexArray(VAO);
+
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, colors, GL_STATIC_DRAW);
+
+			glBindVertexArray(0);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		void setPos(int x, int y, int w, int h)
 		{
 			return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, int x, int y, int w, int h)>(getFuncAddr((int)Func::QuadRenderer::setPos))(this, x, y, w, h);
 		}
+		// mash thx so much
+		void setQuadRendererMode(GLuint mode)
+		{
+			if (mode == this->mode)
+			{
+				return;
+			}
 
-		// thx compiler for removing that and thx to mashpoe for telling me that it exists
+			if (mode == GL_TRIANGLES)
+			{
+				constexpr GLuint indices[] = {
+					0, 1, 2, // first triangle
+					2, 3, 0  // second triangle
+				};
+
+				if (this->VAO != 0)
+				{
+					glBindVertexArray(this->VAO);
+					glBindBuffer(GL_ARRAY_BUFFER, this->buffers[0]);
+					glBufferData(GL_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+					glBindBuffer(GL_ARRAY_BUFFER, 0);
+				}
+
+				this->mode = GL_TRIANGLES;
+				this->elementCount = 6;
+			}
+			else
+			{
+				if (this->VAO != 0)
+				{
+					constexpr GLuint indices[] = {
+						0, 1, 2, 3
+					};
+
+					glBindVertexArray(this->VAO);
+					glBindBuffer(GL_ARRAY_BUFFER, this->buffers[0]);
+					glBufferData(GL_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+					glBindBuffer(GL_ARRAY_BUFFER, 0);
+				}
+
+				this->mode = GL_LINE_LOOP;
+				this->elementCount = 4;
+			}
+		}
 		void render()
 		{
-			if (mode != 4)
-			{
-				if (VAO)
-				{
-					constexpr const int data[6] = { 0, 1, 2, 2, 3, 0 };
-					glBindVertexArray(VAO);
-					glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-					glBufferData(GL_ARRAY_BUFFER, 24, data, GL_STATIC_DRAW);
-					glBindBuffer(GL_ARRAY_BUFFER, NULL);
-				}
-				mode = 4;
-				elementCount = 6;
-			}
 			shader->use();
 			glBindVertexArray(VAO);
 			glDrawElements(mode, elementCount, GL_UNSIGNED_INT, 0);

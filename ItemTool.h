@@ -9,12 +9,12 @@ namespace fdm
 	public:
 		std::string name; // 0x10
 		inline static const float scaleFactor = 0.15f; 
-		inline static glm::vec4* *pickaxeVerts = reinterpret_cast<glm::vec4**>((base + 0x29B600)); 
-		inline static glm::vec4* *pickaxeNormals = reinterpret_cast<glm::vec4**>((base + 0x29BC40)); 
-		inline static glm::vec3* *ironPickTUV = reinterpret_cast<glm::vec3**>((base + 0x29BA60)); 
-		inline static glm::vec3* *deadlyPickTUV = reinterpret_cast<glm::vec3**>((base + 0x29B880)); 
-		inline static glm::u8vec4* *ultrahammerTUV = reinterpret_cast<glm::u8vec4**>((base + 0x2AF3F0)); 
-		inline static glm::u8vec4* *solenoidCollectorTUV = reinterpret_cast<glm::u8vec4**>((base + 0x2AF2F0)); 
+		inline static glm::vec4* pickaxeVerts = reinterpret_cast<glm::vec4*>((base + 0x29B600)); 
+		inline static glm::vec4* pickaxeNormals = reinterpret_cast<glm::vec4*>((base + 0x29BC40)); 
+		inline static glm::vec3* ironPickTUV = reinterpret_cast<glm::vec3*>((base + 0x29BA60)); 
+		inline static glm::vec3* deadlyPickTUV = reinterpret_cast<glm::vec3*>((base + 0x29B880)); 
+		inline static glm::u8vec4* ultrahammerTUV = reinterpret_cast<glm::u8vec4*>((base + 0x2AF3F0)); 
+		inline static glm::u8vec4* solenoidCollectorTUV = reinterpret_cast<glm::u8vec4*>((base + 0x2AF2F0)); 
 		inline static MeshRenderer *ironPickaxeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279D68)); 
 		inline static MeshRenderer *deadlyPickaxeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279D88)); 
 		inline static MeshRenderer *rockRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279E48)); 

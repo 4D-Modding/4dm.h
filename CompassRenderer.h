@@ -23,7 +23,7 @@ namespace fdm
 		inline static MeshRenderer* cubeTriangleRenderer = reinterpret_cast<MeshRenderer*>((base + 0x278908));
 		inline static MeshBuilder* cubeWireframeMesh = reinterpret_cast<MeshBuilder*>((base + 0x278A10));
 		inline static MeshRenderer* cubeWireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x278998));
-		inline static glm::vec3** line = reinterpret_cast<glm::vec3**>((base + 0x278440));
+		inline static glm::vec3* line = reinterpret_cast<glm::vec3*>((base + 0x278440));
 		inline static MeshBuilder* lineMesh = reinterpret_cast<MeshBuilder*>((base + 0x278928));
 		inline static MeshRenderer* lineRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2789B8));
 		inline static FontRenderer* fr = reinterpret_cast<FontRenderer*>((base + 0x278AA0));

@@ -44,12 +44,36 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(World* self, glm::vec4& currentPos, glm::ivec4& currentBlock, glm::ivec4& intersectBlock, glm::vec4& endpoint)>(getFuncAddr((int)Func::World::castRay))(this, currentPos, currentBlock, intersectBlock, endpoint);
 		}
+		uint8_t getBlock(const glm::ivec4& block)
+		{
+			if (block.y >= Chunk::HEIGHT || block.y < 0)
+			{
+				return 0;
+			}
+
+			Chunk* c = getChunkFromCoords(block.x, block.z, block.w);
+			if (c != nullptr)
+			{
+				// coords must be floats
+				glm::vec4 coords = block;
+
+				glm::ivec4 b = {
+					coords.x - (glm::floor(coords.x / Chunk::SIZE) * Chunk::SIZE),
+					coords.y,
+					coords.z - (glm::floor(coords.z / Chunk::SIZE) * Chunk::SIZE),
+					coords.w - (glm::floor(coords.w / Chunk::SIZE) * Chunk::SIZE),
+				};
+
+				return c->blocks[b.x + 1][b.z + 1][b.w + 1][b.y];
+			}
+			return BlockInfo::BARRIER;
+		}
 		
 		// VIRTUAL FUNCS
 
 		virtual ~World() {}
 		virtual World::Type getType() { return TYPE_CLIENT; }
-		virtual void setBlockUpdate(const glm::ivec4& block, unsigned char value) {}
+		virtual bool setBlockUpdate(const glm::ivec4& block, unsigned char value) {}
 		virtual bool addEntityToChunk(std::unique_ptr<Entity>& entity, Chunk* c)
 		{
 			return reinterpret_cast<bool(__thiscall*)(World * self, std::unique_ptr<Entity>& entity, Chunk* c)>(getFuncAddr((int)Func::World::addEntityToChunk))(this, entity, c);

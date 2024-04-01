@@ -1,5 +1,7 @@
-.vs/
-x64/
+.vs
+x64
+obj
+.vscode
 4dm.h.sln
 4dm.h.vcxproj
 4dm.h.vcxproj.filters

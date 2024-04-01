@@ -23,10 +23,10 @@ namespace fdm
 		inline static const float maxSpeed = 3.f; 
 		Hitbox hitbox; // 0x20
 		inline static const int NUM_TYPES = 5; 
-		inline static EntitySpider::SpiderType** spiderTypes = reinterpret_cast<EntitySpider::SpiderType**>((base + 0x279A30));
+		inline static EntitySpider::SpiderType* spiderTypes = reinterpret_cast<EntitySpider::SpiderType*>((base + 0x279A30));
 		int type; // 0x70
 		inline static const int NUM_LEGS = 32; 
-		inline static glm::vec4** legPositions = reinterpret_cast<glm::vec4**>((base + 0x29B400));
+		inline static glm::vec4* legPositions = reinterpret_cast<glm::vec4*>((base + 0x29B400));
 		inline static MeshRenderer* legRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279D28));
 		glm::vec4 direction; // 0x74
 		float rotation; // 0x84

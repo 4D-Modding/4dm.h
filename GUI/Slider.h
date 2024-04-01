@@ -24,6 +24,10 @@ namespace fdm::gui
 		void* user; // 0x48
 		SliderCallback callback = NULL; // 0x50
 
+		void setText(const std::string& text)
+		{
+			this->text = text;
+		}
 		void offsetX(int offset) override
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::Slider* self, int offset)>(getFuncAddr((int)Func::gui_Nested::Slider::offsetX))(this, offset);

@@ -13,7 +13,7 @@ namespace fdm
 			const glm::vec4 colorB; // 0x10
 
 		};
-		inline static glm::u8vec3** wing_tuv = reinterpret_cast<glm::u8vec3**>((base + 0x2ACC90));
+		inline static glm::u8vec3* wing_tuv = reinterpret_cast<glm::u8vec3*>((base + 0x2ACC90));
 		inline static const float hitboxRadius = 1.4f; 
 		inline static const float maxSpeed = 1.8f; 
 		Hitbox hitbox; // 0x20
@@ -23,7 +23,7 @@ namespace fdm
 		double hitTime; // 0x88
 		inline static const float hitDelay = 0.7f; 
 		inline static const int NUM_TYPES = 4; 
-		inline static EntityButterfly::ButterflyType** ButterflyTypes = reinterpret_cast<EntityButterfly::ButterflyType**>((base + 0x2783C0));
+		inline static EntityButterfly::ButterflyType* ButterflyTypes = reinterpret_cast<EntityButterfly::ButterflyType*>((base + 0x2783C0));
 		int type; // 0x90
 		inline static MeshRenderer* wingRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2788C8));
 		inline static MeshRenderer* wireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2788A8));

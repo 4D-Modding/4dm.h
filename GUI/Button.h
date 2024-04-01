@@ -27,6 +27,10 @@ namespace fdm::gui
 		{
 			reinterpret_cast<void(__thiscall*)(gui::Button * self)>(getFuncAddr((int)Func::gui_Nested::Button::destr_Button))(this);
 		}
+		void setText(const std::string& text)
+		{
+			this->text = text;
+		}
 		void render(gui::Window* w) override
 		{
 			return reinterpret_cast<void(__thiscall*)(gui::Button * self, gui::Window * w)>(getFuncAddr((int)Func::gui_Nested::Button::render))(this, w);
