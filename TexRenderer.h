@@ -48,10 +48,12 @@ namespace fdm
 		void setColor(float r, float g, float b, float a)
 		{
 			setColor(
-				{r, g, b, a},
-				{r, g, b, a},
-				{r, g, b, a},
-				{r, g, b, a});
+				{
+					{r, g, b, a},
+					{r, g, b, a},
+					{r, g, b, a},
+					{r, g, b, a}
+				});
 			//return reinterpret_cast<void (__thiscall*)(TexRenderer* self, float r, float g, float b, float a)>(getFuncAddr((int)Func::TexRenderer::setColor))(this, r, g, b, a);
 		}
 		void setPos(int x, int y, int w, int h)
