@@ -32,33 +32,24 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(QuadRenderer* self)>(getFuncAddr((int)Func::QuadRenderer::init))(this);
 		}
+		void setColor(const glm::vec4 (&colors)[4])
+		{
+			glBindVertexArray(VAO);
+
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, colors, GL_STATIC_DRAW);
+
+			glBindVertexArray(0);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
 		void setColor(float r, float g, float b, float a)
 		{
-			glm::vec4 colors[] = 
-			{
+			setColor(
 				{r, g, b, a},
 				{r, g, b, a},
 				{r, g, b, a},
-				{r, g, b, a},
-			};
-			glBindVertexArray(VAO);
-
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, colors, GL_STATIC_DRAW);
-
-			glBindVertexArray(0);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
+				{r, g, b, a});
 			//return reinterpret_cast<void (__thiscall*)(QuadRenderer* self, float r, float g, float b, float a)>(getFuncAddr((int)Func::QuadRenderer::setColor))(this, r, g, b, a);
-		}
-		void setColor(glm::vec4 colors[4])
-		{
-			glBindVertexArray(VAO);
-
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, colors, GL_STATIC_DRAW);
-
-			glBindVertexArray(0);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		void setPos(int x, int y, int w, int h)
 		{
