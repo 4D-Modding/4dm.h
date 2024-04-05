@@ -5,8 +5,8 @@
 
 namespace fdm::gui
 {
-	enum AlignmentX;
-	enum AlignmentY;
+	enum AlignmentX: int;
+	enum AlignmentY: int;
 	class Window;
 	class Element 
 	{
