@@ -1381,8 +1381,8 @@ to call the original function, do `original(self, <all of the you have arguments
 		class CONCAT(function, H) \
 		{ \
 		public: \
-			inline static returnType(__thiscall* original)(fdm::cl* self, __VA_ARGS__) = nullptr; \
-			static returnType __fastcall hook(fdm::cl* self, __VA_ARGS__); \
+			inline static returnType(__thiscall* original)(fdm::cl* self, ##__VA_ARGS__) = nullptr; \
+			static returnType __fastcall hook(fdm::cl* self, ##__VA_ARGS__); \
 		}; \
 	} \
 	$exec \
@@ -1392,7 +1392,7 @@ to call the original function, do `original(self, <all of the you have arguments
 		Hook(hookAddr, &fdmHooks::cl::CONCAT(function, H)::hook, &fdmHooks::cl::CONCAT(function, H)::original); \
 		EnableHook(); \
 	} \
-	inline returnType __fastcall fdmHooks::cl::CONCAT(function, H)::hook(fdm::cl* self, __VA_ARGS__)
+	inline returnType __fastcall fdmHooks::cl::CONCAT(function, H)::hook(fdm::cl* self, ##__VA_ARGS__)
 
 /*
 creates a hook for a member function (__thiscall) using Func namespace. Useful for hooking functions of classes inside classes/namespaces (like gui classes). Because it turned out to not work properly with those (yea i havent tested it properly previously bruh)
@@ -1405,8 +1405,8 @@ to call the original function, do `original(self, <all of the you have arguments
 		class H \
 		{ \
 		public: \
-			inline static returnType(__thiscall* original)(fdm::className* self, __VA_ARGS__) = nullptr; \
-			static returnType __fastcall hook(fdm::className* self, __VA_ARGS__); \
+			inline static returnType(__thiscall* original)(fdm::className* self, ##__VA_ARGS__) = nullptr; \
+			static returnType __fastcall hook(fdm::className* self, ##__VA_ARGS__); \
 		}; \
 	} \
 	$exec \
@@ -1416,7 +1416,7 @@ to call the original function, do `original(self, <all of the you have arguments
 		Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original); \
 		EnableHook(); \
 	} \
-	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(fdm::className* self, __VA_ARGS__)
+	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(fdm::className* self, ##__VA_ARGS__)
 
 /*
 creates a hook for a static function (__fastcall)
@@ -1428,8 +1428,8 @@ to call the original function, do `original(<all of the you have arguments>)`
 		class CONCAT(function, H)  \
 		{ \
 		public: \
-			inline static returnType(__fastcall* original)(__VA_ARGS__) = nullptr;\
-			static returnType __fastcall hook(__VA_ARGS__); \
+			inline static returnType(__fastcall* original)(##__VA_ARGS__) = nullptr;\
+			static returnType __fastcall hook(##__VA_ARGS__); \
 		}; \
 	} \
 	$exec \
@@ -1439,7 +1439,7 @@ to call the original function, do `original(<all of the you have arguments>)`
 		Hook(hookAddr, &fdmHooks::cl::CONCAT(function, H)::hook, &fdmHooks::cl::CONCAT(function, H)::original); \
 		EnableHook(); \
 	} \
-	inline returnType __fastcall fdmHooks::cl::CONCAT(function, H)::hook(__VA_ARGS__)
+	inline returnType __fastcall fdmHooks::cl::CONCAT(function, H)::hook(##__VA_ARGS__)
 
 /*
 creates a hook for a static function (__fastcall) using Func namespace. Useful for hooking functions of classes inside classes/namespaces (like gui classes). Because it turned out to not work properly with those (yea i havent tested it properly previously bruh)
@@ -1451,8 +1451,8 @@ to call the original function, do `original(<all of the you have arguments>)`
 		class H \
 		{ \
 		public: \
-			inline static returnType(__fastcall* original)(__VA_ARGS__) = nullptr; \
-			static returnType __fastcall hook(__VA_ARGS__); \
+			inline static returnType(__fastcall* original)(##__VA_ARGS__) = nullptr; \
+			static returnType __fastcall hook(##__VA_ARGS__); \
 		}; \
 	} \
 	$exec \
@@ -1462,7 +1462,7 @@ to call the original function, do `original(<all of the you have arguments>)`
 		Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original); \
 		EnableHook(); \
 	} \
-	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(__VA_ARGS__)
+	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(##__VA_ARGS__)
 
 #ifdef DEBUG_CONSOLE
 #define initDLL \
