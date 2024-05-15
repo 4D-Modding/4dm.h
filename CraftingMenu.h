@@ -28,11 +28,11 @@ namespace fdm
 
 			~CraftableRecipe() 
 			{
-				reinterpret_cast<void(__thiscall*)(CraftingMenu::CraftableRecipe* self)>(getFuncAddr((int)Func::CraftingMenu_Nested::CraftableRecipe::destr_CraftableRecipe))(this);
+				reinterpret_cast<void(__thiscall*)(CraftingMenu::CraftableRecipe* self)>(getFuncAddr((int)Func::CraftingMenu::CraftableRecipe::destr_CraftableRecipe))(this);
 			}
 			CraftableRecipe(int recipeIndex, nlohmann::json& j, int availableCount) 
 			{
-				reinterpret_cast<void(__thiscall*)(CraftingMenu::CraftableRecipe* self, int recipeIndex, nlohmann::json& j, int availableCount)>(getFuncAddr((int)Func::CraftingMenu_Nested::CraftableRecipe::CraftableRecipe))(this, recipeIndex, j, availableCount);
+				reinterpret_cast<void(__thiscall*)(CraftingMenu::CraftableRecipe* self, int recipeIndex, nlohmann::json& j, int availableCount)>(getFuncAddr((int)Func::CraftingMenu::CraftableRecipe::CraftableRecipe))(this, recipeIndex, j, availableCount);
 			}
 		};
 		inline static nlohmann::json* recipes = reinterpret_cast<nlohmann::json*>((base + 0x4DF90 + 0x270000));

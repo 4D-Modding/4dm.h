@@ -12,7 +12,7 @@ namespace fdm
 	class FontRenderer 
 	{
 	public:
-		std::string text; 
+		stl::string text; 
 		glm::ivec2 charSize; // 0x20
 		int fontSize; // 0x28
 		glm::ivec2 pos; // 0x2C
@@ -33,9 +33,9 @@ namespace fdm
 		{
 			reinterpret_cast<void(__thiscall*)(FontRenderer* self)>(getFuncAddr((int)Func::FontRenderer::FontRendererA))(this);
 		}
-		void setText(const std::string& text) 
+		void setText(const stl::string& text) 
 		{
-			return reinterpret_cast<void (__thiscall*)(FontRenderer* self, const std::string& text)>(getFuncAddr((int)Func::FontRenderer::setText))(this, text);
+			return reinterpret_cast<void (__thiscall*)(FontRenderer* self, const stl::string& text)>(getFuncAddr((int)Func::FontRenderer::setText))(this, text);
 		}
 		void render() 
 		{

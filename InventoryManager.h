@@ -10,7 +10,7 @@ namespace fdm
 	class InventoryManager 
 	{
 	public:
-		enum TransferAction
+		enum TransferAction : int
 		{
 			ACTION_SWAP = 0x0,
 			ACTION_TAKE_HALF = 0x1,
@@ -68,9 +68,9 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(InventoryManager* self, InventoryManager::TransferAction action, std::unique_ptr<Item>& selectedSlot, std::unique_ptr<Item>& cursorSlot, Inventory* other)>(getFuncAddr((int)Func::InventoryManager::applyTransfer))(this, action, selectedSlot, cursorSlot, other);
 		}
-		Inventory* findInventory(World* world, Player* player, const std::string& inventoryName) 
+		Inventory* findInventory(World* world, Player* player, const stl::string& inventoryName) 
 		{
-			return reinterpret_cast<Inventory* (__thiscall*)(InventoryManager* self, World* world, Player* player, const std::string& inventoryName)>(getFuncAddr((int)Func::InventoryManager::findInventory))(this, world, player, inventoryName);
+			return reinterpret_cast<Inventory* (__thiscall*)(InventoryManager* self, World* world, Player* player, const stl::string& inventoryName)>(getFuncAddr((int)Func::InventoryManager::findInventory))(this, world, player, inventoryName);
 		}
 		void updateCraftingMenuBox() 
 		{

@@ -2,12 +2,12 @@
 
 #include "4dm.h"
 
-namespace fdm
+namespace fdm::stl
 {
     class path
     {
     public:
-        std::wstring pathName;
+        stl::wstring pathName;
         path()
         {
             pathName = L"";
@@ -16,21 +16,21 @@ namespace fdm
         {
             pathName = src.pathName;
         }
-        path(const std::string& src)
+        path(const stl::string& src)
         {
-            pathName = std::wstring(src.begin(), src.end());
+            pathName = stl::wstring(src.begin(), src.end());
         }
-        path(const std::wstring& src)
+        path(const stl::wstring& src)
         {
             pathName = src;
         }
-        const std::wstring wstring(void)
+        const stl::wstring wstring(void)
         {
             return pathName;
         }
-        const std::string string(void)
+        const stl::string string(void)
         {
-            return std::string(pathName.begin(), pathName.end());
+            return stl::string(pathName.begin(), pathName.end());
         }
         const char* c_str(void)
         {

@@ -42,9 +42,9 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__fastcall*)(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to)>(getFuncAddr((int)Func::Item::giveOne))(from, to);
 		}
-		inline static std::unique_ptr<Item> instantiateItem(const std::string& itemName, uint32_t count, const std::string& type, nlohmann::json& attributes) 
+		inline static std::unique_ptr<Item> instantiateItem(const stl::string& itemName, uint32_t count, const stl::string& type, nlohmann::json& attributes) 
 		{
-			return reinterpret_cast<std::unique_ptr<Item> (__fastcall*)(const std::string& itemName, uint32_t count, const std::string& type, nlohmann::json& attributes)>(getFuncAddr((int)Func::Item::instantiateItem))(itemName, count, type, attributes);
+			return reinterpret_cast<std::unique_ptr<Item> (__fastcall*)(const stl::string& itemName, uint32_t count, const stl::string& type, nlohmann::json& attributes)>(getFuncAddr((int)Func::Item::instantiateItem))(itemName, count, type, attributes);
 		}
 		inline static nlohmann::json combineItemAttributes(nlohmann::json& baseAttributes, nlohmann::json& additions) 
 		{
@@ -72,7 +72,7 @@ namespace fdm
 
 		// VIRTUAL FUNCS
 
-		virtual std::string getName() { return ""; }
+		virtual stl::string getName() { return ""; }
 		virtual void render(const glm::ivec2& pos) {}
 		virtual void renderEntity(const m4::Mat5& MV, bool inHand, const glm::vec4& lightDir) {}
 		virtual bool isDeadly() { return false; }

@@ -123,7 +123,7 @@ namespace fdm
 			}
 			void getPos(const gui::Window* w, int* x, int* y) const override
 			{
-				return reinterpret_cast<void(__thiscall*)(const gui::ContentBox * self, const gui::Window * w, int* x, int* y)>(getFuncAddr((int)Func::gui_Nested::ContentBox::getPos))(this, w, x, y);
+				return reinterpret_cast<void(__thiscall*)(const gui::ContentBox * self, const gui::Window * w, int* x, int* y)>(getFuncAddr((int)Func::gui::ContentBox::getPos))(this, w, x, y);
 			}
 			void getSize(const gui::Window* w, int* width, int* height) const override
 			{
@@ -132,15 +132,15 @@ namespace fdm
 			}
 			bool touchingMouse()
 			{
-				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self)>(getFuncAddr((int)Func::gui_Nested::ContentBox::touchingMouse))(this);
+				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self)>(getFuncAddr((int)Func::gui::ContentBox::touchingMouse))(this);
 			}
 			void resetViewport(bool applyScroll)
 			{
-				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self, bool applyScroll)>(getFuncAddr((int)Func::gui_Nested::ContentBox::resetViewport))(this, applyScroll);
+				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self, bool applyScroll)>(getFuncAddr((int)Func::gui::ContentBox::resetViewport))(this, applyScroll);
 			}
 			void render(gui::Window* w) override
 			{
-				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self, gui::Window * w)>(getFuncAddr((int)Func::gui_Nested::ContentBox::render))(this, w);
+				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self, gui::Window * w)>(getFuncAddr((int)Func::gui::ContentBox::render))(this, w);
 			}
 			void offsetX(int offset) override
 			{
@@ -209,27 +209,27 @@ namespace fdm
 				}
 
 				return false;
-				//return reinterpret_cast<bool(__thiscall*)(const gui::ContentBox * self, const gui::Window * w, double xpos, double ypos)>(getFuncAddr((int)Func::gui_Nested::ContentBox::mouseInput))(this, w, xpos, ypos);
+				//return reinterpret_cast<bool(__thiscall*)(const gui::ContentBox * self, const gui::Window * w, double xpos, double ypos)>(getFuncAddr((int)Func::gui::ContentBox::mouseInput))(this, w, xpos, ypos);
 			}
 			bool scrollInput(const gui::Window* w, double xoffset, double yoffset) override
 			{
-				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, const gui::Window * w, double xoffset, double yoffset)>(getFuncAddr((int)Func::gui_Nested::ContentBox::scrollInput))(this, w, xoffset, yoffset);
+				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, const gui::Window * w, double xoffset, double yoffset)>(getFuncAddr((int)Func::gui::ContentBox::scrollInput))(this, w, xoffset, yoffset);
 			}
 			bool mouseButtonInput(const gui::Window* w, int button, int action, int mods) override
 			{
-				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, const gui::Window * w, int button, int action, int mods)>(getFuncAddr((int)Func::gui_Nested::ContentBox::mouseButtonInput))(this, w, button, action, mods);
+				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, const gui::Window * w, int button, int action, int mods)>(getFuncAddr((int)Func::gui::ContentBox::mouseButtonInput))(this, w, button, action, mods);
 			}
 			bool keyInput(const gui::Window* w, int key, int scancode, int action, int mods) override
 			{
-				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, const gui::Window * w, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::gui_Nested::ContentBox::keyInput))(this, w, key, scancode, action, mods);
+				return reinterpret_cast<bool(__thiscall*)(gui::ContentBox * self, const gui::Window * w, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::gui::ContentBox::keyInput))(this, w, key, scancode, action, mods);
 			}
 			void select() override
 			{
-				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self)>(getFuncAddr((int)Func::gui_Nested::ContentBox::select))(this);
+				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self)>(getFuncAddr((int)Func::gui::ContentBox::select))(this);
 			}
 			void deselect() override
 			{
-				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self)>(getFuncAddr((int)Func::gui_Nested::ContentBox::deselect))(this);
+				return reinterpret_cast<void(__thiscall*)(gui::ContentBox * self)>(getFuncAddr((int)Func::gui::ContentBox::deselect))(this);
 			}
 			void addElement(gui::Element* e) override
 			{

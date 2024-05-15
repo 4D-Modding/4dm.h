@@ -36,7 +36,7 @@ namespace fdm
 		inline static const float JUMP_VEL = 12.f; 
 		inline static const float DAMAGE_COOLDOWN = 1.2f; 
 		inline static const glm::ivec4* defaultSpawnPos = reinterpret_cast<const glm::ivec4*>((base + 0x2B3508));
-		uuid EntityPlayerID; 
+		stl::uuid EntityPlayerID; 
 		struct 
 		{
 			bool w; 

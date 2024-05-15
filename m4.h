@@ -20,21 +20,21 @@ namespace fdm
 			BiVector4(const nlohmann::json& j)
 			{
 				reinterpret_cast<void(__thiscall*)(BiVector4*, const nlohmann::json & j)>(
-					getFuncAddr((int)Func::m4_Nested::BiVector4::BiVector4A)
+					getFuncAddr((int)Func::m4::BiVector4::BiVector4A)
 					)(this, j);
 			}
 
 			nlohmann::json toJson()
 			{
 				nlohmann::json result{};
-				return reinterpret_cast<nlohmann::json&(__thiscall*)(m4::BiVector4 * self, nlohmann::json * result)>(getFuncAddr((int)Func::m4_Nested::BiVector4::toJson))(this, &result);
+				return reinterpret_cast<nlohmann::json&(__thiscall*)(m4::BiVector4 * self, nlohmann::json * result)>(getFuncAddr((int)Func::m4::BiVector4::toJson))(this, &result);
 				return result;
 			}
 
 			void normalize()
 			{
 				return reinterpret_cast<void(__thiscall*)(BiVector4*)>(
-					getFuncAddr((int)Func::m4_Nested::BiVector4::normalize)
+					getFuncAddr((int)Func::m4::BiVector4::normalize)
 					)(this);
 			}
 
@@ -75,19 +75,19 @@ namespace fdm
 			Rotor(const BiVector4& plane, float radians)
 			{
 				reinterpret_cast<void(__thiscall*)(Rotor*, const BiVector4&, float)>(
-					getFuncAddr((int)Func::m4_Nested::Rotor::RotorA)
+					getFuncAddr((int)Func::m4::Rotor::RotorA)
 					)(this, plane, radians);
 			}
 			Rotor(const glm::vec4& from, const glm::vec4& to)
 			{
 				reinterpret_cast<void(__thiscall*)(Rotor*, const glm::vec4 & from, const glm::vec4 & to)>(
-					getFuncAddr((int)Func::m4_Nested::Rotor::Rotor)
+					getFuncAddr((int)Func::m4::Rotor::Rotor)
 					)(this, from, to);
 			}
 			Rotor& operator*=(const Rotor& r)
 			{
 				reinterpret_cast<void(__thiscall*)(Rotor*, const Rotor&)>(
-					getFuncAddr((int)Func::m4_Nested::Rotor::operatorMultEq)
+					getFuncAddr((int)Func::m4::Rotor::operatorMultEq)
 					)(this, r);
 				return *this;
 			}
@@ -95,7 +95,7 @@ namespace fdm
 			{
 				glm::vec4 result{};
 				return reinterpret_cast<glm::vec4&(__thiscall*)(const Rotor*, glm::vec4*, const glm::vec4&)>(
-					getFuncAddr((int)Func::m4_Nested::Rotor::rotate)
+					getFuncAddr((int)Func::m4::Rotor::rotate)
 					)(this, &result, v);
 
 				return result;
@@ -103,7 +103,7 @@ namespace fdm
 			void normalize()
 			{
 				return reinterpret_cast<void(__thiscall*)(Rotor*)>(
-					getFuncAddr((int)Func::m4_Nested::Rotor::normalize)
+					getFuncAddr((int)Func::m4::Rotor::normalize)
 					)(this);
 			}
 		};
@@ -115,19 +115,19 @@ namespace fdm
 			Mat5()
 			{
 				reinterpret_cast<void(__thiscall*)(Mat5*, float)>(
-					getFuncAddr((int)Func::m4_Nested::Mat5::Mat5)
+					getFuncAddr((int)Func::m4::Mat5::Mat5)
 					)(this, 0.0);
 			}
 			Mat5(float x)
 			{
 				reinterpret_cast<void(__thiscall*)(Mat5*, float)>(
-					getFuncAddr((int)Func::m4_Nested::Mat5::Mat5)
+					getFuncAddr((int)Func::m4::Mat5::Mat5)
 					)(this, x);
 			}
 			Mat5(nlohmann::json& j)
 			{
 				reinterpret_cast<void(__thiscall*)(Mat5*, nlohmann::json&)>(
-					getFuncAddr((int)Func::m4_Nested::Mat5::Mat5A)
+					getFuncAddr((int)Func::m4::Mat5::Mat5A)
 					)(this, j);
 			}
 			Mat5(const Rotor& rotor)
@@ -158,7 +158,7 @@ namespace fdm
 			nlohmann::json toJson()
 			{
 				nlohmann::json result{};
-				return reinterpret_cast<nlohmann::json&(__thiscall*)(m4::Mat5* self, nlohmann::json* result)>(getFuncAddr((int)Func::m4_Nested::Mat5::toJson))(this, &result);
+				return reinterpret_cast<nlohmann::json&(__thiscall*)(m4::Mat5* self, nlohmann::json* result)>(getFuncAddr((int)Func::m4::Mat5::toJson))(this, &result);
 				return result;
 			}
 			inline static Mat5 identity()
@@ -194,7 +194,7 @@ namespace fdm
 			{
 				glm::vec4 result{};
 				return reinterpret_cast<glm::vec4&(__thiscall*)(Mat5*, glm::vec4*, const glm::vec4&, float)>(
-					getFuncAddr((int)Func::m4_Nested::Mat5::multiply)
+					getFuncAddr((int)Func::m4::Mat5::multiply)
 					)(this, &result, v, finalComp);
 				return result;
 			}
@@ -205,13 +205,13 @@ namespace fdm
 			void translate(const glm::vec4& v)
 			{
 				return reinterpret_cast<void(__thiscall*)(Mat5*, const glm::vec4&)>(
-					getFuncAddr((int)Func::m4_Nested::Mat5::translate)
+					getFuncAddr((int)Func::m4::Mat5::translate)
 					)(this, v);
 			}
 			void scale(const glm::vec4& s)
 			{
 				return reinterpret_cast<void(__thiscall*)(Mat5*, const glm::vec4&)>(
-					getFuncAddr((int)Func::m4_Nested::Mat5::scale)
+					getFuncAddr((int)Func::m4::Mat5::scale)
 					)(this, s);
 			}
 

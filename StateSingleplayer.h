@@ -20,7 +20,7 @@ namespace fdm
 		gui::Text yourWorlds; // 0x278
 		gui::Text noWorlds; // 0x2D0
 		std::vector<gui::Button> worldButtons; // 0x328
-		std::vector<std::string> worldPaths; // 0x340
+		std::vector<stl::string> worldPaths; // 0x340
 		bool shouldLoadWorld; // 0x358
 
 		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
@@ -71,9 +71,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StateSingleplayer::windowResize))(this, s, width, height);
 		}
-		void queueWorldLoad(std::string& path) 
+		void queueWorldLoad(stl::string& path) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, std::string& path)>(getFuncAddr((int)Func::StateSingleplayer::queueWorldLoad))(this, path);
+			return reinterpret_cast<void (__thiscall*)(StateSingleplayer* self, stl::string& path)>(getFuncAddr((int)Func::StateSingleplayer::queueWorldLoad))(this, path);
 		}
 	};
 }

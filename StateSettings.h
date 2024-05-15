@@ -101,9 +101,9 @@ namespace fdm
 		{
 			reinterpret_cast<void(__thiscall*)(StateSettings* self)>(getFuncAddr((int)Func::StateSettings::StateSettings))(this);
 		}
-		nlohmann::json getSetting(std::string& settingName, nlohmann::json& settings, const nlohmann::json& defaultSettings) 
+		nlohmann::json getSetting(stl::string& settingName, nlohmann::json& settings, const nlohmann::json& defaultSettings) 
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(StateSettings* self, std::string& settingName, nlohmann::json& settings, const nlohmann::json& defaultSettings)>(getFuncAddr((int)Func::StateSettings::getSetting))(this, settingName, settings, defaultSettings);
+			return reinterpret_cast<nlohmann::json (__thiscall*)(StateSettings* self, stl::string& settingName, nlohmann::json& settings, const nlohmann::json& defaultSettings)>(getFuncAddr((int)Func::StateSettings::getSetting))(this, settingName, settings, defaultSettings);
 		}
 		inline static void renderDistanceSliderCallback(void* user, int value) 
 		{

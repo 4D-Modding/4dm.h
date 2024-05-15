@@ -22,7 +22,7 @@ namespace fdm
 	public:
 		struct SkinMessageData 
 		{
-			uuid id; 
+			stl::uuid id; 
 			uint32_t* skinData; // 0x10
 		};
 		Player* player; // 0x20
@@ -34,7 +34,7 @@ namespace fdm
 		inline static int* wWidth = reinterpret_cast<int*>((base + 0x29B3F4));
 		inline static int* wHeight = reinterpret_cast<int*>((base + 0x29B3F0));
 		inline static FontRenderer* fr = reinterpret_cast<FontRenderer*>((base + 0x279700));
-		std::string displayName; // 0x710
+		stl::string displayName; // 0x710
 		double lastMovementUpdateTime; // 0x730
 		bool justDamaged; // 0x738
 		PAD(0x3);
@@ -49,10 +49,10 @@ namespace fdm
 		{
 			reinterpret_cast<void(__thiscall*)(EntityPlayer* self, nlohmann::json& j)>(getFuncAddr((int)Func::EntityPlayer::EntityPlayer))(this, j);
 		}
-		std::string getName() override
+		stl::string getName() override
 		{
-			std::string result;
-			return reinterpret_cast<std::string& (__thiscall*)(EntityPlayer* self, std::string* result)>(getFuncAddr((int)Func::EntityPlayer::getName))(this, &result);
+			stl::string result;
+			return reinterpret_cast<stl::string& (__thiscall*)(EntityPlayer* self, stl::string* result)>(getFuncAddr((int)Func::EntityPlayer::getName))(this, &result);
 			return result;
 		}
 		void update(World* world, double dt) override

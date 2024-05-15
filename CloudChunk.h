@@ -19,27 +19,27 @@ namespace fdm
 
 			int indexBuffSize() const override
 			{
-				return reinterpret_cast<int (__thiscall*)(const CloudChunk::CloudChunkMesh* self)>(getFuncAddr((int)Func::CloudChunk_Nested::CloudChunkMesh::indexBuffSize))(this);
+				return reinterpret_cast<int (__thiscall*)(const CloudChunk::CloudChunkMesh* self)>(getFuncAddr((int)Func::CloudChunk::CloudChunkMesh::indexBuffSize))(this);
 			}
 			int buffSize(int buffIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(const CloudChunk::CloudChunkMesh* self, int buffIndex)>(getFuncAddr((int)Func::CloudChunk_Nested::CloudChunkMesh::buffSize))(this, buffIndex);
+				return reinterpret_cast<int (__thiscall*)(const CloudChunk::CloudChunkMesh* self, int buffIndex)>(getFuncAddr((int)Func::CloudChunk::CloudChunkMesh::buffSize))(this, buffIndex);
 			}
 			int attrSize(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(const CloudChunk::CloudChunkMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::CloudChunk_Nested::CloudChunkMesh::attrSize))(this, buffIndex, attrIndex);
+				return reinterpret_cast<int (__thiscall*)(const CloudChunk::CloudChunkMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::CloudChunk::CloudChunkMesh::attrSize))(this, buffIndex, attrIndex);
 			}
 			int attrStride(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(const CloudChunk::CloudChunkMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::CloudChunk_Nested::CloudChunkMesh::attrStride))(this, buffIndex, attrIndex);
+				return reinterpret_cast<int (__thiscall*)(const CloudChunk::CloudChunkMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::CloudChunk::CloudChunkMesh::attrStride))(this, buffIndex, attrIndex);
 			}
 			void move(CloudChunk::CloudChunkMesh* other) 
 			{
-				return reinterpret_cast<void (__thiscall*)(CloudChunk::CloudChunkMesh* self, CloudChunk::CloudChunkMesh* other)>(getFuncAddr((int)Func::CloudChunk_Nested::CloudChunkMesh::move))(this, other);
+				return reinterpret_cast<void (__thiscall*)(CloudChunk::CloudChunkMesh* self, CloudChunk::CloudChunkMesh* other)>(getFuncAddr((int)Func::CloudChunk::CloudChunkMesh::move))(this, other);
 			}
 			~CloudChunkMesh() 
 			{
-				reinterpret_cast<void(__thiscall*)(CloudChunk::CloudChunkMesh* self)>(getFuncAddr((int)Func::CloudChunk_Nested::CloudChunkMesh::destr_CloudChunkMesh))(this);
+				reinterpret_cast<void(__thiscall*)(CloudChunk::CloudChunkMesh* self)>(getFuncAddr((int)Func::CloudChunk::CloudChunkMesh::destr_CloudChunkMesh))(this);
 			}
 		};
 		inline static const uint32_t SIZE = 6; 

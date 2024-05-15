@@ -1,7 +1,6 @@
 #pragma once
 
-//#include "gui.h"
-#include "Window.h"
+#include "Alignment.h"
 
 namespace fdm::gui
 {
@@ -26,13 +25,13 @@ namespace fdm::gui
 		virtual bool charInput(const gui::Window* w, uint32_t codepoint) { return false; }
 		virtual bool enabled()
 		{
-			return reinterpret_cast<bool(__thiscall*)(gui::Element * self)>(getFuncAddr((int)Func::gui_Nested::Element::enabled))(this);
+			return reinterpret_cast<bool(__thiscall*)(gui::Element * self)>(getFuncAddr((int)Func::gui::Element::enabled))(this);
 		}
 		virtual void select() { }
 		virtual void deselect() { }
 		virtual int getCursorType()
 		{
-			return reinterpret_cast<int(__thiscall*)(gui::Element * self)>(getFuncAddr((int)Func::gui_Nested::Element::getCursorType))(this);
+			return reinterpret_cast<int(__thiscall*)(gui::Element * self)>(getFuncAddr((int)Func::gui::Element::getCursorType))(this);
 		}
 	};
 }

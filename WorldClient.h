@@ -55,9 +55,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(WorldClient* self, StateManager& s, Player* player)>(getFuncAddr((int)Func::WorldClient::localPlayerRespawn))(this, s, player);
 		}
-		void sendChatMessage(Player* player, const std::string& message) override
+		void sendChatMessage(Player* player, const stl::string& message) override
 		{
-			return reinterpret_cast<void (__thiscall*)(WorldClient* self, Player* player, const std::string& message)>(getFuncAddr((int)Func::WorldClient::sendChatMessage))(this, player, message);
+			return reinterpret_cast<void (__thiscall*)(WorldClient* self, Player* player, const stl::string& message)>(getFuncAddr((int)Func::WorldClient::sendChatMessage))(this, player, message);
 		}
 		void updatePhysics(Player* player, double dt) 
 		{

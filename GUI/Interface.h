@@ -1,7 +1,10 @@
 #pragma once
-#include "Window.h"
 
-#include "gui.h"
+#include "Window.h"
+#include "ElemContainer.h"
+#include "Element.h"
+
+#include "../glfw.h"
 
 namespace fdm
 {
@@ -11,8 +14,8 @@ namespace fdm
 	{
 		using ViewportCallback = std::add_pointer<void(void* user, const glm::ivec4& pos, const glm::ivec2& scroll)>::type;
 
-		class Element;
 		class ElemContainer;
+		class Element;
 		class Window;
 
 		class Interface : public gui::Window, public gui::ElemContainer
@@ -94,32 +97,32 @@ namespace fdm
 			void mouseInput(double xpos, double ypos)
 			{
 				if (elements.empty()) return;
-				return reinterpret_cast<void(__thiscall*)(gui::Interface * self, double xpos, double ypos)>(getFuncAddr((int)Func::gui_Nested::Interface::mouseInput))(this, xpos, ypos);
+				return reinterpret_cast<void(__thiscall*)(gui::Interface * self, double xpos, double ypos)>(getFuncAddr((int)Func::gui::Interface::mouseInput))(this, xpos, ypos);
 			}
 			bool scrollInput(double xoffset, double yoffset)
 			{
-				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, double xoffset, double yoffset)>(getFuncAddr((int)Func::gui_Nested::Interface::scrollInput))(this, xoffset, yoffset);
+				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, double xoffset, double yoffset)>(getFuncAddr((int)Func::gui::Interface::scrollInput))(this, xoffset, yoffset);
 			}
 			bool mouseButtonInput(int button, int action, int mods)
 			{
 				if (elements.empty()) return false;
-				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, int button, int action, int mods)>(getFuncAddr((int)Func::gui_Nested::Interface::mouseButtonInput))(this, button, action, mods);
+				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, int button, int action, int mods)>(getFuncAddr((int)Func::gui::Interface::mouseButtonInput))(this, button, action, mods);
 			}
 			bool keyInput(int key, int scancode, int action, int mods)
 			{
-				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::gui_Nested::Interface::keyInput))(this, key, scancode, action, mods);
+				return reinterpret_cast<bool(__thiscall*)(gui::Interface * self, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::gui::Interface::keyInput))(this, key, scancode, action, mods);
 			}
 			QuadRenderer* getQuadRenderer() const override
 			{
-				return reinterpret_cast<QuadRenderer * (__thiscall*)(const gui::Interface * self)>(getFuncAddr((int)Func::gui_Nested::Interface::getQuadRenderer))(this);
+				return reinterpret_cast<QuadRenderer * (__thiscall*)(const gui::Interface * self)>(getFuncAddr((int)Func::gui::Interface::getQuadRenderer))(this);
 			}
 			FontRenderer* getFont() const override
 			{
-				return reinterpret_cast<FontRenderer * (__thiscall*)(const gui::Interface * self)>(getFuncAddr((int)Func::gui_Nested::Interface::getFont))(this);
+				return reinterpret_cast<FontRenderer * (__thiscall*)(const gui::Interface * self)>(getFuncAddr((int)Func::gui::Interface::getFont))(this);
 			}
 			GLFWwindow* getGLFWwindow() const override
 			{
-				return reinterpret_cast<GLFWwindow * (__thiscall*)(const gui::Interface * self)>(getFuncAddr((int)Func::gui_Nested::Interface::getGLFWwindow))(this);
+				return reinterpret_cast<GLFWwindow * (__thiscall*)(const gui::Interface * self)>(getFuncAddr((int)Func::gui::Interface::getGLFWwindow))(this);
 			}
 			void getCursorPos(int* x, int* y) const override
 			{

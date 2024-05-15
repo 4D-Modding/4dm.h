@@ -37,10 +37,10 @@ namespace fdm
 		m4::BiVector4 rotationPlane; // 0xA8
 		float angleToRotate; // 0xC0
 
-		std::string getName() override
+		stl::string getName() override
 		{
-			std::string result;
-			return reinterpret_cast<std::string& (__thiscall*)(EntityButterfly* self, std::string* result)>(getFuncAddr((int)Func::EntityButterfly::getName))(this, &result);
+			stl::string result;
+			return reinterpret_cast<stl::string& (__thiscall*)(EntityButterfly* self, stl::string* result)>(getFuncAddr((int)Func::EntityButterfly::getName))(this, &result);
 			return result;
 		}
 		void update(World* world, double dt) override

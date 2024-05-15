@@ -7,14 +7,14 @@ namespace fdm
 	class StateTutorial : public State 
 	{
 	public:
-		enum PlayerState
+		enum PlayerState : int
 		{
 			PLAYER_IDLE = 0x0,
 			PLAYER_WALKING = 0x1,
 			PLAYER_FALLING = 0x2,
 		};
 
-		enum PlayerDirection
+		enum PlayerDirection : int
 		{
 			PLAYER_DIRECTION_RIGHT = 0x0,
 			PLAYER_DIRECTION_LEFT = 0x1,

@@ -22,7 +22,7 @@ namespace fdm
 		glm::ivec2 size; // 0x38
 		int selectedIndex; // 0x40
 		PAD(0x4);
-		std::string label; // 0x48
+		stl::string label; // 0x48
 		std::vector<std::unique_ptr<Item>> slots; // 0x68
 
 		~InventoryGrid() 

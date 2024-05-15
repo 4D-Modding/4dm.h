@@ -7,7 +7,7 @@ namespace fdm
 	class Shader
 	{
 	public:
-		enum shaderType
+		enum shaderType : int
 		{
 			VERTEX_SHADER = GL_VERTEX_SHADER,
 			GEOMETRY_SHADER = GL_GEOMETRY_SHADER,
@@ -15,7 +15,7 @@ namespace fdm
 		};
 		unsigned int ID;
 		// thank you mashed potatoes for this
-		bool load(const std::string& vertexPath, const std::string& geometryPath, const std::string& fragmentPath)
+		bool load(const stl::string& vertexPath, const stl::string& geometryPath, const stl::string& fragmentPath)
 		{
 			if (ID != 0)
 			{
@@ -52,15 +52,15 @@ namespace fdm
 
 			return ID != 0;
 		}
-		bool load(const std::string& vertexPath, const std::string& fragmentPath)
+		bool load(const stl::string& vertexPath, const stl::string& fragmentPath)
 		{
-			return reinterpret_cast<bool(__thiscall*)(Shader*, const std::string & vertexPath, const std::string & fragmentPath)>(
+			return reinterpret_cast<bool(__thiscall*)(Shader*, const stl::string & vertexPath, const stl::string & fragmentPath)>(
 				getFuncAddr((int)Func::Shader::load)
 				)(this, vertexPath, fragmentPath);
 		}
-		unsigned int compileShader(const std::string& path, shaderType type) const
+		unsigned int compileShader(const stl::string& path, shaderType type) const
 		{
-			return reinterpret_cast<unsigned int(__thiscall*)(const Shader*, const std::string & path, shaderType fragmentPath)>(
+			return reinterpret_cast<unsigned int(__thiscall*)(const Shader*, const stl::string & path, shaderType fragmentPath)>(
 				getFuncAddr((int)Func::Shader::compileShader)
 				)(this, path, type);
 		}

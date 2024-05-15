@@ -51,11 +51,11 @@ namespace fdm
 
 			~ItemMesh() 
 			{
-				reinterpret_cast<void(__thiscall*)(BlockInfo::ItemMesh* self)>(getFuncAddr((int)Func::BlockInfo_Nested::ItemMesh::destr_ItemMesh))(this);
+				reinterpret_cast<void(__thiscall*)(BlockInfo::ItemMesh* self)>(getFuncAddr((int)Func::BlockInfo::ItemMesh::destr_ItemMesh))(this);
 			}
 		};
 
-		enum TYPE
+		enum TYPE : int
 		{
 			AIR = 0x0,
 			VISIBLE_BLOCK_START = 0x1,
@@ -325,8 +325,8 @@ namespace fdm
 		};
 		inline static glm::u8vec3* cube_verts_triangles = reinterpret_cast<glm::u8vec3*>((base + 0x3B2E0 + 0x200000));
 		inline static glm::u8vec3* cube_verts_lines = reinterpret_cast<glm::u8vec3*>((base + 0x3B1D0 + 0x200000));
-		inline static std::unordered_map<std::string,uint8_t>* blockIDs = reinterpret_cast<std::unordered_map<std::string,uint8_t>*>((base + 0x53FD0 + 0x270000));
-		inline static std::unordered_map<uint8_t,std::string>* blockNames = reinterpret_cast<std::unordered_map<uint8_t,std::string>*>((base + 0x54010 + 0x270000));
+		inline static std::unordered_map<stl::string,uint8_t>* blockIDs = reinterpret_cast<std::unordered_map<stl::string,uint8_t>*>((base + 0x53FD0 + 0x270000));
+		inline static std::unordered_map<uint8_t,stl::string>* blockNames = reinterpret_cast<std::unordered_map<uint8_t,stl::string>*>((base + 0x54010 + 0x270000));
 		inline static BlockInfo::ItemMesh* itemMeshes = reinterpret_cast<BlockInfo::ItemMesh*>((base + 0x4DB30 + 0x270000));
 
 		inline static void renderItemMesh(uint8_t blockID) 

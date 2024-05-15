@@ -17,7 +17,7 @@ namespace fdm::gui
 
 		Image() {}
 
-		Image(const std::string& imgPath, bool modFolder = false)
+		Image(const stl::string& imgPath, bool modFolder = false)
 		{
 			const Tex2D* tex = ResourceManager::get(imgPath, modFolder);
 			if (tex == nullptr)
@@ -31,7 +31,7 @@ namespace fdm::gui
 			width = tr->texture->width;
 			height = tr->texture->height;
 		}
-		Image(const std::string& imgPath, const std::string& folderOverride)
+		Image(const stl::string& imgPath, const stl::string& folderOverride)
 		{
 			const Tex2D* tex = ResourceManager::get(imgPath, folderOverride);
 			if (tex == nullptr)
@@ -64,15 +64,15 @@ namespace fdm::gui
 		}
 		void render(gui::Window* w) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::Image* self, gui::Window* w)>(getFuncAddr((int)Func::gui_Nested::Image::render))(this, w);
+			return reinterpret_cast<void (__thiscall*)(gui::Image* self, gui::Window* w)>(getFuncAddr((int)Func::gui::Image::render))(this, w);
 		}
 		void getPos(const gui::Window* w, int* x, int* y) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(const gui::Image* self, const gui::Window* w, int* x, int* y)>(getFuncAddr((int)Func::gui_Nested::Image::getPos))(this, w, x, y);
+			return reinterpret_cast<void (__thiscall*)(const gui::Image* self, const gui::Window* w, int* x, int* y)>(getFuncAddr((int)Func::gui::Image::getPos))(this, w, x, y);
 		}
 		void getSize(const gui::Window* w, int* width, int* height) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(const gui::Image* self, const gui::Window* w, int* width, int* height)>(getFuncAddr((int)Func::gui_Nested::Image::getSize))(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(const gui::Image* self, const gui::Window* w, int* width, int* height)>(getFuncAddr((int)Func::gui::Image::getSize))(this, w, width, height);
 		}
 		bool enabled() override
 		{

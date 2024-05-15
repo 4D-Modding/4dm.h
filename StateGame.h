@@ -126,9 +126,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(StateGame* self, std::unique_ptr<WorldManager>& world)>(getFuncAddr((int)Func::StateGame::setWorld))(this, world);
 		}
-		void addChatMessage(Player* player, const std::string& message, uint32_t color) 
+		void addChatMessage(Player* player, const stl::string& message, uint32_t color) 
 		{
-			return reinterpret_cast<void (__thiscall*)(StateGame* self, Player* player, const std::string& message, uint32_t color)>(getFuncAddr((int)Func::StateGame::addChatMessage))(this, player, message, color);
+			return reinterpret_cast<void (__thiscall*)(StateGame* self, Player* player, const stl::string& message, uint32_t color)>(getFuncAddr((int)Func::StateGame::addChatMessage))(this, player, message, color);
 		}
 	};
 }

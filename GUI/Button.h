@@ -8,7 +8,7 @@ namespace fdm::gui
 	class Button : public gui::Element
 	{
 	public:
-		std::string text = ""; // 0x8
+		stl::string text = ""; // 0x8
 		bool clickable = true; // 0x28
 		bool mouseDown; // 0x29
 		bool selected; // 0x2A
@@ -25,23 +25,23 @@ namespace fdm::gui
 
 		~Button()
 		{
-			reinterpret_cast<void(__thiscall*)(gui::Button * self)>(getFuncAddr((int)Func::gui_Nested::Button::destr_Button))(this);
+			reinterpret_cast<void(__thiscall*)(gui::Button * self)>(getFuncAddr((int)Func::gui::Button::destr_Button))(this);
 		}
-		void setText(const std::string& text)
+		void setText(const stl::string& text)
 		{
 			this->text = text;
 		}
 		void render(gui::Window* w) override
 		{
-			return reinterpret_cast<void(__thiscall*)(gui::Button * self, gui::Window * w)>(getFuncAddr((int)Func::gui_Nested::Button::render))(this, w);
+			return reinterpret_cast<void(__thiscall*)(gui::Button * self, gui::Window * w)>(getFuncAddr((int)Func::gui::Button::render))(this, w);
 		}
 		bool mouseButtonInput(const gui::Window* w, int button, int action, int mods) override
 		{
-			return reinterpret_cast<bool(__thiscall*)(gui::Button * self, const gui::Window * w, int button, int action, int mods)>(getFuncAddr((int)Func::gui_Nested::Button::mouseButtonInput))(this, w, button, action, mods);
+			return reinterpret_cast<bool(__thiscall*)(gui::Button * self, const gui::Window * w, int button, int action, int mods)>(getFuncAddr((int)Func::gui::Button::mouseButtonInput))(this, w, button, action, mods);
 		}
 		bool keyInput(const gui::Window* w, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<bool(__thiscall*)(gui::Button * self, const gui::Window * w, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::gui_Nested::Button::keyInput))(this, w, key, scancode, action, mods);
+			return reinterpret_cast<bool(__thiscall*)(gui::Button * self, const gui::Window * w, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::gui::Button::keyInput))(this, w, key, scancode, action, mods);
 		}
 		void offsetX(int offset) override
 		{
@@ -61,7 +61,7 @@ namespace fdm::gui
 		}
 		bool enabled() override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::Button* self)>(getFuncAddr((int)Func::gui_Nested::Button::enabled))(this);
+			return reinterpret_cast<bool (__thiscall*)(gui::Button* self)>(getFuncAddr((int)Func::gui::Button::enabled))(this);
 		}
 		void select() override
 		{
@@ -73,15 +73,15 @@ namespace fdm::gui
 		}
 		void getPos(const gui::Window* w, int* x, int* y) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(const gui::Button* self, const gui::Window* w, int* x, int* y)>(getFuncAddr((int)Func::gui_Nested::Button::getPos))(this, w, x, y);
+			return reinterpret_cast<void (__thiscall*)(const gui::Button* self, const gui::Window* w, int* x, int* y)>(getFuncAddr((int)Func::gui::Button::getPos))(this, w, x, y);
 		}
 		void getSize(const gui::Window* w, int* width, int* height) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(const gui::Button* self, const gui::Window* w, int* width, int* height)>(getFuncAddr((int)Func::gui_Nested::Button::getSize))(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(const gui::Button* self, const gui::Window* w, int* width, int* height)>(getFuncAddr((int)Func::gui::Button::getSize))(this, w, width, height);
 		}
 		bool touchingMouse(const gui::Window* w)
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::Button* self, const gui::Window* w)>(getFuncAddr((int)Func::gui_Nested::Button::touchingMouse))(this, w);
+			return reinterpret_cast<bool (__thiscall*)(gui::Button* self, const gui::Window* w)>(getFuncAddr((int)Func::gui::Button::touchingMouse))(this, w);
 		}
 	};
 }

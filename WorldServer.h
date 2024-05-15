@@ -10,7 +10,7 @@ namespace fdm
 	public:
 		struct PlayerInfo 
 		{
-			enum Status
+			enum Status : int
 			{
 				QUEUED = 0x0,
 				JOINING = 0x1,
@@ -18,10 +18,10 @@ namespace fdm
 				JOINED = 0x3
 			};
 			std::unique_ptr<Player> player; 
-			uuid id; // 0x8
+			stl::uuid id; // 0x8
 			uint32_t handle; // 0x18
 			PAD(0x4);
-			std::string displayName; // 0x20
+			stl::string displayName; // 0x20
 			Status status;
 			PAD(0x8);
 			Connection::OutMessage skinMessage; // 0x48
@@ -40,11 +40,11 @@ namespace fdm
 		PAD(0x7);
 		Connection::Server server; // 0x1E0
 		ChunkLoader chunkLoader; // 0x218
-		path playerSavePath; // 0x2B8
+		stl::path playerSavePath; // 0x2B8
 		nlohmann::json playerSaves; // 0x2D8
 		std::unordered_map<uint32_t,WorldServer::PlayerInfo> players; // 0x2E8
-		std::unordered_map<uuid, WorldServer::PlayerInfo*> playerIDs;
-		std::unordered_map<uuid, WorldServer::PlayerInfo*> entityPlayerIDs;
+		std::unordered_map<stl::uuid, WorldServer::PlayerInfo*> playerIDs;
+		std::unordered_map<stl::uuid, WorldServer::PlayerInfo*> entityPlayerIDs;
 		glm::ivec4 spawnPoint; // 0x3A8
 		int joinedPlayerCount; // 0x3B8
 		int joinedPlayerLimit; // 0x3BC

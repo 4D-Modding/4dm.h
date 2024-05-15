@@ -17,10 +17,11 @@
 #include <utility>
 #include <stdio.h>
 #include <iostream>
+#include <sstream>
 #include <windows.h>
 #include <cstdint>
 #include <stdio.h>
-#include <string>
+#include "stl/string.hpp"
 #include <vector>
 #include "json.hpp"
 #include "glm/glm.hpp"
@@ -65,1084 +66,1083 @@ namespace fdm
 {
 	inline uintptr_t base = reinterpret_cast<uintptr_t>(GetModuleHandle(0));
 
-	inline std::string modID = "";
-
+	inline fdm::stl::string modID = "";
+	
 	namespace Func {
-
-		enum class AudioManager : int {
-			loadSound = 0,
-			playSound4D = 1,
-			setListenerInfo4D = 2,
-			loadBGMfromJSON = 3,
-			updateBGM = 4,
-			getSound = 5,
-			getVoiceGroupInfo = 6,
-		};
-		enum class Hitbox : int {
-			addVelWithMaxHorizSpeed = 7,
-			update = 8,
-			isIntersectingRay = 9,
-			takeStep = 10,
-		};
-		enum class KleinBottle : int {
-			buffData = 11,
-			attrSize = 12,
-			KleinBottle = 13,
-			buffSize = 14,
-			destr_KleinBottle = 15,
-		};
-		namespace Connection_Nested {
-			enum class InMessage : int {
-				InMessageDeleter = 16,
-				destr_InMessage = 17,
-			};
+		namespace AudioManager {
+			inline constexpr int loadSound = 0;
+			inline constexpr int playSound4D = 1;
+			inline constexpr int setListenerInfo4D = 2;
+			inline constexpr int loadBGMfromJSON = 3;
+			inline constexpr int updateBGM = 4;
+			inline constexpr int getSound = 5;
+			inline constexpr int getVoiceGroupInfo = 6;
 		}
-		namespace Connection_Nested {
-			enum class OutMessage : int {
-				createMessage = 18,
-				OutMessage = 19,
-				ReleaseHeapMessageData = 20,
-			};
+		namespace Hitbox {
+			inline constexpr int addVelWithMaxHorizSpeed = 7;
+			inline constexpr int update = 8;
+			inline constexpr int isIntersectingRay = 9;
+			inline constexpr int takeStep = 10;
 		}
-		namespace Connection_Nested {
-			enum class Client : int {
-				update = 21,
-				resolveHost = 22,
-				cleanup = 23,
-				connectionStatusChangedCallback = 24,
-			};
+		namespace KleinBottle {
+			inline constexpr int buffData = 11;
+			inline constexpr int attrSize = 12;
+			inline constexpr int KleinBottle = 13;
+			inline constexpr int buffSize = 14;
+			inline constexpr int destr_KleinBottle = 15;
 		}
-		enum class WorldTitleScreen : int {
-			loadCube = 25,
-			loadChunk = 26,
-			updateChunkCache = 27,
-			generateMesh = 28,
-			loadChunks = 29,
-		};
-		enum class FontRenderer : int {
-			FontRenderer = 30,
-			FontRendererA = 31,
-			setText = 32,
-			render = 33,
-			updateModel = 34,
-			move = 35,
-		};
-		enum class TexRenderer : int {
-			destr_TexRenderer = 36,
-			operatorEq = 37,
-			init = 38,
-			setClip = 39,
-			setColor = 40,
-			setPos = 41,
-		};
-		enum class Dodecaplex : int {
-			buffCount = 42,
-			buffData = 43,
-			buffSize = 44,
-			attrSize = 45,
-			generateMesh = 46,
-			generateCellColors = 47,
-			addFaces = 48,
-			addCells = 49,
-			destr_Dodecaplex = 50,
-		};
-		enum class Skybox : int {
-			buffData = 51,
-			buffSize = 52,
-			attrSize = 53,
-			vertCount = 54,
-		};
-		enum class PentachoronHollow : int {
-			buffData = 55,
-			PentachoronHollow = 56,
-			buffSize = 57,
-			vertCount = 58,
-			addTetSide = 59,
-		};
-		namespace Hypersphere_Nested {
-			enum class VertInfo : int {
-				VertInfo = 60,
-				destr_VertInfo = 61,
-				add = 62,
-				addA = 63,
-			};
+		namespace Connection {
+			namespace InMessage {
+				inline constexpr int InMessageDeleter = 16;
+				inline constexpr int destr_InMessage = 17;
+			}
 		}
-		enum class Hypersphere : int {
-			attrCount = 64,
-			attrType = 65,
-			buffCount = 66,
-			Hypersphere = 67,
-			HypersphereA = 68,
-			generateSpherePolygons = 69,
-			addWedgeSide = 70,
-			addCubeSide = 71,
-		};
-		enum class MeshRenderer : int {
-			MeshRenderer = 72,
-			setMesh = 73,
-			updateMesh = 74,
-			destr_MeshRenderer = 75,
-			render = 76,
-			init = 77,
-			cleanup = 78,
-			initAttrs = 79,
-		};
-		namespace PlayerSkin_Nested {
-			enum class SkinMesh : int {
-				vertCount = 80,
-				destr_SkinMesh = 81,
-				generate = 82,
-				buffSize = 83,
-				attrCount = 84,
-				attrType = 85,
-				attrSize = 86,
-				attrStride = 87,
-				addPixelToFace = 88,
-			};
+		namespace Connection {
+			namespace OutMessage {
+				inline constexpr int createMessage = 18;
+				inline constexpr int OutMessage = 19;
+				inline constexpr int ReleaseHeapMessageData = 20;
+			}
 		}
-		enum class PlayerSkin : int {
-			load = 89,
-			generateMesh = 90,
-			destr_PlayerSkin = 91,
-		};
-		enum class Tex2D : int {
-			destr_Tex2D = 92,
-			loadRawImageData = 93,
-			initFromTexID = 94,
-			loadArrayTexture = 95,
-		};
-		enum class StateCredits : int {
-			init = 96,
-			update = 97,
-			render = 98,
-			windowResize = 99,
-			keyInput = 100,
-			updateProjection = 101,
-		};
-		enum class StateCreateWorld : int {
-			StateCreateWorld = 102,
-			init = 103,
-			close = 104,
-			update = 105,
-			render = 106,
-			resume = 107,
-			mouseInput = 108,
-			scrollInput = 109,
-			keyInput = 110,
-			windowResize = 111,
-			charInput = 112,
-			createNewWorld = 113,
-			viewportCallback = 114,
-			caveCheckboxCallback = 115,
-			handleCreateButton = 116,
-		};
-		enum class StateTitleScreen : int {
-			quitGameButtonCallback = 117,
-			settingsButtonCallback = 118,
-			StateTitleScreen = 119,
-			updateProjection = 120,
-			singleplayerButtonCallback = 121,
-			multiplayerplayerButtonCallback = 122,
-			creditsButtonCallback = 123,
-			tutorialButtonCallback = 124,
-			init = 125,
-			close = 126,
-			update = 127,
-			render = 128,
-			pause = 129,
-			resume = 130,
-			keyInput = 131,
-			windowResize = 132,
-			mouseInput = 133,
-			mouseButtonInput = 134,
-			renderBackground = 135,
-		};
-		enum class StateGame : int {
-			StateGame = 136,
-			resetMouse = 137,
-			updateProjection2D = 138,
-			viewportCallback = 139,
-			updateChatMessages = 140,
-			init = 141,
-			close = 142,
-			pause = 143,
-			resume = 144,
-			update = 145,
-			render = 146,
-			mouseInput = 147,
-			scrollInput = 148,
-			mouseButtonInput = 149,
-			keyInput = 150,
-			windowResize = 151,
-			charInput = 152,
-			updateProjection = 153,
-			setWorld = 154,
-			addChatMessage = 155,
-		};
-		enum class StateWorldGen : int {
-			updateProjection = 156,
-			init = 157,
-			update = 158,
-			render = 159,
-			windowResize = 160,
-		};
-		enum class StateMultiplayer : int {
-			destr_StateMultiplayer = 161,
-			StateMultiplayer = 162,
-			updateProjection = 163,
-			cancelButtonCallback = 164,
-			changeSkinButtonCallback = 165,
-			joinButtonCallback = 166,
-			viewportCallback = 167,
-			uuidCopyButtonCallback = 168,
-			init = 169,
-			close = 170,
-			update = 171,
-			render = 172,
-			mouseInput = 173,
-			scrollInput = 174,
-			mouseButtonInput = 175,
-			keyInput = 176,
-			windowResize = 177,
-			charInput = 178,
-			rejoin = 179,
-			connect = 180,
-			connectionErrorOkButtonCallback = 181,
-		};
-		enum class StateSingleplayer : int {
-			mouseButtonInput = 182,
-			updateProjection = 183,
-			StateSingleplayer = 184,
-			updateWorldListContainer = 185,
-			createCallback = 186,
-			viewportCallback = 187,
-			worldButtonCallback = 188,
-			init = 189,
-			close = 190,
-			update = 191,
-			resume = 192,
-			windowResize = 193,
-			queueWorldLoad = 194,
-		};
-		enum class StateDeathScreen : int {
-			updateProjection = 195,
-			retryButtonCallback = 196,
-			init = 197,
-			close = 198,
-			update = 199,
-			render = 200,
-			mouseInput = 201,
-			scrollInput = 202,
-			mouseButtonInput = 203,
-			keyInput = 204,
-			windowResize = 205,
-		};
-		enum class StateErrorScreen : int {
-			okButtonCallback = 206,
-			init = 207,
-			close = 208,
-			update = 209,
-			render = 210,
-			mouseButtonInput = 211,
-			windowResize = 212,
-		};
-		enum class StateIntro : int {
-			updateProjection = 213,
-			loadFiles = 214,
-			init = 215,
-			update = 216,
-			render = 217,
-			windowResize = 218,
-		};
-		enum class StateTutorial : int {
-			destr_StateTutorial = 219,
-			StateTutorial = 220,
-			updateProjection = 221,
-			backButtonCallback = 222,
-			nextButtonCallback = 223,
-			generateMesh = 224,
-			getSmoothLighting = 225,
-			updatePlayerComponentVectors = 226,
-			updatePlayerPos = 227,
-			updateCurrentBlock = 228,
-			handleCollision = 229,
-			setForgSprite = 230,
-			init = 231,
-			close = 232,
-			update = 233,
-			render = 234,
-			resume = 235,
-			mouseInput = 236,
-			scrollInput = 237,
-			mouseButtonInput = 238,
-			keyInput = 239,
-			windowResize = 240,
-			charInput = 241,
-			updateViewport = 242,
-		};
-		enum class StateTutorialSlideshow : int {
-			destr_StateTutorialSlideshow = 243,
-			StateTutorialSlideshow = 244,
-			updateProjection = 245,
-			updateSlideSize = 246,
-			viewportCallback = 247,
-			init = 248,
-			update = 249,
-			render = 250,
-			resume = 251,
-			windowResize = 252,
-			continueButtonCallback = 253,
-			backButtonCallback = 254,
-			setSlide = 255,
-		};
-		enum class StateSkinChooser : int {
-			mouseInput = 256,
-			scrollInput = 257,
-			keyInput = 258,
-			StateSkinChooser = 259,
-			updateProjection = 260,
-			viewportCallback = 261,
-			chooseFileButtonCallback = 262,
-			init = 263,
-			close = 264,
-			update = 265,
-			render = 266,
-			windowResize = 267,
-			fileDrop = 268,
-			getSkinMessage = 269,
-			loadSkin = 270,
-		};
-		enum class StateSettings : int {
-			updateProjection = 271,
-			destr_StateSettings = 272,
-			StateSettings = 273,
-			getSetting = 274,
-			renderDistanceSliderCallback = 275,
-			scrollSensitivitySliderCallback = 276,
-			lookSensitivitySliderCallback = 277,
-			xInvertCheckBoxCallback = 278,
-			yInvertCheckBoxCallback = 279,
-			fovSliderCallback = 280,
-			globalVolumeSliderCallback = 281,
-			musicVolumeSliderCallback = 282,
-			creatureVolumeSliderCallback = 283,
-			ambienceVolumeSliderCallback = 284,
-			controlsButtonCallback = 285,
-			controlsOkButtonCallback = 286,
-			fullscreenButtonCallback = 287,
-			difficultySliderCallback = 288,
-			smoothLightingCheckBoxCallback = 289,
-			shadowsCheckBoxCallback = 290,
-			lightsCheckBoxCallback = 291,
-			chatCheckBoxCallback = 292,
-			nametagsCheckBoxCallback = 293,
-			skinsCheckBoxCallback = 294,
-			secretButtonCallback = 295,
-			viewportCallback = 296,
-			updateStateGame = 297,
-			updateVolume = 298,
-			load = 299,
-			save = 300,
-			init = 301,
-			close = 302,
-			render = 303,
-			mouseInput = 304,
-			scrollInput = 305,
-			mouseButtonInput = 306,
-			keyInput = 307,
-			windowResize = 308,
-			updateRenderDistance = 309,
-			updateFOV = 310,
-			updateCreatureVolume = 311,
-			updateAmbienceVolume = 312,
-			updateDifficulty = 313,
-			setFullscreenMode = 314,
-		};
-		enum class StatePause : int {
-			StatePause = 315,
-			updateProjection = 316,
-			update = 317,
-			render = 318,
-			pause = 319,
-			resume = 320,
-			windowResize = 321,
-		};
-		enum class StateManager : int {
-			pushState = 322,
-		};
-		namespace m4_Nested {
-			enum class Mat5 : int {
-				operatorInd = 323,
-				Mat5 = 324,
-				Mat5A = 325,
-				toJson = 326,
-				operatorMult = 327,
-				operatorMultEQ = 328,
-				multiply = 329,
-				operatorMult_A = 330,
-				translate = 331,
-				scale = 332,
-			};
+		namespace Connection {
+			namespace Client {
+				inline constexpr int update = 21;
+				inline constexpr int resolveHost = 22;
+				inline constexpr int cleanup = 23;
+				inline constexpr int connectionStatusChangedCallback = 24;
+			}
 		}
-		namespace m4_Nested {
-			enum class Rotor : int {
-				Rotor = 333,
-				RotorA = 334,
-				operatorMultEq = 335,
-				rotate = 336,
-				normalize = 337,
-			};
+		namespace WorldTitleScreen {
+			inline constexpr int loadCube = 25;
+			inline constexpr int loadChunk = 26;
+			inline constexpr int updateChunkCache = 27;
+			inline constexpr int generateMesh = 28;
+			inline constexpr int loadChunks = 29;
 		}
-		namespace m4_Nested {
-			enum class BiVector4 : int {
-				BiVector4 = 338,
-				BiVector4A = 339,
-				toJson = 340,
-				normalize = 341,
-			};
+		namespace FontRenderer {
+			inline constexpr int FontRenderer = 30;
+			inline constexpr int FontRendererA = 31;
+			inline constexpr int setText = 32;
+			inline constexpr int render = 33;
+			inline constexpr int updateModel = 34;
+			inline constexpr int move = 35;
 		}
-		enum class m4 : int {
-			i64vec3ToJson = 342,
-			ivec4ToJson = 343,
-			vec4ToJson = 344,
-			vec4FromJson = 345,
-			cross = 346,
-			adjustToMaxHorizSpeed = 347,
-			createCamera = 833,
-		};
-		enum class Item : int {
-			loadItemInfo = 348,
-			renderItem = 349,
-			renderItemDescription = 350,
-			createFromJson = 351,
-			giveMax = 352,
-			giveOne = 353,
-			instantiateItem = 354,
-			combineItemAttributes = 355,
-			save = 356,
-			destr_Item = 357,
-			takeMax = 358,
-			takeHalf = 359,
-		};
-		enum class World : int {
-			World = 360,
-			getChunk = 361,
-			getChunkFromCoords = 362,
-			getEntityIntersection = 363,
-			castRay = 364,
-			addEntityToChunk = 365,
-		};
-		namespace BlockInfo_Nested {
-			enum class ItemMesh : int {
-				destr_ItemMesh = 366,
-			};
+		namespace TexRenderer {
+			inline constexpr int destr_TexRenderer = 36;
+			inline constexpr int operatorEq = 37;
+			inline constexpr int init = 38;
+			inline constexpr int setClip = 39;
+			inline constexpr int setColor = 40;
+			inline constexpr int setPos = 41;
 		}
-		enum class BlockInfo : int {
-			renderItemMesh = 367,
-		};
-		enum class ItemBlock : int {
-			render = 368,
-			renderEntity = 369,
-			isDeadly = 370,
-			isCompatible = 371,
-			saveAttributes = 372,
-			action = 373,
-			postAction = 374,
-			clone = 375,
-		};
-		enum class ItemTool : int {
-			render = 376,
-			renderEntity = 377,
-			isDeadly = 378,
-			isCompatible = 379,
-			getStackLimit = 380,
-			action = 381,
-			breakBlock = 382,
-			entityAction = 383,
-			clone = 384,
-		};
-		enum class ItemMaterial : int {
-			getStackLimit = 385,
-			getName = 386,
-			render = 387,
-			renderEntity = 388,
-			isDeadly = 389,
-			isCompatible = 390,
-			action = 391,
-			postAction = 392,
-			clone = 393,
-		};
-		namespace Chunk_Nested {
-			enum class ChunkMesh : int {
-				destr_ChunkMesh = 394,
-				ChunkMesh = 395,
-				buffSize = 396,
-				attrCount = 397,
-				attrType = 398,
-				attrSize = 399,
-				attrStride = 400,
-				indexBuffData = 401,
-				move = 402,
-				addMeshSide = 403,
-				addMeshPlant = 404,
-			};
+		namespace Dodecaplex {
+			inline constexpr int buffCount = 42;
+			inline constexpr int buffData = 43;
+			inline constexpr int buffSize = 44;
+			inline constexpr int attrSize = 45;
+			inline constexpr int generateMesh = 46;
+			inline constexpr int generateCellColors = 47;
+			inline constexpr int addFaces = 48;
+			inline constexpr int addCells = 49;
+			inline constexpr int destr_Dodecaplex = 50;
 		}
-		enum class Chunk : int {
-			Chunk = 405,
-			setBlock = 406,
-			generateMesh = 407,
-			updateEntitiesClient = 408,
-			clearEntities = 409,
-			render = 410,
-			updateLightingHeightMap = 411,
-			updateMesh = 412,
-			load = 413,
-			save = 414,
-			loadFromMessage = 415,
-			updateCacheSection = 416,
-			updateHeightmapCacheSection = 417,
-			generateMeshSection = 418,
-			getSmoothLighting = 419,
-			getLighting = 420,
-			enableMesh = 421,
-			loadEntitiesFromJson = 422,
-			getFilenamePrefix = 423,
-		};
-		namespace ChunkLoader_Nested {
-			enum class BiomeInfo : int {
-				destr_BiomeInfo = 424,
-				BiomeInfo = 425,
-			};
+		namespace Skybox {
+			inline constexpr int buffData = 51;
+			inline constexpr int buffSize = 52;
+			inline constexpr int attrSize = 53;
+			inline constexpr int vertCount = 54;
 		}
-		enum class ChunkLoader : int {
-			init = 426,
-			loadChunk = 427,
-			loadBiomes = 428,
-			loadInfo = 429,
-			generateChunk = 430,
-			getBiome = 431,
-			generateTree = 432,
-			generateTreeBranch = 433,
-			generateTaigaTree = 434,
-			createFlatWorldChests = 435,
-		};
-		namespace CloudChunk_Nested {
-			enum class CloudChunkMesh : int {
-				indexBuffSize = 436,
-				buffSize = 437,
-				attrSize = 438,
-				attrStride = 439,
-				move = 440,
-				destr_CloudChunkMesh = 441,
-			};
+		namespace PentachoronHollow {
+			inline constexpr int buffData = 55;
+			inline constexpr int PentachoronHollow = 56;
+			inline constexpr int buffSize = 57;
+			inline constexpr int vertCount = 58;
+			inline constexpr int addTetSide = 59;
 		}
-		enum class CloudChunk : int {
-			generateMesh = 442,
-		};
-		enum class CloudManager : int {
-			destr_CloudManager = 443,
-			render = 444,
-			updateChunks = 445,
-			unloadAllChunks = 446,
-			loadChunks = 447,
-			updateChunk = 448,
-		};
-		namespace CraftingMenu_Nested {
-			enum class CraftableRecipe : int {
-				destr_CraftableRecipe = 449,
-				CraftableRecipe = 450,
-			};
+		namespace Hypersphere {
+			namespace VertInfo {
+				inline constexpr int VertInfo = 60;
+				inline constexpr int destr_VertInfo = 61;
+				inline constexpr int add = 62;
+				inline constexpr int addA = 63;
+			}
 		}
-		enum class CraftingMenu : int {
-			loadRecipes = 451,
-			render = 452,
-			offsetX = 453,
-			offsetY = 454,
-			getPos = 455,
-			getSize = 456,
-			mouseButtonInput = 457,
-			updateAvailableRecipes = 458,
-		};
-		enum class Entity : int {
-			loadEntityInfo = 459,
-			createFromJson = 460,
-			createWithAttributes = 461,
-			save = 462,
-			instantiateEntity = 463,
-			combineEntityAttributes = 464,
-			destr_Entity = 465,
-		};
-		enum class InventoryPlayer : int {
-			addItem = 466,
-			begin = 467,
-			render = 468,
-			combineItem = 469,
-			placeItem = 470,
-			getSlotIndex = 471,
-			getSlotCount = 472,
-			getSlot = 473,
-			end = 474,
-		};
-		enum class InventoryGrid : int {
-			destr_InventoryGrid = 475,
-			InventoryGrid = 476,
-			render = 477,
-			combineItem = 478,
-			placeItem = 479,
-			getSlotIndex = 480,
-			getSlotCount = 481,
-			getSlot = 482,
-			end = 483,
-			load = 484,
-			save = 485,
-		};
-		enum class InventorySession : int {
-			destr_InventorySession = 486,
-		};
-		enum class InventoryManager : int {
-			destr_InventoryManager = 487,
-			renderInit = 488,
-			mouseButtonInput = 489,
-			windowResize = 490,
-			applyAction = 491,
-			applyTransfer = 492,
-			findInventory = 493,
-			updateCraftingMenuBox = 494,
-			craftingMenuCallback = 495,
-			viewportCallback = 496,
-			updateProjection = 497,
-		};
-		enum class MeshBuilder : int {
-			MeshBuilder = 498,
-			MeshBuilder_A = 499,
-			destr_MeshBuilder = 500,
-			buffCount = 501,
-			buffSize = 502,
-			attrCount = 503,
-			vertCount = 504,
-			indexBuffSize = 505,
-			addBuff = 506,
-			attrType = 507,
-			attrSize = 508,
-			attrStride = 509,
-			addAttr = 510,
-			clear = 511,
-		};
-		enum class Player : int {
-			destr_Player = 512,
-			Player = 513,
-			updatePos = 514,
-			updateCurrentBlock = 515,
-			handleCollision = 516,
-			updateComponentVectors = 517,
-			updateAllComponentVectors = 518,
-			removeVelComp = 519,
-			updateTargetBlock = 520,
-			init = 521,
-			renderHud = 522,
-			renderTargetBlock = 523,
-			getMovementUpdate = 524,
-			setMovementBehavior = 525,
-			hitTargetBlock = 526,
-			breakBlock = 527,
-			throwItem = 528,
-			update = 529,
-			updateLocal = 530,
-			updateCameraPos = 531,
-			resetMouse = 532,
-			keyInput = 533,
-			mouseInput = 534,
-			mouseButtonInput = 535,
-			isHoldingGlasses = 536,
-			isHoldingCompass = 537,
-			isHoldingCollector = 538,
-			headIsInBlock = 539,
-			getHeadBlock = 540,
-			respawn = 541,
-			load = 542,
-			save = 543,
-			loadClientData = 544,
-			saveClientData = 545,
-			saveOrientation = 546,
-		};
-		enum class QuadRenderer : int {
-			destr_QuadRenderer = 547,
-			init = 548,
-			setColor = 549,
-			setPos = 550,
-		};
-		enum class ResourceManager : int {
-			loadArrayTexture = 551,
-			get = 552,
-		};
-		enum class ShaderManager : int {
-			loadFromShaderList = 553,
-			get = 554,
-		};
-		enum class Shader : int {
-			load = 555,
-			compileShader = 556,
-		};
-		enum class WorldManager : int {
-			destr_WorldManager = 557,
-			updateRenderFrustum = 558,
-			setBlockUpdate = 559,
-			render = 560,
-		};
-		enum class WorldClient : int {
-			destr_WorldClient = 561,
-			addEntityToChunk = 562,
-			localPlayerEvent = 563,
-			updateLocal = 564,
-			setRenderDistanceLocal = 565,
-			setSkinVisibility = 566,
-			localPlayerInit = 567,
-			localPlayerRespawn = 568,
-			sendChatMessage = 569,
-			updatePhysics = 570,
-			handleWorldMessage = 571,
-			handleLightingOptionsUpdate = 572,
-			updateChunks = 573,
-			updateChunk = 574,
-			generateChunkMeshes = 575,
-			updateChunkCacheAndMesh = 576,
-			updateChunkCache = 577,
-			regenerateAllChunkMeshes = 578,
-			joinAllChunkLoadingThreads = 579,
-			handleMessage = 580,
-			inventoryUpdateCallback = 581,
-		};
-		enum class WorldSingleplayer : int {
-			WorldSingleplayer = 582,
-			destr_WorldSingleplayer = 583,
-			localPlayerEvent = 584,
-			updateLocal = 585,
-			cleanupLocal = 586,
-			setRenderDistanceLocal = 587,
-			setDifficultyLocal = 588,
-			localPlayerInit = 589,
-			localPlayerRespawn = 590,
-			handleLightingOptionsUpdate = 591,
-			updateChunks = 592,
-			updateChunk = 593,
-			loadChunks = 594,
-			loadChunk = 595,
-			updateChunkCacheAndMesh = 596,
-			updateChunkCache = 597,
-			regenerateAllChunkMeshes = 598,
-		};
-		namespace gui_Nested {
-			enum class Button : int {
-				destr_Button = 599,
-				render = 600,
-				mouseButtonInput = 601,
-				keyInput = 602,
-				offsetX = 603,
-				enabled = 604,
-				select = 605,
-				getPos = 606,
-				getSize = 607,
-				touchingMouse = 608,
-			};
+		namespace Hypersphere {
+			inline constexpr int attrCount = 64;
+			inline constexpr int attrType = 65;
+			inline constexpr int buffCount = 66;
+			inline constexpr int Hypersphere = 67;
+			inline constexpr int HypersphereA = 68;
+			inline constexpr int generateSpherePolygons = 69;
+			inline constexpr int addWedgeSide = 70;
+			inline constexpr int addCubeSide = 71;
 		}
-		namespace gui_Nested {
-			enum class CheckBox : int {
-				render = 609,
-				mouseButtonInput = 610,
-				keyInput = 611,
-				getPos = 612,
-				getSize = 613,
-				touchingMouse = 614,
-			};
+		namespace MeshRenderer {
+			inline constexpr int MeshRenderer = 72;
+			inline constexpr int setMesh = 73;
+			inline constexpr int updateMesh = 74;
+			inline constexpr int destr_MeshRenderer = 75;
+			inline constexpr int render = 76;
+			inline constexpr int init = 77;
+			inline constexpr int cleanup = 78;
+			inline constexpr int initAttrs = 79;
 		}
-		namespace gui_Nested {
-			enum class ContentBox : int {
-				destr_ContentBox = 615,
-				getQuadRenderer = 616,
-				getFont = 617,
-				getGLFWwindow = 618,
-				getCursorPos = 619,
-				getSize = 620,
-				changeViewport = 621,
-				getPos = 622,
-				getSizeA = 623,
-				touchingMouse = 624,
-				resetViewport = 625,
-				render = 626,
-				alignX = 627,
-				alignY = 628,
-				offsetX = 629,
-				offsetY = 630,
-				mouseInput = 631,
-				scrollInput = 632,
-				mouseButtonInput = 633,
-				keyInput = 634,
-				select = 635,
-				deselect = 636,
-				addElement = 637,
-				removeElement = 638,
-				selectElement = 639,
-				clear = 640,
-				empty = 641,
-			};
+		namespace PlayerSkin {
+			namespace SkinMesh {
+				inline constexpr int vertCount = 80;
+				inline constexpr int destr_SkinMesh = 81;
+				inline constexpr int generate = 82;
+				inline constexpr int buffSize = 83;
+				inline constexpr int attrCount = 84;
+				inline constexpr int attrType = 85;
+				inline constexpr int attrSize = 86;
+				inline constexpr int attrStride = 87;
+				inline constexpr int addPixelToFace = 88;
+			}
 		}
-		namespace gui_Nested {
-			enum class Element : int {
-				enabled = 642,
-				getCursorType = 643,
-			};
+		namespace PlayerSkin {
+			inline constexpr int load = 89;
+			inline constexpr int generateMesh = 90;
+			inline constexpr int destr_PlayerSkin = 91;
 		}
-		namespace gui_Nested {
-			enum class Image : int {
-				offsetX = 644,
-				offsetY = 645,
-				render = 646,
-				getPos = 647,
-				getSize = 648,
-			};
+		namespace Tex2D {
+			inline constexpr int destr_Tex2D = 92;
+			inline constexpr int loadRawImageData = 93;
+			inline constexpr int initFromTexID = 94;
+			inline constexpr int loadArrayTexture = 95;
 		}
-		namespace gui_Nested {
-			enum class Interface : int {
-				Interface = 649,
-				destr_Interface = 650,
-				render = 651,
-				mouseInput = 652,
-				scrollInput = 653,
-				mouseButtonInput = 654,
-				keyInput = 655,
-				getQuadRenderer = 656,
-				getFont = 657,
-				getGLFWwindow = 658,
-				getCursorPos = 659,
-				getSize = 660,
-				changeViewport = 661,
-				addElement = 662,
-				removeElement = 663,
-				selectElement = 664,
-				clear = 665,
-				empty = 666,
-			};
+		namespace StateCredits {
+			inline constexpr int init = 96;
+			inline constexpr int update = 97;
+			inline constexpr int render = 98;
+			inline constexpr int windowResize = 99;
+			inline constexpr int keyInput = 100;
+			inline constexpr int updateProjection = 101;
 		}
-		namespace gui_Nested {
-			enum class Slider : int {
-				offsetX = 667,
-				offsetY = 668,
-				deselect = 669,
-				render = 670,
-				mouseButtonInput = 671,
-				mouseInput = 672,
-				keyInput = 673,
-				alignX = 674,
-				alignY = 675,
-				getPos = 676,
-				getSize = 677,
-			};
+		namespace StateCreateWorld {
+			inline constexpr int StateCreateWorld = 102;
+			inline constexpr int init = 103;
+			inline constexpr int close = 104;
+			inline constexpr int update = 105;
+			inline constexpr int render = 106;
+			inline constexpr int resume = 107;
+			inline constexpr int mouseInput = 108;
+			inline constexpr int scrollInput = 109;
+			inline constexpr int keyInput = 110;
+			inline constexpr int windowResize = 111;
+			inline constexpr int charInput = 112;
+			inline constexpr int createNewWorld = 113;
+			inline constexpr int viewportCallback = 114;
+			inline constexpr int caveCheckboxCallback = 115;
+			inline constexpr int handleCreateButton = 116;
 		}
-		namespace gui_Nested {
-			enum class Text : int {
-				render = 678,
-				offsetX = 679,
-				getPos = 680,
-				getSize = 681,
-				setText = 682,
-				renderText = 683,
-			};
+		namespace StateTitleScreen {
+			inline constexpr int quitGameButtonCallback = 117;
+			inline constexpr int settingsButtonCallback = 118;
+			inline constexpr int StateTitleScreen = 119;
+			inline constexpr int updateProjection = 120;
+			inline constexpr int singleplayerButtonCallback = 121;
+			inline constexpr int multiplayerplayerButtonCallback = 122;
+			inline constexpr int creditsButtonCallback = 123;
+			inline constexpr int tutorialButtonCallback = 124;
+			inline constexpr int init = 125;
+			inline constexpr int close = 126;
+			inline constexpr int update = 127;
+			inline constexpr int render = 128;
+			inline constexpr int pause = 129;
+			inline constexpr int resume = 130;
+			inline constexpr int keyInput = 131;
+			inline constexpr int windowResize = 132;
+			inline constexpr int mouseInput = 133;
+			inline constexpr int mouseButtonInput = 134;
+			inline constexpr int renderBackground = 135;
 		}
-		namespace gui_Nested {
-			enum class TextInput : int {
-				render = 684,
-				alignX = 685,
-				alignY = 686,
-				offsetX = 687,
-				offsetY = 688,
-				mouseButtonInput = 689,
-				mouseInput = 690,
-				keyInput = 691,
-				charInput = 692,
-				getCursorType = 693,
-				select = 694,
-				deselect = 695,
-				updatePasswordVisualText = 696,
-				updateScrollPos = 697,
-				getPos = 698,
-				getSize = 699,
-				removeInvalidChars = 700,
-				removeHighlightedText = 701,
-			};
+		namespace StateGame {
+			inline constexpr int StateGame = 136;
+			inline constexpr int resetMouse = 137;
+			inline constexpr int updateProjection2D = 138;
+			inline constexpr int viewportCallback = 139;
+			inline constexpr int updateChatMessages = 140;
+			inline constexpr int init = 141;
+			inline constexpr int close = 142;
+			inline constexpr int pause = 143;
+			inline constexpr int resume = 144;
+			inline constexpr int update = 145;
+			inline constexpr int render = 146;
+			inline constexpr int mouseInput = 147;
+			inline constexpr int scrollInput = 148;
+			inline constexpr int mouseButtonInput = 149;
+			inline constexpr int keyInput = 150;
+			inline constexpr int windowResize = 151;
+			inline constexpr int charInput = 152;
+			inline constexpr int updateProjection = 153;
+			inline constexpr int setWorld = 154;
+			inline constexpr int addChatMessage = 155;
 		}
-		enum class EntityButterfly : int {
-			getName = 702,
-			update = 703,
-			render = 704,
-			getServerUpdateAttributes = 705,
-			applyServerUpdate = 706,
-			takeDamage = 707,
-			playHitSound = 708,
-			playDeathSound = 709,
-			collisionCallback = 710,
-		};
-		namespace EntityAlidade_Nested {
-			enum class SPInfo : int {
-				SPInfo = 711,
-				destr_SPInfo = 712,
-			};
+		namespace StateWorldGen {
+			inline constexpr int updateProjection = 156;
+			inline constexpr int init = 157;
+			inline constexpr int update = 158;
+			inline constexpr int render = 159;
+			inline constexpr int windowResize = 160;
 		}
-		enum class EntityAlidade : int {
-			getName = 713,
-			update = 714,
-			render = 715,
-			saveAttributes = 716,
-			getPos = 717,
-			setPos = 718,
-			takeDamage = 719,
-			action = 720,
-			postAction = 721,
-			generateSpherinder = 722,
-			generateSpherinderHollow = 723,
-			generateSemicircle = 724,
-		};
-		enum class EntityItem : int {
-			createWithItem = 725,
-			getName = 726,
-			update = 727,
-			render = 728,
-			saveAttributes = 729,
-			applyServerUpdate = 730,
-			getPos = 731,
-			setPos = 732,
-			shouldSave = 733,
-			isIntersectingRay = 734,
-			give = 735,
-			combineWithNearby = 736,
-			collisionCallback = 737,
-		};
-		enum class EntityPlayer : int {
-			createFromPlayer = 738,
-			EntityPlayer = 739,
-			getName = 740,
-			update = 741,
-			render = 742,
-			saveAttributes = 743,
-			applyServerUpdate = 744,
-			getPos = 745,
-			setPos = 746,
-			isIntersectingRay = 747,
-			takeDamage = 748,
-			deathTimer = 749,
-			applyMovementUpdate = 750,
-			collectItems = 751,
-		};
-		namespace EntitySpider_Nested {
-			enum class SpiderType : int {
-				destr_SpiderType = 752,
-			};
+		namespace StateMultiplayer {
+			inline constexpr int destr_StateMultiplayer = 161;
+			inline constexpr int StateMultiplayer = 162;
+			inline constexpr int updateProjection = 163;
+			inline constexpr int cancelButtonCallback = 164;
+			inline constexpr int changeSkinButtonCallback = 165;
+			inline constexpr int joinButtonCallback = 166;
+			inline constexpr int viewportCallback = 167;
+			inline constexpr int uuidCopyButtonCallback = 168;
+			inline constexpr int init = 169;
+			inline constexpr int close = 170;
+			inline constexpr int update = 171;
+			inline constexpr int render = 172;
+			inline constexpr int mouseInput = 173;
+			inline constexpr int scrollInput = 174;
+			inline constexpr int mouseButtonInput = 175;
+			inline constexpr int keyInput = 176;
+			inline constexpr int windowResize = 177;
+			inline constexpr int charInput = 178;
+			inline constexpr int rejoin = 179;
+			inline constexpr int connect = 180;
+			inline constexpr int connectionErrorOkButtonCallback = 181;
 		}
-		enum class EntitySpider : int {
-			isIntersectingRay = 753,
-			getPos = 754,
-			setPos = 755,
-			getName = 756,
-			update = 757,
-			render = 758,
-			saveAttributes = 759,
-			getServerUpdateAttributes = 760,
-			applyServerUpdate = 761,
-			takeDamage = 762,
-			playHitSound = 763,
-			playDeathSound = 764,
-			collisionCallback = 765,
-			findPlayer = 766,
-			persuePlayer = 767,
-		};
-		enum class EntityChest : int {
-			isClickable = 768,
-			getName = 769,
-			update = 770,
-			render = 771,
-			saveAttributes = 772,
-			getServerUpdateAttributes = 773,
-			applyServerUpdate = 774,
-			getPos = 775,
-			setPos = 776,
-			action = 777,
-		};
-		enum class EntityDying : int {
-			deathTimer = 778,
-			createWithEntity = 779,
-			getName = 780,
-			update = 781,
-			render = 782,
-			getServerUpdateAttributes = 783,
-			applyServerUpdate = 784,
-			getPos = 785,
-			setPos = 786,
-			isBlockEntity = 787,
-			isIntersectingRay = 788,
-		};
-		enum class EntityManager : int {
-			extract = 789,
-			get = 790,
-			getBlockEntity = 791,
-		};
-		enum class Coil : int {
-			Coil = 792,
-			buffSize = 793,
-			attrSize = 794,
-		};
-		enum class CompassRenderer : int {
-			renderHand = 795,
-			renderItemDrop = 796,
-		};
-		enum class DodecaplexWireframe : int {
-			generateMesh = 797,
-			addFaces = 798,
-			addCells = 799,
-		};
-		enum class Framebuffer : int {
-			destr_Framebuffer = 800,
-			render = 801,
-			init = 802,
-			cleanup = 803,
-		};
-		enum class HypercubeHollow : int {
-			attrSize = 804,
-			attrStride = 805,
-			HypercubeHollow = 806,
-			addCubeSide = 807,
-		};
-		enum class PlayerSkinRenderer : int {
-			PlayerSkinRenderer = 808,
-			render = 809,
-			updateAnimation = 810,
-			resetTransformations = 811,
-		};
-		enum class PlayerSkinViewer : int {
-			render = 812,
-			alignX = 813,
-			alignY = 814,
-			getPos = 815,
-			getSize = 816,
-			mouseInput = 817,
-			getCursorType = 818,
-			init = 819,
-			setupFrameBuffer = 820,
-		};
-		enum class Sphere : int {
-			vertCount = 821,
-			buffSize = 822,
-			Sphere = 823,
-			generateCirclePolygons = 824,
-		};
-		enum class main_cpp : int {
-			main = 825,
-			handleRawMouseInput = 826,
-			scrollCallback = 827,
-			mouseButtonCallback = 828,
-			keyCallback = 829,
-			framebufferSizeCallback = 830,
-			charCallback = 831,
-			fileDropCallback = 832,
-		};
+		namespace StateSingleplayer {
+			inline constexpr int mouseButtonInput = 182;
+			inline constexpr int updateProjection = 183;
+			inline constexpr int StateSingleplayer = 184;
+			inline constexpr int updateWorldListContainer = 185;
+			inline constexpr int createCallback = 186;
+			inline constexpr int viewportCallback = 187;
+			inline constexpr int worldButtonCallback = 188;
+			inline constexpr int init = 189;
+			inline constexpr int close = 190;
+			inline constexpr int update = 191;
+			inline constexpr int resume = 192;
+			inline constexpr int windowResize = 193;
+			inline constexpr int queueWorldLoad = 194;
+		}
+		namespace StateDeathScreen {
+			inline constexpr int updateProjection = 195;
+			inline constexpr int retryButtonCallback = 196;
+			inline constexpr int init = 197;
+			inline constexpr int close = 198;
+			inline constexpr int update = 199;
+			inline constexpr int render = 200;
+			inline constexpr int mouseInput = 201;
+			inline constexpr int scrollInput = 202;
+			inline constexpr int mouseButtonInput = 203;
+			inline constexpr int keyInput = 204;
+			inline constexpr int windowResize = 205;
+		}
+		namespace StateErrorScreen {
+			inline constexpr int okButtonCallback = 206;
+			inline constexpr int init = 207;
+			inline constexpr int close = 208;
+			inline constexpr int update = 209;
+			inline constexpr int render = 210;
+			inline constexpr int mouseButtonInput = 211;
+			inline constexpr int windowResize = 212;
+		}
+		namespace StateIntro {
+			inline constexpr int updateProjection = 213;
+			inline constexpr int loadFiles = 214;
+			inline constexpr int init = 215;
+			inline constexpr int update = 216;
+			inline constexpr int render = 217;
+			inline constexpr int windowResize = 218;
+		}
+		namespace StateTutorial {
+			inline constexpr int destr_StateTutorial = 219;
+			inline constexpr int StateTutorial = 220;
+			inline constexpr int updateProjection = 221;
+			inline constexpr int backButtonCallback = 222;
+			inline constexpr int nextButtonCallback = 223;
+			inline constexpr int generateMesh = 224;
+			inline constexpr int getSmoothLighting = 225;
+			inline constexpr int updatePlayerComponentVectors = 226;
+			inline constexpr int updatePlayerPos = 227;
+			inline constexpr int updateCurrentBlock = 228;
+			inline constexpr int handleCollision = 229;
+			inline constexpr int setForgSprite = 230;
+			inline constexpr int init = 231;
+			inline constexpr int close = 232;
+			inline constexpr int update = 233;
+			inline constexpr int render = 234;
+			inline constexpr int resume = 235;
+			inline constexpr int mouseInput = 236;
+			inline constexpr int scrollInput = 237;
+			inline constexpr int mouseButtonInput = 238;
+			inline constexpr int keyInput = 239;
+			inline constexpr int windowResize = 240;
+			inline constexpr int charInput = 241;
+			inline constexpr int updateViewport = 242;
+		}
+		namespace StateTutorialSlideshow {
+			inline constexpr int destr_StateTutorialSlideshow = 243;
+			inline constexpr int StateTutorialSlideshow = 244;
+			inline constexpr int updateProjection = 245;
+			inline constexpr int updateSlideSize = 246;
+			inline constexpr int viewportCallback = 247;
+			inline constexpr int init = 248;
+			inline constexpr int update = 249;
+			inline constexpr int render = 250;
+			inline constexpr int resume = 251;
+			inline constexpr int windowResize = 252;
+			inline constexpr int continueButtonCallback = 253;
+			inline constexpr int backButtonCallback = 254;
+			inline constexpr int setSlide = 255;
+		}
+		namespace StateSkinChooser {
+			inline constexpr int mouseInput = 256;
+			inline constexpr int scrollInput = 257;
+			inline constexpr int keyInput = 258;
+			inline constexpr int StateSkinChooser = 259;
+			inline constexpr int updateProjection = 260;
+			inline constexpr int viewportCallback = 261;
+			inline constexpr int chooseFileButtonCallback = 262;
+			inline constexpr int init = 263;
+			inline constexpr int close = 264;
+			inline constexpr int update = 265;
+			inline constexpr int render = 266;
+			inline constexpr int windowResize = 267;
+			inline constexpr int fileDrop = 268;
+			inline constexpr int getSkinMessage = 269;
+			inline constexpr int loadSkin = 270;
+		}
+		namespace StateSettings {
+			inline constexpr int updateProjection = 271;
+			inline constexpr int destr_StateSettings = 272;
+			inline constexpr int StateSettings = 273;
+			inline constexpr int getSetting = 274;
+			inline constexpr int renderDistanceSliderCallback = 275;
+			inline constexpr int scrollSensitivitySliderCallback = 276;
+			inline constexpr int lookSensitivitySliderCallback = 277;
+			inline constexpr int xInvertCheckBoxCallback = 278;
+			inline constexpr int yInvertCheckBoxCallback = 279;
+			inline constexpr int fovSliderCallback = 280;
+			inline constexpr int globalVolumeSliderCallback = 281;
+			inline constexpr int musicVolumeSliderCallback = 282;
+			inline constexpr int creatureVolumeSliderCallback = 283;
+			inline constexpr int ambienceVolumeSliderCallback = 284;
+			inline constexpr int controlsButtonCallback = 285;
+			inline constexpr int controlsOkButtonCallback = 286;
+			inline constexpr int fullscreenButtonCallback = 287;
+			inline constexpr int difficultySliderCallback = 288;
+			inline constexpr int smoothLightingCheckBoxCallback = 289;
+			inline constexpr int shadowsCheckBoxCallback = 290;
+			inline constexpr int lightsCheckBoxCallback = 291;
+			inline constexpr int chatCheckBoxCallback = 292;
+			inline constexpr int nametagsCheckBoxCallback = 293;
+			inline constexpr int skinsCheckBoxCallback = 294;
+			inline constexpr int secretButtonCallback = 295;
+			inline constexpr int viewportCallback = 296;
+			inline constexpr int updateStateGame = 297;
+			inline constexpr int updateVolume = 298;
+			inline constexpr int load = 299;
+			inline constexpr int save = 300;
+			inline constexpr int init = 301;
+			inline constexpr int close = 302;
+			inline constexpr int render = 303;
+			inline constexpr int mouseInput = 304;
+			inline constexpr int scrollInput = 305;
+			inline constexpr int mouseButtonInput = 306;
+			inline constexpr int keyInput = 307;
+			inline constexpr int windowResize = 308;
+			inline constexpr int updateRenderDistance = 309;
+			inline constexpr int updateFOV = 310;
+			inline constexpr int updateCreatureVolume = 311;
+			inline constexpr int updateAmbienceVolume = 312;
+			inline constexpr int updateDifficulty = 313;
+			inline constexpr int setFullscreenMode = 314;
+		}
+		namespace StatePause {
+			inline constexpr int StatePause = 315;
+			inline constexpr int updateProjection = 316;
+			inline constexpr int update = 317;
+			inline constexpr int render = 318;
+			inline constexpr int pause = 319;
+			inline constexpr int resume = 320;
+			inline constexpr int windowResize = 321;
+		}
+		namespace StateManager {
+			inline constexpr int pushState = 322;
+		}
+		namespace m4 {
+			namespace Mat5 {
+				inline constexpr int operatorInd = 323;
+				inline constexpr int Mat5 = 324;
+				inline constexpr int Mat5A = 325;
+				inline constexpr int toJson = 326;
+				inline constexpr int operatorMult = 327;
+				inline constexpr int operatorMultEQ = 328;
+				inline constexpr int multiply = 329;
+				inline constexpr int operatorMult_A = 330;
+				inline constexpr int translate = 331;
+				inline constexpr int scale = 332;
+			}
+		}
+		namespace m4 {
+			namespace Rotor {
+				inline constexpr int Rotor = 333;
+				inline constexpr int RotorA = 334;
+				inline constexpr int operatorMultEq = 335;
+				inline constexpr int rotate = 336;
+				inline constexpr int normalize = 337;
+			}
+		}
+		namespace m4 {
+			namespace BiVector4 {
+				inline constexpr int BiVector4 = 338;
+				inline constexpr int BiVector4A = 339;
+				inline constexpr int toJson = 340;
+				inline constexpr int normalize = 341;
+			}
+		}
+		namespace m4 {
+			inline constexpr int i64vec3ToJson = 342;
+			inline constexpr int ivec4ToJson = 343;
+			inline constexpr int vec4ToJson = 344;
+			inline constexpr int vec4FromJson = 345;
+			inline constexpr int cross = 346;
+			inline constexpr int adjustToMaxHorizSpeed = 347;
+			inline constexpr int createCamera = 833;
+		}
+		namespace Item {
+			inline constexpr int loadItemInfo = 348;
+			inline constexpr int renderItem = 349;
+			inline constexpr int renderItemDescription = 350;
+			inline constexpr int createFromJson = 351;
+			inline constexpr int giveMax = 352;
+			inline constexpr int giveOne = 353;
+			inline constexpr int instantiateItem = 354;
+			inline constexpr int combineItemAttributes = 355;
+			inline constexpr int save = 356;
+			inline constexpr int destr_Item = 357;
+			inline constexpr int takeMax = 358;
+			inline constexpr int takeHalf = 359;
+		}
+		namespace World {
+			inline constexpr int World = 360;
+			inline constexpr int getChunk = 361;
+			inline constexpr int getChunkFromCoords = 362;
+			inline constexpr int getEntityIntersection = 363;
+			inline constexpr int castRay = 364;
+			inline constexpr int addEntityToChunk = 365;
+		}
+		namespace BlockInfo {
+			namespace ItemMesh {
+				inline constexpr int destr_ItemMesh = 366;
+			}
+		}
+		namespace BlockInfo {
+			inline constexpr int renderItemMesh = 367;
+		}
+		namespace ItemBlock {
+			inline constexpr int render = 368;
+			inline constexpr int renderEntity = 369;
+			inline constexpr int isDeadly = 370;
+			inline constexpr int isCompatible = 371;
+			inline constexpr int saveAttributes = 372;
+			inline constexpr int action = 373;
+			inline constexpr int postAction = 374;
+			inline constexpr int clone = 375;
+		}
+		namespace ItemTool {
+			inline constexpr int render = 376;
+			inline constexpr int renderEntity = 377;
+			inline constexpr int isDeadly = 378;
+			inline constexpr int isCompatible = 379;
+			inline constexpr int getStackLimit = 380;
+			inline constexpr int action = 381;
+			inline constexpr int breakBlock = 382;
+			inline constexpr int entityAction = 383;
+			inline constexpr int clone = 384;
+		}
+		namespace ItemMaterial {
+			inline constexpr int getStackLimit = 385;
+			inline constexpr int getName = 386;
+			inline constexpr int render = 387;
+			inline constexpr int renderEntity = 388;
+			inline constexpr int isDeadly = 389;
+			inline constexpr int isCompatible = 390;
+			inline constexpr int action = 391;
+			inline constexpr int postAction = 392;
+			inline constexpr int clone = 393;
+		}
+		namespace Chunk {
+			namespace ChunkMesh {
+				inline constexpr int destr_ChunkMesh = 394;
+				inline constexpr int ChunkMesh = 395;
+				inline constexpr int buffSize = 396;
+				inline constexpr int attrCount = 397;
+				inline constexpr int attrType = 398;
+				inline constexpr int attrSize = 399;
+				inline constexpr int attrStride = 400;
+				inline constexpr int indexBuffData = 401;
+				inline constexpr int move = 402;
+				inline constexpr int addMeshSide = 403;
+				inline constexpr int addMeshPlant = 404;
+			}
+		}
+		namespace Chunk {
+			inline constexpr int Chunk = 405;
+			inline constexpr int setBlock = 406;
+			inline constexpr int generateMesh = 407;
+			inline constexpr int updateEntitiesClient = 408;
+			inline constexpr int clearEntities = 409;
+			inline constexpr int render = 410;
+			inline constexpr int updateLightingHeightMap = 411;
+			inline constexpr int updateMesh = 412;
+			inline constexpr int load = 413;
+			inline constexpr int save = 414;
+			inline constexpr int loadFromMessage = 415;
+			inline constexpr int updateCacheSection = 416;
+			inline constexpr int updateHeightmapCacheSection = 417;
+			inline constexpr int generateMeshSection = 418;
+			inline constexpr int getSmoothLighting = 419;
+			inline constexpr int getLighting = 420;
+			inline constexpr int enableMesh = 421;
+			inline constexpr int loadEntitiesFromJson = 422;
+			inline constexpr int getFilenamePrefix = 423;
+		}
+		namespace ChunkLoader {
+			namespace BiomeInfo {
+				inline constexpr int destr_BiomeInfo = 424;
+				inline constexpr int BiomeInfo = 425;
+			}
+		}
+		namespace ChunkLoader {
+			inline constexpr int init = 426;
+			inline constexpr int loadChunk = 427;
+			inline constexpr int loadBiomes = 428;
+			inline constexpr int loadInfo = 429;
+			inline constexpr int generateChunk = 430;
+			inline constexpr int getBiome = 431;
+			inline constexpr int generateTree = 432;
+			inline constexpr int generateTreeBranch = 433;
+			inline constexpr int generateTaigaTree = 434;
+			inline constexpr int createFlatWorldChests = 435;
+		}
+		namespace CloudChunk {
+			namespace CloudChunkMesh {
+				inline constexpr int indexBuffSize = 436;
+				inline constexpr int buffSize = 437;
+				inline constexpr int attrSize = 438;
+				inline constexpr int attrStride = 439;
+				inline constexpr int move = 440;
+				inline constexpr int destr_CloudChunkMesh = 441;
+			}
+		}
+		namespace CloudChunk {
+			inline constexpr int generateMesh = 442;
+		}
+		namespace CloudManager {
+			inline constexpr int destr_CloudManager = 443;
+			inline constexpr int render = 444;
+			inline constexpr int updateChunks = 445;
+			inline constexpr int unloadAllChunks = 446;
+			inline constexpr int loadChunks = 447;
+			inline constexpr int updateChunk = 448;
+		}
+		namespace CraftingMenu {
+			namespace CraftableRecipe {
+				inline constexpr int destr_CraftableRecipe = 449;
+				inline constexpr int CraftableRecipe = 450;
+			}
+		}
+		namespace CraftingMenu {
+			inline constexpr int loadRecipes = 451;
+			inline constexpr int render = 452;
+			inline constexpr int offsetX = 453;
+			inline constexpr int offsetY = 454;
+			inline constexpr int getPos = 455;
+			inline constexpr int getSize = 456;
+			inline constexpr int mouseButtonInput = 457;
+			inline constexpr int updateAvailableRecipes = 458;
+		}
+		namespace Entity {
+			inline constexpr int loadEntityInfo = 459;
+			inline constexpr int createFromJson = 460;
+			inline constexpr int createWithAttributes = 461;
+			inline constexpr int save = 462;
+			inline constexpr int instantiateEntity = 463;
+			inline constexpr int combineEntityAttributes = 464;
+			inline constexpr int destr_Entity = 465;
+		}
+		namespace InventoryPlayer {
+			inline constexpr int addItem = 466;
+			inline constexpr int begin = 467;
+			inline constexpr int render = 468;
+			inline constexpr int combineItem = 469;
+			inline constexpr int placeItem = 470;
+			inline constexpr int getSlotIndex = 471;
+			inline constexpr int getSlotCount = 472;
+			inline constexpr int getSlot = 473;
+			inline constexpr int end = 474;
+		}
+		namespace InventoryGrid {
+			inline constexpr int destr_InventoryGrid = 475;
+			inline constexpr int InventoryGrid = 476;
+			inline constexpr int render = 477;
+			inline constexpr int combineItem = 478;
+			inline constexpr int placeItem = 479;
+			inline constexpr int getSlotIndex = 480;
+			inline constexpr int getSlotCount = 481;
+			inline constexpr int getSlot = 482;
+			inline constexpr int end = 483;
+			inline constexpr int load = 484;
+			inline constexpr int save = 485;
+		}
+		namespace InventorySession {
+			inline constexpr int destr_InventorySession = 486;
+		}
+		namespace InventoryManager {
+			inline constexpr int destr_InventoryManager = 487;
+			inline constexpr int renderInit = 488;
+			inline constexpr int mouseButtonInput = 489;
+			inline constexpr int windowResize = 490;
+			inline constexpr int applyAction = 491;
+			inline constexpr int applyTransfer = 492;
+			inline constexpr int findInventory = 493;
+			inline constexpr int updateCraftingMenuBox = 494;
+			inline constexpr int craftingMenuCallback = 495;
+			inline constexpr int viewportCallback = 496;
+			inline constexpr int updateProjection = 497;
+		}
+		namespace MeshBuilder {
+			inline constexpr int MeshBuilder = 498;
+			inline constexpr int MeshBuilder_A = 499;
+			inline constexpr int destr_MeshBuilder = 500;
+			inline constexpr int buffCount = 501;
+			inline constexpr int buffSize = 502;
+			inline constexpr int attrCount = 503;
+			inline constexpr int vertCount = 504;
+			inline constexpr int indexBuffSize = 505;
+			inline constexpr int addBuff = 506;
+			inline constexpr int attrType = 507;
+			inline constexpr int attrSize = 508;
+			inline constexpr int attrStride = 509;
+			inline constexpr int addAttr = 510;
+			inline constexpr int clear = 511;
+		}
+		namespace Player {
+			inline constexpr int destr_Player = 512;
+			inline constexpr int Player = 513;
+			inline constexpr int updatePos = 514;
+			inline constexpr int updateCurrentBlock = 515;
+			inline constexpr int handleCollision = 516;
+			inline constexpr int updateComponentVectors = 517;
+			inline constexpr int updateAllComponentVectors = 518;
+			inline constexpr int removeVelComp = 519;
+			inline constexpr int updateTargetBlock = 520;
+			inline constexpr int init = 521;
+			inline constexpr int renderHud = 522;
+			inline constexpr int renderTargetBlock = 523;
+			inline constexpr int getMovementUpdate = 524;
+			inline constexpr int setMovementBehavior = 525;
+			inline constexpr int hitTargetBlock = 526;
+			inline constexpr int breakBlock = 527;
+			inline constexpr int throwItem = 528;
+			inline constexpr int update = 529;
+			inline constexpr int updateLocal = 530;
+			inline constexpr int updateCameraPos = 531;
+			inline constexpr int resetMouse = 532;
+			inline constexpr int keyInput = 533;
+			inline constexpr int mouseInput = 534;
+			inline constexpr int mouseButtonInput = 535;
+			inline constexpr int isHoldingGlasses = 536;
+			inline constexpr int isHoldingCompass = 537;
+			inline constexpr int isHoldingCollector = 538;
+			inline constexpr int headIsInBlock = 539;
+			inline constexpr int getHeadBlock = 540;
+			inline constexpr int respawn = 541;
+			inline constexpr int load = 542;
+			inline constexpr int save = 543;
+			inline constexpr int loadClientData = 544;
+			inline constexpr int saveClientData = 545;
+			inline constexpr int saveOrientation = 546;
+		}
+		namespace QuadRenderer {
+			inline constexpr int destr_QuadRenderer = 547;
+			inline constexpr int init = 548;
+			inline constexpr int setColor = 549;
+			inline constexpr int setPos = 550;
+		}
+		namespace ResourceManager {
+			inline constexpr int loadArrayTexture = 551;
+			inline constexpr int get = 552;
+		}
+		namespace ShaderManager {
+			inline constexpr int loadFromShaderList = 553;
+			inline constexpr int get = 554;
+		}
+		namespace Shader {
+			inline constexpr int load = 555;
+			inline constexpr int compileShader = 556;
+		}
+		namespace WorldManager {
+			inline constexpr int destr_WorldManager = 557;
+			inline constexpr int updateRenderFrustum = 558;
+			inline constexpr int setBlockUpdate = 559;
+			inline constexpr int render = 560;
+		}
+		namespace WorldClient {
+			inline constexpr int destr_WorldClient = 561;
+			inline constexpr int addEntityToChunk = 562;
+			inline constexpr int localPlayerEvent = 563;
+			inline constexpr int updateLocal = 564;
+			inline constexpr int setRenderDistanceLocal = 565;
+			inline constexpr int setSkinVisibility = 566;
+			inline constexpr int localPlayerInit = 567;
+			inline constexpr int localPlayerRespawn = 568;
+			inline constexpr int sendChatMessage = 569;
+			inline constexpr int updatePhysics = 570;
+			inline constexpr int handleWorldMessage = 571;
+			inline constexpr int handleLightingOptionsUpdate = 572;
+			inline constexpr int updateChunks = 573;
+			inline constexpr int updateChunk = 574;
+			inline constexpr int generateChunkMeshes = 575;
+			inline constexpr int updateChunkCacheAndMesh = 576;
+			inline constexpr int updateChunkCache = 577;
+			inline constexpr int regenerateAllChunkMeshes = 578;
+			inline constexpr int joinAllChunkLoadingThreads = 579;
+			inline constexpr int handleMessage = 580;
+			inline constexpr int inventoryUpdateCallback = 581;
+		}
+		namespace WorldSingleplayer {
+			inline constexpr int WorldSingleplayer = 582;
+			inline constexpr int destr_WorldSingleplayer = 583;
+			inline constexpr int localPlayerEvent = 584;
+			inline constexpr int updateLocal = 585;
+			inline constexpr int cleanupLocal = 586;
+			inline constexpr int setRenderDistanceLocal = 587;
+			inline constexpr int setDifficultyLocal = 588;
+			inline constexpr int localPlayerInit = 589;
+			inline constexpr int localPlayerRespawn = 590;
+			inline constexpr int handleLightingOptionsUpdate = 591;
+			inline constexpr int updateChunks = 592;
+			inline constexpr int updateChunk = 593;
+			inline constexpr int loadChunks = 594;
+			inline constexpr int loadChunk = 595;
+			inline constexpr int updateChunkCacheAndMesh = 596;
+			inline constexpr int updateChunkCache = 597;
+			inline constexpr int regenerateAllChunkMeshes = 598;
+		}
+		namespace gui {
+			namespace Button {
+				inline constexpr int destr_Button = 599;
+				inline constexpr int render = 600;
+				inline constexpr int mouseButtonInput = 601;
+				inline constexpr int keyInput = 602;
+				inline constexpr int offsetX = 603;
+				inline constexpr int enabled = 604;
+				inline constexpr int select = 605;
+				inline constexpr int getPos = 606;
+				inline constexpr int getSize = 607;
+				inline constexpr int touchingMouse = 608;
+			}
+		}
+		namespace gui {
+			namespace CheckBox {
+				inline constexpr int render = 609;
+				inline constexpr int mouseButtonInput = 610;
+				inline constexpr int keyInput = 611;
+				inline constexpr int getPos = 612;
+				inline constexpr int getSize = 613;
+				inline constexpr int touchingMouse = 614;
+			}
+		}
+		namespace gui {
+			namespace ContentBox {
+				inline constexpr int destr_ContentBox = 615;
+				inline constexpr int getQuadRenderer = 616;
+				inline constexpr int getFont = 617;
+				inline constexpr int getGLFWwindow = 618;
+				inline constexpr int getCursorPos = 619;
+				inline constexpr int getSize = 620;
+				inline constexpr int changeViewport = 621;
+				inline constexpr int getPos = 622;
+				inline constexpr int getSizeA = 623;
+				inline constexpr int touchingMouse = 624;
+				inline constexpr int resetViewport = 625;
+				inline constexpr int render = 626;
+				inline constexpr int alignX = 627;
+				inline constexpr int alignY = 628;
+				inline constexpr int offsetX = 629;
+				inline constexpr int offsetY = 630;
+				inline constexpr int mouseInput = 631;
+				inline constexpr int scrollInput = 632;
+				inline constexpr int mouseButtonInput = 633;
+				inline constexpr int keyInput = 634;
+				inline constexpr int select = 635;
+				inline constexpr int deselect = 636;
+				inline constexpr int addElement = 637;
+				inline constexpr int removeElement = 638;
+				inline constexpr int selectElement = 639;
+				inline constexpr int clear = 640;
+				inline constexpr int empty = 641;
+			}
+		}
+		namespace gui {
+			namespace Element {
+				inline constexpr int enabled = 642;
+				inline constexpr int getCursorType = 643;
+			}
+		}
+		namespace gui {
+			namespace Image {
+				inline constexpr int offsetX = 644;
+				inline constexpr int offsetY = 645;
+				inline constexpr int render = 646;
+				inline constexpr int getPos = 647;
+				inline constexpr int getSize = 648;
+			}
+		}
+		namespace gui {
+			namespace Interface {
+				inline constexpr int Interface = 649;
+				inline constexpr int destr_Interface = 650;
+				inline constexpr int render = 651;
+				inline constexpr int mouseInput = 652;
+				inline constexpr int scrollInput = 653;
+				inline constexpr int mouseButtonInput = 654;
+				inline constexpr int keyInput = 655;
+				inline constexpr int getQuadRenderer = 656;
+				inline constexpr int getFont = 657;
+				inline constexpr int getGLFWwindow = 658;
+				inline constexpr int getCursorPos = 659;
+				inline constexpr int getSize = 660;
+				inline constexpr int changeViewport = 661;
+				inline constexpr int addElement = 662;
+				inline constexpr int removeElement = 663;
+				inline constexpr int selectElement = 664;
+				inline constexpr int clear = 665;
+				inline constexpr int empty = 666;
+			}
+		}
+		namespace gui {
+			namespace Slider {
+				inline constexpr int offsetX = 667;
+				inline constexpr int offsetY = 668;
+				inline constexpr int deselect = 669;
+				inline constexpr int render = 670;
+				inline constexpr int mouseButtonInput = 671;
+				inline constexpr int mouseInput = 672;
+				inline constexpr int keyInput = 673;
+				inline constexpr int alignX = 674;
+				inline constexpr int alignY = 675;
+				inline constexpr int getPos = 676;
+				inline constexpr int getSize = 677;
+			}
+		}
+		namespace gui {
+			namespace Text {
+				inline constexpr int render = 678;
+				inline constexpr int offsetX = 679;
+				inline constexpr int getPos = 680;
+				inline constexpr int getSize = 681;
+				inline constexpr int setText = 682;
+				inline constexpr int renderText = 683;
+			}
+		}
+		namespace gui {
+			namespace TextInput {
+				inline constexpr int render = 684;
+				inline constexpr int alignX = 685;
+				inline constexpr int alignY = 686;
+				inline constexpr int offsetX = 687;
+				inline constexpr int offsetY = 688;
+				inline constexpr int mouseButtonInput = 689;
+				inline constexpr int mouseInput = 690;
+				inline constexpr int keyInput = 691;
+				inline constexpr int charInput = 692;
+				inline constexpr int getCursorType = 693;
+				inline constexpr int select = 694;
+				inline constexpr int deselect = 695;
+				inline constexpr int updatePasswordVisualText = 696;
+				inline constexpr int updateScrollPos = 697;
+				inline constexpr int getPos = 698;
+				inline constexpr int getSize = 699;
+				inline constexpr int removeInvalidChars = 700;
+				inline constexpr int removeHighlightedText = 701;
+			}
+		}
+		namespace EntityButterfly {
+			inline constexpr int getName = 702;
+			inline constexpr int update = 703;
+			inline constexpr int render = 704;
+			inline constexpr int getServerUpdateAttributes = 705;
+			inline constexpr int applyServerUpdate = 706;
+			inline constexpr int takeDamage = 707;
+			inline constexpr int playHitSound = 708;
+			inline constexpr int playDeathSound = 709;
+			inline constexpr int collisionCallback = 710;
+		}
+		namespace EntityAlidade {
+			namespace SPInfo {
+				inline constexpr int SPInfo = 711;
+				inline constexpr int destr_SPInfo = 712;
+			}
+		}
+		namespace EntityAlidade {
+			inline constexpr int getName = 713;
+			inline constexpr int update = 714;
+			inline constexpr int render = 715;
+			inline constexpr int saveAttributes = 716;
+			inline constexpr int getPos = 717;
+			inline constexpr int setPos = 718;
+			inline constexpr int takeDamage = 719;
+			inline constexpr int action = 720;
+			inline constexpr int postAction = 721;
+			inline constexpr int generateSpherinder = 722;
+			inline constexpr int generateSpherinderHollow = 723;
+			inline constexpr int generateSemicircle = 724;
+		}
+		namespace EntityItem {
+			inline constexpr int createWithItem = 725;
+			inline constexpr int getName = 726;
+			inline constexpr int update = 727;
+			inline constexpr int render = 728;
+			inline constexpr int saveAttributes = 729;
+			inline constexpr int applyServerUpdate = 730;
+			inline constexpr int getPos = 731;
+			inline constexpr int setPos = 732;
+			inline constexpr int shouldSave = 733;
+			inline constexpr int isIntersectingRay = 734;
+			inline constexpr int give = 735;
+			inline constexpr int combineWithNearby = 736;
+			inline constexpr int collisionCallback = 737;
+		}
+		namespace EntityPlayer {
+			inline constexpr int createFromPlayer = 738;
+			inline constexpr int EntityPlayer = 739;
+			inline constexpr int getName = 740;
+			inline constexpr int update = 741;
+			inline constexpr int render = 742;
+			inline constexpr int saveAttributes = 743;
+			inline constexpr int applyServerUpdate = 744;
+			inline constexpr int getPos = 745;
+			inline constexpr int setPos = 746;
+			inline constexpr int isIntersectingRay = 747;
+			inline constexpr int takeDamage = 748;
+			inline constexpr int deathTimer = 749;
+			inline constexpr int applyMovementUpdate = 750;
+			inline constexpr int collectItems = 751;
+		}
+		namespace EntitySpider {
+			namespace SpiderType {
+				inline constexpr int destr_SpiderType = 752;
+			}
+		}
+		namespace EntitySpider {
+			inline constexpr int isIntersectingRay = 753;
+			inline constexpr int getPos = 754;
+			inline constexpr int setPos = 755;
+			inline constexpr int getName = 756;
+			inline constexpr int update = 757;
+			inline constexpr int render = 758;
+			inline constexpr int saveAttributes = 759;
+			inline constexpr int getServerUpdateAttributes = 760;
+			inline constexpr int applyServerUpdate = 761;
+			inline constexpr int takeDamage = 762;
+			inline constexpr int playHitSound = 763;
+			inline constexpr int playDeathSound = 764;
+			inline constexpr int collisionCallback = 765;
+			inline constexpr int findPlayer = 766;
+			inline constexpr int persuePlayer = 767;
+		}
+		namespace EntityChest {
+			inline constexpr int isClickable = 768;
+			inline constexpr int getName = 769;
+			inline constexpr int update = 770;
+			inline constexpr int render = 771;
+			inline constexpr int saveAttributes = 772;
+			inline constexpr int getServerUpdateAttributes = 773;
+			inline constexpr int applyServerUpdate = 774;
+			inline constexpr int getPos = 775;
+			inline constexpr int setPos = 776;
+			inline constexpr int action = 777;
+		}
+		namespace EntityDying {
+			inline constexpr int deathTimer = 778;
+			inline constexpr int createWithEntity = 779;
+			inline constexpr int getName = 780;
+			inline constexpr int update = 781;
+			inline constexpr int render = 782;
+			inline constexpr int getServerUpdateAttributes = 783;
+			inline constexpr int applyServerUpdate = 784;
+			inline constexpr int getPos = 785;
+			inline constexpr int setPos = 786;
+			inline constexpr int isBlockEntity = 787;
+			inline constexpr int isIntersectingRay = 788;
+		}
+		namespace EntityManager {
+			inline constexpr int extract = 789;
+			inline constexpr int get = 790;
+			inline constexpr int getBlockEntity = 791;
+		}
+		namespace Coil {
+			inline constexpr int Coil = 792;
+			inline constexpr int buffSize = 793;
+			inline constexpr int attrSize = 794;
+		}
+		namespace CompassRenderer {
+			inline constexpr int renderHand = 795;
+			inline constexpr int renderItemDrop = 796;
+		}
+		namespace DodecaplexWireframe {
+			inline constexpr int generateMesh = 797;
+			inline constexpr int addFaces = 798;
+			inline constexpr int addCells = 799;
+		}
+		namespace Framebuffer {
+			inline constexpr int destr_Framebuffer = 800;
+			inline constexpr int render = 801;
+			inline constexpr int init = 802;
+			inline constexpr int cleanup = 803;
+		}
+		namespace HypercubeHollow {
+			inline constexpr int attrSize = 804;
+			inline constexpr int attrStride = 805;
+			inline constexpr int HypercubeHollow = 806;
+			inline constexpr int addCubeSide = 807;
+		}
+		namespace PlayerSkinRenderer {
+			inline constexpr int PlayerSkinRenderer = 808;
+			inline constexpr int render = 809;
+			inline constexpr int updateAnimation = 810;
+			inline constexpr int resetTransformations = 811;
+		}
+		namespace PlayerSkinViewer {
+			inline constexpr int render = 812;
+			inline constexpr int alignX = 813;
+			inline constexpr int alignY = 814;
+			inline constexpr int getPos = 815;
+			inline constexpr int getSize = 816;
+			inline constexpr int mouseInput = 817;
+			inline constexpr int getCursorType = 818;
+			inline constexpr int init = 819;
+			inline constexpr int setupFrameBuffer = 820;
+		}
+		namespace Sphere {
+			inline constexpr int vertCount = 821;
+			inline constexpr int buffSize = 822;
+			inline constexpr int Sphere = 823;
+			inline constexpr int generateCirclePolygons = 824;
+		}
+		namespace main_cpp {
+			inline constexpr int main = 825;
+			inline constexpr int handleRawMouseInput = 826;
+			inline constexpr int scrollCallback = 827;
+			inline constexpr int mouseButtonCallback = 828;
+			inline constexpr int keyCallback = 829;
+			inline constexpr int framebufferSizeCallback = 830;
+			inline constexpr int charCallback = 831;
+			inline constexpr int fileDropCallback = 832;
+		}
 	}
 
 	inline void startConsole()
@@ -1154,52 +1154,52 @@ namespace fdm
 	{
 		return reinterpret_cast<uint64_t(__stdcall*)(int)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getFuncAddr"))(func);
 	}
-	inline bool isModLoaded(const std::string& modId)
+	inline bool isModLoaded(const fdm::stl::string& modId)
 	{
-		return reinterpret_cast<bool(__stdcall*)(const std::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "isModLoaded"))(modId);
+		return reinterpret_cast<bool(__stdcall*)(const fdm::stl::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "isModLoaded"))(modId);
 	}
-	inline bool isDLLLoaded(const std::string& dllFileName)
+	inline bool isDLLLoaded(const fdm::stl::string& dllFileName)
 	{
-		return reinterpret_cast<bool(__stdcall*)(const std::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "isDLLLoaded"))(dllFileName);
+		return reinterpret_cast<bool(__stdcall*)(const fdm::stl::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "isDLLLoaded"))(dllFileName);
 	}
-	inline std::string getModDLL(const std::string& modId)
+	inline fdm::stl::string getModDLL(const fdm::stl::string& modId)
 	{
-		return reinterpret_cast<std::string(__stdcall*)(const std::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModDLL"))(modId);
+		return reinterpret_cast<fdm::stl::string(__stdcall*)(const fdm::stl::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModDLL"))(modId);
 	}
-	inline std::string getModVersion(const std::string& modId)
+	inline fdm::stl::string getModVersion(const fdm::stl::string& modId)
 	{
-		return reinterpret_cast<std::string(__stdcall*)(const std::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModVersion"))(modId);
+		return reinterpret_cast<fdm::stl::string(__stdcall*)(const fdm::stl::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModVersion"))(modId);
 	}
-	inline std::string getModName(const std::string& modId)
+	inline fdm::stl::string getModName(const fdm::stl::string& modId)
 	{
-		return reinterpret_cast<std::string(__stdcall*)(const std::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModName"))(modId);
+		return reinterpret_cast<fdm::stl::string(__stdcall*)(const fdm::stl::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModName"))(modId);
 	}
-	inline std::string getModAuthor(const std::string& modId)
+	inline fdm::stl::string getModAuthor(const fdm::stl::string& modId)
 	{
-		return reinterpret_cast<std::string(__stdcall*)(const std::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModAuthor"))(modId);
+		return reinterpret_cast<fdm::stl::string(__stdcall*)(const fdm::stl::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModAuthor"))(modId);
 	}
-	inline std::string getModDescription(const std::string& modId)
+	inline fdm::stl::string getModDescription(const fdm::stl::string& modId)
 	{
-		return reinterpret_cast<std::string(__stdcall*)(const std::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModDescription"))(modId);
+		return reinterpret_cast<fdm::stl::string(__stdcall*)(const fdm::stl::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModDescription"))(modId);
 	}
-	inline HMODULE getModHandle(const std::string& modId)
+	inline HMODULE getModHandle(const fdm::stl::string& modId)
 	{
-		return reinterpret_cast<HMODULE(__stdcall*)(const std::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModHandle"))(modId);
+		return reinterpret_cast<HMODULE(__stdcall*)(const fdm::stl::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModHandle"))(modId);
 	}
-	inline std::string getModloaderVersion()
+	inline fdm::stl::string getModloaderVersion()
 	{
-		return reinterpret_cast<std::string(__stdcall*)()>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModloaderVersion"))();
+		return reinterpret_cast<fdm::stl::string(__stdcall*)()>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModloaderVersion"))();
 	}
-	inline std::string getGameVersion()
+	inline fdm::stl::string getGameVersion()
 	{
-		return reinterpret_cast<std::string(__stdcall*)()>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getGameVersion"))();
+		return reinterpret_cast<fdm::stl::string(__stdcall*)()>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getGameVersion"))();
 	}
-	inline std::string getModPath(const std::string& modId)
+	inline fdm::stl::string getModPath(const fdm::stl::string& modId)
 	{
-		return reinterpret_cast<std::string(__stdcall*)(const std::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModPath"))(modId);
+		return reinterpret_cast<fdm::stl::string(__stdcall*)(const fdm::stl::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getModPath"))(modId);
 	}
 	// useful for creating library mod headers
-	inline FARPROC getModFuncPointer(const std::string& modId, const std::string& funcName)
+	inline FARPROC getModFuncPointer(const fdm::stl::string& modId, const fdm::stl::string& funcName)
 	{
 		HMODULE modModule = getModHandle(modId);
 		if (modModule == nullptr) return nullptr;
@@ -1211,14 +1211,14 @@ namespace fdm
 	operators are "==" | ">=" | "<=" | "<" | ">" | "!="
 	it is used by modloader to check dependency versions
 	*/
-	inline bool versionCompare(const std::string& aVer, const std::string& op, const std::string& bVer)
+	inline bool versionCompare(const fdm::stl::string& aVer, const fdm::stl::string& op, const fdm::stl::string& bVer)
 	{
-		return reinterpret_cast<bool(__stdcall*)(const std::string&, const std::string&, const std::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "versionCompare"))(aVer, op, bVer);
+		return reinterpret_cast<bool(__stdcall*)(const fdm::stl::string&, const fdm::stl::string&, const fdm::stl::string&)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "versionCompare"))(aVer, op, bVer);
 	}
 	// splits string by a delimiter
-	inline std::vector<std::string> splitStr(const std::string& str, char delim)
+	inline std::vector<fdm::stl::string> splitStr(const fdm::stl::string& str, char delim)
 	{
-		std::vector<std::string> tokens;
+		std::vector<fdm::stl::string> tokens;
 		size_t pos = 0;
 		size_t len = str.length();
 		tokens.reserve(len / 2);  // allocate memory for expected number of tokens
@@ -1226,7 +1226,7 @@ namespace fdm
 		while (pos < len)
 		{
 			size_t end = str.find_first_of(delim, pos);
-			if (end == std::string::npos)
+			if (end == fdm::stl::string::npos)
 			{
 				tokens.emplace_back(str.substr(pos));
 				break;
@@ -1242,7 +1242,7 @@ namespace fdm
 #include "Console.h"
 
 // used by modloader
-extern "C" inline __declspec(dllexport) void setModID(const std::string& modID) { fdm::modID = modID; }
+extern "C" inline __declspec(dllexport) void setModID(const fdm::stl::string& modID) { fdm::modID = modID; }
 
 // Connection namespace
 #include "Connection/MessageData.h"
@@ -1253,8 +1253,8 @@ extern "C" inline __declspec(dllexport) void setModID(const std::string& modID) 
 #include "Packet.h" // thats not in Connection namespace for some reason even tho it relates to networking but k
 
 // fuck boost
-#include "path.h"
-#include "uuid.h"
+#include "stl/path.h"
+#include "stl/uuid.h"
 
 // mesh related stuff mostly
 #include "Mesh.h"
@@ -1376,26 +1376,26 @@ to call the original function, do `original(self, <all of the you have arguments
 `this` pointer is called `self`
 */
 #define $hook(returnType, cl, function, ...) \
-	namespace fdmHooks::cl \
+	namespace CONCAT(fdmHooks, __LINE__) \
 	{ \
 		class CONCAT(function, H) \
 		{ \
 		public: \
-			inline static returnType(__thiscall* original)(fdm::cl* self, __VA_ARGS__) = nullptr; \
-			static returnType __fastcall hook(fdm::cl* self, __VA_ARGS__); \
+			inline static returnType(__thiscall* original)(cl* self, __VA_ARGS__) = nullptr; \
+			static returnType __fastcall hook(cl* self, __VA_ARGS__); \
 		}; \
 	} \
 	$exec \
 	{ \
-		uint64_t hookAddr = getFuncAddr((int)(fdm::Func::cl::function)); \
+		uint64_t hookAddr = getFuncAddr((int)(Func::cl::function)); \
 		if(hookAddr <= 0) { printf("Failed To Hook " #cl "::" #function "\n"); return; } \
-		Hook(hookAddr, &fdmHooks::cl::CONCAT(function, H)::hook, &fdmHooks::cl::CONCAT(function, H)::original); \
+		Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original); \
 		EnableHook(); \
 	} \
-	inline returnType __fastcall fdmHooks::cl::CONCAT(function, H)::hook(fdm::cl* self, __VA_ARGS__)
+	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook(cl* self, __VA_ARGS__)
 
 /*
-creates a hook for a member function (__thiscall) using Func namespace. Useful for hooking functions of classes inside classes/namespaces (like gui classes). Because it turned out to not work properly with those (yea i havent tested it properly previously bruh)
+creates a hook for a member function (__thiscall) using Func namespace.
 to call the original function, do `original(self, <all of the you have arguments>)`
 `this` pointer is called `self`
 */
@@ -1405,25 +1405,25 @@ to call the original function, do `original(self, <all of the you have arguments
 		class H \
 		{ \
 		public: \
-			inline static returnType(__thiscall* original)(fdm::className* self, __VA_ARGS__) = nullptr; \
-			static returnType __fastcall hook(fdm::className* self, __VA_ARGS__); \
+			inline static returnType(__thiscall* original)(className* self, __VA_ARGS__) = nullptr; \
+			static returnType __fastcall hook(className* self, __VA_ARGS__); \
 		}; \
 	} \
 	$exec \
 	{ \
-		uint64_t hookAddr = getFuncAddr((int)(fdm::func)); \
+		uint64_t hookAddr = getFuncAddr((int)(func)); \
 		if(hookAddr <= 0) { printf("Failed To Hook " #func "\n"); return; } \
 		Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original); \
 		EnableHook(); \
 	} \
-	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(fdm::className* self, __VA_ARGS__)
+	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(className* self, __VA_ARGS__)
 
 /*
 creates a hook for a static function (__fastcall)
 to call the original function, do `original(<all of the you have arguments>)`
 */
 #define $hookStatic(returnType, cl, function, ...) \
-	namespace fdmHooks::cl \
+	namespace CONCAT(fdmHooks, __LINE__) \
 	{ \
 		class CONCAT(function, H)  \
 		{ \
@@ -1434,15 +1434,15 @@ to call the original function, do `original(<all of the you have arguments>)`
 	} \
 	$exec \
 	{ \
-		uint64_t hookAddr = getFuncAddr((int)(fdm::Func::cl::function)); \
+		uint64_t hookAddr = getFuncAddr((int)(Func::cl::function)); \
 		if(hookAddr <= 0) { printf("Failed To Hook " #cl "::" #function "\n"); return; } \
-		Hook(hookAddr, &fdmHooks::cl::CONCAT(function, H)::hook, &fdmHooks::cl::CONCAT(function, H)::original); \
+		Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original); \
 		EnableHook(); \
 	} \
-	inline returnType __fastcall fdmHooks::cl::CONCAT(function, H)::hook(__VA_ARGS__)
+	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook(__VA_ARGS__)
 
 /*
-creates a hook for a static function (__fastcall) using Func namespace. Useful for hooking functions of classes inside classes/namespaces (like gui classes). Because it turned out to not work properly with those (yea i havent tested it properly previously bruh)
+creates a hook for a static function (__fastcall) using Func namespace.
 to call the original function, do `original(<all of the you have arguments>)`
 */
 #define $hookStaticByFunc(returnType, func, ...) \
@@ -1457,7 +1457,7 @@ to call the original function, do `original(<all of the you have arguments>)`
 	} \
 	$exec \
 	{ \
-		uint64_t hookAddr = getFuncAddr((int)(fdm::func)); \
+		uint64_t hookAddr = getFuncAddr((int)(func)); \
 		if(hookAddr <= 0) { printf("Failed To Hook " #func "\n"); return; } \
 		Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original); \
 		EnableHook(); \

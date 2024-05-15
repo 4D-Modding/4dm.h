@@ -7,7 +7,7 @@ namespace fdm
 	class ItemTool : public Item 
 	{
 	public:
-		std::string name; // 0x10
+		stl::string name; // 0x10
 		inline static const float scaleFactor = 0.15f; 
 		inline static glm::vec4* pickaxeVerts = reinterpret_cast<glm::vec4*>((base + 0x29B600)); 
 		inline static glm::vec4* pickaxeNormals = reinterpret_cast<glm::vec4*>((base + 0x29BC40)); 

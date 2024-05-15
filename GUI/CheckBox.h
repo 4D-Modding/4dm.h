@@ -8,7 +8,7 @@ namespace fdm::gui
 	class CheckBox : public gui::Element 
 	{
 	public:
-		std::string text = ""; // 0x8
+		stl::string text = ""; // 0x8
 		bool clickable = true; // 0x28
 		bool mouseDown; // 0x29
 		bool selected; // 0x2A
@@ -24,7 +24,7 @@ namespace fdm::gui
 		CheckBoxCallback callback = NULL; // 0x48
 		bool checked; // 0x50
 
-		void setText(const std::string& text)
+		void setText(const stl::string& text)
 		{
 			this->text = text;
 		}
@@ -46,23 +46,23 @@ namespace fdm::gui
 		}
 		void render(gui::Window* w) override
 		{
-			return reinterpret_cast<void (__thiscall*)(gui::CheckBox* self, gui::Window* w)>(getFuncAddr((int)Func::gui_Nested::CheckBox::render))(this, w);
+			return reinterpret_cast<void (__thiscall*)(gui::CheckBox* self, gui::Window* w)>(getFuncAddr((int)Func::gui::CheckBox::render))(this, w);
 		}
 		bool mouseButtonInput(const gui::Window* w, int button, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, const gui::Window* w, int button, int action, int mods)>(getFuncAddr((int)Func::gui_Nested::CheckBox::mouseButtonInput))(this, w, button, action, mods);
+			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, const gui::Window* w, int button, int action, int mods)>(getFuncAddr((int)Func::gui::CheckBox::mouseButtonInput))(this, w, button, action, mods);
 		}
 		bool keyInput(const gui::Window* w, int key, int scancode, int action, int mods) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, const gui::Window* w, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::gui_Nested::CheckBox::keyInput))(this, w, key, scancode, action, mods);
+			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, const gui::Window* w, int key, int scancode, int action, int mods)>(getFuncAddr((int)Func::gui::CheckBox::keyInput))(this, w, key, scancode, action, mods);
 		}
 		void getPos(const gui::Window* w, int* x, int* y) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(const gui::CheckBox* self, const gui::Window* w, int* x, int* y)>(getFuncAddr((int)Func::gui_Nested::CheckBox::getPos))(this, w, x, y);
+			return reinterpret_cast<void (__thiscall*)(const gui::CheckBox* self, const gui::Window* w, int* x, int* y)>(getFuncAddr((int)Func::gui::CheckBox::getPos))(this, w, x, y);
 		}
 		void getSize(const gui::Window* w, int* width, int* height) const override
 		{
-			return reinterpret_cast<void (__thiscall*)(const gui::CheckBox* self, const gui::Window* w, int* width, int* height)>(getFuncAddr((int)Func::gui_Nested::CheckBox::getSize))(this, w, width, height);
+			return reinterpret_cast<void (__thiscall*)(const gui::CheckBox* self, const gui::Window* w, int* width, int* height)>(getFuncAddr((int)Func::gui::CheckBox::getSize))(this, w, width, height);
 		}
 		void select() override
 		{
@@ -74,7 +74,7 @@ namespace fdm::gui
 		}
 		bool touchingMouse(gui::Window* w) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, gui::Window* w)>(getFuncAddr((int)Func::gui_Nested::CheckBox::touchingMouse))(this, w);
+			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, gui::Window* w)>(getFuncAddr((int)Func::gui::CheckBox::touchingMouse))(this, w);
 		}
 	};
 }

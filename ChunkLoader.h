@@ -9,7 +9,7 @@ namespace fdm
 	public:
 		struct BiomeInfo 
 		{
-			enum TreeType
+			enum TreeType : int
 			{
 				TREE_NONE = 0x0,
 				TREE_REDLEAF = 0x1,
@@ -17,7 +17,7 @@ namespace fdm
 				TREE_SNOWY = 0x3,
 			};
 
-			std::string name; 
+			stl::string name; 
 			float weight; // 0x20
 			float hMultiplier; // 0x24
 			float vMultiplier; // 0x28
@@ -34,11 +34,11 @@ namespace fdm
 
 			~BiomeInfo() 
 			{
-				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self)>(getFuncAddr((int)Func::ChunkLoader_Nested::BiomeInfo::destr_BiomeInfo))(this);
+				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self)>(getFuncAddr((int)Func::ChunkLoader::BiomeInfo::destr_BiomeInfo))(this);
 			}
 			BiomeInfo(const ChunkLoader::BiomeInfo& __that) noexcept 
 			{
-				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self, const ChunkLoader::BiomeInfo & __that)>(getFuncAddr((int)Func::ChunkLoader_Nested::BiomeInfo::BiomeInfo))(this, __that);
+				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self, const ChunkLoader::BiomeInfo & __that)>(getFuncAddr((int)Func::ChunkLoader::BiomeInfo::BiomeInfo))(this, __that);
 			}
 		};
 		struct BiomeMapPixel 
@@ -48,8 +48,8 @@ namespace fdm
 			float hMultiplier; // 0x4
 			float vMultiplier; // 0x8
 		};
-		path worldPath; 
-		path chunksPath; // 0x20
+		stl::path worldPath;
+		stl::path chunksPath; // 0x20
 		uint32_t seed; // 0x40
 		glm::vec3 terrainOffsets; // 0x44
 		glm::vec3 biomeOffsets; // 0x50
@@ -67,21 +67,21 @@ namespace fdm
 		std::vector<ChunkLoader::BiomeInfo> biomes; // 0x80
 		std::unique_ptr<ChunkLoader::BiomeMapPixel*> biomeMap; // 0x98
 
-		bool init(const path& worldPath, const path& biomeInfoPath) 
+		bool init(const stl::path& worldPath, const stl::path& biomeInfoPath)
 		{
-			return reinterpret_cast<bool (__thiscall*)(ChunkLoader* self, const path& worldPath, const path& biomeInfoPath)>(getFuncAddr((int)Func::ChunkLoader::init))(this, worldPath, biomeInfoPath);
+			return reinterpret_cast<bool (__thiscall*)(ChunkLoader* self, const stl::path& worldPath, const stl::path& biomeInfoPath)>(getFuncAddr((int)Func::ChunkLoader::init))(this, worldPath, biomeInfoPath);
 		}
 		void loadChunk(Chunk* c, World* world) 
 		{
 			return reinterpret_cast<void (__thiscall*)(ChunkLoader* self, Chunk* c, World* world)>(getFuncAddr((int)Func::ChunkLoader::loadChunk))(this, c, world);
 		}
-		bool loadBiomes(const path& biomeInfoPath) 
+		bool loadBiomes(const stl::path& biomeInfoPath)
 		{
-			return reinterpret_cast<bool (__thiscall*)(ChunkLoader* self, const path& biomeInfoPath)>(getFuncAddr((int)Func::ChunkLoader::loadBiomes))(this, biomeInfoPath);
+			return reinterpret_cast<bool (__thiscall*)(ChunkLoader* self, const stl::path& biomeInfoPath)>(getFuncAddr((int)Func::ChunkLoader::loadBiomes))(this, biomeInfoPath);
 		}
-		bool loadInfo(const path& worldInfoPath) 
+		bool loadInfo(const stl::path& worldInfoPath)
 		{
-			return reinterpret_cast<bool (__thiscall*)(ChunkLoader* self, const path& worldInfoPath)>(getFuncAddr((int)Func::ChunkLoader::loadInfo))(this, worldInfoPath);
+			return reinterpret_cast<bool (__thiscall*)(ChunkLoader* self, const stl::path& worldInfoPath)>(getFuncAddr((int)Func::ChunkLoader::loadInfo))(this, worldInfoPath);
 		}
 		void generateChunk(Chunk* chunk) 
 		{

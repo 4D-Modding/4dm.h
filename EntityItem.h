@@ -22,10 +22,10 @@ namespace fdm
 		{
 			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const std::unique_ptr<Item>& item, const glm::vec4& pos, const glm::vec4& vel)>(getFuncAddr((int)Func::EntityItem::createWithItem))(item, pos, vel);
 		}
-		std::string getName() override
+		stl::string getName() override
 		{
-			std::string result;
-			return reinterpret_cast<std::string& (__thiscall*)(EntityItem* self, std::string* result)>(getFuncAddr((int)Func::EntityItem::getName))(this, &result);
+			stl::string result;
+			return reinterpret_cast<stl::string& (__thiscall*)(EntityItem* self, stl::string* result)>(getFuncAddr((int)Func::EntityItem::getName))(this, &result);
 			return result;
 		}
 		void update(World* world, double dt) override
