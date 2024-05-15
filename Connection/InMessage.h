@@ -10,13 +10,13 @@ namespace fdm::Connection
 	public:
 		inline static void InMessageDeleter(SteamNetworkingMessage_t* message)
 		{
-			reinterpret_cast<void(__fastcall*)(SteamNetworkingMessage_t* message)>(getFuncAddr((int)Func::Connection_Nested::InMessage::InMessageDeleter))(message);
+			reinterpret_cast<void(__fastcall*)(SteamNetworkingMessage_t* message)>(getFuncAddr((int)Func::Connection::InMessage::InMessageDeleter))(message);
 		}
 
 		std::unique_ptr<SteamNetworkingMessage_t, void(__cdecl*)(SteamNetworkingMessage_t*)> messagePtr{ nullptr, InMessageDeleter };
 		~InMessage()
 		{
-			reinterpret_cast<void(__thiscall*)(Connection::InMessage* self)>(getFuncAddr((int)Func::Connection_Nested::InMessage::destr_InMessage))(this);
+			reinterpret_cast<void(__thiscall*)(Connection::InMessage* self)>(getFuncAddr((int)Func::Connection::InMessage::destr_InMessage))(this);
 		}
 		InMessage() : messagePtr(nullptr, InMessageDeleter) {}
 		InMessage(SteamNetworkingMessage_t* msg) : messagePtr(msg, InMessageDeleter) {}

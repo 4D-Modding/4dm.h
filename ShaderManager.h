@@ -9,13 +9,13 @@ namespace fdm
 	class ShaderManager 
 	{
 	public:
-		inline static std::map<std::string,Shader *>* shaders = reinterpret_cast<std::map<std::string,Shader *>*>((base + 0x2C0728));
+		inline static std::map<stl::string,Shader *>* shaders = reinterpret_cast<std::map<stl::string,Shader *>*>((base + 0x2C0728));
 
 		// will load relative to the mod's directory!! (will load a new shader only if the shaderName wasnt found in shaders tho)
-		inline static const Shader* load(const std::string& shaderName, const std::string& vertexPath, const std::string& fragmentPath)
+		inline static const Shader* load(const stl::string& shaderName, const stl::string& vertexPath, const stl::string& fragmentPath)
 		{
-			std::string vertP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / vertexPath).string();
-			std::string fragP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / fragmentPath).string();
+			stl::string vertP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / vertexPath).string();
+			stl::string fragP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / fragmentPath).string();
 			if (shaders->contains(shaderName))
 				return shaders->at(shaderName);
 
@@ -30,11 +30,11 @@ namespace fdm
 			return shader;
 		}
 		// will load relative to the mod's directory!! (will load a new shader only if the shaderName wasnt found in shaders tho)
-		inline static const Shader* load(const std::string& shaderName, const std::string& vertexPath, const std::string& fragmentPath, const std::string& geometryPath)
+		inline static const Shader* load(const stl::string& shaderName, const stl::string& vertexPath, const stl::string& fragmentPath, const stl::string& geometryPath)
 		{
-			std::string vertP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / vertexPath).string();
-			std::string fragP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / fragmentPath).string();
-			std::string geoP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / geometryPath).string();
+			stl::string vertP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / vertexPath).string();
+			stl::string fragP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / fragmentPath).string();
+			stl::string geoP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / geometryPath).string();
 			if (shaders->contains(shaderName))
 				return shaders->at(shaderName);
 
@@ -49,16 +49,16 @@ namespace fdm
 			return shader;
 		}
 
-		inline static const Shader* get(const std::string& shaderName)
+		inline static const Shader* get(const stl::string& shaderName)
 		{
-			return reinterpret_cast<const Shader * (__fastcall*)(const std::string&)>(
+			return reinterpret_cast<const Shader * (__fastcall*)(const stl::string&)>(
 				getFuncAddr((int)Func::ShaderManager::get)
 				)(shaderName);
 		}
 
-		inline static bool loadFromShaderList(const std::string& jsonListPath) 
+		inline static bool loadFromShaderList(const stl::string& jsonListPath) 
 		{
-			return reinterpret_cast<bool (__fastcall*)(const std::string& jsonListPath)>(getFuncAddr((int)Func::ShaderManager::loadFromShaderList))(jsonListPath);
+			return reinterpret_cast<bool (__fastcall*)(const stl::string& jsonListPath)>(getFuncAddr((int)Func::ShaderManager::loadFromShaderList))(jsonListPath);
 		}
 	};
 }

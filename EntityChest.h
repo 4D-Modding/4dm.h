@@ -21,10 +21,10 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(EntityChest* self)>(getFuncAddr((int)Func::EntityChest::isClickable))(this);
 		}
-		std::string getName() override
+		stl::string getName() override
 		{
-			std::string result;
-			return reinterpret_cast<std::string& (__thiscall*)(EntityChest* self, std::string* result)>(getFuncAddr((int)Func::EntityChest::getName))(this, &result);
+			stl::string result;
+			return reinterpret_cast<stl::string& (__thiscall*)(EntityChest* self, stl::string* result)>(getFuncAddr((int)Func::EntityChest::getName))(this, &result);
 			return result;
 		}
 		void update(World* world, double dt) override

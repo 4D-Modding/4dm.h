@@ -22,11 +22,11 @@ namespace fdm
 
 			SPInfo() 
 			{
-				reinterpret_cast<void(__thiscall*)(EntityAlidade::SPInfo* self)>(getFuncAddr((int)Func::EntityAlidade_Nested::SPInfo::SPInfo))(this);
+				reinterpret_cast<void(__thiscall*)(EntityAlidade::SPInfo* self)>(getFuncAddr((int)Func::EntityAlidade::SPInfo::SPInfo))(this);
 			}
 			~SPInfo() 
 			{
-				reinterpret_cast<void(__thiscall*)(EntityAlidade::SPInfo* self)>(getFuncAddr((int)Func::EntityAlidade_Nested::SPInfo::destr_SPInfo))(this);
+				reinterpret_cast<void(__thiscall*)(EntityAlidade::SPInfo* self)>(getFuncAddr((int)Func::EntityAlidade::SPInfo::destr_SPInfo))(this);
 			}
 		};
 		inline static MeshRenderer *telescopeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x278828)); 
@@ -41,10 +41,10 @@ namespace fdm
 		glm::ivec4 currentBlock; // 0x84
 		m4::Mat5 orientation; // 0x94
 
-		std::string getName() override
+		stl::string getName() override
 		{
-			std::string result;
-			return reinterpret_cast<std::string& (__thiscall*)(EntityAlidade* self, std::string* result)>(getFuncAddr((int)Func::EntityAlidade::getName))(this, &result);
+			stl::string result;
+			return reinterpret_cast<stl::string& (__thiscall*)(EntityAlidade* self, stl::string* result)>(getFuncAddr((int)Func::EntityAlidade::getName))(this, &result);
 			return result;
 		}
 		void update(World* world, double dt) override

@@ -17,7 +17,7 @@ namespace fdm
 			reinterpret_cast<void(__thiscall*)(Tex2D* self)>(getFuncAddr((int)Func::Tex2D::destr_Tex2D))(this);
 		}
 		// decompiled from old version. since it got removed (probably optimized out) in newer versions
-		bool load(const std::string& filename)
+		bool load(const stl::string& filename)
 		{
 			if (this->ID)
 			{

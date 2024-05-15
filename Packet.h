@@ -6,7 +6,7 @@ namespace fdm
 {
 	namespace Packet
 	{
-		enum ClientPacket
+		enum ClientPacket : short
 		{
 			C_LOGIN_DETAILS = 0x0,
 			C_SKIN_DATA = 0x1,
@@ -38,7 +38,7 @@ namespace fdm
 			C_JUMP = 0x1B,
 			C_LOOK = 0x1C
 		};
-		enum ServerPacket
+		enum ServerPacket : short
 		{
 			S_ERROR_VERSION_INVALID = 0x0,
 			S_ERROR_UUID_INVALID = 0x1,

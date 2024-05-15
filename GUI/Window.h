@@ -1,7 +1,10 @@
 #pragma once
 
 //#include "gui.h"
-#include "../4dm.h"
+//#include "../glfw.h"
+#include "../glm/glm.hpp"
+
+struct GLFWwindow;
 
 namespace fdm
 {

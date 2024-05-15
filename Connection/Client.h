@@ -11,7 +11,7 @@ namespace fdm::Connection
 	class Client
 	{
 	public:
-		enum Status
+		enum Status : int
 		{
 			OFFLINE = 0x0,
 			STARTING = 0x1,
@@ -23,7 +23,7 @@ namespace fdm::Connection
 		Status status;
 		std::atomic<bool> resolvingHost;
 		PAD(3);
-		std::string address;
+		stl::string address;
 		std::thread resolveHostThread;
 		unsigned int connectionHandle;
 		PAD(4);
@@ -31,19 +31,19 @@ namespace fdm::Connection
 
 		void update()
 		{
-			return reinterpret_cast<void(__thiscall*)(Client * self)>(getFuncAddr((int)Func::Connection_Nested::Client::update))(this);
+			return reinterpret_cast<void(__thiscall*)(Client * self)>(getFuncAddr((int)Func::Connection::Client::update))(this);
 		}
-		void resolveHost(std::string& host)
+		void resolveHost(stl::string& host)
 		{
-			return reinterpret_cast<void(__thiscall*)(Client * self, std::string& host)>(getFuncAddr((int)Func::Connection_Nested::Client::resolveHost))(this, host);
+			return reinterpret_cast<void(__thiscall*)(Client * self, stl::string& host)>(getFuncAddr((int)Func::Connection::Client::resolveHost))(this, host);
 		}
 		void cleanup()
 		{
-			return reinterpret_cast<void(__thiscall*)(Client * self)>(getFuncAddr((int)Func::Connection_Nested::Client::cleanup))(this);
+			return reinterpret_cast<void(__thiscall*)(Client * self)>(getFuncAddr((int)Func::Connection::Client::cleanup))(this);
 		}
 		inline static void connectionStatusChangedCallback(SteamNetConnectionStatusChangedCallback_t* info)
 		{
-			return reinterpret_cast<void(__fastcall*)(SteamNetConnectionStatusChangedCallback_t * info)>(getFuncAddr((int)Func::Connection_Nested::Client::connectionStatusChangedCallback))(info);
+			return reinterpret_cast<void(__fastcall*)(SteamNetConnectionStatusChangedCallback_t * info)>(getFuncAddr((int)Func::Connection::Client::connectionStatusChangedCallback))(info);
 		}
 	};
 }

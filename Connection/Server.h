@@ -12,7 +12,7 @@ namespace fdm::Connection
 	class Server 
 	{
 	public:
-		enum Status
+		enum Status : int
 		{
 			OFFLINE = 0x0,
 			STARTING = 0x1,

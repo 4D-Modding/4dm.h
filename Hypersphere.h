@@ -14,19 +14,19 @@ namespace fdm
 
 			VertInfo() 
 			{
-				reinterpret_cast<void(__thiscall*)(Hypersphere::VertInfo* self)>(getFuncAddr((int)Func::Hypersphere_Nested::VertInfo::VertInfo))(this);
+				reinterpret_cast<void(__thiscall*)(Hypersphere::VertInfo* self)>(getFuncAddr((int)Func::Hypersphere::VertInfo::VertInfo))(this);
 			}
 			~VertInfo() 
 			{
-				reinterpret_cast<void(__thiscall*)(Hypersphere::VertInfo* self)>(getFuncAddr((int)Func::Hypersphere_Nested::VertInfo::destr_VertInfo))(this);
+				reinterpret_cast<void(__thiscall*)(Hypersphere::VertInfo* self)>(getFuncAddr((int)Func::Hypersphere::VertInfo::destr_VertInfo))(this);
 			}
 			void add(const glm::vec4& vert, MeshBuilder::AttrInfo* tuv) 
 			{
-				return reinterpret_cast<void (__thiscall*)(Hypersphere::VertInfo* self, const glm::vec4& vert, MeshBuilder::AttrInfo* tuv)>(getFuncAddr((int)Func::Hypersphere_Nested::VertInfo::add))(this, vert, tuv);
+				return reinterpret_cast<void (__thiscall*)(Hypersphere::VertInfo* self, const glm::vec4& vert, MeshBuilder::AttrInfo* tuv)>(getFuncAddr((int)Func::Hypersphere::VertInfo::add))(this, vert, tuv);
 			}
 			void add(const Hypersphere::VertInfo* v, int index) 
 			{
-				return reinterpret_cast<void (__thiscall*)(Hypersphere::VertInfo* self, const Hypersphere::VertInfo* v, int index)>(getFuncAddr((int)Func::Hypersphere_Nested::VertInfo::addA))(this, v, index);
+				return reinterpret_cast<void (__thiscall*)(Hypersphere::VertInfo* self, const Hypersphere::VertInfo* v, int index)>(getFuncAddr((int)Func::Hypersphere::VertInfo::addA))(this, v, index);
 			}
 		};
 		struct HSInfo 

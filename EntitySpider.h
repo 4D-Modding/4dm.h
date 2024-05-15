@@ -16,7 +16,7 @@ namespace fdm
 
 			~SpiderType() 
 			{
-				reinterpret_cast<void(__thiscall*)(EntitySpider::SpiderType* self)>(getFuncAddr((int)Func::EntitySpider_Nested::SpiderType::destr_SpiderType))(this);
+				reinterpret_cast<void(__thiscall*)(EntitySpider::SpiderType* self)>(getFuncAddr((int)Func::EntitySpider::SpiderType::destr_SpiderType))(this);
 			}
 		};
 		inline static const float hitboxRadius = 0.6f; 
@@ -38,7 +38,7 @@ namespace fdm
 		float health; // 0x9C
 		double hitTime; // 0xA0
 		inline static const float hitDelay = 0.7f; 
-		uuid target; // 0xA8
+		stl::uuid target; // 0xA8
 		inline static const float updateDelay = 2.f; 
 		double lastUpdateTime; // 0xB8
 		inline static const float serverUpdateDelay = 0.5f; 
@@ -59,10 +59,10 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, const glm::vec4& pos)>(getFuncAddr((int)Func::EntitySpider::setPos))(this, pos);
 		}
-		std::string getName() override
+		stl::string getName() override
 		{
-			std::string result;
-			return reinterpret_cast<std::string& (__thiscall*)(EntitySpider* self, std::string* result)>(getFuncAddr((int)Func::EntitySpider::getName))(this, &result);
+			stl::string result;
+			return reinterpret_cast<stl::string& (__thiscall*)(EntitySpider* self, stl::string* result)>(getFuncAddr((int)Func::EntitySpider::getName))(this, &result);
 			return result;
 		}
 		void update(World* world, double dt) override

@@ -15,7 +15,7 @@ namespace fdm
 			Inventory* inventory; 
 			int index; // 0x8
 		};
-		std::string name; // 0x8
+		stl::string name; // 0x8
 		bool updateFlag; // 0x28
 
 

@@ -29,47 +29,47 @@ namespace fdm
 
 			~ChunkMesh() 
 			{
-				reinterpret_cast<void(__thiscall*)(Chunk::ChunkMesh* self)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::destr_ChunkMesh))(this);
+				reinterpret_cast<void(__thiscall*)(Chunk::ChunkMesh* self)>(getFuncAddr((int)Func::Chunk::ChunkMesh::destr_ChunkMesh))(this);
 			}
 			ChunkMesh() 
 			{
-				reinterpret_cast<void(__thiscall*)(Chunk::ChunkMesh* self)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::ChunkMesh))(this);
+				reinterpret_cast<void(__thiscall*)(Chunk::ChunkMesh* self)>(getFuncAddr((int)Func::Chunk::ChunkMesh::ChunkMesh))(this);
 			}
 			int buffSize(int buffIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::buffSize))(this, buffIndex);
+				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex)>(getFuncAddr((int)Func::Chunk::ChunkMesh::buffSize))(this, buffIndex);
 			}
 			int attrCount(int buffIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::attrCount))(this, buffIndex);
+				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex)>(getFuncAddr((int)Func::Chunk::ChunkMesh::attrCount))(this, buffIndex);
 			}
 			unsigned int attrType(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<unsigned int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::attrType))(this, buffIndex, attrIndex);
+				return reinterpret_cast<unsigned int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::Chunk::ChunkMesh::attrType))(this, buffIndex, attrIndex);
 			}
 			int attrSize(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::attrSize))(this, buffIndex, attrIndex);
+				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::Chunk::ChunkMesh::attrSize))(this, buffIndex, attrIndex);
 			}
 			int attrStride(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::attrStride))(this, buffIndex, attrIndex);
+				return reinterpret_cast<int (__thiscall*)(const Chunk::ChunkMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::Chunk::ChunkMesh::attrStride))(this, buffIndex, attrIndex);
 			}
 			const void* indexBuffData() const override
 			{
-				return reinterpret_cast<const void* (__thiscall*)(const Chunk::ChunkMesh* self)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::indexBuffData))(this);
+				return reinterpret_cast<const void* (__thiscall*)(const Chunk::ChunkMesh* self)>(getFuncAddr((int)Func::Chunk::ChunkMesh::indexBuffData))(this);
 			}
 			void move(Chunk::ChunkMesh* other) 
 			{
-				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, Chunk::ChunkMesh* other)>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::move))(this, other);
+				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, Chunk::ChunkMesh* other)>(getFuncAddr((int)Func::Chunk::ChunkMesh::move))(this, other);
 			}
 			void addMeshSide(const glm::u8vec4* side, const glm::u8vec4* side_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting lighting[8]) 
 			{
-				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, const glm::u8vec4* side, const glm::u8vec4* side_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting lighting[8])>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::addMeshSide))(this, side, side_tuvs, pos, lighting);
+				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, const glm::u8vec4* side, const glm::u8vec4* side_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting lighting[8])>(getFuncAddr((int)Func::Chunk::ChunkMesh::addMeshSide))(this, side, side_tuvs, pos, lighting);
 			}
 			void addMeshPlant(const glm::u8vec4* plant, const glm::u8vec4* plant_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting lighting[16]) 
 			{
-				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, const glm::u8vec4* plant, const glm::u8vec4* plant_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting lighting[16])>(getFuncAddr((int)Func::Chunk_Nested::ChunkMesh::addMeshPlant))(this, plant, plant_tuvs, pos, lighting);
+				return reinterpret_cast<void (__thiscall*)(Chunk::ChunkMesh* self, const glm::u8vec4* plant, const glm::u8vec4* plant_tuvs, const glm::u8vec4& pos, const BlockInfo::VertLighting lighting[16])>(getFuncAddr((int)Func::Chunk::ChunkMesh::addMeshPlant))(this, plant, plant_tuvs, pos, lighting);
 			}
 		};
 		inline static const uint32_t SIZE = 8; 
@@ -130,13 +130,13 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, bool smoothLighting, bool shadows, bool lights)>(getFuncAddr((int)Func::Chunk::updateMesh))(this, smoothLighting, shadows, lights);
 		}
-		bool load(const path& chunksFolderPath, World* world) 
+		bool load(const stl::path& chunksFolderPath, World* world)
 		{
-			return reinterpret_cast<bool (__thiscall*)(Chunk* self, const path& chunksFolderPath, World* world)>(getFuncAddr((int)Func::Chunk::load))(this, chunksFolderPath, world);
+			return reinterpret_cast<bool (__thiscall*)(Chunk* self, const stl::path& chunksFolderPath, World* world)>(getFuncAddr((int)Func::Chunk::load))(this, chunksFolderPath, world);
 		}
-		void save(const path& chunksFolderPath) 
+		void save(const stl::path& chunksFolderPath)
 		{
-			return reinterpret_cast<void (__thiscall*)(Chunk* self, const path& chunksFolderPath)>(getFuncAddr((int)Func::Chunk::save))(this, chunksFolderPath);
+			return reinterpret_cast<void (__thiscall*)(Chunk* self, const stl::path& chunksFolderPath)>(getFuncAddr((int)Func::Chunk::save))(this, chunksFolderPath);
 		}
 		void loadFromMessage(const Connection::InMessage& message, World* world) 
 		{
@@ -170,10 +170,10 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(Chunk* self, nlohmann::json& j, World* world)>(getFuncAddr((int)Func::Chunk::loadEntitiesFromJson))(this, j, world);
 		}
-		std::string getFilenamePrefix() 
+		stl::string getFilenamePrefix() 
 		{
-			std::string result;
-			return reinterpret_cast<std::string& (__thiscall*)(Chunk* self, std::string* result)>(getFuncAddr((int)Func::Chunk::getFilenamePrefix))(this, &result);
+			stl::string result;
+			return reinterpret_cast<stl::string& (__thiscall*)(Chunk* self, stl::string* result)>(getFuncAddr((int)Func::Chunk::getFilenamePrefix))(this, &result);
 			return result;
 		}
 	};

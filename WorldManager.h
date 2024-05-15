@@ -39,7 +39,7 @@ namespace fdm
 		virtual void setSkinVisibility(bool visible) {}
 		virtual void localPlayerInit(Player* player) {}
 		virtual void localPlayerRespawn(StateManager&, Player*) {}
-		virtual void sendChatMessage(Player* player, const std::string&) {}
+		virtual void sendChatMessage(Player* player, const stl::string&) {}
 		virtual void handleLightingOptionsUpdate() {}
 	};
 }

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "gui.h"
-
 namespace fdm::gui
 {
 	class Element;

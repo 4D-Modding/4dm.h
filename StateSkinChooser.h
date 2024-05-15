@@ -7,7 +7,7 @@ namespace fdm
 	class StateSkinChooser : public State 
 	{
 	public:
-		inline static const std::string* defaultSkinPath = reinterpret_cast<const std::string*>((base + 0x2C0F40));
+		inline static const stl::string* defaultSkinPath = reinterpret_cast<const stl::string*>((base + 0x2C0F40));
 		inline static StateSkinChooser* instanceObj = reinterpret_cast<StateSkinChooser*>((base + 0x2C0F60));
 		FontRenderer font; // 0x8
 		QuadRenderer qr; // 0xA8
@@ -19,7 +19,7 @@ namespace fdm
 		gui::Button chooseFileButton; // 0x1A0
 		gui::Button resetOrientation; // 0x1F8
 		gui::Button resetPosition; // 0x250
-		std::string skinPath; // 0x2A8
+		stl::string skinPath; // 0x2A8
 		PlayerSkin skin; // 0x2C8
 		PlayerSkinRenderer skinRenderer; // 0x418
 		PlayerSkinViewer skinViewer; // 0x9A8
@@ -82,9 +82,9 @@ namespace fdm
 			reinterpret_cast<Connection::OutMessage* (__thiscall*)(StateSkinChooser* self, Connection::OutMessage* result)>(getFuncAddr((int)Func::StateSkinChooser::getSkinMessage))(this, &result);
 			return result;
 		}
-		bool loadSkin(path* p) 
+		bool loadSkin(const stl::path& p) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(StateSkinChooser* self, path* p)>(getFuncAddr((int)Func::StateSkinChooser::loadSkin))(this, p);
+			return reinterpret_cast<bool (__thiscall*)(StateSkinChooser* self, const stl::path& p)>(getFuncAddr((int)Func::StateSkinChooser::loadSkin))(this, p);
 		}
 	};
 }

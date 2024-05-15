@@ -29,7 +29,7 @@ namespace fdm
 		inline static TexRenderer* ftr = NULL; 
 		inline static FontRenderer* fr = NULL; 
 		inline static nlohmann::json* blueprints = reinterpret_cast<nlohmann::json*>((base + 0x4E5A8 + 0x270000));
-		uuid id; // 0x8
+		stl::uuid id; // 0x8
 		bool dead; // 0x18
 
 		Entity(){}
@@ -42,9 +42,9 @@ namespace fdm
 		{
 			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)( nlohmann::json& j)>(getFuncAddr((int)Func::Entity::createFromJson))(j);
 		}
-		inline static std::unique_ptr<Entity> createWithAttributes(std::string& entityName, std::string& pos, nlohmann::json& attributes) 
+		inline static std::unique_ptr<Entity> createWithAttributes(stl::string& entityName, stl::string& pos, nlohmann::json& attributes) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(std::string& entityName, std::string& pos, nlohmann::json& attributes)>(getFuncAddr((int)Func::Entity::createWithAttributes))(entityName, pos, attributes);
+			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(stl::string& entityName, stl::string& pos, nlohmann::json& attributes)>(getFuncAddr((int)Func::Entity::createWithAttributes))(entityName, pos, attributes);
 		}
 		nlohmann::json save() 
 		{
@@ -52,9 +52,9 @@ namespace fdm
 			return reinterpret_cast<nlohmann::json& (__thiscall*)(Entity* self, nlohmann::json* result)>(getFuncAddr((int)Func::Entity::save))(this, &result);
 			return result;
 		}
-		inline static std::unique_ptr<Entity> instantiateEntity(const std::string& itemName, const uuid& id, glm::vec4& pos, const std::string& type, nlohmann::json& attributes) 
+		inline static std::unique_ptr<Entity> instantiateEntity(const stl::string& itemName, const stl::uuid& id, glm::vec4& pos, const stl::string& type, nlohmann::json& attributes) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const std::string& itemName, const uuid& id, glm::vec4& pos, const std::string& type, nlohmann::json& attributes)>(getFuncAddr((int)Func::Entity::instantiateEntity))(itemName, id, pos, type, attributes);
+			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const stl::string& itemName, const stl::uuid& id, glm::vec4& pos, const stl::string& type, nlohmann::json& attributes)>(getFuncAddr((int)Func::Entity::instantiateEntity))(itemName, id, pos, type, attributes);
 		}
 		inline static nlohmann::json combineEntityAttributes(nlohmann::json& baseAttributes, nlohmann::json& additions) 
 		{
@@ -67,7 +67,7 @@ namespace fdm
 
 		// VIRTUAL FUNCS
 
-		virtual std::string getName() { return ""; }
+		virtual stl::string getName() { return ""; }
 		virtual void update(World* world, double dt) {}
 		virtual void render(const World* world, const m4::Mat5& MV, bool glasses) {}
 		virtual nlohmann::json saveAttributes() { return NULL; }
