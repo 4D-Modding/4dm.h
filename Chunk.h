@@ -79,6 +79,7 @@ namespace fdm
 		unsigned char lightingHeightMap[SIZE + 2][SIZE + 2][SIZE + 2];
 		glm::i64vec3 pos; // 0x1F7E8
 		bool saved; // 0x1F800
+		PAD(0x7);
 		inline static const uint32_t MESH_COUNT = 8; 
 		inline static const uint32_t MESH_HEIGHT = 16; 
 		Chunk::ChunkMesh meshData[MESH_COUNT];
