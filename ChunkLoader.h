@@ -36,14 +36,14 @@ namespace fdm
 			{
 				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self)>(getFuncAddr((int)Func::ChunkLoader::BiomeInfo::destr_BiomeInfo))(this);
 			}
-			BiomeInfo(const ChunkLoader::BiomeInfo& __that) noexcept 
+			BiomeInfo(const ChunkLoader::BiomeInfo& __that)
 			{
-				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self, const ChunkLoader::BiomeInfo & __that)>(getFuncAddr((int)Func::ChunkLoader::BiomeInfo::BiomeInfo))(this, __that);
+				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self, const ChunkLoader::BiomeInfo& __that)>(getFuncAddr((int)Func::ChunkLoader::BiomeInfo::BiomeInfo))(this, __that);
 			}
 		};
 		struct BiomeMapPixel 
 		{
-			uint32_t biome; 
+			uint8_t biome;
 			PAD(0x3);
 			float hMultiplier; // 0x4
 			float vMultiplier; // 0x8
@@ -89,7 +89,8 @@ namespace fdm
 		}
 		ChunkLoader::BiomeMapPixel getBiome(int x, int z, int w) 
 		{
-			return reinterpret_cast<ChunkLoader::BiomeMapPixel (__thiscall*)(ChunkLoader* self, int x, int z, int w)>(getFuncAddr((int)Func::ChunkLoader::getBiome))(this, x, z, w);
+			ChunkLoader::BiomeMapPixel result;
+			return reinterpret_cast<ChunkLoader::BiomeMapPixel& (__thiscall*)(ChunkLoader* self, ChunkLoader::BiomeMapPixel*, int x, int z, int w)>(getFuncAddr((int)Func::ChunkLoader::getBiome))(this, &result, x, z, w);
 		}
 		void generateTree(unsigned char* blocks, const glm::i64vec3& chunkPos, bool dark) 
 		{
