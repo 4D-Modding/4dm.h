@@ -46,6 +46,16 @@ namespace fdm
 		{
 			return reinterpret_cast<std::unique_ptr<Item> (__fastcall*)(const stl::string& itemName, uint32_t count, const stl::string& type, const nlohmann::json& attributes)>(getFuncAddr((int)Func::Item::instantiateItem))(itemName, count, type, attributes);
 		}
+		inline static std::unique_ptr<Item> create(const std::string& itemName, unsigned int count)
+		{
+			if (!(*blueprints).contains(itemName)) return NULL;
+
+			nlohmann::json itemJson = (*blueprints)[itemName];
+			std::string itemType = (std::string)itemJson["type"];
+			nlohmann::json itemBaseAttributes = itemJson["baseAttributes"];
+
+			return instantiateItem(itemName, count, itemType, itemBaseAttributes);
+		}
 		inline static nlohmann::json combineItemAttributes(const nlohmann::json& baseAttributes, const nlohmann::json& additions) 
 		{
 			return reinterpret_cast<nlohmann::json (__fastcall*)(const nlohmann::json& baseAttributes, const nlohmann::json& additions)>(getFuncAddr((int)Func::Item::combineItemAttributes))(baseAttributes, additions);
