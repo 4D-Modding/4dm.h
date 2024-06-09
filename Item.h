@@ -44,11 +44,11 @@ namespace fdm
 		}
 		inline static std::unique_ptr<Item> instantiateItem(const stl::string& itemName, uint32_t count, const stl::string& type, const nlohmann::json& attributes) 
 		{
-			return reinterpret_cast<std::unique_ptr<Item> (__fastcall*)(const stl::string& itemName, uint32_t count, const stl::string& type, nlohmann::json& attributes)>(getFuncAddr((int)Func::Item::instantiateItem))(itemName, count, type, attributes);
+			return reinterpret_cast<std::unique_ptr<Item> (__fastcall*)(const stl::string& itemName, uint32_t count, const stl::string& type, const nlohmann::json& attributes)>(getFuncAddr((int)Func::Item::instantiateItem))(itemName, count, type, attributes);
 		}
-		inline static nlohmann::json combineItemAttributes(nlohmann::json& baseAttributes, nlohmann::json& additions) 
+		inline static nlohmann::json combineItemAttributes(const nlohmann::json& baseAttributes, const nlohmann::json& additions) 
 		{
-			return reinterpret_cast<nlohmann::json (__fastcall*)(nlohmann::json& baseAttributes, nlohmann::json& additions)>(getFuncAddr((int)Func::Item::combineItemAttributes))(baseAttributes, additions);
+			return reinterpret_cast<nlohmann::json (__fastcall*)(const nlohmann::json& baseAttributes, const nlohmann::json& additions)>(getFuncAddr((int)Func::Item::combineItemAttributes))(baseAttributes, additions);
 		}
 		nlohmann::json save() 
 		{
