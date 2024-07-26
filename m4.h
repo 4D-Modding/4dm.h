@@ -91,6 +91,12 @@ namespace fdm
 					)(this, r);
 				return *this;
 			}
+			Rotor operator*(const Rotor& r) const
+			{
+				Rotor result = *this;
+				result *= r;
+				return result;
+			}
 			glm::vec4 rotate(const glm::vec4& v) const
 			{
 				glm::vec4 result{};
@@ -106,19 +112,19 @@ namespace fdm
 					getFuncAddr((int)Func::m4::Rotor::normalize)
 					)(this);
 			}
+
+			Rotor normalized() const
+			{
+				Rotor r = *this;
+				r.normalize();
+				return r;
+			}
 		};
 		class Mat5
 		{
 		public:
 			float value[5][5] = { 0.f };
-			// 0.0
-			Mat5()
-			{
-				reinterpret_cast<void(__thiscall*)(Mat5*, float)>(
-					getFuncAddr((int)Func::m4::Mat5::Mat5)
-					)(this, 0.0);
-			}
-			Mat5(float x)
+			Mat5(float x = 0.f)
 			{
 				reinterpret_cast<void(__thiscall*)(Mat5*, float)>(
 					getFuncAddr((int)Func::m4::Mat5::Mat5)
@@ -155,17 +161,17 @@ namespace fdm
 
 				value[4][4] = 1.0;
 			}
-			nlohmann::json toJson()
+			nlohmann::json toJson() const
 			{
 				nlohmann::json result{};
-				return reinterpret_cast<nlohmann::json&(__thiscall*)(m4::Mat5* self, nlohmann::json* result)>(getFuncAddr((int)Func::m4::Mat5::toJson))(this, &result);
+				return reinterpret_cast<nlohmann::json&(__thiscall*)(const m4::Mat5* self, nlohmann::json* result)>(getFuncAddr((int)Func::m4::Mat5::toJson))(this, &result);
 				return result;
 			}
 			inline static Mat5 identity()
 			{
 				return { 1 };
 			}
-			Mat5& operator*(const Mat5& other) const
+			Mat5 operator*(const Mat5& other) const
 			{
 				Mat5 result;
 
@@ -186,19 +192,19 @@ namespace fdm
 			{
 				Mat5 result = *this * other;
 
-				std::swap(this->value, result.value);
+				std::memcpy(&value[0][0], &result.value[0][0], sizeof(value));
 
 				return *this;
 			}
-			glm::vec4 multiply(const glm::vec4& v, float finalComp)
+			glm::vec4 multiply(const glm::vec4& v, float finalComp) const
 			{
 				glm::vec4 result{};
-				return reinterpret_cast<glm::vec4&(__thiscall*)(Mat5*, glm::vec4*, const glm::vec4&, float)>(
+				return reinterpret_cast<glm::vec4&(__thiscall*)(const Mat5*, glm::vec4*, const glm::vec4&, float)>(
 					getFuncAddr((int)Func::m4::Mat5::multiply)
 					)(this, &result, v, finalComp);
 				return result;
 			}
-			glm::vec4 operator*(const glm::vec4& v)
+			glm::vec4 operator*(const glm::vec4& v) const
 			{
 				return multiply(v, 1.0f);
 			}

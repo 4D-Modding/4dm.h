@@ -24,30 +24,28 @@ namespace fdm
 	public:
 		struct BlockData
 		{
-			glm::u8vec4* tuv_top; // 0x0
-			glm::u8vec4* tuv_side; // 0x8
-			glm::u8vec4* tuv_bottom; // 0x10
-			glm::u8vec4* tuv_full_block; // 0x18
-			glm::u8vec4* uv_top; // 0x20
-			glm::u8vec4* uv_side; // 0x28
-			glm::u8vec4* uv_bottom; // 0x30
-			bool solid; // 0x38
-			bool opaque; // 0x39
-			bool plant; // 0x3A
-			glm::u8vec3 glowColor; // 0x3B
+			glm::u8vec4* tuv_top;// 0x0
+			glm::u8vec4* tuv_side;// 0x8
+			glm::u8vec4* tuv_bottom;// 0x10
+			glm::u8vec4* tuv_full_block;// 0x18
+			glm::u8vec4* uv_top;// 0x20
+			glm::u8vec4* uv_side;// 0x28
+			glm::u8vec4* uv_bottom;// 0x30
+			bool solid;// 0x38
+			bool opaque;// 0x39
+			bool plant;// 0x3A
+			glm::u8vec3 glowColor;// 0x3B
 			PAD(2);
 		};
-		// size is BlockInfo::BLOCK_COUNT
-		inline static const BlockData* Blocks = reinterpret_cast<BlockData*>(base + 0x23F690);
 		struct VertLighting 
 		{
-			uint8_t ambient; 
-			uint8_t shadow; // 0x1
-			glm::u8vec3 glow; // 0x2
+			uint8_t ambient;
+			uint8_t shadow;// 0x1
+			glm::u8vec3 glow;// 0x2
 		};
 		struct ItemMesh 
 		{
-			MeshRenderer renderer; 
+			MeshRenderer renderer;
 
 			~ItemMesh() 
 			{
@@ -98,23 +96,24 @@ namespace fdm
 			BLOCK_END = 0x22,
 		};
 
-		inline static const int TET_VERT_COUNT = 4; 
-		inline static const int CUBE_TET_COUNT = 5; 
-		inline static const int CUBE_FULL_INDEX_COUNT = 20; 
-		inline static const int HYPERCUBE_FULL_INDEX_COUNT = 160; 
-		inline static const int PLANT_FULL_INDEX_COUNT = 240; 
-		inline static const int SQUARE_VERT_COUNT = 4; 
-		inline static const int CUBE_VERT_COUNT = 8; 
-		inline static const int HYPERCUBE_VERT_COUNT = 64; 
-		inline static const int PLANT_VERT_COUNT = 48; 
+		inline static const int TET_VERT_COUNT = 4;
+		inline static const int CUBE_TET_COUNT = 5;
+		inline static const int CUBE_FULL_INDEX_COUNT = 20;
+		inline static const int HYPERCUBE_FULL_INDEX_COUNT = 160;
+		inline static const int PLANT_FULL_INDEX_COUNT = 240;
+		inline static const int SQUARE_VERT_COUNT = 4;
+		inline static const int CUBE_VERT_COUNT = 8;
+		inline static const int HYPERCUBE_VERT_COUNT = 64;
+		inline static const int PLANT_VERT_COUNT = 48;
 		
-		inline static const int BLOCK_COUNT = 34; 
+		inline static const int BLOCK_COUNT = 34;
 		inline static const int VISIBLE_BLOCK_COUNT = 31;
 
 		inline static glm::u8vec4* cube_verts_x = reinterpret_cast<glm::u8vec4*>((base + 0x3B570 + 0x200000));
 		inline static glm::u8vec4* cube_verts_y = reinterpret_cast<glm::u8vec4*>((base + 0x3BD80 + 0x200000));
 		inline static glm::u8vec4* cube_verts_z = reinterpret_cast<glm::u8vec4*>((base + 0x3A210 + 0x200000));
 		inline static glm::u8vec4* cube_verts_w = reinterpret_cast<glm::u8vec4*>((base + 0x3AE98 + 0x200000));
+		inline static const std::array<BlockData, BLOCK_COUNT>& Blocks = *reinterpret_cast<std::array<BlockData, BLOCK_COUNT>*>(base + 0x23F690);
 		inline static const glm::u8vec4 hypercube_full_verts[HYPERCUBE_VERT_COUNT] =
 		{
 			// -x

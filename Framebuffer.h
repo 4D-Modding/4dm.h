@@ -29,9 +29,11 @@ namespace fdm
 		{
 			const Shader* s = getShader();
 			s->use();
+			
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, depthTex2D.ID);
 			glUniform1i(glGetUniformLocation(s->id(), "depth"), 1);
+
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, tex2D.ID);
 			glUniform1i(glGetUniformLocation(s->id(), "texture"), 0);
