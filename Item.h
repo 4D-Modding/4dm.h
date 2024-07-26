@@ -42,13 +42,23 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__fastcall*)(std::unique_ptr<Item>& from, std::unique_ptr<Item>& to)>(getFuncAddr((int)Func::Item::giveOne))(from, to);
 		}
-		inline static std::unique_ptr<Item> instantiateItem(const stl::string& itemName, uint32_t count, const stl::string& type, nlohmann::json& attributes) 
+		inline static std::unique_ptr<Item> instantiateItem(const stl::string& itemName, uint32_t count, const stl::string& type, const nlohmann::json& attributes) 
 		{
-			return reinterpret_cast<std::unique_ptr<Item> (__fastcall*)(const stl::string& itemName, uint32_t count, const stl::string& type, nlohmann::json& attributes)>(getFuncAddr((int)Func::Item::instantiateItem))(itemName, count, type, attributes);
+			return reinterpret_cast<std::unique_ptr<Item> (__fastcall*)(const stl::string& itemName, uint32_t count, const stl::string& type, const nlohmann::json& attributes)>(getFuncAddr((int)Func::Item::instantiateItem))(itemName, count, type, attributes);
 		}
-		inline static nlohmann::json combineItemAttributes(nlohmann::json& baseAttributes, nlohmann::json& additions) 
+		inline static std::unique_ptr<Item> create(const std::string& itemName, unsigned int count)
 		{
-			return reinterpret_cast<nlohmann::json (__fastcall*)(nlohmann::json& baseAttributes, nlohmann::json& additions)>(getFuncAddr((int)Func::Item::combineItemAttributes))(baseAttributes, additions);
+			if (!(*blueprints).contains(itemName)) return NULL;
+
+			nlohmann::json itemJson = (*blueprints)[itemName];
+			std::string itemType = (std::string)itemJson["type"];
+			nlohmann::json itemBaseAttributes = itemJson["baseAttributes"];
+
+			return instantiateItem(itemName, count, itemType, itemBaseAttributes);
+		}
+		inline static nlohmann::json combineItemAttributes(const nlohmann::json& baseAttributes, const nlohmann::json& additions) 
+		{
+			return reinterpret_cast<nlohmann::json (__fastcall*)(const nlohmann::json& baseAttributes, const nlohmann::json& additions)>(getFuncAddr((int)Func::Item::combineItemAttributes))(baseAttributes, additions);
 		}
 		nlohmann::json save() 
 		{

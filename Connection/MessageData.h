@@ -6,6 +6,6 @@ namespace fdm::Connection
 	{
 	public:
 		unsigned short type = 0;
-		char* content{};
+		char content[];
 	};
 }

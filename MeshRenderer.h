@@ -19,13 +19,13 @@ namespace fdm
 		{
 			reinterpret_cast<void(__thiscall*)(MeshRenderer* self)>(getFuncAddr((int)Func::MeshRenderer::MeshRenderer))(this);
 		}
-		void setMesh(Mesh* mesh) 
+		void setMesh(const Mesh* mesh) 
 		{
-			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, Mesh* mesh)>(getFuncAddr((int)Func::MeshRenderer::setMesh))(this, mesh);
+			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, const Mesh* mesh)>(getFuncAddr((int)Func::MeshRenderer::setMesh))(this, mesh);
 		}
-		void updateMesh(Mesh* mesh) 
+		void updateMesh(const Mesh* mesh) 
 		{
-			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, Mesh* mesh)>(getFuncAddr((int)Func::MeshRenderer::updateMesh))(this, mesh);
+			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, const Mesh* mesh)>(getFuncAddr((int)Func::MeshRenderer::updateMesh))(this, mesh);
 		}
 		~MeshRenderer() 
 		{
@@ -35,9 +35,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self)>(getFuncAddr((int)Func::MeshRenderer::render))(this);
 		}
-		void init(Mesh* mesh) 
+		void init(const Mesh* mesh) 
 		{
-			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, Mesh* mesh)>(getFuncAddr((int)Func::MeshRenderer::init))(this, mesh);
+			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self, const Mesh* mesh)>(getFuncAddr((int)Func::MeshRenderer::init))(this, mesh);
 		}
 		void cleanup() 
 		{

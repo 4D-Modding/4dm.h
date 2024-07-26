@@ -24,19 +24,19 @@ namespace fdm::stl
         {
             pathName = src;
         }
-        const stl::wstring wstring(void)
+        stl::wstring wstring(void) const
         {
             return pathName;
         }
-        const stl::string string(void)
+        stl::string string(void) const
         {
             return stl::string(pathName.begin(), pathName.end());
         }
-        const char* c_str(void)
+        const char* c_str(void) const
         {
             return string().c_str();
         }
-        const wchar_t* c_wstr(void)
+        const wchar_t* c_wstr(void) const
         {
             return pathName.c_str();
         }
