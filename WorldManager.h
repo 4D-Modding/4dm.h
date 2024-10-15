@@ -28,9 +28,9 @@ namespace fdm
 		}
 		
 
-		virtual void render(const m4::Mat5& MV, bool glasses, glm::vec3& worldColor)
+		virtual void render(const m4::Mat5& MV, bool glasses, glm::vec3 worldColor)
 		{
-			return reinterpret_cast<void(__thiscall*)(WorldManager * self, const m4::Mat5 & MV, bool glasses, glm::vec3 & worldColor)>(getFuncAddr((int)Func::WorldManager::render))(this, MV, glasses, worldColor);
+			return reinterpret_cast<void(__thiscall*)(WorldManager * self, const m4::Mat5 & MV, bool glasses, glm::vec3 worldColor)>(getFuncAddr((int)Func::WorldManager::render))(this, MV, glasses, worldColor);
 		}
 		virtual void updateLocal(StateManager& s, Player* player, double dt) {}
 		virtual void cleanupLocal(Player* player) {}
