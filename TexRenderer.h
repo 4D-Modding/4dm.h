@@ -7,10 +7,19 @@ namespace fdm
 	class TexRenderer 
 	{
 	public:
+		enum bufferIndex : int
+		{
+			VBO_INDEX = 0,
+			VBO_VERTEX = 1,
+			VBO_TEX_COORD = 2,
+			VBO_MODEL = 3,
+			VBO_COLOR = 4,
+			VBO_COUNT = 5,
+		};
 		const Tex2D* texture; 
 		const Shader* shader; // 0x8
-		uint32_t VAO; // 0x10
-		uint32_t buffers[5]; // 0x14
+		uint32_t VAO = 0; // 0x10
+		uint32_t buffers[VBO_COUNT]{ 0 }; // 0x14
 
 		~TexRenderer() 
 		{
