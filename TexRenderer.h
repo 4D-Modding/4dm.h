@@ -31,9 +31,9 @@ namespace fdm
 			this->texture = texture;
 			this->shader = shader;
 		}
-		TexRenderer& operator=(TexRenderer& other) 
+		TexRenderer& operator=(const TexRenderer& other) 
 		{
-			reinterpret_cast<TexRenderer& (__thiscall*)(TexRenderer* self, TexRenderer& other)>(getFuncAddr((int)Func::TexRenderer::operatorEq))(this, other);
+			reinterpret_cast<TexRenderer& (__thiscall*)(TexRenderer* self, const TexRenderer& other)>(getFuncAddr((int)Func::TexRenderer::operatorEq))(this, other);
 			return *this;
 		}
 		bool init() 
