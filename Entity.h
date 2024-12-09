@@ -42,9 +42,9 @@ namespace fdm
 		{
 			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)( nlohmann::json& j)>(getFuncAddr((int)Func::Entity::createFromJson))(j);
 		}
-		inline static std::unique_ptr<Entity> createWithAttributes(stl::string& entityName, stl::string& pos, nlohmann::json& attributes) 
+		inline static std::unique_ptr<Entity> createWithAttributes(const stl::string& entityName, const glm::vec4& pos, const nlohmann::json& attributes) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(stl::string& entityName, stl::string& pos, nlohmann::json& attributes)>(getFuncAddr((int)Func::Entity::createWithAttributes))(entityName, pos, attributes);
+			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const stl::string&, const glm::vec4&, const nlohmann::json&)>(getFuncAddr((int)Func::Entity::createWithAttributes))(entityName, pos, attributes);
 		}
 		nlohmann::json save() 
 		{
@@ -52,9 +52,9 @@ namespace fdm
 			return reinterpret_cast<nlohmann::json& (__thiscall*)(Entity* self, nlohmann::json* result)>(getFuncAddr((int)Func::Entity::save))(this, &result);
 			return result;
 		}
-		inline static std::unique_ptr<Entity> instantiateEntity(const stl::string& itemName, const stl::uuid& id, glm::vec4& pos, const stl::string& type, nlohmann::json& attributes) 
+		inline static std::unique_ptr<Entity> instantiateEntity(const stl::string& entityName, const stl::uuid& id, const glm::vec4& pos, const stl::string& type, const nlohmann::json& attributes) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const stl::string& itemName, const stl::uuid& id, glm::vec4& pos, const stl::string& type, nlohmann::json& attributes)>(getFuncAddr((int)Func::Entity::instantiateEntity))(itemName, id, pos, type, attributes);
+			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const stl::string&, const stl::uuid&, const glm::vec4&, const stl::string&, const nlohmann::json&)>(getFuncAddr((int)Func::Entity::instantiateEntity))(entityName, id, pos, type, attributes);
 		}
 		inline static nlohmann::json combineEntityAttributes(nlohmann::json& baseAttributes, nlohmann::json& additions) 
 		{
