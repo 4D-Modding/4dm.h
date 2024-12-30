@@ -40,7 +40,7 @@ namespace fdm
 		}
 		inline static std::unique_ptr<Entity> createFromJson(const nlohmann::json& j) 
 		{
-			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)( nlohmann::json& j)>(getFuncAddr((int)Func::Entity::createFromJson))(j);
+			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const nlohmann::json& j)>(getFuncAddr((int)Func::Entity::createFromJson))(j);
 		}
 		inline static std::unique_ptr<Entity> createWithAttributes(const stl::string& entityName, const glm::vec4& pos, const nlohmann::json& attributes) 
 		{
