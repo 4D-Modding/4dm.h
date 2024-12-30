@@ -38,7 +38,7 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__fastcall*)()>(getFuncAddr((int)Func::Entity::loadEntityInfo))();
 		}
-		inline static std::unique_ptr<Entity> createFromJson(nlohmann::json& j) 
+		inline static std::unique_ptr<Entity> createFromJson(const nlohmann::json& j) 
 		{
 			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)( nlohmann::json& j)>(getFuncAddr((int)Func::Entity::createFromJson))(j);
 		}
@@ -56,9 +56,9 @@ namespace fdm
 		{
 			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const stl::string&, const stl::uuid&, const glm::vec4&, const stl::string&, const nlohmann::json&)>(getFuncAddr((int)Func::Entity::instantiateEntity))(entityName, id, pos, type, attributes);
 		}
-		inline static nlohmann::json combineEntityAttributes(nlohmann::json& baseAttributes, nlohmann::json& additions) 
+		inline static nlohmann::json combineEntityAttributes(const nlohmann::json& baseAttributes, const nlohmann::json& additions) 
 		{
-			return reinterpret_cast<nlohmann::json (__fastcall*)(nlohmann::json& baseAttributes, nlohmann::json& additions)>(getFuncAddr((int)Func::Entity::combineEntityAttributes))(baseAttributes, additions);
+			return reinterpret_cast<nlohmann::json (__fastcall*)(const nlohmann::json& baseAttributes, const nlohmann::json& additions)>(getFuncAddr((int)Func::Entity::combineEntityAttributes))(baseAttributes, additions);
 		}
 		virtual ~Entity()
 		{
