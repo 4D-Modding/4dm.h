@@ -25,13 +25,13 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__fastcall*)(const stl::string& sound)>(getFuncAddr((int)Func::AudioManager::loadSound))(sound);
 		}
-		inline static uint32_t playSound4D(stl::string& sound, stl::string& voiceGroup, const glm::vec4& pos, const glm::vec4& vel) 
+		inline static uint32_t playSound4D(const stl::string& sound, const stl::string& voiceGroup, const glm::vec4& pos, const glm::vec4& vel)
 		{
-			return reinterpret_cast<uint32_t (__fastcall*)(stl::string& sound, stl::string& voiceGroup, const glm::vec4& pos, const glm::vec4& vel)>(getFuncAddr((int)Func::AudioManager::playSound4D))(sound, voiceGroup, pos, vel);
+			return reinterpret_cast<uint32_t (__fastcall*)(const stl::string& sound, const stl::string& voiceGroup, const glm::vec4& pos, const glm::vec4& vel)>(getFuncAddr((int)Func::AudioManager::playSound4D))(sound, voiceGroup, pos, vel);
 		}
-		inline static void setListenerInfo4D(glm::vec4& pos, const m4::Mat5* orientation, const glm::vec4& vel) 
+		inline static void setListenerInfo4D(const glm::vec4& pos, const m4::Mat5* orientation, const glm::vec4& vel)
 		{
-			return reinterpret_cast<void (__fastcall*)(glm::vec4& pos, const m4::Mat5* orientation, const glm::vec4& vel)>(getFuncAddr((int)Func::AudioManager::setListenerInfo4D))(pos, orientation, vel);
+			return reinterpret_cast<void (__fastcall*)(const glm::vec4& pos, const m4::Mat5* orientation, const glm::vec4& vel)>(getFuncAddr((int)Func::AudioManager::setListenerInfo4D))(pos, orientation, vel);
 		}
 		inline static bool loadBGMfromJSON(const stl::string& jsonListPath) 
 		{
