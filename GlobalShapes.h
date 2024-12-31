@@ -7,6 +7,7 @@
 #include "KleinBottle.h"
 #include "PentachoronHollow.h"
 #include "Sphere.h"
+#include <array>
 
 namespace fdm 
 {
@@ -38,6 +39,7 @@ namespace fdm
 		inline static const Hypersphere* hypersphere = reinterpret_cast<const Hypersphere*>((base + 0x2C0738));
 		inline static const Hypersphere* hypersphereHollow = reinterpret_cast<const Hypersphere*>((base + 0x2C0BA0));
 		inline static const KleinBottle* kleinBottle = reinterpret_cast<const KleinBottle*>((base + 0x2C08E8));
-
+		inline static std::array<glm::vec3, 20>& five_cell_colors = *reinterpret_cast<std::array<glm::vec3, 20>*>(base + 0x23D4A0);
+		inline static std::array<glm::vec4, 20>& five_cell_tet = *reinterpret_cast<std::array<glm::vec4, 20>*>(base + 0x2C0990);
 	};
 }
