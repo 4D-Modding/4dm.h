@@ -15,7 +15,9 @@ namespace fdm
 			union { float b13, yw; };
 			union { float b23, zw; };
 
-			BiVector4(float b01 = 0.f, float b02 = 0.f, float b03 = 0.f, float b12 = 0.f, float b13 = 0.f, float b23 = 0.f) : b01(b01), b02(b02), b03(b03), b12(b12), b13(b13), b23(b23) {}
+			BiVector4() { }
+
+			BiVector4(float b01, float b02, float b03, float b12, float b13, float b23) : b01(b01), b02(b02), b03(b03), b12(b12), b13(b13), b23(b23) { }
 
 			BiVector4(const nlohmann::json& j)
 			{
