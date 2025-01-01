@@ -8,12 +8,12 @@ namespace fdm
 	{
 		struct BiVector4
 		{
-			union { float b01, xy; };
-			union { float b02, xz; };
-			union { float b03, xw; };
-			union { float b12, yz; };
-			union { float b13, yw; };
-			union { float b23, zw; };
+			union { float b01 = 0, xy; };
+			union { float b02 = 0, xz; };
+			union { float b03 = 0, xw; };
+			union { float b12 = 0, yz; };
+			union { float b13 = 0, yw; };
+			union { float b23 = 0, zw; };
 
 			BiVector4() { }
 
@@ -35,9 +35,14 @@ namespace fdm
 
 			void normalize()
 			{
-				return reinterpret_cast<void(__thiscall*)(BiVector4*)>(
-					getFuncAddr((int)Func::m4::BiVector4::normalize)
-					)(this);
+				float l = glm::sqrt((b01 * b01) + (b02 * b02) + (b03 * b03) + (b12 * b12) + (b13 * b13) + (b23 * b23));
+
+				b01 /= l;
+				b02 /= l;
+				b03 /= l;
+				b12 /= l;
+				b13 /= l;
+				b23 /= l;
 			}
 
 			BiVector4 normalized() const
@@ -46,75 +51,214 @@ namespace fdm
 				b.normalize();
 				return b;
 			}
+
+			constexpr bool operator==(const BiVector4& b) const
+			{
+				return xy == b.xy && xz == b.xz && xw == b.xw && yz == b.yz && yw == b.yw && zw == b.zw;
+			}
 		};
 		inline glm::vec4 cross(const glm::vec4& u, const glm::vec4& v, const glm::vec4& w)
 		{
-			glm::vec4 result{};
-			return reinterpret_cast<glm::vec4& (__fastcall*)(glm::vec4*, const glm::vec4&, const glm::vec4&, const glm::vec4&)>(
-				getFuncAddr((int)Func::m4::cross)
-				)(&result, u, v, w);
-			return result;
+			//  intermediate values
+			float a = (v.x * w.y) - (v.y * w.x);
+			float b = (v.x * w.z) - (v.z * w.x);
+			float c = (v.x * w.w) - (v.w * w.x);
+			float d = (v.y * w.z) - (v.z * w.y);
+			float e = (v.y * w.w) - (v.w * w.y);
+			float f = (v.z * w.w) - (v.w * w.z);
+
+			// result vector
+			glm::vec4 res;
+
+			res.x = (u.y * f) - (u.z * e) + (u.w * d);
+			res.y = -(u.x * f) + (u.z * c) - (u.w * b);
+			res.z = (u.x * e) - (u.y * c) + (u.w * a);
+			res.w = -(u.x * d) + (u.y * b) - (u.z * a);
+
+			return res;
 		}
 		inline BiVector4 wedge(const glm::vec4& u, const glm::vec4& v)
 		{
 			BiVector4 result{};
 
-			result.b01 = u.x * v.y - u.y * v.x;
-			result.b02 = v.z * u.x - u.z * v.x;
-			result.b03 = u.x * v.w - u.w * v.x;
-			result.b12 = v.z * u.y - v.y * u.z;
-			result.b13 = v.w * u.y - u.w * v.y;
-			result.b23 = v.w * u.z - u.w * v.z;
+			result.xy = u.x * v.y - u.y * v.x;
+			result.xz = u.x * v.z - u.z * v.x;
+			result.xw = u.x * v.w - u.w * v.x;
+			result.yz = u.y * v.z - u.z * v.y;
+			result.yw = u.y * v.w - u.w * v.y;
+			result.zw = u.z * v.w - u.w * v.z;
 
 			return result.normalized();
 		}
+		
 		class Rotor
 		{
 		public:
-			float a;
-			BiVector4 b;
-			float b0123;
+			float a = 1;
+			BiVector4 b{ };
+			float b0123 = 0;
 			Rotor() { }
 			Rotor(const BiVector4& plane, float radians)
 			{
-				reinterpret_cast<void(__thiscall*)(Rotor*, const BiVector4&, float)>(
-					getFuncAddr((int)Func::m4::Rotor::RotorA)
-					)(this, plane, radians);
+				float cosHalf = std::cosf(radians * 0.5f);
+				float sinHalf = std::sinf(radians * 0.5f);
+
+				a = cosHalf;
+
+				b.b01 = sinHalf * plane.b01;
+				b.b02 = sinHalf * plane.b02;
+				b.b03 = sinHalf * plane.b03;
+				b.b12 = sinHalf * plane.b12;
+				b.b13 = sinHalf * plane.b13;
+				b.b23 = sinHalf * plane.b23;
 			}
 			Rotor(const glm::vec4& from, const glm::vec4& to)
 			{
-				reinterpret_cast<void(__thiscall*)(Rotor*, const glm::vec4 & from, const glm::vec4 & to)>(
-					getFuncAddr((int)Func::m4::Rotor::Rotor)
-					)(this, from, to);
+				float dot = glm::max(-1.0f, glm::min(1.0f, glm::dot(from, to)));
+				if (dot == 1)
+				{
+					a = 1;
+					b = {};
+					return;
+				}
+
+				// calculate the half angle
+				float radians = glm::acos(dot);
+				a = glm::cos(radians / 2.f);
+				float sina = glm::sin(radians / 2.f);
+				// the left side of the products have b a, not a b, so flip
+				b = wedge(to, from);
+				b.b01 *= sina;
+				b.b02 *= sina;
+				b.b03 *= sina;
+				b.b12 *= sina;
+				b.b13 *= sina;
+				b.b23 *= sina;
+
+				normalize();
 			}
 			Rotor(float a, const BiVector4& b, float b0123) : a(a), b(b), b0123(b0123) { }
-			Rotor& operator*=(const Rotor& r)
-			{
-				reinterpret_cast<void(__thiscall*)(Rotor*, const Rotor&)>(
-					getFuncAddr((int)Func::m4::Rotor::operatorMultEq)
-					)(this, r);
-				return *this;
-			}
 			Rotor operator*(const Rotor& r) const
 			{
-				Rotor result = *this;
-				result *= r;
+				Rotor result;
+
+				result.a =
+					(b.b01 * r.b.b01)
+					+ (a * r.a)
+					+ (b.b02 * r.b.b02)
+					+ (b.b03 * r.b.b03)
+					+ (b.b12 * r.b.b12)
+					+ (b.b13 * r.b.b13)
+					+ (b.b23 * r.b.b23)
+					+ (b0123 * r.b0123);
+				result.b.b01 =
+					(result.a * r.b.b01)
+					+ (b.b01 * r.a)
+					- (b.b02 * r.b.b12)
+					- (b.b03 * r.b.b13)
+					+ (b.b12 * r.b.b02)
+					+ (b.b13 * r.b.b03)
+					- (b.b23 * r.b0123)
+					- (b0123 * r.b.b23);
+				result.b.b02 =
+					(result.a * r.b.b02)
+					+ (result.b.b01 * r.b.b12)
+					+ (b.b02 * r.a)
+					- (b.b03 * r.b.b23)
+					- (b.b12 * r.b.b01)
+					+ (b.b13 * r.b0123)
+					+ (b.b23 * r.b.b03)
+					+ (b0123 * r.b.b13);
+				result.b.b03 =
+					+(result.a * r.b.b03)
+					+ (result.b.b01 * r.b.b13)
+					+ (result.b.b02 * r.b.b23)
+					+ (b.b03 * r.a)
+					- (b.b12 * r.b0123)
+					- (b.b13 * r.b.b01)
+					- (b.b23 * r.b.b02)
+					- (b0123 * r.b.b12);
+				result.b.b12 =
+					(result.a * r.b.b12)
+					- (result.b.b01 * r.b.b02)
+					+ (result.b.b02 * r.b.b01)
+					- (result.b.b03 * r.b0123)
+					+ (b.b12 * r.a)
+					- (b.b13 * r.b.b23)
+					+ (b.b23 * r.b.b13)
+					- (b0123 * r.b.b03);
+				result.b.b13 =
+					(result.a * r.b.b13)
+					- (result.b.b01 * r.b.b03)
+					+ (result.b.b02 * r.b0123)
+					+ (result.b.b03 * r.b.b01)
+					+ (result.b.b12 * r.b.b23)
+					+ (b.b13 * r.a)
+					- (b.b23 * r.b.b12)
+					+ (b0123 * r.b.b02);
+				result.b.b23 =
+					(result.a * r.b.b23)
+					- (result.b.b01 * r.b0123)
+					- (result.b.b02 * r.b.b03)
+					+ (result.b.b03 * r.b.b02)
+					- (result.b.b12 * r.b.b13)
+					+ (result.b.b13 * r.b.b12)
+					+ (b.b23 * r.a)
+					- (b0123 * r.b.b01);
+				result.b0123 =
+					(result.a * r.b.b23)
+					+ (result.b.b01 * r.b0123)
+					- (result.b.b02 * r.b.b13)
+					+ (result.b.b03 * r.b.b12)
+					+ (result.b.b12 * r.b.b03)
+					- (result.b.b13 * r.b.b02)
+					+ (result.b.b23 * r.b.b01)
+					+ (b0123 * r.a);
+
 				return result;
+			}
+			Rotor& operator*=(const Rotor& r)
+			{
+				Rotor result = *this * r;
+
+				*this = result;
+
+				return *this;
 			}
 			glm::vec4 rotate(const glm::vec4& v) const
 			{
-				glm::vec4 result{};
-				return reinterpret_cast<glm::vec4&(__thiscall*)(const Rotor*, glm::vec4*, const glm::vec4&)>(
-					getFuncAddr((int)Func::m4::Rotor::rotate)
-					)(this, &result, v);
+				glm::vec4 result{ 0 };
+
+				float xyz = b.xy * v.z - b.xz * v.y + b.yz * v.x + b0123 * v.w;
+				float xyw = -b.xw * v.y + b.xy * v.w + b.yw * v.x + -b0123 * v.z;
+				float xzw = -b.xw * v.z + b.xz * v.w + b.zw * v.x + b0123 * v.y;
+				float yzw = -b.yw * v.z + b.yz * v.w + b.zw * v.y + -b0123 * v.x;
+
+				float sX = a * v.x + b.xw * v.w + b.xy * v.y + b.xz * v.z;
+				float sY = a * v.y + -b.xy * v.x + b.yw * v.w + b.yz * v.z;
+				float sZ = a * v.z + -b.xz * v.x - b.yz * v.y + b.zw * v.w;
+				float sW = a * v.w + -b.xw * v.x - b.yw * v.y - b.zw * v.z;
+
+				result.x = a * sX + (-sY * -b.xy - sZ * -b.xz - sW * -b.xw) + (b.yw * xyw + b.yz * xyz + b.zw * xzw) + (b0123 * yzw);
+				result.y = a * sY + (sX * -b.xy - sZ * -b.yz - sW * -b.yw) + (-b.xw * xyw - b.xz * xyz + b.zw * yzw) + (-b0123 * xzw);
+				result.z = a * sZ + (sX * -b.xz + sY * -b.yz - sW * -b.zw) + (-b.xw * xzw + b.xy * xyz - b.yw * yzw) + (b0123 * xyw);
+				result.w = a * sW + (sX * -b.xw + sY * -b.yw + sZ * -b.zw) + (b.xy * xyw + b.xz * xzw + b.yz * yzw) + (-b0123 * xyz);
 
 				return result;
 			}
 			void normalize()
 			{
-				return reinterpret_cast<void(__thiscall*)(Rotor*)>(
-					getFuncAddr((int)Func::m4::Rotor::normalize)
-					)(this);
+				float l = glm::sqrt(a * a + b.xy * b.xy + b.xz * b.xz + b.xw * b.xw +
+					b.yz * b.yz + b.yw * b.yw + b.zw * b.zw + b0123 * b0123);
+
+				a /= l;
+				b.xy /= l;
+				b.xz /= l;
+				b.xw /= l;
+				b.yz /= l;
+				b.yw /= l;
+				b.zw /= l;
+				b0123 /= l;
 			}
 
 			Rotor normalized() const
@@ -130,9 +274,7 @@ namespace fdm
 			float value[5][5] = { 0.f };
 			Mat5(float x = 0.f)
 			{
-				reinterpret_cast<void(__thiscall*)(Mat5*, float)>(
-					getFuncAddr((int)Func::m4::Mat5::Mat5)
-					)(this, x);
+				value[0][0] = value[1][1] = value[2][2] = value[3][3] = value[4][4] = x;
 			}
 			Mat5(nlohmann::json& j)
 			{
@@ -202,10 +344,15 @@ namespace fdm
 			}
 			glm::vec4 multiply(const glm::vec4& v, float finalComp) const
 			{
-				glm::vec4 result{};
-				return reinterpret_cast<glm::vec4&(__thiscall*)(const Mat5*, glm::vec4*, const glm::vec4&, float)>(
-					getFuncAddr((int)Func::m4::Mat5::multiply)
-					)(this, &result, v, finalComp);
+				glm::vec4 result;
+				for (int row = 0; row < 4; ++row)
+				{
+					result[row] = 0;
+					for (int col = 0; col < 5; ++col)
+					{
+						result[row] += value[col][row] * v[col];
+					}
+				}
 				return result;
 			}
 			glm::vec4 operator*(const glm::vec4& v) const
@@ -214,15 +361,16 @@ namespace fdm
 			}
 			void translate(const glm::vec4& v)
 			{
-				return reinterpret_cast<void(__thiscall*)(Mat5*, const glm::vec4&)>(
-					getFuncAddr((int)Func::m4::Mat5::translate)
-					)(this, v);
+				value[4][0] += (value[0][0] * v.x) + (value[1][0] * v.y) + (value[2][0] * v.z) + (value[3][0] * v.w);
+				value[4][1] += (value[0][1] * v.x) + (value[1][1] * v.y) + (value[2][1] * v.z) + (value[3][1] * v.w);
+				value[4][2] += (value[0][2] * v.x) + (value[1][2] * v.y) + (value[2][2] * v.z) + (value[3][2] * v.w);
+				value[4][3] += (value[0][3] * v.x) + (value[1][3] * v.y) + (value[2][3] * v.z) + (value[3][3] * v.w);
 			}
 			void scale(const glm::vec4& s)
 			{
-				return reinterpret_cast<void(__thiscall*)(Mat5*, const glm::vec4&)>(
-					getFuncAddr((int)Func::m4::Mat5::scale)
-					)(this, s);
+				for (int row = 0; row < 5; ++row)
+					for (int col = 0; col < 4; ++col)
+						value[col][row] *= s[col];
 			}
 
 			float* operator[](int index)
