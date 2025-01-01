@@ -72,6 +72,7 @@ namespace fdm
 			float a;
 			BiVector4 b;
 			float b0123;
+			Rotor() { }
 			Rotor(const BiVector4& plane, float radians)
 			{
 				reinterpret_cast<void(__thiscall*)(Rotor*, const BiVector4&, float)>(
@@ -84,6 +85,7 @@ namespace fdm
 					getFuncAddr((int)Func::m4::Rotor::Rotor)
 					)(this, from, to);
 			}
+			Rotor(float a, const BiVector4& b, float b0123) : a(a), b(b), b0123(b0123) { }
 			Rotor& operator*=(const Rotor& r)
 			{
 				reinterpret_cast<void(__thiscall*)(Rotor*, const Rotor&)>(
