@@ -1237,12 +1237,31 @@ namespace fdm
 
 		return tokens;
 	}
+	
+	inline std::vector<void(*)()> execMacroFunctions;
 }
 
 #include "Console.h"
 
 // used by modloader
-extern "C" inline __declspec(dllexport) void setModID(const fdm::stl::string& modID) { fdm::modID = modID; }
+extern "C" inline __declspec(dllexport) void setModID(const fdm::stl::string& modID) {
+	fdm::modID = modID;
+	
+	for (const auto& execMacroFunction : fdm::execMacroFunctions)
+		execMacroFunction();
+}
+
+// allows to execute any code at any location, which is run when setModID is called by the modloader
+#define $exec \
+	template <class> void CONCAT(fdmEFunc, __LINE__)();\
+	namespace{ /* empty namespace is only accessible in that file*/\
+		struct CONCAT(fdmEStruct, __LINE__) {};\
+		inline auto CONCAT(_fdmEVar, __LINE__) = [](){\
+			fdm::execMacroFunctions.push_back(&CONCAT(fdmEFunc, __LINE__)<CONCAT(fdmEStruct, __LINE__)>);\
+			return true;\
+		}();\
+	}\
+	template <class> void CONCAT(fdmEFunc, __LINE__)()
 
 // Connection namespace
 #include "Connection/MessageData.h"
@@ -1356,8 +1375,8 @@ extern "C" inline __declspec(dllexport) void setModID(const fdm::stl::string& mo
 #include "StateTutorialSlideshow.h"
 #include "StateWorldGen.h"
 
-// allows to execute any code at any location
-#define $exec                                                                                  \
+// allows to execute any code at any location, which is run when the dll is loaded
+#define $execAtLoad \
 	template <class>                                                                              \
 	void CONCAT(fdmEFunc, __LINE__)();                                             \
 	namespace \
