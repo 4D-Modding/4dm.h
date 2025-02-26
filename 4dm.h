@@ -52,8 +52,6 @@
 #define MBO(t, c, off) *reinterpret_cast<t*>(reinterpret_cast<uintptr_t>(c) + off) // Member By Offset (type, object, offset)
 #endif
 
-#include "hook.h"
-
 inline void patchMemory(uintptr_t addressToWrite, uint8_t* valueToWrite, int byteNum)
 {
 	unsigned long OldProtection;
@@ -1150,9 +1148,9 @@ namespace fdm
 		return reinterpret_cast<void(__stdcall*)()>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "startConsole"))();
 	}
 
-	inline uint64_t getFuncAddr(int func)
+	inline LPVOID getFuncAddr(int func)
 	{
-		return reinterpret_cast<uint64_t(__stdcall*)(int)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getFuncAddr"))(func);
+		return reinterpret_cast<LPVOID(__stdcall*)(int)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getFuncAddr"))(func);
 	}
 	inline bool isModLoaded(const fdm::stl::string& modId)
 	{
@@ -1241,6 +1239,7 @@ namespace fdm
 	inline std::vector<void(*)()> execMacroFunctions;
 }
 
+#include "hook.h"
 #include "Console.h"
 
 // used by modloader
@@ -1406,10 +1405,8 @@ to call the original function, do `original(self, <all of the you have arguments
 	} \
 	$exec \
 	{ \
-		uint64_t hookAddr = getFuncAddr((int)(Func::cl::function)); \
-		if(hookAddr <= 0) { printf("Failed To Hook " #cl "::" #function "\n"); return; } \
-		Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original); \
-		EnableHook(); \
+		Hook( Func::cl::function, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original ); \
+		EnableHook(Func::cl::function); \
 	} \
 	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook(cl* self, ##__VA_ARGS__)
 
@@ -1430,10 +1427,8 @@ to call the original function, do `original(self, <all of the you have arguments
 	} \
 	$exec \
 	{ \
-		uint64_t hookAddr = getFuncAddr((int)(func)); \
-		if(hookAddr <= 0) { printf("Failed To Hook " #func "\n"); return; } \
-		Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original); \
-		EnableHook(); \
+		Hook( (int)func, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original ); \
+		EnableHook( (int)func ); \
 	} \
 	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(className* self, ##__VA_ARGS__)
 
@@ -1453,10 +1448,8 @@ to call the original function, do `original(<all of the you have arguments>)`
 	} \
 	$exec \
 	{ \
-		uint64_t hookAddr = getFuncAddr((int)(Func::cl::function)); \
-		if(hookAddr <= 0) { printf("Failed To Hook " #cl "::" #function "\n"); return; } \
-		Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original); \
-		EnableHook(); \
+		Hook( Func::cl::function, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original ); \
+		EnableHook()Func::cl::function; \
 	} \
 	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook(##__VA_ARGS__)
 
@@ -1476,10 +1469,8 @@ to call the original function, do `original(<all of the you have arguments>)`
 	} \
 	$exec \
 	{ \
-		uint64_t hookAddr = getFuncAddr((int)(func)); \
-		if(hookAddr <= 0) { printf("Failed To Hook " #func "\n"); return; } \
-		Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original); \
-		EnableHook(); \
+		Hook( (int)func, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original); \
+		EnableHook( (int)func ); \
 	} \
 	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(##__VA_ARGS__)
 
