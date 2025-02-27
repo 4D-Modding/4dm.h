@@ -100,8 +100,8 @@ namespace fdm
 			Rotor() { }
 			Rotor(const BiVector4& plane, float radians)
 			{
-				float cosHalf = std::cosf(radians * 0.5f);
-				float sinHalf = std::sinf(radians * 0.5f);
+				float cosHalf = std::cos(radians * 0.5f);
+				float sinHalf = std::sin(radians * 0.5f);
 
 				a = cosHalf;
 
