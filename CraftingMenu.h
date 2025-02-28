@@ -34,6 +34,7 @@ namespace fdm
 			{
 				reinterpret_cast<void(__thiscall*)(CraftingMenu::CraftableRecipe* self, int recipeIndex, nlohmann::json& j, int availableCount)>(getFuncAddr((int)Func::CraftingMenu::CraftableRecipe::CraftableRecipe))(this, recipeIndex, j, availableCount);
 			}
+			CraftableRecipe() { }
 		};
 		inline static nlohmann::json* recipes = reinterpret_cast<nlohmann::json*>((base + 0x4DF90 + 0x270000));
 		InventoryManager* Interface; // 0x8
