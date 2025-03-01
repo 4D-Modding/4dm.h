@@ -80,9 +80,9 @@ namespace fdm
 			return reinterpret_cast<Inventory::iterator& (__thiscall*)(InventoryGrid* self, Inventory::iterator* result)>(getFuncAddr((int)Func::InventoryGrid::end))(this, &result);
 			return result;
 		}
-		void load(nlohmann::json& j) 
+		void load(const nlohmann::json& j) 
 		{
-			return reinterpret_cast<void (__thiscall*)(InventoryGrid* self, nlohmann::json& j)>(getFuncAddr((int)Func::InventoryGrid::load))(this, j);
+			return reinterpret_cast<void (__thiscall*)(InventoryGrid* self, const nlohmann::json& j)>(getFuncAddr((int)Func::InventoryGrid::load))(this, j);
 		}
 		nlohmann::json save() 
 		{
