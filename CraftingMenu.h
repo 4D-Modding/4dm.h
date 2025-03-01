@@ -26,15 +26,57 @@ namespace fdm
 			std::unique_ptr<Item> result; // 0x20
 			int availableCount; // 0x28
 
-			~CraftableRecipe() 
-			{
-				reinterpret_cast<void(__thiscall*)(CraftingMenu::CraftableRecipe* self)>(getFuncAddr((int)Func::CraftingMenu::CraftableRecipe::destr_CraftableRecipe))(this);
-			}
 			CraftableRecipe(int recipeIndex, nlohmann::json& j, int availableCount) 
 			{
 				reinterpret_cast<void(__thiscall*)(CraftingMenu::CraftableRecipe* self, int recipeIndex, nlohmann::json& j, int availableCount)>(getFuncAddr((int)Func::CraftingMenu::CraftableRecipe::CraftableRecipe))(this, recipeIndex, j, availableCount);
 			}
 			CraftableRecipe() { }
+
+			void copy(const CraftableRecipe& other)
+			{
+				recipeIndex = other.recipeIndex;
+				availableCount = other.availableCount;
+
+				result = other.result->clone();
+				result->count = other.result->count;
+
+				recipe.clear();
+				recipe.reserve(other.recipe.size());
+				for (auto& itemB : other.recipe)
+				{
+					recipe.push_back(itemB->clone());
+					recipe.back()->count = itemB->count;
+				}
+			}
+			CraftableRecipe(const CraftableRecipe& other)
+			{
+				copy(other);
+			}
+			CraftableRecipe& operator=(const CraftableRecipe& other)
+			{
+				copy(other);
+				return *this;
+			}
+			CraftableRecipe(CraftableRecipe&& other) noexcept
+			{
+				copy(other);
+
+				other.recipeIndex = -1;
+				other.availableCount = 0;
+				other.result = NULL;
+				other.recipe.clear();
+			}
+			CraftableRecipe& operator=(CraftableRecipe&& other) noexcept
+			{
+				copy(other);
+
+				other.recipeIndex = -1;
+				other.availableCount = 0;
+				other.result = NULL;
+				other.recipe.clear();
+
+				return *this;
+			}
 		};
 		inline static nlohmann::json* recipes = reinterpret_cast<nlohmann::json*>((base + 0x4DF90 + 0x270000));
 		InventoryManager* Interface; // 0x8
