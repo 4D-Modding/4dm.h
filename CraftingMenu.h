@@ -80,5 +80,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(CraftingMenu* self)>(getFuncAddr((int)Func::CraftingMenu::updateAvailableRecipes))(this);
 		}
+		bool craftRecipe(int recipeIndex)
+		{
+			return reinterpret_cast<bool (__thiscall*)(CraftingMenu* self, int)>(fdm::base + 0x5B120)(this, recipeIndex);
+		}
 	};
 }
