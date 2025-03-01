@@ -124,7 +124,7 @@ namespace fdm
 		}
 		bool craftRecipe(int recipeIndex)
 		{
-			return reinterpret_cast<bool (__thiscall*)(CraftingMenu* self, int)>(fdm::base + 0x75700)(this, recipeIndex);
+			return reinterpret_cast<bool (__thiscall*)(CraftingMenu* self, int)>(fdm::base + 0x5C120)(this, recipeIndex);
 		}
 	};
 }
