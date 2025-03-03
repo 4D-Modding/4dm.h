@@ -1442,16 +1442,16 @@ to call the original function, do `original(<all of the you have arguments>)`
 		class CONCAT(function, H)  \
 		{ \
 		public: \
-			inline static returnType(__fastcall* original)(##__VA_ARGS__) = nullptr;\
-			static returnType __fastcall hook(##__VA_ARGS__); \
+			inline static returnType(__fastcall* original)(__VA_ARGS__) = nullptr;\
+			static returnType __fastcall hook(__VA_ARGS__); \
 		}; \
 	} \
 	$exec \
 	{ \
 		Hook( Func::cl::function, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original ); \
-		EnableHook()Func::cl::function; \
+		EnableHook(Func::cl::function); \
 	} \
-	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook(##__VA_ARGS__)
+	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook(__VA_ARGS__)
 
 /*
 creates a hook for a static function (__fastcall) using Func namespace.
@@ -1463,8 +1463,8 @@ to call the original function, do `original(<all of the you have arguments>)`
 		class H \
 		{ \
 		public: \
-			inline static returnType(__fastcall* original)(##__VA_ARGS__) = nullptr; \
-			static returnType __fastcall hook(##__VA_ARGS__); \
+			inline static returnType(__fastcall* original)(__VA_ARGS__) = nullptr; \
+			static returnType __fastcall hook(__VA_ARGS__); \
 		}; \
 	} \
 	$exec \
@@ -1472,7 +1472,7 @@ to call the original function, do `original(<all of the you have arguments>)`
 		Hook( (int)func, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original); \
 		EnableHook( (int)func ); \
 	} \
-	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(##__VA_ARGS__)
+	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(__VA_ARGS__)
 
 #ifdef DEBUG_CONSOLE
 #define initDLL \
