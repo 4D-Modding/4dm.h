@@ -1405,8 +1405,8 @@ to call the original function, do `original(self, <all of the you have arguments
 	} \
 	$exec \
 	{ \
-		Hook( Func::cl::function, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original ); \
-		EnableHook(Func::cl::function); \
+		Hook( fdm::Func::cl::function, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original ); \
+		EnableHook(fdm::Func::cl::function); \
 	} \
 	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook(cl* self, ##__VA_ARGS__)
 
@@ -1448,8 +1448,8 @@ to call the original function, do `original(<all of the you have arguments>)`
 	} \
 	$exec \
 	{ \
-		Hook( Func::cl::function, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original ); \
-		EnableHook(Func::cl::function); \
+		Hook( fdm::Func::cl::function, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original ); \
+		EnableHook(fdm::Func::cl::function); \
 	} \
 	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook(__VA_ARGS__)
 
