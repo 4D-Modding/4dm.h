@@ -18,11 +18,11 @@ namespace fdm
 	public:
 		inline static TexRenderer* tr = reinterpret_cast<TexRenderer*>((base + 0x2BE5B8));
 		inline static FontRenderer* fr = reinterpret_cast<FontRenderer*>((base + 0x279360));
-		glm::ivec2 renderPos; // 0x30
-		glm::ivec2 size; // 0x38
-		int selectedIndex; // 0x40
+		glm::ivec2 renderPos{ 0 }; // 0x30
+		glm::ivec2 size{ 0 }; // 0x38
+		int selectedIndex = -1; // 0x40
 		PAD(0x4);
-		stl::string label; // 0x48
+		stl::string label = ""; // 0x48
 		std::vector<std::unique_ptr<Item>> slots; // 0x68
 
 		~InventoryGrid() 
@@ -33,6 +33,52 @@ namespace fdm
 		InventoryGrid(const glm::ivec2& size) 
 		{
 			reinterpret_cast<void(__thiscall*)(InventoryGrid* self, const glm::ivec2& size)>(getFuncAddr((int)Func::InventoryGrid::InventoryGrid))(this, size);
+		}
+		void copy(const InventoryGrid& other)
+		{
+			renderPos = other.renderPos;
+			size = other.size;
+			selectedIndex = other.selectedIndex;
+			label = other.label;
+
+			slots.clear();
+			slots.reserve(other.slots.size());
+			for (auto& itemB : other.slots)
+			{
+				slots.push_back(itemB->clone());
+				slots.back()->count = itemB->count;
+			}
+		}
+		InventoryGrid(const InventoryGrid& other)
+		{
+			copy(other);
+		}
+		InventoryGrid& operator=(const InventoryGrid& other)
+		{
+			copy(other);
+			return *this;
+		}
+		InventoryGrid(InventoryGrid&& other) noexcept
+		{
+			copy(other);
+
+			other.renderPos = glm::ivec2{ 0 };
+			other.size = glm::ivec2{ 0 };
+			other.selectedIndex = -1;
+			other.label = "";
+			other.slots.clear();
+		}
+		InventoryGrid& operator=(InventoryGrid&& other) noexcept
+		{
+			copy(other);
+
+			other.renderPos = glm::ivec2{ 0 };
+			other.size = glm::ivec2{ 0 };
+			other.selectedIndex = -1;
+			other.label = "";
+			other.slots.clear();
+
+			return *this;
 		}
 		bool addItem(std::unique_ptr<Item>& item) override
 		{
