@@ -45,8 +45,15 @@ namespace fdm
 			slots.reserve(other.slots.size());
 			for (auto& itemB : other.slots)
 			{
-				slots.push_back(itemB->clone());
-				slots.back()->count = itemB->count;
+				if (itemB)
+				{
+					slots.push_back(itemB->clone());
+					slots.back()->count = itemB->count;
+				}
+				else
+				{
+					slots.push_back(nullptr);
+				}
 			}
 		}
 		InventoryGrid(const InventoryGrid& other)
