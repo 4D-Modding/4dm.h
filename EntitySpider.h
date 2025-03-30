@@ -19,15 +19,8 @@ namespace fdm
 				reinterpret_cast<void(__thiscall*)(EntitySpider::SpiderType* self)>(getFuncAddr((int)Func::EntitySpider::SpiderType::destr_SpiderType))(this);
 			}
 		};
-		inline static const float hitboxRadius = 0.6f; 
-		inline static const float maxSpeed = 3.f; 
 		Hitbox hitbox; // 0x20
-		inline static const int NUM_TYPES = 5; 
-		inline static EntitySpider::SpiderType* spiderTypes = reinterpret_cast<EntitySpider::SpiderType*>((base + 0x279A30));
 		int type; // 0x70
-		inline static const int NUM_LEGS = 32; 
-		inline static glm::vec4* legPositions = reinterpret_cast<glm::vec4*>((base + 0x29B400));
-		inline static MeshRenderer* legRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279D28));
 		glm::vec4 direction; // 0x74
 		float rotation; // 0x84
 		bool touchingGround; // 0x88
@@ -37,13 +30,20 @@ namespace fdm
 		glm::vec4 horizAcc; // 0x8C
 		float health; // 0x9C
 		double hitTime; // 0xA0
-		inline static const float hitDelay = 0.7f; 
 		stl::uuid target; // 0xA8
-		inline static const float updateDelay = 2.f; 
 		double lastUpdateTime; // 0xB8
-		inline static const float serverUpdateDelay = 0.5f; 
 		double lastServerUpdateTime; // 0xC0
-		inline static MeshRenderer* wireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279D48));
+		inline static const float hitboxRadius = 0.6f; 
+		inline static const float maxSpeed = 3.f; 
+		inline static const int NUM_TYPES = 5; 
+		inline static std::array<EntitySpider::SpiderType, 5>& spiderTypes = *reinterpret_cast<std::array<EntitySpider::SpiderType, 5>*>(getDataAddr((int)Data::EntitySpider::spiderTypes));
+		inline static const int NUM_LEGS = 32; 
+		inline static std::array<glm::vec4, 32>& legPositions = *reinterpret_cast<std::array<glm::vec4, 32>*>(getDataAddr((int)Data::EntitySpider::legPositions));
+		inline static MeshRenderer& legRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::EntitySpider::legRenderer));
+		inline static const float hitDelay = 0.7f; 
+		inline static const float updateDelay = 2.f; 
+		inline static const float serverUpdateDelay = 0.5f;
+		inline static MeshRenderer& wireframeRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::EntitySpider::wireframeRenderer));
 
 		bool isIntersectingRay(const Entity::Ray& ray) override
 		{
@@ -112,6 +112,26 @@ namespace fdm
 		void persuePlayer(World* world, double dt, EntityPlayer* player) 
 		{
 			return reinterpret_cast<void (__thiscall*)(EntitySpider* self, World* world, double dt, EntityPlayer* player)>(getFuncAddr((int)Func::EntitySpider::persuePlayer))(this, world, dt, player);
+		}
+		bool action(World* world, Entity* actor, int action, const nlohmann::json& details) override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntitySpider * self, World*, Entity*, int, const nlohmann::json&)>(getFuncAddr((int)Func::EntitySpider::action))(this, world, actor, action, details);
+		}
+		float deathTimer() override
+		{
+			return reinterpret_cast<float(__thiscall*)(EntitySpider * self)>(getFuncAddr((int)Func::EntitySpider::deathTimer))(this);
+		}
+		bool isBlockEntity() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntitySpider * self)>(getFuncAddr((int)Func::EntitySpider::isBlockEntity))(this);
+		}
+		bool isClickable() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntitySpider * self)>(getFuncAddr((int)Func::EntitySpider::isClickable))(this);
+		}
+		bool shouldSave() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntitySpider * self)>(getFuncAddr((int)Func::EntitySpider::shouldSave))(this);
 		}
 	};
 }

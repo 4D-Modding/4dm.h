@@ -7,27 +7,29 @@ namespace fdm
 	class StateIntro : public State 
 	{
 	public:
-		inline static StateIntro* instanceObj = reinterpret_cast<StateIntro*>((base + 0x279140));
+		inline static StateIntro& instanceObj = *reinterpret_cast<StateIntro*>(getDataAddr((int)Data::StateIntro::instanceObj));
 		glm::mat4 projection2D; // 0x8
 		glm::mat4 projection3D; // 0x48
-		inline static const int fileCount = 6;
-		inline static const char* fileNames[fileCount] = { "logo.png", "moon.png", "sun.png", "crosshair.png", "targetBlock.png", "forg.png" }; // rip "ock.png"
+		inline static constexpr const int fileCount = 6;
+		inline static std::array<const char, fileCount>*& fileNames = *reinterpret_cast<std::array<const char, 6>**>(getDataAddr((int)Data::StateIntro::fileNames));
+
 		struct 
 		{
-			unsigned char* data;
+			uint8_t* data;
 			int width;
 			int height;
 			int channels;
 		} imageData[fileCount];
-		std::atomic_int filesLoaded; // 0x118
+
+		std::atomic<int> filesLoaded; // 0x118
 		float displayProgress; // 0x11C
 		FontRenderer font; // 0x120
-		Shader* hypercubeShader; // 0x1C0
+		const Shader* hypercubeShader; // 0x1C0
 		MeshRenderer hypercubeRenderer; // 0x1C8
 		uint32_t mvID; // 0x1E8
 		float rotation; // 0x1EC
 		QuadRenderer qr; // 0x1F0
-		Shader* qs; // 0x218
+		const Shader* qs; // 0x218
 
 		void updateProjection(int width, int height) 
 		{

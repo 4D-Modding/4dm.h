@@ -15,7 +15,7 @@ namespace fdm
 		glm::vec4 pos; // 0x20
 		InventoryGrid inventory; // 0x30
 		InventorySession openInstance; // 0xB0
-		inline static MeshRenderer* wireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2788E8));
+		inline static MeshRenderer& wireframeRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::EntityChest::wireframeRenderer));
 
 		bool isClickable() override
 		{
@@ -64,6 +64,26 @@ namespace fdm
 		bool action(World* world, Entity* actor, int action, const nlohmann::json& details) override
 		{
 			return reinterpret_cast<bool (__thiscall*)(EntityChest* self, World* world, Entity* actor, int action, const nlohmann::json& details)>(getFuncAddr((int)Func::EntityChest::action))(this, world, actor, action, details);
+		}
+		float deathTimer() override
+		{
+			return reinterpret_cast<float(__thiscall*)(EntityChest * self)>(getFuncAddr((int)Func::EntityChest::deathTimer))(this);
+		}
+		bool isBlockEntity() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntityChest * self)>(getFuncAddr((int)Func::EntityChest::isBlockEntity))(this);
+		}
+		bool isIntersectingRay(const Entity::Ray& ray) override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntityChest * self, const Entity::Ray&)>(getFuncAddr((int)Func::EntityChest::isIntersectingRay))(this, ray);
+		}
+		bool shouldSave() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntityChest * self)>(getFuncAddr((int)Func::EntityChest::shouldSave))(this);
+		}
+		void takeDamage(float damage, World* world) override
+		{
+			return reinterpret_cast<void(__thiscall*)(EntityChest * self, float, World*)>(getFuncAddr((int)Func::EntityChest::takeDamage))(this, damage, world);
 		}
 	};
 }

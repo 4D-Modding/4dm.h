@@ -11,10 +11,10 @@ namespace fdm
 		{
 			enum TreeType : int
 			{
-				TREE_NONE = 0x0,
-				TREE_REDLEAF = 0x1,
-				TREE_MIDNIGHT = 0x2,
-				TREE_SNOWY = 0x3,
+				TREE_NONE = 0,
+				TREE_REDLEAF = 1,
+				TREE_MIDNIGHT = 2,
+				TREE_SNOWY = 3,
 			};
 
 			stl::string name; 
@@ -36,9 +36,9 @@ namespace fdm
 			{
 				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self)>(getFuncAddr((int)Func::ChunkLoader::BiomeInfo::destr_BiomeInfo))(this);
 			}
-			BiomeInfo(const ChunkLoader::BiomeInfo& __that)
+			BiomeInfo(ChunkLoader::BiomeInfo&& __that)
 			{
-				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self, const ChunkLoader::BiomeInfo& __that)>(getFuncAddr((int)Func::ChunkLoader::BiomeInfo::BiomeInfo))(this, __that);
+				reinterpret_cast<void(__thiscall*)(ChunkLoader::BiomeInfo* self, ChunkLoader::BiomeInfo& __that)>(getFuncAddr((int)Func::ChunkLoader::BiomeInfo::BiomeInfo))(this, __that);
 			}
 		};
 		struct BiomeMapPixel 
@@ -92,17 +92,17 @@ namespace fdm
 			ChunkLoader::BiomeMapPixel result;
 			return reinterpret_cast<ChunkLoader::BiomeMapPixel& (__thiscall*)(ChunkLoader* self, ChunkLoader::BiomeMapPixel*, int x, int z, int w)>(getFuncAddr((int)Func::ChunkLoader::getBiome))(this, &result, x, z, w);
 		}
-		void generateTree(unsigned char* blocks, const glm::i64vec3& chunkPos, bool dark) 
+		void generateTree(uint8_t* blocks, const glm::i64vec3& chunkPos, bool dark) 
 		{
-			return reinterpret_cast<void (__thiscall*)(ChunkLoader* self, unsigned char* blocks, const glm::i64vec3& chunkPos, bool dark)>(getFuncAddr((int)Func::ChunkLoader::generateTree))(this, blocks, chunkPos, dark);
+			return reinterpret_cast<void (__thiscall*)(ChunkLoader* self, uint8_t* blocks, const glm::i64vec3& chunkPos, bool dark)>(getFuncAddr((int)Func::ChunkLoader::generateTree))(this, blocks, chunkPos, dark);
 		}
-		void generateTreeBranch(unsigned char* blocks, const glm::i64vec3& chunkPos, glm::ivec4& startPos, int limit, bool dark) 
+		void generateTreeBranch(uint8_t* blocks, const glm::i64vec3& chunkPos, glm::ivec4& startPos, int limit, bool dark) 
 		{
-			return reinterpret_cast<void (__thiscall*)(ChunkLoader* self, unsigned char* blocks, const glm::i64vec3& chunkPos, glm::ivec4& startPos, int limit, bool dark)>(getFuncAddr((int)Func::ChunkLoader::generateTreeBranch))(this, blocks, chunkPos, startPos, limit, dark);
+			return reinterpret_cast<void (__thiscall*)(ChunkLoader* self, uint8_t* blocks, const glm::i64vec3& chunkPos, glm::ivec4& startPos, int limit, bool dark)>(getFuncAddr((int)Func::ChunkLoader::generateTreeBranch))(this, blocks, chunkPos, startPos, limit, dark);
 		}
-		void generateTaigaTree(unsigned char* blocks, const glm::i64vec3& chunkPos) 
+		void generateTaigaTree(uint8_t* blocks, const glm::i64vec3& chunkPos) 
 		{
-			return reinterpret_cast<void (__thiscall*)(ChunkLoader* self, unsigned char* blocks, const glm::i64vec3& chunkPos)>(getFuncAddr((int)Func::ChunkLoader::generateTaigaTree))(this, blocks, chunkPos);
+			return reinterpret_cast<void (__thiscall*)(ChunkLoader* self, uint8_t* blocks, const glm::i64vec3& chunkPos)>(getFuncAddr((int)Func::ChunkLoader::generateTaigaTree))(this, blocks, chunkPos);
 		}
 		void createFlatWorldChests(Chunk* chunk, World* world) 
 		{

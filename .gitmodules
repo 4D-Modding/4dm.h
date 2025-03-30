@@ -1,0 +1,21 @@
+[submodule "networking"]
+	path = networking
+	url = https://github.com/4D-Modding/networking.git
+[submodule "GL"]
+	path = GL
+	url = https://github.com/4D-Modding/GL.git
+[submodule "glm"]
+	path = glm
+	url = https://github.com/4D-Modding/glm.git
+[submodule "glfw"]
+	path = glfw
+	url = https://github.com/4D-Modding/glfw.git
+[submodule "soil"]
+	path = soil
+	url = https://github.com/4D-Modding/soil.git
+[submodule "sdl"]
+	path = sdl
+	url = https://github.com/4D-Modding/sdl.git
+[submodule "SoLoud"]
+	path = SoLoud
+	url = https://github.com/4D-Modding/SoLoud.git

@@ -9,7 +9,7 @@ namespace fdm
 	public:
 		inline static const int DEFAULT_WINDOW_WIDTH = 1024; 
 		inline static const int DEFAULT_WINDOW_HEIGHT = 768; 
-		inline static StateSettings* instanceObj = reinterpret_cast<StateSettings*>((base + 0x2BFAE0));
+		inline static StateSettings& instanceObj = *reinterpret_cast<StateSettings*>(getDataAddr((int)Data::StateSettings::instanceObj));
 		FontRenderer font; // 0x8
 		QuadRenderer qr; // 0xA8
 		Shader* qs; // 0xD0
@@ -50,32 +50,32 @@ namespace fdm
 		bool shadows; // 0xA1A
 		bool lights; // 0xA1B
 		bool lightingOptionsChanged; // 0xA1C
-		inline static const int maxRenderDistance = 12; 
-		inline static const int defaultRenderDistance = 4; 
+		inline static constexpr const int maxRenderDistance = 12;
+		inline static constexpr const int defaultRenderDistance = 4;
 		PAD(0x3);
 		int currentRenderDistance; // 0xA20
-		inline static const int maxScrollSensitivity = 200; 
-		inline static const int defaultScrollSensitivity = 100; 
+		inline static constexpr const int maxScrollSensitivity = 200;
+		inline static constexpr const int defaultScrollSensitivity = 100;
 		int currentScrollSensitivity; // 0xA24
 		bool xInvert; // 0xA28
 		bool yInvert; // 0xA29
-		inline static const int maxLookSensitivity = 4; 
-		inline static const int defaultLookSensitivity = 2; 
+		inline static constexpr const int maxLookSensitivity = 4;
+		inline static constexpr const int defaultLookSensitivity = 2;
 		PAD(0x2);
 		int currentLookSensitivity; // 0xA2C
-		inline static const int minFOV = 30; 
-		inline static const int maxFOV = 149; 
-		inline static const int defaultFOV = 55; 
+		inline static constexpr const int minFOV = 30;
+		inline static constexpr const int maxFOV = 149;
+		inline static constexpr const int defaultFOV = 55;
 		int currentFOV; // 0xA30
-		inline static const int maxVolume = 100; 
-		inline static const int defaultVolume = 70; 
+		inline static constexpr const int maxVolume = 100;
+		inline static constexpr const int defaultVolume = 70;
 		int currentGlobalVolume; // 0xA34
 		int currentMusicVolume; // 0xA38
 		int currentCreatureVolume; // 0xA3C
 		int currentAmbienceVolume; // 0xA40
-		inline static const int minDifficulty = NULL; 
-		inline static const int maxDifficulty = 2; 
-		inline static const int defaultDifficulty = 1; 
+		inline static constexpr const int minDifficulty = 0;
+		inline static constexpr const int maxDifficulty = 2;
+		inline static constexpr const int defaultDifficulty = 1;
 		int currentDifficulty; // 0xA44
 		bool chat; // 0xA48
 		bool nametags; // 0xA49
@@ -101,9 +101,17 @@ namespace fdm
 		{
 			reinterpret_cast<void(__thiscall*)(StateSettings* self)>(getFuncAddr((int)Func::StateSettings::StateSettings))(this);
 		}
-		nlohmann::json getSetting(stl::string& settingName, nlohmann::json& settings, const nlohmann::json& defaultSettings) 
+		void update(StateManager& s, double dt) override
 		{
-			return reinterpret_cast<nlohmann::json (__thiscall*)(StateSettings* self, stl::string& settingName, nlohmann::json& settings, const nlohmann::json& defaultSettings)>(getFuncAddr((int)Func::StateSettings::getSetting))(this, settingName, settings, defaultSettings);
+			return reinterpret_cast<void(__thiscall*)(StateSettings * self, StateManager&, double)>(getFuncAddr((int)Func::StateSettings::update))(this, s, dt);
+		}
+		const nlohmann::json& getSetting(const stl::string& settingName, const nlohmann::json& settings, const nlohmann::json& defaultSettings)
+		{
+			return reinterpret_cast<const nlohmann::json& (__thiscall*)(StateSettings* self, const stl::string& settingName, const nlohmann::json& settings, const nlohmann::json& defaultSettings)>(getFuncAddr((int)Func::StateSettings::getSetting))(this, settingName, settings, defaultSettings);
+		}
+		inline static void okButtonCallback(void* user)
+		{
+			return reinterpret_cast<void(__fastcall*)(void*)>(getFuncAddr((int)Func::StateSettings::okButtonCallback))(user);
 		}
 		inline static void renderDistanceSliderCallback(void* user, int value) 
 		{

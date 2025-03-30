@@ -27,13 +27,8 @@ namespace fdm
 		};
 		Player* player; // 0x20
 		std::unique_ptr<Player> ownedPlayer; // 0x28
-		inline static PlayerSkin* defaultSkin = reinterpret_cast<PlayerSkin*>((base + 0x2797A0)); // lmfao it was "defualtSkin" in game :misinformation:
 		PlayerSkin skin; // 0x30
 		PlayerSkinRenderer skinRenderer; // 0x180
-		inline static glm::mat4* projection3D = reinterpret_cast<glm::mat4*>((base + 0x278490));
-		inline static int* wWidth = reinterpret_cast<int*>((base + 0x29B3F4));
-		inline static int* wHeight = reinterpret_cast<int*>((base + 0x29B3F0));
-		inline static FontRenderer* fr = reinterpret_cast<FontRenderer*>((base + 0x279700));
 		stl::string displayName; // 0x710
 		double lastMovementUpdateTime; // 0x730
 		bool justDamaged; // 0x738
@@ -41,10 +36,21 @@ namespace fdm
 		glm::vec4 interpEndpoint; // 0x73C
 		glm::vec4 interpVel; // 0x74C
 
+		inline static PlayerSkin& defaultSkin = *reinterpret_cast<PlayerSkin*>(getDataAddr((int)Data::EntityPlayer::defualtSkin)); // lmfao it is "defualtSkin" in game :misinformation:
+		inline static glm::mat4& projection3D = *reinterpret_cast<glm::mat4*>(getDataAddr((int)Data::EntityPlayer::projection3D));
+		inline static int& wWidth = *reinterpret_cast<int*>(getDataAddr((int)Data::EntityPlayer::wWidth));
+		inline static int& wHeight = *reinterpret_cast<int*>(getDataAddr((int)Data::EntityPlayer::wHeight));
+		inline static FontRenderer& fr = *reinterpret_cast<FontRenderer*>(getDataAddr((int)Data::EntityPlayer::fr));
+
+		inline static void renderInit()
+		{
+			return reinterpret_cast<void(__fastcall*)()>(getFuncAddr((int)Func::EntityPlayer::renderInit))();
+		}
 		inline static std::unique_ptr<Entity> createFromPlayer(Player* p) 
 		{
 			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(Player* p)>(getFuncAddr((int)Func::EntityPlayer::createFromPlayer))(p);
 		}
+		EntityPlayer() {}
 		EntityPlayer(nlohmann::json& j) 
 		{
 			reinterpret_cast<void(__thiscall*)(EntityPlayer* self, nlohmann::json& j)>(getFuncAddr((int)Func::EntityPlayer::EntityPlayer))(this, j);
@@ -102,6 +108,27 @@ namespace fdm
 		void collectItems(World* world) 
 		{
 			return reinterpret_cast<void (__thiscall*)(EntityPlayer* self, World* world)>(getFuncAddr((int)Func::EntityPlayer::collectItems))(this, world);
+		}
+		bool isBlockEntity() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntityPlayer * self)>(getFuncAddr((int)Func::EntityPlayer::isBlockEntity))(this);
+		}
+		bool isClickable() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntityPlayer * self)>(getFuncAddr((int)Func::EntityPlayer::isClickable))(this);
+		}
+		nlohmann::json getServerUpdateAttributes() override
+		{
+			return reinterpret_cast<nlohmann::json(__thiscall*)(EntityPlayer * self)>(getFuncAddr((int)Func::EntityPlayer::getServerUpdateAttributes))(this);
+		}
+		bool shouldSave() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntityPlayer * self)>(getFuncAddr((int)Func::EntityPlayer::shouldSave))(this);
+		}
+		// only available for server
+		void setPerformingAction(bool performingAction)
+		{
+			return reinterpret_cast<void(__thiscall*)(EntityPlayer * self, bool)>(getFuncAddr((int)Func::EntityPlayer::setPerformingAction))(this, performingAction);
 		}
 	};
 }

@@ -22,17 +22,23 @@ namespace fdm
 			glm::vec4 dir; // 0x24
 			glm::vec4 dirInv; // 0x34
 		};
-		inline static const float MAX_HITBOX_RADIUS = 3.f; 
-		//PAD(0x1); // --> inline static boost::uuids::string_generator idParser = NULL
-		//PAD(0x8); // --> inline static boost::uuids::random_generator_pure *uuidGenerator = reinterpret_cast<boost::uuids::random_generator_pure*>((base + 0x2BDFC8))
-		//PAD(0x1); // --> inline static boost::uuids::string_generator *uuidParser = reinterpret_cast<boost::uuids::string_generator*>((base + 0x29B3E0))
-		inline static TexRenderer* ftr = NULL; 
-		inline static FontRenderer* fr = NULL; 
-		inline static nlohmann::json* blueprints = reinterpret_cast<nlohmann::json*>((base + 0x4E5A8 + 0x270000));
+		inline static constexpr const float MAX_HITBOX_RADIUS = 3.0f;
+		
+		//inline static boost::uuids::string_generator& idParser = *reinterpret_cast<boost::uuids::string_generator*>(getDataAddr((int)Data::Entity::idParser));
+		//inline static boost::uuids::random_generator_pure& uuidGenerator = *reinterpret_cast<boost::uuids::random_generator_pure*>(getDataAddr((int)Data::Entity::uuidGenerator));
+		//inline static boost::uuids::string_generator& uuidParser = *reinterpret_cast<boost::uuids::string_generator*>(getDataAddr((int)Data::Entity::uuidParser));
+
+		inline static nlohmann::json& blueprints = *reinterpret_cast<nlohmann::json*>(getDataAddr((int)Data::Entity::blueprints));
 		stl::uuid id; // 0x8
 		bool dead; // 0x18
 
 		Entity(){}
+
+		// only available for server
+		nlohmann::json getServerUpdate()
+		{
+			return reinterpret_cast<nlohmann::json(__thiscall*)(Entity * self)>(getFuncAddr((int)Func::Entity::getServerUpdate))(this);
+		}
 
 		inline static bool loadEntityInfo() 
 		{
@@ -65,6 +71,15 @@ namespace fdm
 			reinterpret_cast<void(__thiscall*)(Entity* self)>(getFuncAddr((int)Func::Entity::destr_Entity))(this);
 		}
 
+		inline static void audioInit()
+		{
+			return reinterpret_cast<void(__fastcall*)()>(getFuncAddr((int)Func::Entity::audioInit))();
+		}
+		inline static void renderInit()
+		{
+			return reinterpret_cast<void(__fastcall*)()>(getFuncAddr((int)Func::Entity::renderInit))();
+		}
+
 		// VIRTUAL FUNCS
 
 		virtual stl::string getName() { return ""; }
@@ -81,7 +96,10 @@ namespace fdm
 		virtual bool isIntersectingRay(const Entity::Ray& ray) { return false; }
 		virtual void takeDamage(float damage, World* world) {}
 		virtual bool action(World* world, Entity* actor, int action, const nlohmann::json& details) { return false; }
-		virtual void postAction(World* world, Entity* actor, int action) {}
+		virtual void postAction(World* world, Entity* actor, int action)
+		{
+			return reinterpret_cast<void(__thiscall*)(Entity * self, World*, Entity*, int)>(getFuncAddr((int)Func::Entity::postAction))(this, world, actor, action);
+		}
 		virtual float deathTimer() { return NULL; }
 	};
 }

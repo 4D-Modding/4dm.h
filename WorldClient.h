@@ -8,12 +8,12 @@ namespace fdm
 	class WorldClient : public WorldManager 
 	{
 	public:
-		inline static const float MESH_GEN_DELAY = NULL; 
+		inline static const double MESH_GEN_DELAY = 1;
 		PAD(0x1); // --> boost::uuids::string_generator uuidParser
 		PAD(0x7);
 		std::shared_ptr<Connection::Client> client; // 0x1D8
-		std::atomic_bool chunksReady; // 0x1E8
-		std::atomic_bool shouldStopLoading; // 0x1E9
+		std::atomic<bool> chunksReady; // 0x1E8
+		std::atomic<bool> shouldStopLoading; // 0x1E9
 		PAD(0x6);
 		std::vector<Chunk*> newChunks; // 0x1F0
 		std::mutex updatedNeighborsMutex; // 0x208
@@ -106,6 +106,10 @@ namespace fdm
 		inline static bool inventoryUpdateCallback(nlohmann::json& action, void* user) 
 		{
 			return reinterpret_cast<bool (__fastcall*)(nlohmann::json& action, void* user)>(getFuncAddr((int)Func::WorldClient::inventoryUpdateCallback))(action, user);
+		}
+		World::Type getType() override
+		{
+			return reinterpret_cast<World::Type(__thiscall*)(WorldClient * self)>(getFuncAddr((int)Func::WorldClient::getType))(this);
 		}
 	};
 }

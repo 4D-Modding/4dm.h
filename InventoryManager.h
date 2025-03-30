@@ -25,6 +25,7 @@ namespace fdm
 			int index; // 0x8
 		};
 		inline static const int scale = 2; 
+		inline static FontRenderer& font = *reinterpret_cast<FontRenderer*>(getDataAddr((int)Data::InventoryManager::font));
 		Inventory* primary; 
 		Inventory* secondary; // 0x8
 		InventoryCursor cursor; // 0x10
@@ -32,7 +33,6 @@ namespace fdm
 		PAD(0x3);
 		int wWidth; // 0x24
 		int wHeight; // 0x28
-		inline static FontRenderer* font = reinterpret_cast<FontRenderer*>((base + 0x279400));
 		PAD(0x4);
 		QuadRenderer qr; // 0x30
 		const Shader* qs; // 0x58

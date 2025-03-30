@@ -7,13 +7,13 @@ namespace fdm
 	class StateCredits : public State 
 	{
 	public:
-		inline static StateCredits* instanceObj = reinterpret_cast<StateCredits*>((base + 0x278BA0));
+		inline static StateCredits& instanceObj = *reinterpret_cast<StateCredits*>(getDataAddr((int)Data::StateCredits::instanceObj));
 		glm::mat4 projection2D; // 0x8
 		float yOffset; // 0x48
 		PAD(0x4);
 		FontRenderer font; // 0x50
 		QuadRenderer qr; // 0xF0
-		Shader* qs; // 0x118
+		const Shader* qs; // 0x118
 		std::vector<Tex2D> supporters; // 0x120
 		std::vector<Tex2D> hyperSupporters; // 0x138
 

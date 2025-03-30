@@ -16,8 +16,9 @@ namespace fdm
 	class InventoryGrid : public Inventory 
 	{
 	public:
-		inline static TexRenderer* tr = reinterpret_cast<TexRenderer*>((base + 0x2BE5B8));
-		inline static FontRenderer* fr = reinterpret_cast<FontRenderer*>((base + 0x279360));
+		inline static TexRenderer& tr = *reinterpret_cast<TexRenderer*>(getDataAddr((int)Data::InventoryGrid::tr));
+		inline static FontRenderer& fr = *reinterpret_cast<FontRenderer*>(getDataAddr((int)Data::InventoryGrid::fr));
+
 		glm::ivec2 renderPos{ 0 }; // 0x30
 		glm::ivec2 size{ 0 }; // 0x38
 		int selectedIndex = -1; // 0x40
@@ -89,14 +90,7 @@ namespace fdm
 		}
 		bool addItem(std::unique_ptr<Item>& item) override
 		{
-			// decompiled from InventoryPlayer loooool. also yea i didnt bother fixing/optimizing it. fuck it. its literally 3:38.
-			auto v4 = combineItem(item);
-			if (!item.get())
-				return v4;
-			auto v5 = placeItem(item);
-			if (v5)
-				return true;
-			return v4;
+			return reinterpret_cast<bool(__thiscall*)(InventoryGrid * self, std::unique_ptr<Item>&)>(getFuncAddr((int)Func::InventoryGrid::addItem))(this, item);
 		}
 		void render(const glm::ivec2& cursorPos) override
 		{
@@ -118,14 +112,15 @@ namespace fdm
 		{
 			return reinterpret_cast<uint32_t (__thiscall*)(InventoryGrid* self)>(getFuncAddr((int)Func::InventoryGrid::getSlotCount))(this);
 		}
-		std::unique_ptr<Item>* getSlot(int index) override
+		std::unique_ptr<Item>& getSlot(int index) override
 		{
-			return reinterpret_cast<std::unique_ptr<Item>* (__thiscall*)(InventoryGrid* self, int index)>(getFuncAddr((int)Func::InventoryGrid::getSlot))(this, index);
+			return reinterpret_cast<std::unique_ptr<Item>& (__thiscall*)(InventoryGrid* self, int index)>(getFuncAddr((int)Func::InventoryGrid::getSlot))(this, index);
 		}
 		Inventory::iterator begin() override
 		{
-			// bruh. 3:39 btw
-			return Inventory::iterator{ this, 0 };
+			iterator result;
+			return reinterpret_cast<Inventory::iterator&(__thiscall*)(InventoryGrid * self, Inventory::iterator * result)>(getFuncAddr((int)Func::InventoryGrid::begin))(this, &result);
+			return result;
 		}
 		Inventory::iterator end() override
 		{
@@ -142,6 +137,10 @@ namespace fdm
 			nlohmann::json result;
 			return reinterpret_cast<nlohmann::json& (__thiscall*)(InventoryGrid* self, nlohmann::json* result)>(getFuncAddr((int)Func::InventoryGrid::save))(this, &result);
 			return result;
+		}
+		inline static void renderInit()
+		{
+			return reinterpret_cast<void(__fastcall*)()>(getFuncAddr((int)Func::InventoryGrid::renderInit))();
 		}
 	};
 }

@@ -81,7 +81,7 @@ namespace fdm::stl
             }
         }
     public:
-        uint8_t data[16];
+        uint8_t data[16]{};
 
         typedef uint8_t* iterator;
         typedef uint8_t const* const_iterator;

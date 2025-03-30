@@ -31,9 +31,9 @@ namespace fdm
 			this->texture = texture;
 			this->shader = shader;
 		}
-		TexRenderer& operator=(const TexRenderer& other) 
+		TexRenderer& operator=(TexRenderer&& other)
 		{
-			reinterpret_cast<TexRenderer& (__thiscall*)(TexRenderer* self, const TexRenderer& other)>(getFuncAddr((int)Func::TexRenderer::operatorEq))(this, other);
+			reinterpret_cast<TexRenderer& (__thiscall*)(TexRenderer* self, TexRenderer& other)>(getFuncAddr((int)Func::TexRenderer::operatorEq))(this, other);
 			return *this;
 		}
 		bool init() 
@@ -48,7 +48,7 @@ namespace fdm
 		{
 			glBindVertexArray(VAO);
 
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[4]);
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[VBO_COLOR]);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, colors, GL_STATIC_DRAW);
 
 			glBindVertexArray(0);
@@ -72,9 +72,8 @@ namespace fdm
 		// thx compiler for removing that and thx to mashpoe for telling me that it exists
 		void render()
 		{
-			glActiveTexture(GL_TEXTURE0);
 			glUseProgram(shader->id());
-			glBindTexture(GL_TEXTURE_2D, texture->ID);
+			texture->use();
 			glBindVertexArray(VAO);
 			glDrawElements(4, 6, GL_UNSIGNED_INT, NULL);
 			glBindVertexArray(0);

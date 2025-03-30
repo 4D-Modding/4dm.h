@@ -2,10 +2,9 @@
 
 namespace fdm::Connection
 {
-	class MessageData
+	struct MessageData
 	{
-	public:
-		unsigned short type = 0;
+		uint16_t type = 0;
 		char content[];
 	};
 }

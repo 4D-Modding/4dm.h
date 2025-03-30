@@ -7,17 +7,17 @@ namespace fdm
 	class ItemMaterial : public Item 
 	{
 	public:
-		inline static const int STACK_MAX = 4096; 
+		inline static constexpr const int STACK_MAX = 4096;
 		stl::string name; // 0x10
-		inline static TexRenderer* tr = reinterpret_cast<TexRenderer*>((base + 0x2BF0A8));
-		inline static glm::u8vec4* barTUV = reinterpret_cast<glm::u8vec4*>((base + 0x2AD220));
-		inline static MeshRenderer *hypersilkRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2795C0)); 
-		inline static MeshRenderer *rockRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2795E0)); 
-		inline static MeshRenderer *barRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279580)); 
-		inline static MeshRenderer *kleinBottleRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279560)); 
-		inline static MeshRenderer *healthPotionRenderer = reinterpret_cast<MeshRenderer*>((base + 0x2795A0)); 
-		inline static MeshRenderer *glassesFrameRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279600)); 
-		inline static MeshRenderer *glassesLensRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279620)); 
+		inline static TexRenderer& tr = *reinterpret_cast<TexRenderer*>(getDataAddr((int)Data::ItemMaterial::tr));
+		inline static std::array<const glm::u8vec4, 64>& barTUV = *reinterpret_cast<std::array<const glm::u8vec4, 64>*>(getDataAddr((int)Data::ItemMaterial::barTUV));
+		inline static MeshRenderer& hypersilkRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemMaterial::hypersilkRenderer));
+		inline static MeshRenderer& rockRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemMaterial::rockRenderer));
+		inline static MeshRenderer& barRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemMaterial::barRenderer));
+		inline static MeshRenderer& kleinBottleRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemMaterial::kleinBottleRenderer));
+		inline static MeshRenderer& healthPotionRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemMaterial::healthPotionRenderer));
+		inline static MeshRenderer& glassesFrameRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemMaterial::glassesFrameRenderer));
+		inline static MeshRenderer& glassesLensRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemMaterial::glassesLensRenderer));
 
 		uint32_t getStackLimit() override
 		{
@@ -52,11 +52,33 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(ItemMaterial* self, World* world, Player* player, int action)>(getFuncAddr((int)Func::ItemMaterial::postAction))(this, world, player, action);
 		}
+		bool breakBlock(World* world, Player* player, uint8_t block, const glm::ivec4& blockPos) override
+		{
+			return reinterpret_cast<bool(__thiscall*)(ItemMaterial * self, World*, Player*, uint8_t, const glm::ivec4&)>(getFuncAddr((int)Func::ItemMaterial::breakBlock))(this, world, player, block, blockPos);
+		}
+		bool entityAction(World* world, Player* player, Entity* entity, int action) override
+		{
+			return reinterpret_cast<bool(__thiscall*)(ItemMaterial * self, World*, Player*, Entity*, int)>(getFuncAddr((int)Func::ItemMaterial::entityAction))(this, world, player, entity, action);
+		}
 		std::unique_ptr<Item> clone() override
 		{
 			std::unique_ptr<Item> result;
-			reinterpret_cast<std::unique_ptr<Item>* (__thiscall*)(ItemMaterial* self, std::unique_ptr<Item>* result)>(getFuncAddr((int)Func::ItemMaterial::clone))(this, &result);
+			reinterpret_cast<std::unique_ptr<Item>& (__thiscall*)(ItemMaterial* self, std::unique_ptr<Item>* result)>(getFuncAddr((int)Func::ItemMaterial::clone))(this, &result);
 			return result;
+		}
+		nlohmann::json saveAttributes() override
+		{
+			nlohmann::json result;
+			reinterpret_cast<nlohmann::json& (__thiscall*)(ItemMaterial * self, nlohmann::json * result)>(getFuncAddr((int)Func::ItemMaterial::saveAttributes))(this, &result);
+			return result;
+		}
+		inline static void initGlassesMesh()
+		{
+			return reinterpret_cast<void(__fastcall*)()>(getFuncAddr((int)Func::ItemMaterial::initGlassesMesh))();
+		}
+		inline static void renderInit()
+		{
+			return reinterpret_cast<void(__fastcall*)()>(getFuncAddr((int)Func::ItemMaterial::renderInit))();
 		}
 	};
 }

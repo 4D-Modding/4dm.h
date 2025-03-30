@@ -8,6 +8,7 @@
 #include "MeshRenderer.h"
 #include "TexRenderer.h"
 #include "FontRenderer.h"
+#include "World.h"
 
 namespace fdm 
 {
@@ -19,23 +20,29 @@ namespace fdm
 	class MeshRenderer;
 	class TexRenderer;
 	class FontRenderer;
-	class World;
 	class Item;
 
 	class Player 
 	{
 	public:
-		inline static const float Z_NEAR = 0.003f; 
-		inline static const float Z_FAR = 1000.f; 
-		inline static const float HEIGHT = 1.8f; 
-		inline static const float ACC = 25.f; 
-		inline static const float FRIC = 15.f; 
-		inline static const float MAX_WALK_SPEED = 5.f; 
-		inline static const float MAX_CROUCH_SPEED = 2.f; 
-		inline static const float MAX_SPRINT_SPEED = 8.f; 
-		inline static const float JUMP_VEL = 12.f; 
-		inline static const float DAMAGE_COOLDOWN = 1.2f; 
-		inline static const glm::ivec4* defaultSpawnPos = reinterpret_cast<const glm::ivec4*>((base + 0x2B3508));
+		inline static constexpr const float Z_NEAR = 0.003f;
+		inline static constexpr const float Z_FAR = 1000;
+		inline static constexpr const float HEIGHT = 1.8f;
+		inline static constexpr const float ACC = 25;
+		inline static constexpr const float FRIC = 15;
+		inline static constexpr const float MAX_WALK_SPEED = 5;
+		inline static constexpr const float MAX_CROUCH_SPEED = 2;
+		inline static constexpr const float MAX_SPRINT_SPEED = 8;
+		inline static constexpr const float JUMP_VEL = 12;
+		inline static constexpr const float DAMAGE_COOLDOWN = 1.2f;
+		inline static const glm::vec4& defaultSpawnPos = *reinterpret_cast<const glm::vec4*>(getDataAddr((int)Data::Player::defaultSpawnPos));
+		inline static constexpr const float maxHealth = 100;
+		inline static constexpr const float leftClickActionCooldown = 0.8f;
+		inline static constexpr const float rightClickActionCooldown = 0.5f;
+		inline static MeshRenderer& targetBlockRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::Player::targetBlockRenderer));
+		inline static TexRenderer& healthRenderer = *reinterpret_cast<TexRenderer*>(getDataAddr((int)Data::Player::healthRenderer));
+		inline static FontRenderer& fr = *reinterpret_cast<FontRenderer*>(getDataAddr((int)Data::Player::fr));
+
 		stl::uuid EntityPlayerID; 
 		struct 
 		{
@@ -108,17 +115,11 @@ namespace fdm
 		InventoryPlayer playerInventory; // 0x398
 		InventoryManager inventoryManager; // 0x3D8
 		bool shouldResetMouse; // 0x5D8
-		inline static const float maxHealth = 100.f; 
 		PAD(0x3);
 		float health; // 0x5DC
-		inline static const double leftClickActionCooldown = 0.8f;
-		inline static const double rightClickActionCooldown = 0.5f;
 		double leftClickActionTime; // 0x5E0
 		double rightClickActionTime; // 0x5E8
 		double damageTime; // 0x5F0
-		inline static MeshRenderer* targetBlockRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279640));
-		inline static TexRenderer* healthRenderer = reinterpret_cast<TexRenderer*>((base + 0x2BFA80));
-		inline static FontRenderer* fr = reinterpret_cast<FontRenderer*>((base + 0x279660));
 		int headBlock; // 0x5F8
 
 		~Player() 
@@ -249,7 +250,8 @@ namespace fdm
 		nlohmann::json save() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json& (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::save))(this, &result);
+			reinterpret_cast<nlohmann::json& (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::save))(this, &result);
+			return result;
 		}
 		void loadClientData(nlohmann::json& j) 
 		{
@@ -258,12 +260,83 @@ namespace fdm
 		nlohmann::json saveClientData() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json& (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::saveClientData))(this, &result);
+			reinterpret_cast<nlohmann::json& (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::saveClientData))(this, &result);
+			return result;
 		}
 		nlohmann::json saveOrientation() 
 		{
 			nlohmann::json result;
-			return reinterpret_cast<nlohmann::json& (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::saveOrientation))(this, &result);
+			reinterpret_cast<nlohmann::json& (__thiscall*)(Player* self, nlohmann::json* result)>(getFuncAddr((int)Func::Player::saveOrientation))(this, &result);
+			return result;
+		}
+		void renderInit(GLFWwindow* window)
+		{
+			return reinterpret_cast<void(__thiscall*)(Player * self, GLFWwindow*)>(getFuncAddr((int)Func::Player::renderInit))(this, window);
+		}
+
+		// only available for server
+		void applyMovementUpdate(const nlohmann::json& j)
+		{
+			return reinterpret_cast<void(__thiscall*)(Player * self, const nlohmann::json&)>(getFuncAddr((int)Func::Player::applyMovementUpdate))(this, j);
+		}
+
+		// only available for server
+		/*std::unique_ptr<Item>& getSelectedHotbarSlot()
+		{
+			return reinterpret_cast<std::unique_ptr<Item>&(__thiscall*)(Player * self)>(getFuncAddr((int)Func::Player::getSelectedHotbarSlot))(this);
+		}*/
+
+		std::unique_ptr<Item>& getSelectedHotbarSlot()
+		{
+			return hotbar.getSlot(hotbar.selectedIndex);
+		}
+
+		// only available for server
+		/*bool leftClickTimerReady()
+		{
+			return reinterpret_cast<bool(__thiscall*)(Player * self)>(getFuncAddr((int)Func::Player::leftClickTimerReady))(this);
+		}*/
+
+		// only available for server
+		/*bool rightClickTimerReady()
+		{
+			return reinterpret_cast<bool(__thiscall*)(Player * self)>(getFuncAddr((int)Func::Player::rightClickTimerReady))(this);
+		}*/
+
+		bool leftClickTimerReady()
+		{
+			return glfwGetTime() - leftClickActionTime >= leftClickActionCooldown;
+		}
+		bool rightClickTimerReady()
+		{
+			return glfwGetTime() - rightClickActionTime >= rightClickActionCooldown;
+		}
+
+		// only available for server
+		/*nlohmann::json saveInventory()
+		{
+			return reinterpret_cast<nlohmann::json(__thiscall*)(Player * self)>(getFuncAddr((int)Func::Player::saveInventory))(this);
+		}*/
+
+		nlohmann::json saveInventory()
+		{
+			return nlohmann::json
+			{
+				{ "hotbar", hotbar.save() },
+				{ "equipment", equipment.save() },
+				{ "inventory", inventory.save() }
+			};
+		}
+
+		// only available for server
+		/*void startBreakingBlock(World* world)
+		{
+			return reinterpret_cast<void(__thiscall*)(Player * self, World*)>(getFuncAddr((int)Func::Player::startBreakingBlock))(this, world);
+		}*/
+
+		void startBreakingBlock(World* world)
+		{
+			world->localPlayerEvent(this, Packet::C_BLOCK_BREAK_START, 0, nullptr);
 		}
 	};
 }

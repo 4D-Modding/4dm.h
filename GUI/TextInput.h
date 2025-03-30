@@ -35,6 +35,10 @@ namespace fdm::gui
 		void* user; // 0x80
 		TextInputCallback callback = NULL; // 0x88
 
+		void setText(const stl::string& text)
+		{
+			this->text = text;
+		}
 		void render(gui::Window* w) override
 		{
 			return reinterpret_cast<void (__thiscall*)(gui::TextInput* self, gui::Window* w)>(getFuncAddr((int)Func::gui::TextInput::render))(this, w);

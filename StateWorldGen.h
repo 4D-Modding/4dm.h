@@ -7,18 +7,18 @@ namespace fdm
 	class StateWorldGen : public State 
 	{
 	public:
-		inline static StateWorldGen* instanceObj = reinterpret_cast<StateWorldGen*>((base + 0x279EB0));
+		inline static StateWorldGen& instanceObj = *reinterpret_cast<StateWorldGen*>(getDataAddr((int)Data::StateWorldGen::instanceObj));
 		glm::mat4 projection2D; // 0x8
 		glm::mat4 projection3D; // 0x48
 		float displayProgress; // 0x88
 		PAD(0x4);
 		FontRenderer font; // 0x90
-		Shader* shapeShader; // 0x130
+		const Shader* shapeShader; // 0x130
 		MeshRenderer shapeRenderer; // 0x138
 		uint32_t mvID; // 0x158
 		float rotation; // 0x15C
 		QuadRenderer qr; // 0x160
-		Shader* qs; // 0x188
+		const Shader* qs; // 0x188
 
 		void updateProjection(int width, int height) 
 		{

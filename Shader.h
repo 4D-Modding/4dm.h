@@ -13,7 +13,7 @@ namespace fdm
 			GEOMETRY_SHADER = GL_GEOMETRY_SHADER,
 			FRAGMENT_SHADER = GL_FRAGMENT_SHADER
 		};
-		unsigned int ID;
+		uint32_t ID;
 		// thank you mashed potatoes for this
 		bool load(const stl::string& vertexPath, const stl::string& geometryPath, const stl::string& fragmentPath)
 		{
@@ -58,13 +58,13 @@ namespace fdm
 				getFuncAddr((int)Func::Shader::load)
 				)(this, vertexPath, fragmentPath);
 		}
-		unsigned int compileShader(const stl::string& path, shaderType type) const
+		uint32_t compileShader(const stl::string& path, shaderType type) const
 		{
 			return reinterpret_cast<unsigned int(__thiscall*)(const Shader*, const stl::string & path, shaderType fragmentPath)>(
 				getFuncAddr((int)Func::Shader::compileShader)
 				)(this, path, type);
 		}
-		unsigned int id() const
+		uint32_t id() const
 		{
 			return ID;
 		}

@@ -7,14 +7,14 @@ namespace fdm
 	class ResourceManager 
 	{
 	public:
-		inline static std::unordered_map<stl::string,Tex2D *>* textures = reinterpret_cast<std::unordered_map<stl::string,Tex2D *>*>((base + 0x2C40F0));
+		inline static std::unordered_map<stl::string, Tex2D*>& textures = *reinterpret_cast<std::unordered_map<stl::string, Tex2D*>*>(getDataAddr((int)Data::ResourceManager::textures));
 
 		inline static const Tex2D* get(const stl::string& filename, const stl::string& folderOverride)
 		{
 			stl::string path = (std::filesystem::path(folderOverride) / filename).string();
 
-			if (textures->contains(path))
-				return textures->at(path);
+			if (textures.contains(path))
+				return textures.at(path);
 
 			Tex2D* tex = new Tex2D();
 			tex->ID = 0;
@@ -28,7 +28,7 @@ namespace fdm
 				tex = nullptr;
 			}
 
-			textures->insert({ path, tex });
+			textures[path] = tex;
 			return tex;
 		}
 

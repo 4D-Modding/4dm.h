@@ -8,8 +8,8 @@ namespace fdm
 	{
 	public:
 		ChunkLoader chunkLoader; // 0x1D0
-		std::atomic_bool chunksReady; // 0x270
-		std::atomic_bool shouldStopLoading; // 0x271
+		std::atomic<bool> chunksReady; // 0x270
+		std::atomic<bool> shouldStopLoading; // 0x271
 		PAD(0x6);
 		std::vector<Chunk*> newChunks; // 0x278
 		std::mutex updatedNeighborsMutex; // 0x290
@@ -24,6 +24,10 @@ namespace fdm
 		~WorldSingleplayer() override
 		{
 			reinterpret_cast<void(__thiscall*)(WorldSingleplayer* self)>(getFuncAddr((int)Func::WorldSingleplayer::destr_WorldSingleplayer))(this);
+		}
+		World::Type getType() override
+		{
+			return reinterpret_cast<World::Type(__thiscall*)(WorldSingleplayer * self)>(getFuncAddr((int)Func::WorldSingleplayer::getType))(this);
 		}
 		void localPlayerEvent(Player* player, Packet::ClientPacket eventType, int64_t eventValue, void* data) override
 		{

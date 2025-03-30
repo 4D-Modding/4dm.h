@@ -7,10 +7,10 @@ namespace fdm
 	class StateMultiplayer : public State 
 	{
 	public:
-		inline static StateMultiplayer* instanceObj = reinterpret_cast<StateMultiplayer*>((base + 0x2BF0D0));
+		inline static StateMultiplayer& instanceObj = *reinterpret_cast<StateMultiplayer*>(getDataAddr((int)Data::StateMultiplayer::instanceObj));
 		FontRenderer font; // 0x8
 		QuadRenderer qr; // 0xA8
-		Shader* qs; // 0xD0
+		const Shader* qs; // 0xD0
 		std::shared_ptr<Connection::Client> client; // 0xD8
 		std::unique_ptr<WorldClient> world; // 0xE8
 		bool loggedIn; // 0xF0

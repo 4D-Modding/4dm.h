@@ -22,6 +22,18 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, gui::Window* w)>(getFuncAddr((int)Func::PlayerSkinViewer::render))(this, w);
 		}
+		bool mouseButtonInput(const gui::Window* w, int button, int action, int mods)
+		{
+			return reinterpret_cast<bool(__thiscall*)(PlayerSkinViewer * self, const gui::Window*, int, int, int)>(getFuncAddr((int)Func::PlayerSkinViewer::mouseButtonInput))(this, w, button, action, mods);
+		}
+		void offsetX(int offset)
+		{
+			return reinterpret_cast<void(__thiscall*)(PlayerSkinViewer * self, int)>(getFuncAddr((int)Func::PlayerSkinViewer::offsetX))(this, offset);
+		}
+		void offsetY(int offset)
+		{
+			return reinterpret_cast<void(__thiscall*)(PlayerSkinViewer * self, int)>(getFuncAddr((int)Func::PlayerSkinViewer::offsetY))(this, offset);
+		}
 		void alignX(gui::AlignmentX a) override
 		{
 			return reinterpret_cast<void (__thiscall*)(PlayerSkinViewer* self, gui::AlignmentX a)>(getFuncAddr((int)Func::PlayerSkinViewer::alignX))(this, a);

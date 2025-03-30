@@ -10,7 +10,7 @@ namespace fdm
 	class EntityManager 
 	{
 	public:
-		std::unordered_map<stl::uuid,std::unique_ptr<Entity>> entities;
+		std::unordered_map<stl::uuid, std::unique_ptr<Entity>> entities;
 		std::unordered_map<glm::ivec4,stl::uuid> blockEntities; // 0x40
 
 		std::unique_ptr<Entity>* extract(const stl::uuid& id) 
@@ -20,6 +20,10 @@ namespace fdm
 		Entity* get(const stl::uuid& id) 
 		{
 			return reinterpret_cast<Entity* (__thiscall*)(EntityManager* self, const stl::uuid& id)>(getFuncAddr((int)Func::EntityManager::get))(this, id);
+		}
+		void relocateBlockEntities()
+		{
+			return reinterpret_cast<void(__thiscall*)(EntityManager * self)>(getFuncAddr((int)Func::EntityManager::relocateBlockEntities))(this);
 		}
 		Entity* getBlockEntity(const glm::ivec4& pos) 
 		{

@@ -7,12 +7,12 @@ namespace fdm
 	class StatePause : public State 
 	{
 	public:
-		inline static StatePause* instanceObj = reinterpret_cast<StatePause*>((base + 0x2BF7D0));
+		inline static StatePause& instanceObj = *reinterpret_cast<StatePause*>(getDataAddr((int)Data::StatePause::instanceObj));
 		bool paused; // 0x8
 		PAD(0x7);
 		FontRenderer font; // 0x10
 		QuadRenderer qr; // 0xB0
-		Shader* qs; // 0xD8
+		const Shader* qs; // 0xD8
 		gui::Interface ui; // 0xE0
 		bool updateViewFlag; // 0x148
 		PAD(0x7);
@@ -48,6 +48,42 @@ namespace fdm
 		void windowResize(StateManager& s, int width, int height) override
 		{
 			return reinterpret_cast<void (__thiscall*)(StatePause* self, StateManager& s, int width, int height)>(getFuncAddr((int)Func::StatePause::windowResize))(this, s, width, height);
+		}
+		void close(StateManager& s) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StatePause * self, StateManager&)>(getFuncAddr((int)Func::StatePause::close))(this, s);
+		}
+		void init(StateManager& s) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StatePause * self, StateManager&)>(getFuncAddr((int)Func::StatePause::init))(this, s);
+		}
+		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StatePause * self, StateManager&, int, int, int, int)>(getFuncAddr((int)Func::StatePause::keyInput))(this, s, key, scancode, action, mods);
+		}
+		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StatePause * self, StateManager&, int, int, int)>(getFuncAddr((int)Func::StatePause::mouseButtonInput))(this, s, button, action, mods);
+		}
+		void mouseInput(StateManager& s, double xpos, double ypos) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StatePause * self, StateManager&, double, double)>(getFuncAddr((int)Func::StatePause::mouseInput))(this, s, xpos, ypos);
+		}
+		void scrollInput(StateManager& s, double xoffset, double yoffset) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StatePause * self, StateManager&, double, double)>(getFuncAddr((int)Func::StatePause::scrollInput))(this, s, xoffset, yoffset);
+		}
+		inline static void quitButtonCallback(void* user)
+		{
+			return reinterpret_cast<void(__fastcall*)(void*)>(getFuncAddr((int)Func::StatePause::quitButtonCallback))(user);
+		}
+		inline static void returnButtonCallback(void* user)
+		{
+			return reinterpret_cast<void(__fastcall*)(void*)>(getFuncAddr((int)Func::StatePause::returnButtonCallback))(user);
+		}
+		inline static void settingsButtonCallback(void* user)
+		{
+			return reinterpret_cast<void(__fastcall*)(void*)>(getFuncAddr((int)Func::StatePause::settingsButtonCallback))(user);
 		}
 	};
 }

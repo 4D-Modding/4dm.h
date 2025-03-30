@@ -4,7 +4,7 @@
 #include "ElemContainer.h"
 #include "Element.h"
 
-#include "../glfw.h"
+#include "../glfw/glfw.h"
 
 namespace fdm
 {

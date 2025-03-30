@@ -11,26 +11,24 @@ namespace fdm
 		struct Face 
 		{
 			glm::vec3 center; 
-			glm::vec3* edges; // 0xC
-			glm::vec3* verts; // 0x48
+			glm::vec3 edges[5]; // 0xC
+			glm::vec3 verts[5]; // 0x48
 			glm::vec3 normal; // 0x84
 
 		};
 		struct Face4D 
 		{
 			glm::vec4 center; 
-			glm::vec4* edges; // 0x10
-			glm::vec4* verts; // 0x60
-
+			glm::vec4 edges[5]; // 0x10
+			glm::vec4 verts[5]; // 0x60
 		};
 		struct Cell 
 		{
 			glm::vec4 center; 
-			Dodecaplex::Face4D* faces; // 0x10
+			Dodecaplex::Face4D faces[12]; // 0x10
 			glm::vec4 normal; // 0x850
-
 		};
-		inline static const float radius = 3.702459f; 
+		inline static constexpr const float radius = 3.702459f; 
 		std::vector<glm::vec4> v; // 0x8
 		std::vector<glm::vec3> t; // 0x20
 		bool usingNormals; // 0x38
@@ -61,23 +59,34 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, std::vector<glm::vec3>& colors)>(getFuncAddr((int)Func::Dodecaplex::generateCellColors))(this, colors);
 		}
-		void addFaces(Dodecaplex::Face* face, std::vector<DodecaplexWireframe::Face>* list, int recurse_limit) 
+		void addFaces(Dodecaplex::Face* face, std::vector<DodecaplexWireframe::Face>& list, int recurse_limit) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, Dodecaplex::Face* face, std::vector<DodecaplexWireframe::Face>* list, int recurse_limit)>(getFuncAddr((int)Func::Dodecaplex::addFaces))(this, face, list, recurse_limit);
+			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, Dodecaplex::Face* face, std::vector<DodecaplexWireframe::Face>& list, int recurse_limit)>(getFuncAddr((int)Func::Dodecaplex::addFaces))(this, face, list, recurse_limit);
 		}
-		void addCells(Dodecaplex::Cell* cell, std::vector<DodecaplexWireframe::Cell>* list, int recurse_limit) 
+		void addCells(Dodecaplex::Cell* cell, std::vector<DodecaplexWireframe::Cell>& list, int recurse_limit) 
 		{
-			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, Dodecaplex::Cell* cell, std::vector<DodecaplexWireframe::Cell>* list, int recurse_limit)>(getFuncAddr((int)Func::Dodecaplex::addCells))(this, cell, list, recurse_limit);
+			return reinterpret_cast<void (__thiscall*)(Dodecaplex* self, Dodecaplex::Cell* cell, std::vector<DodecaplexWireframe::Cell>& list, int recurse_limit)>(getFuncAddr((int)Func::Dodecaplex::addCells))(this, cell, list, recurse_limit);
 		}
 		~Dodecaplex() 
 		{
 			reinterpret_cast<void(__thiscall*)(Dodecaplex* self)>(getFuncAddr((int)Func::Dodecaplex::destr_Dodecaplex))(this);
 		}
-
-		int attrCount(int buffIndex) const { return 0; }
-		unsigned int attrType(int buffIndex, int attrIndex) const { return 0; }
-		int attrStride(int buffIndex, int attrIndex) const { return 0; }
-		int vertCount() const { return 0; }
+		int attrCount(int buffIndex) const override
+		{
+			return reinterpret_cast<int(__thiscall*)(const Dodecaplex * self, int)>(getFuncAddr((int)Func::Dodecaplex::attrCount))(this, buffIndex);
+		}
+		uint32_t attrType(int buffIndex, int attrIndex) const override
+		{
+			return reinterpret_cast<uint32_t(__thiscall*)(const Dodecaplex * self, int, int)>(getFuncAddr((int)Func::Dodecaplex::attrType))(this, buffIndex, attrIndex);
+		}
+		int attrStride(int buffIndex, int attrIndex) const override
+		{
+			return reinterpret_cast<int(__thiscall*)(const Dodecaplex * self, int, int)>(getFuncAddr((int)Func::Dodecaplex::attrStride))(this, buffIndex, attrIndex);
+		}
+		int vertCount() const override
+		{
+			return reinterpret_cast<int(__thiscall*)(const Dodecaplex * self)>(getFuncAddr((int)Func::Dodecaplex::vertCount))(this);
+		}
 		const void* indexBuffData() const { return nullptr; }
 		int indexBuffSize() const { return 0; }
 	};

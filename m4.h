@@ -37,6 +37,8 @@ namespace fdm
 			{
 				float l = glm::sqrt((b01 * b01) + (b02 * b02) + (b03 * b03) + (b12 * b12) + (b13 * b13) + (b23 * b23));
 
+				if (l == 0) return;
+
 				b01 /= l;
 				b02 /= l;
 				b03 /= l;
@@ -100,8 +102,8 @@ namespace fdm
 			Rotor() { }
 			Rotor(const BiVector4& plane, float radians)
 			{
-				float cosHalf = std::cosf(radians * 0.5f);
-				float sinHalf = std::sinf(radians * 0.5f);
+				float cosHalf = glm::cos(radians * 0.5f);
+				float sinHalf = glm::sin(radians * 0.5f);
 
 				a = cosHalf;
 
@@ -250,6 +252,8 @@ namespace fdm
 			{
 				float l = glm::sqrt(a * a + b.xy * b.xy + b.xz * b.xz + b.xw * b.xw +
 					b.yz * b.yz + b.yw * b.yw + b.zw * b.zw + b0123 * b0123);
+
+				if (l == 0) return;
 
 				a /= l;
 				b.xy /= l;
@@ -493,25 +497,45 @@ namespace fdm
 				)(&result, vel, deltaVel, maxHorizSpeed);
 		}
 
-		inline nlohmann::json i64vec3ToJson(const glm::i64vec3& vec)
-		{
-			return reinterpret_cast<nlohmann::json(__fastcall*)(const glm::i64vec3 & vec)>(getFuncAddr((int)Func::m4::i64vec3ToJson))(vec);
-		}
-		inline nlohmann::json ivec4ToJson(const glm::ivec4& vec)
-		{
-			return reinterpret_cast<nlohmann::json(__fastcall*)(const glm::ivec4 & vec)>(getFuncAddr((int)Func::m4::ivec4ToJson))(vec);
-		}
+		//inline nlohmann::json i64vec3ToJson(const glm::i64vec3& vec)
+		//{
+		//	return reinterpret_cast<nlohmann::json(__fastcall*)(const glm::i64vec3 & vec)>(getFuncAddr((int)Func::m4::i64vec3ToJson))(vec);
+		//}
+		//inline nlohmann::json ivec4ToJson(const glm::ivec4& vec)
+		//{
+		//	return reinterpret_cast<nlohmann::json(__fastcall*)(const glm::ivec4 & vec)>(getFuncAddr((int)Func::m4::ivec4ToJson))(vec);
+		//}
 		//inline glm::ivec4 ivec4FromJson(const nlohmann::json& j)
 		//{
 		//	return reinterpret_cast<glm::ivec4(__fastcall*)(const nlohmann::json & j)>(FUNC_M4_IVEC4FROMJSON)(j);
 		//}
-		inline nlohmann::json vec4ToJson(const glm::vec4& vec)
+		//inline nlohmann::json vec4ToJson(const glm::vec4& vec)
+		//{
+		//	return reinterpret_cast<nlohmann::json(__fastcall*)(const glm::vec4 & vec)>(getFuncAddr((int)Func::m4::vec4ToJson))(vec);
+		//}
+		//inline glm::vec4 vec4FromJson(const nlohmann::json& j)
+		//{
+		//	return reinterpret_cast<glm::vec4(__fastcall*)(const nlohmann::json & j)>(getFuncAddr((int)Func::m4::vec4FromJson))(j);
+		//}
+		template<typename T>
+		inline nlohmann::json vec3ToJson(const glm::vec<3, T>& v)
 		{
-			return reinterpret_cast<nlohmann::json(__fastcall*)(const glm::vec4 & vec)>(getFuncAddr((int)Func::m4::vec4ToJson))(vec);
+			return nlohmann::json{ v.x, v.y, v.z };
 		}
-		inline glm::vec4 vec4FromJson(const nlohmann::json& j)
+		template<typename T>
+		inline nlohmann::json vec4ToJson(const glm::vec<4, T>& v)
 		{
-			return reinterpret_cast<glm::vec4(__fastcall*)(const nlohmann::json & j)>(getFuncAddr((int)Func::m4::vec4FromJson))(j);
+			return nlohmann::json{ v.x, v.y, v.z, v.w };
+		}
+		template<typename T>
+		inline glm::vec<3, T> vec3FromJson(const nlohmann::json& j)
+		{
+			return glm::vec<3, T>{ j[0].get<T>(), j[1].get<T>(), j[2].get<T>() };
+		}
+		template<typename T>
+		inline glm::vec<4, T> vec4FromJson(const nlohmann::json& j)
+		{
+			return glm::vec<4, T>{ j[0].get<T>(), j[1].get<T>(), j[2].get<T>(), j[3].get<T>() };
 		}
 
 		inline void printMat5(const Mat5& m)

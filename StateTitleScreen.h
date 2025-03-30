@@ -7,7 +7,7 @@ namespace fdm
 	class StateTitleScreen : public State 
 	{
 	public:
-		inline static StateTitleScreen* instanceObj = reinterpret_cast<StateTitleScreen*>((base + 0x2C1980));
+		inline static StateTitleScreen& instanceObj = *reinterpret_cast<StateTitleScreen*>(getDataAddr((int)Data::StateTitleScreen::instanceObj));
 		glm::mat4 projection2D; // 0x8
 		glm::mat4 projection3D; // 0x48
 		bool paused; // 0x88
@@ -15,11 +15,11 @@ namespace fdm
 		float displayProgress; // 0x8C
 		FontRenderer font; // 0x90
 		QuadRenderer qr; // 0x130
-		Shader* qs; // 0x158
+		const Shader* qs; // 0x158
 		TexRenderer logoRenderer; // 0x160
 		float rotation; // 0x188
 		PAD(0x4);
-		std::unique_ptr<WorldTitleScreen,std::default_delete<WorldTitleScreen> > bgWorld; // 0x190
+		std::unique_ptr<WorldTitleScreen> bgWorld; // 0x190
 		glm::ivec3 spawnChunk; // 0x198
 		glm::vec4 bgPos; // 0x1A4
 		glm::vec3 skyColorTop; // 0x1B4

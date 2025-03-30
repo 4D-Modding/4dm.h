@@ -7,11 +7,11 @@ namespace fdm
 	class StateSkinChooser : public State 
 	{
 	public:
-		inline static const stl::string* defaultSkinPath = reinterpret_cast<const stl::string*>((base + 0x2C0F40));
-		inline static StateSkinChooser* instanceObj = reinterpret_cast<StateSkinChooser*>((base + 0x2C0F60));
+		inline static const stl::string& defaultSkinPath = *reinterpret_cast<const stl::string*>(getDataAddr((int)Data::StateSkinChooser::defaultSkinPath));
+		inline static StateSkinChooser& instanceObj = *reinterpret_cast<StateSkinChooser*>(getDataAddr((int)Data::StateSkinChooser::instanceObj));
 		FontRenderer font; // 0x8
 		QuadRenderer qr; // 0xA8
-		Shader* qs; // 0xD0
+		const Shader* qs; // 0xD0
 		gui::Interface ui; // 0xD8
 		bool updateViewFlag; // 0x140
 		PAD(0x7);
@@ -52,6 +52,14 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateSkinChooser::chooseFileButtonCallback))(user);
 		}
+		inline static void okButtonCallback(void* user)
+		{
+			return reinterpret_cast<void(__fastcall*)(void*)>(getFuncAddr((int)Func::StateSkinChooser::okButtonCallback))(user);
+		}
+		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StateSkinChooser * self, StateManager&, int, int, int)>(getFuncAddr((int)Func::StateSkinChooser::mouseButtonInput))(this, s, button, action, mods);
+		}
 		void init(StateManager& s) override
 		{
 			return reinterpret_cast<void (__thiscall*)(StateSkinChooser* self, StateManager& s)>(getFuncAddr((int)Func::StateSkinChooser::init))(this, s);
@@ -79,7 +87,7 @@ namespace fdm
 		Connection::OutMessage getSkinMessage() 
 		{
 			Connection::OutMessage result;
-			reinterpret_cast<Connection::OutMessage* (__thiscall*)(StateSkinChooser* self, Connection::OutMessage* result)>(getFuncAddr((int)Func::StateSkinChooser::getSkinMessage))(this, &result);
+			reinterpret_cast<Connection::OutMessage& (__thiscall*)(StateSkinChooser* self, Connection::OutMessage* result)>(getFuncAddr((int)Func::StateSkinChooser::getSkinMessage))(this, &result);
 			return result;
 		}
 		bool loadSkin(const stl::path& p) 

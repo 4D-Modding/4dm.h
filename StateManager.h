@@ -10,6 +10,10 @@ namespace fdm
 	public:
 		std::vector<State *> states; 
 		GLFWwindow* window; // 0x18
+		~StateManager()
+		{
+			reinterpret_cast<void(__thiscall*)(StateManager * self)>(getFuncAddr((int)Func::StateManager::destr_StateManager))(this);
+		}
 
 		void pushState(State* state) 
 		{

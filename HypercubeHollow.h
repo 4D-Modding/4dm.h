@@ -15,13 +15,37 @@ namespace fdm
 		};
 		std::vector<HypercubeHollow::VertData> vertices; // 0x8
 
+		int attrCount(int buffIndex) const override
+		{
+			return reinterpret_cast<int(__thiscall*)(const HypercubeHollow * self, int)>(getFuncAddr((int)Func::HypercubeHollow::attrCount))(this, buffIndex);
+		}
 		int attrSize(int buffIndex, int attrIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(const HypercubeHollow* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::HypercubeHollow::attrSize))(this, buffIndex, attrIndex);
+			return reinterpret_cast<int(__thiscall*)(const HypercubeHollow * self, int, int)>(getFuncAddr((int)Func::HypercubeHollow::attrSize))(this, buffIndex, attrIndex);
 		}
-		int attrStride(int buffIndex, int attriIdex) const override
+		int attrStride(int buffIndex, int attrIndex) const override
 		{
-			return reinterpret_cast<int (__thiscall*)(const HypercubeHollow* self, int buffIndex, int attriIdex)>(getFuncAddr((int)Func::HypercubeHollow::attrStride))(this, buffIndex, attriIdex);
+			return reinterpret_cast<int(__thiscall*)(const HypercubeHollow * self, int, int)>(getFuncAddr((int)Func::HypercubeHollow::attrStride))(this, buffIndex, attrIndex);
+		}
+		uint32_t attrType(int buffIndex, int attrIndex) const override
+		{
+			return reinterpret_cast<uint32_t(__thiscall*)(const HypercubeHollow * self, int, int)>(getFuncAddr((int)Func::HypercubeHollow::attrType))(this, buffIndex, attrIndex);
+		}
+		int buffCount() const override
+		{
+			return reinterpret_cast<int(__thiscall*)(const HypercubeHollow * self)>(getFuncAddr((int)Func::HypercubeHollow::buffCount))(this);
+		}
+		const void* buffData(int buffIndex) const override
+		{
+			return reinterpret_cast<const void* (__thiscall*)(const HypercubeHollow * self, int)>(getFuncAddr((int)Func::HypercubeHollow::buffData))(this, buffIndex);
+		}
+		int buffSize(int buffIndex) const override
+		{
+			return reinterpret_cast<int(__thiscall*)(const HypercubeHollow * self, int)>(getFuncAddr((int)Func::HypercubeHollow::buffSize))(this, buffIndex);
+		}
+		int vertCount() const override
+		{
+			return reinterpret_cast<int(__thiscall*)(const HypercubeHollow * self)>(getFuncAddr((int)Func::HypercubeHollow::vertCount))(this);
 		}
 		HypercubeHollow(float distance) 
 		{

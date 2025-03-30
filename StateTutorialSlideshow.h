@@ -7,18 +7,18 @@ namespace fdm
 	class StateTutorialSlideshow : public State 
 	{
 	public:
-		inline static StateTutorialSlideshow* instanceObj = reinterpret_cast<StateTutorialSlideshow*>((base + 0x2C1E80));
+		inline static StateTutorialSlideshow& instanceObj = *reinterpret_cast<StateTutorialSlideshow*>(getDataAddr((int)Data::StateTutorialSlideshow::instanceObj));
+		inline static constexpr const int slide_box_count = 4;
 		bool updateViewFlag; // 0x8
 		PAD(0x7);
 		FontRenderer font; // 0x10
 		QuadRenderer qr; // 0xB0
-		Shader* qs; // 0xD8
+		const Shader* qs; // 0xD8
 		gui::Interface ui; // 0xE0
 		gui::Button continueButton; // 0x148
 		gui::Button backButton; // 0x1A0
 		gui::Button exitButton; // 0x1F8
-		inline static const int slide_box_count = 4; 
-		gui::ContentBox slides[4]; // 0x250
+		gui::ContentBox slides[slide_box_count]; // 0x250
 		int currentSlide; // 0x450
 		PAD(0x4);
 		gui::Text slide0_text1; // 0x458
@@ -96,6 +96,34 @@ namespace fdm
 		void setSlide(StateManager& s, int index) 
 		{
 			return reinterpret_cast<void (__thiscall*)(StateTutorialSlideshow* self, StateManager& s, int index)>(getFuncAddr((int)Func::StateTutorialSlideshow::setSlide))(this, s, index);
+		}
+		void charInput(StateManager& s, uint32_t codepoint) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow * self, StateManager&, uint32_t)>(getFuncAddr((int)Func::StateTutorialSlideshow::charInput))(this, s, codepoint);
+		}
+		void close(StateManager& s) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow * self, StateManager&)>(getFuncAddr((int)Func::StateTutorialSlideshow::close))(this, s);
+		}
+		void keyInput(StateManager& s, int key, int scancode, int action, int mods) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow * self, StateManager&, int, int, int, int)>(getFuncAddr((int)Func::StateTutorialSlideshow::keyInput))(this, s, key, scancode, action, mods);
+		}
+		void mouseButtonInput(StateManager& s, int button, int action, int mods) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow * self, StateManager&, int, int, int)>(getFuncAddr((int)Func::StateTutorialSlideshow::mouseButtonInput))(this, s, button, action, mods);
+		}
+		void mouseInput(StateManager& s, double xpos, double ypos) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow * self, StateManager&, double, double)>(getFuncAddr((int)Func::StateTutorialSlideshow::mouseInput))(this, s, xpos, ypos);
+		}
+		void scrollInput(StateManager& s, double xoffset, double yoffset) override
+		{
+			return reinterpret_cast<void(__thiscall*)(StateTutorialSlideshow * self, StateManager&, double, double)>(getFuncAddr((int)Func::StateTutorialSlideshow::scrollInput))(this, s, xoffset, yoffset);
+		}
+		inline static void exitButtonCallback(void* user)
+		{
+			return reinterpret_cast<void(__fastcall*)(void*)>(getFuncAddr((int)Func::StateTutorialSlideshow::exitButtonCallback))(user);
 		}
 	};
 }

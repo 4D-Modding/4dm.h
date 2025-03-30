@@ -8,24 +8,24 @@ namespace fdm
 	{
 	public:
 		stl::string name; // 0x10
-		inline static const float scaleFactor = 0.15f; 
-		inline static glm::vec4* pickaxeVerts = reinterpret_cast<glm::vec4*>((base + 0x29B600)); 
-		inline static glm::vec4* pickaxeNormals = reinterpret_cast<glm::vec4*>((base + 0x29BC40)); 
-		inline static glm::vec3* ironPickTUV = reinterpret_cast<glm::vec3*>((base + 0x29BA60)); 
-		inline static glm::vec3* deadlyPickTUV = reinterpret_cast<glm::vec3*>((base + 0x29B880)); 
-		inline static glm::u8vec4* ultrahammerTUV = reinterpret_cast<glm::u8vec4*>((base + 0x2AF3F0)); 
-		inline static glm::u8vec4* solenoidCollectorTUV = reinterpret_cast<glm::u8vec4*>((base + 0x2AF2F0)); 
-		inline static MeshRenderer *ironPickaxeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279D68)); 
-		inline static MeshRenderer *deadlyPickaxeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279D88)); 
-		inline static MeshRenderer *rockRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279E48)); 
-		inline static MeshRenderer *ultrahammerRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279E68)); 
-		inline static MeshRenderer *solenoidCollectorRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279DC8)); 
-		inline static Coil* coilMesh = reinterpret_cast<Coil*>((base + 0x2C1E48));
-		inline static MeshRenderer* coilRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279DA8));
-		inline static Dodecaplex* collectorBall = reinterpret_cast<Dodecaplex*>((base + 0x279DF0));
-		inline static MeshRenderer* collectorBallRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279E88));
-		inline static bool* collectorAnimation = reinterpret_cast<bool*>((base + 0x29B3E1));
-		inline static TexRenderer* tr = reinterpret_cast<TexRenderer*>((base + 0x2C1E20));
+		inline static constexpr const float scaleFactor = 0.15f;
+		inline static std::array<glm::vec4, 40>& pickaxeVerts = *reinterpret_cast<std::array<glm::vec4, 40>*>(getDataAddr((int)Data::ItemTool::pickaxeVerts));
+		inline static std::array<glm::vec4, 10>& pickaxeNormals = *reinterpret_cast<std::array<glm::vec4, 10>*>(getDataAddr((int)Data::ItemTool::pickaxeNormals));
+		inline static std::array<glm::vec3, 40>& ironPickTUV = *reinterpret_cast<std::array<glm::vec3, 40>*>(getDataAddr((int)Data::ItemTool::ironPickTUV));
+		inline static std::array<glm::vec3, 40>& deadlyPickTUV = *reinterpret_cast<std::array<glm::vec3, 40>*>(getDataAddr((int)Data::ItemTool::deadlyPickTUV));
+		inline static std::array<const glm::u8vec4, 64>& ultrahammerTUV = *reinterpret_cast<std::array<const glm::u8vec4, 64>*>(getDataAddr((int)Data::ItemTool::ultrahammerTUV));
+		inline static std::array<const glm::u8vec4, 64>& solenoidCollectorTUV = *reinterpret_cast<std::array<const glm::u8vec4, 64>*>(getDataAddr((int)Data::ItemTool::solenoidCollectorTUV));
+		inline static MeshRenderer& ironPickaxeRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemTool::ironPickaxeRenderer));
+		inline static MeshRenderer& deadlyPickaxeRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemTool::deadlyPickaxeRenderer));
+		inline static MeshRenderer& rockRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemTool::rockRenderer));
+		inline static MeshRenderer& ultrahammerRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemTool::ultrahammerRenderer));
+		inline static MeshRenderer& solenoidCollectorRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemTool::solenoidCollectorRenderer));
+		inline static Coil& coilMesh = *reinterpret_cast<Coil*>(getDataAddr((int)Data::ItemTool::coilMesh));
+		inline static MeshRenderer& coilRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemTool::coilRenderer));
+		inline static Dodecaplex& collectorBall = *reinterpret_cast<Dodecaplex*>(getDataAddr((int)Data::ItemTool::collectorBall));
+		inline static MeshRenderer& collectorBallRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::ItemTool::collectorBallRenderer));
+		inline static bool& collectorAnimation = *reinterpret_cast<bool*>(getDataAddr((int)Data::ItemTool::collectorAnimation));
+		inline static TexRenderer& tr = *reinterpret_cast<TexRenderer*>(getDataAddr((int)Data::ItemTool::tr));
 
 		void render(const glm::ivec2& pos) override
 		{
@@ -62,8 +62,22 @@ namespace fdm
 		std::unique_ptr<Item> clone() override
 		{
 			std::unique_ptr<Item> result;
-			reinterpret_cast<std::unique_ptr<Item>* (__thiscall*)(ItemTool* self, std::unique_ptr<Item>* result)>(getFuncAddr((int)Func::ItemTool::clone))(this, &result);
+			reinterpret_cast<std::unique_ptr<Item>& (__thiscall*)(ItemTool* self, std::unique_ptr<Item>* result)>(getFuncAddr((int)Func::ItemTool::clone))(this, &result);
 			return result;
+		}
+		stl::string getName() override
+		{
+			return reinterpret_cast<stl::string(__thiscall*)(ItemTool * self)>(getFuncAddr((int)Func::ItemTool::getName))(this);
+		}
+		nlohmann::json saveAttributes() override
+		{
+			nlohmann::json result;
+			reinterpret_cast<nlohmann::json& (__thiscall*)(ItemTool * self, nlohmann::json * result)>(getFuncAddr((int)Func::ItemTool::saveAttributes))(this, &result);
+			return result;
+		}
+		inline static void renderInit()
+		{
+			return reinterpret_cast<void(__fastcall*)()>(getFuncAddr((int)Func::ItemTool::renderInit))();
 		}
 	};
 }

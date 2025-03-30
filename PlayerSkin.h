@@ -26,7 +26,7 @@ namespace fdm
 			const glm::u8vec3 upperBound; 
 			const glm::u8vec3 lowerBound; // 0x3
 			const glm::u8vec3 origin; // 0x6
-			uint32_t zOffset; // 0x9
+			uint8_t zOffset; // 0x9
 
 		};
 		class SkinMesh : public Mesh 
@@ -34,17 +34,17 @@ namespace fdm
 		public:
 			struct Pixel 
 			{
-				uint32_t r; 
-				uint32_t g; // 0x1
-				uint32_t b; // 0x2
-				uint32_t a; // 0x3
+				uint8_t r; 
+				uint8_t g; // 0x1
+				uint8_t b; // 0x2
+				uint8_t a; // 0x3
 
 			};
 			struct VertInfo 
 			{
 				glm::vec4 vert; 
 				glm::vec3 tuv; // 0x10
-				int normalComp; // 0x1C
+				int8_t normalComp; // 0x1C
 
 			};
 			struct FaceInfo 
@@ -56,10 +56,6 @@ namespace fdm
 			std::vector<PlayerSkin::SkinMesh::VertInfo> verts; // 0x8
 			std::vector<uint32_t> indices; // 0x20
 
-			int vertCount() const override
-			{
-				return reinterpret_cast<int (__thiscall*)(const PlayerSkin::SkinMesh* self)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::vertCount))(this);
-			}
 			~SkinMesh() 
 			{
 				reinterpret_cast<void(__thiscall*)(PlayerSkin::SkinMesh* self)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::destr_SkinMesh))(this);
@@ -68,25 +64,49 @@ namespace fdm
 			{
 				return reinterpret_cast<void (__thiscall*)(PlayerSkin::SkinMesh* self, const PlayerSkin::SkinMesh::Pixel* data, PlayerSkin::SkinMesh* meshBounds)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::generate))(this, data, meshBounds);
 			}
-			int buffSize(int buffIndex) const override
-			{
-				return reinterpret_cast<int (__thiscall*)(const PlayerSkin::SkinMesh* self, int buffIndex)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::buffSize))(this, buffIndex);
-			}
 			int attrCount(int buffIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(const PlayerSkin::SkinMesh* self, int buffIndex)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::attrCount))(this, buffIndex);
-			}
-			uint32_t attrType(int buffIndex, int attrIndex) const override
-			{
-				return reinterpret_cast<uint32_t (__thiscall*)(const PlayerSkin::SkinMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::attrType))(this, buffIndex, attrIndex);
+				return reinterpret_cast<int(__thiscall*)(const PlayerSkin::SkinMesh * self, int)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::attrCount))(this, buffIndex);
 			}
 			int attrSize(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(const PlayerSkin::SkinMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::attrSize))(this, buffIndex, attrIndex);
+				return reinterpret_cast<int(__thiscall*)(const PlayerSkin::SkinMesh * self, int, int)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::attrSize))(this, buffIndex, attrIndex);
 			}
 			int attrStride(int buffIndex, int attrIndex) const override
 			{
-				return reinterpret_cast<int (__thiscall*)(const PlayerSkin::SkinMesh* self, int buffIndex, int attrIndex)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::attrStride))(this, buffIndex, attrIndex);
+				return reinterpret_cast<int(__thiscall*)(const PlayerSkin::SkinMesh * self, int, int)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::attrStride))(this, buffIndex, attrIndex);
+			}
+			uint32_t attrType(int buffIndex, int attrIndex) const override
+			{
+				return reinterpret_cast<uint32_t(__thiscall*)(const PlayerSkin::SkinMesh * self, int, int)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::attrType))(this, buffIndex, attrIndex);
+			}
+			int buffCount() const override
+			{
+				return reinterpret_cast<int(__thiscall*)(const PlayerSkin::SkinMesh * self)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::buffCount))(this);
+			}
+			const void* buffData(int buffIndex) const override
+			{
+				return reinterpret_cast<const void* (__thiscall*)(const PlayerSkin::SkinMesh * self, int)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::buffData))(this, buffIndex);
+			}
+			int buffSize(int buffIndex) const override
+			{
+				return reinterpret_cast<int(__thiscall*)(const PlayerSkin::SkinMesh * self, int)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::buffSize))(this, buffIndex);
+			}
+			void generate(const PlayerSkin::SkinMesh::Pixel* data, const PlayerSkin::MeshBounds& meshBounds)
+			{
+				return reinterpret_cast<void(__thiscall*)(PlayerSkin::SkinMesh * self, const PlayerSkin::SkinMesh::Pixel*, const PlayerSkin::MeshBounds&)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::generate))(this, data, meshBounds);
+			}
+			const void* indexBuffData() const override
+			{
+				return reinterpret_cast<const void* (__thiscall*)(const PlayerSkin::SkinMesh * self)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::indexBuffData))(this);
+			}
+			int indexBuffSize() const override
+			{
+				return reinterpret_cast<int(__thiscall*)(const PlayerSkin::SkinMesh * self)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::indexBuffSize))(this);
+			}
+			int vertCount() const override
+			{
+				return reinterpret_cast<int(__thiscall*)(const PlayerSkin::SkinMesh * self)>(getFuncAddr((int)Func::PlayerSkin::SkinMesh::vertCount))(this);
 			}
 			void addPixelToFace(std::unordered_map<glm::u8vec2, FaceInfo>& faceMap, const glm::i8vec2& compPos, const glm::u8vec3& pos) 
 			{
@@ -96,69 +116,8 @@ namespace fdm
 		inline static const int WIDTH = 24; 
 		inline static const int HEIGHT = 48; 
 		inline static const int DEPTH = 42; 
-		inline static const PlayerSkin::MeshBounds meshBounds[MESH_COMP_COUNT] =
-		{
-		  {
-			{ { 18u }, { 12u }, { 12u } },
-			{ { 6u }, { 0u }, { 0u } },
-			{ { 12u }, { 11u }, { 8u } },
-			0u
-		  },
-		  {
-			{ { 21u }, { 32u }, { 42u } },
-			{ { 3u }, { 8u }, { 27u } },
-			{ { 12u }, { 20u }, { 33u } },
-			27u
-		  },
-		  {
-			{ { 24u }, { 23u }, { 27u } },
-			{ { 15u }, { 8u }, { 15u } },
-			{ { 17u }, { 13u }, { 21u } },
-			13u
-		  },
-		  {
-			{ { 9u }, { 23u }, { 27u } },
-			{ { 0u }, { 8u }, { 15u } },
-			{ { 6u }, { 13u }, { 21u } },
-			13u
-		  },
-		  {
-			{ { 24u }, { 33u }, { 14u } },
-			{ { 15u }, { 18u }, { 2u } },
-			{ { 20u }, { 20u }, { 8u } },
-			0u
-		  },
-		  {
-			{ { 9u }, { 33u }, { 14u } },
-			{ { 0u }, { 18u }, { 2u } },
-			{ { 4u }, { 20u }, { 8u } },
-			0u
-		  },
-		  {
-			{ { 21u }, { 38u }, { 26u } },
-			{ { 12u }, { 23u }, { 14u } },
-			{ { 14u }, { 27u }, { 19u } },
-			13u
-		  },
-		  {
-			{ { 12u }, { 38u }, { 26u } },
-			{ { 3u }, { 23u }, { 14u } },
-			{ { 9u }, { 27u }, { 19u } },
-			13u
-		  },
-		  {
-			{ { 21u }, { 48u }, { 12u } },
-			{ { 12u }, { 33u }, { 0u } },
-			{ { 15u }, { 36u }, { 7u } },
-			0u
-		  },
-		  {
-			{ { 12u }, { 48u }, { 12u } },
-			{ { 3u }, { 33u }, { 0u } },
-			{ { 8u }, { 36u }, { 7u } },
-			0u
-		  }
-		};
+		inline static std::array<const PlayerSkin::MeshBounds, 10>& meshBounds = *reinterpret_cast<std::array<const PlayerSkin::MeshBounds, 10>*>(getDataAddr((int)Data::PlayerSkin::meshBounds));
+
 		Tex2D tex; 
 		MeshRenderer meshComps[MESH_COMP_COUNT]; // 0x10
 

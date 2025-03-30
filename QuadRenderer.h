@@ -8,18 +8,32 @@ namespace fdm
 	class QuadRenderer 
 	{
 	public:
+		enum Mode : int
+		{
+			MODE_FILL = GL_TRIANGLES,
+			MODE_LINES = GL_LINE_LOOP,
+		};
+		enum bufferIndex : int
+		{
+			VBO_INDEX = 0,
+			VBO_VERTEX = 1,
+			VBO_COLOR = 2,
+			VBO_MODEL = 3,
+			VBO_COUNT = 4,
+		};
+
 		const Shader* shader = nullptr;
-		unsigned int VAO = 0; // 0x8
-		unsigned int buffers[4] = { 0 }; // 0xC
-		unsigned int mode = 4; // 0x1C
-		unsigned int elementCount = 6; // 0x20
+		uint32_t VAO = 0; // 0x8
+		uint32_t buffers[VBO_COUNT] = { 0 }; // 0xC
+		uint32_t mode = MODE_FILL; // 0x1C
+		uint32_t elementCount = 6; // 0x20
 
 		~QuadRenderer()
 		{
 			if (VAO)
 			{
 				glBindVertexArray(this->VAO);
-				glDeleteBuffers(4, this->buffers);
+				glDeleteBuffers(VBO_COUNT, this->buffers);
 				glDeleteVertexArrays(1, &this->VAO);
 			}
 		}
@@ -36,7 +50,7 @@ namespace fdm
 		{
 			glBindVertexArray(VAO);
 
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[VBO_COLOR]);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, colors, GL_STATIC_DRAW);
 
 			glBindVertexArray(0);
@@ -65,7 +79,7 @@ namespace fdm
 				return;
 			}
 
-			if (mode == GL_TRIANGLES)
+			if (mode == MODE_FILL)
 			{
 				constexpr GLuint indices[] = {
 					0, 1, 2, // first triangle
@@ -75,7 +89,7 @@ namespace fdm
 				if (this->VAO != 0)
 				{
 					glBindVertexArray(this->VAO);
-					glBindBuffer(GL_ARRAY_BUFFER, this->buffers[0]);
+					glBindBuffer(GL_ARRAY_BUFFER, this->buffers[VBO_INDEX]);
 					glBufferData(GL_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 					glBindBuffer(GL_ARRAY_BUFFER, 0);
 				}
@@ -92,7 +106,7 @@ namespace fdm
 					};
 
 					glBindVertexArray(this->VAO);
-					glBindBuffer(GL_ARRAY_BUFFER, this->buffers[0]);
+					glBindBuffer(GL_ARRAY_BUFFER, this->buffers[VBO_INDEX]);
 					glBufferData(GL_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 					glBindBuffer(GL_ARRAY_BUFFER, 0);
 				}

@@ -22,8 +22,8 @@ namespace fdm
 		PAD(0x3);
 		const Tex2D* texture; // 0x88
 		const Shader* shader; // 0x90
-		unsigned int VAO; // 0x98
-		unsigned int charVBO; // 0x9C
+		uint32_t VAO; // 0x98
+		uint32_t charVBO; // 0x9C
 
 		FontRenderer(const Tex2D* texture, const Shader* shader) 
 		{
@@ -32,6 +32,10 @@ namespace fdm
 		FontRenderer() 
 		{
 			reinterpret_cast<void(__thiscall*)(FontRenderer* self)>(getFuncAddr((int)Func::FontRenderer::FontRendererA))(this);
+		}
+		~FontRenderer()
+		{
+			reinterpret_cast<void(__thiscall*)(FontRenderer * self)>(getFuncAddr((int)Func::FontRenderer::destr_FontRenderer))(this);
 		}
 		void setText(const stl::string& text) 
 		{

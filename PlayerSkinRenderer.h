@@ -8,8 +8,8 @@ namespace fdm
 	class PlayerSkinRenderer 
 	{
 	public:
-		inline static MeshRenderer* wireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x278B80));
-		m4::Mat5 transformations[10]; 
+		inline static MeshRenderer& wireframeRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::PlayerSkinRenderer::wireframeRenderer));
+		m4::Mat5 transformations[PlayerSkin::MESH_COMP_COUNT];
 		glm::vec4 vel; // 0x3E8
 		glm::vec4 walkDir; // 0x3F8
 		m4::Mat5 orientationDst; // 0x408
@@ -20,13 +20,13 @@ namespace fdm
 		inline static const float thighAnimDefault = -0.3333333f; 
 		float thighAnimL; // 0x540
 		float thighAnimR; // 0x544
-		inline static const float lowerLegAnimDefault = 1.f; 
+		inline static const float lowerLegAnimDefault = 1.0f; 
 		float lowerLegAnimL; // 0x548
 		float lowerLegAnimR; // 0x54C
 		inline static const float upperArmAnimDefault = 0; 
 		float upperArmAnimL; // 0x550
 		float upperArmAnimR; // 0x554
-		inline static const float forearmAnimDefault = -1.f; 
+		inline static const float forearmAnimDefault = -1.0f; 
 		float forearmAnimL; // 0x558
 		float forearmAnimR; // 0x55C
 		bool crouching; // 0x560
@@ -40,16 +40,16 @@ namespace fdm
 		bool dead; // 0x579
 		PAD(0x6);
 		double damageStartTime; // 0x580
-		PlayerSkin* skin; // 0x588
+		const PlayerSkin* skin; // 0x588
 
 		PlayerSkinRenderer(){}
 		PlayerSkinRenderer(const PlayerSkin* skin) 
 		{
 			reinterpret_cast<void(__thiscall*)(PlayerSkinRenderer* self, const PlayerSkin* skin)>(getFuncAddr((int)Func::PlayerSkinRenderer::PlayerSkinRenderer))(this, skin);
 		}
-		void render(const m4::Mat5& MV, const glm::vec4& lightDir, const std::unique_ptr<Item>* handSlot, const std::unique_ptr<Item>* equipmentSlot, bool glasses) 
+		void render(const m4::Mat5& MV, const glm::vec4& lightDir, const std::unique_ptr<Item>& handSlot, const std::unique_ptr<Item>& equipmentSlot, bool glasses) 
 		{
-			return reinterpret_cast<void (__thiscall*)(PlayerSkinRenderer* self, const m4::Mat5& MV, const glm::vec4& lightDir, const std::unique_ptr<Item>* handSlot, const std::unique_ptr<Item>* equipmentSlot, bool glasses)>(getFuncAddr((int)Func::PlayerSkinRenderer::render))(this, MV, lightDir, handSlot, equipmentSlot, glasses);
+			return reinterpret_cast<void (__thiscall*)(PlayerSkinRenderer* self, const m4::Mat5& MV, const glm::vec4& lightDir, const std::unique_ptr<Item>& handSlot, const std::unique_ptr<Item>& equipmentSlot, bool glasses)>(getFuncAddr((int)Func::PlayerSkinRenderer::render))(this, MV, lightDir, handSlot, equipmentSlot, glasses);
 		}
 		void updateAnimation(double dt) 
 		{

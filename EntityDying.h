@@ -10,6 +10,10 @@ namespace fdm
 		std::unique_ptr<Entity> entity; // 0x20
 		double deathTime; // 0x28
 
+		bool action(World* world, Entity* actor, int action, const nlohmann::json& details) override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntityDying * self, World*, Entity*, int, const nlohmann::json&)>(getFuncAddr((int)Func::EntityDying::action))(this, world, actor, action, details);
+		}
 		float deathTimer() override
 		{
 			return reinterpret_cast<float (__thiscall*)(EntityDying* self)>(getFuncAddr((int)Func::EntityDying::deathTimer))(this);
@@ -56,9 +60,31 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(EntityDying* self)>(getFuncAddr((int)Func::EntityDying::isBlockEntity))(this);
 		}
+		bool isClickable() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntityDying * self)>(getFuncAddr((int)Func::EntityDying::isClickable))(this);
+		}
 		bool isIntersectingRay(const Entity::Ray& ray) override
 		{
 			return reinterpret_cast<bool (__thiscall*)(EntityDying* self, const Entity::Ray& ray)>(getFuncAddr((int)Func::EntityDying::isIntersectingRay))(this, ray);
+		}
+		nlohmann::json saveAttributes() override
+		{
+			return reinterpret_cast<nlohmann::json(__thiscall*)(EntityDying * self)>(getFuncAddr((int)Func::EntityDying::saveAttributes))(this);
+		}
+		bool shouldSave() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntityDying * self)>(getFuncAddr((int)Func::EntityDying::shouldSave))(this);
+		}
+		void takeDamage(float damage, World* world) override
+		{
+			return reinterpret_cast<void(__thiscall*)(EntityDying * self, float, World*)>(getFuncAddr((int)Func::EntityDying::takeDamage))(this, damage, world);
+		}
+		inline static std::unique_ptr<Entity> createWithEntity(std::unique_ptr<Entity> entity, stl::uuid id)
+		{
+			std::unique_ptr<Entity> result;
+			reinterpret_cast<std::unique_ptr<Entity>&(__fastcall*)(std::unique_ptr<Entity>*, std::unique_ptr<Entity>, stl::uuid)>(getFuncAddr((int)Func::EntityDying::createWithEntity))(&result, std::move(entity), id);
+			return result;
 		}
 	};
 }

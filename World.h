@@ -3,10 +3,10 @@
 #include "4dm.h"
 #include "Chunk.h"
 #include "EntityManager.h"
-#include "Player.h"
 
 namespace fdm 
 {
+	class Player;
 	class World 
 	{
 	public:
@@ -18,7 +18,7 @@ namespace fdm
 			TYPE_TITLESCREEN
 		};
 
-		inline static const float gravity = -32.f; 
+		inline static const float gravity = -32.0f; 
 		std::recursive_mutex chunksMutex; // 0x8
 		std::unordered_map<glm::i64vec3,std::unique_ptr<Chunk>> chunks; // 0x58
 		std::mutex entitiesMutex; // 0x98
@@ -44,6 +44,10 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(World* self, glm::vec4& currentPos, glm::ivec4& currentBlock, glm::ivec4& intersectBlock, glm::vec4& endpoint)>(getFuncAddr((int)Func::World::castRay))(this, currentPos, currentBlock, intersectBlock, endpoint);
 		}
+		/*uint8_t getBlock(const glm::ivec4& block)
+		{
+			return reinterpret_cast<uint8_t(__thiscall*)(World * self, const glm::ivec4&)>(getFuncAddr((int)Func::World::getBlock))(this, block);
+		}*/
 		uint8_t getBlock(const glm::ivec4& block)
 		{
 			if (block.y >= Chunk::HEIGHT || block.y < 0)
@@ -68,6 +72,18 @@ namespace fdm
 			}
 			return BlockInfo::BARRIER;
 		}
+
+		// only available for server
+		/*Entity* getEntity(const stl::uuid& id)
+		{
+			return reinterpret_cast<Entity* (__thiscall*)(World* self, const stl::uuid&)>(getFuncAddr((int)Func::World::getEntity))(this, id);
+		}*/
+
+		Entity* getEntity(const stl::uuid& id)
+		{
+			std::lock_guard<std::mutex> lock(entitiesMutex);
+			return entities.get(id);
+		}
 		
 		// VIRTUAL FUNCS
 
@@ -79,6 +95,9 @@ namespace fdm
 			return reinterpret_cast<bool(__thiscall*)(World * self, std::unique_ptr<Entity>& entity, Chunk* c)>(getFuncAddr((int)Func::World::addEntityToChunk))(this, entity, c);
 		}
 		virtual void localPlayerEvent(Player* player, Packet::ClientPacket eventType, int64_t eventValue, void* data) {}
-		virtual void handlePlayerDeath(Player* player, std::string_view reason) {}
+		virtual void handlePlayerDeath(Player* player, std::string_view reason)
+		{
+			return reinterpret_cast<void(__thiscall*)(World * self, Player*, std::basic_string_view<char, std::char_traits<char> >)>(getFuncAddr((int)Func::World::handlePlayerDeath))(this, player, reason);
+		}
 	};
 }

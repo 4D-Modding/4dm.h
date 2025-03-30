@@ -38,11 +38,11 @@ namespace fdm::gui
 		}
 		void select() override
 		{
-			selected = true;
+			return reinterpret_cast<void(__thiscall*)(gui::Slider * self)>(getFuncAddr((int)Func::gui::Slider::select))(this);
 		}
 		void deselect() override
 		{
-			selected = false;
+			return reinterpret_cast<void (__thiscall*)(gui::Slider* self)>(getFuncAddr((int)Func::gui::Slider::deselect))(this);
 		}
 		void render(gui::Window* w) override
 		{
@@ -75,6 +75,10 @@ namespace fdm::gui
 		void getSize(const gui::Window* w, int* width, int* height) const override
 		{
 			return reinterpret_cast<void (__thiscall*)(const gui::Slider* self, const gui::Window* w, int* width, int* height)>(getFuncAddr((int)Func::gui::Slider::getSize))(this, w, width, height);
+		}
+		bool enabled() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(gui::Slider * self)>(getFuncAddr((int)Func::gui::Slider::enabled))(this);
 		}
 	};
 }

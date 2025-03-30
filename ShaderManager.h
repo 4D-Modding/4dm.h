@@ -9,15 +9,15 @@ namespace fdm
 	class ShaderManager 
 	{
 	public:
-		inline static std::map<stl::string,Shader *>* shaders = reinterpret_cast<std::map<stl::string,Shader *>*>((base + 0x2C0728));
+		inline static std::map<stl::string, Shader*>& shaders = *reinterpret_cast<std::map<stl::string, Shader*>*>(getDataAddr((int)Data::ShaderManager::shaders));
 
-		// will load relative to the mod's directory!! (will load a new shader only if the shaderName wasnt found in shaders tho)
+		// will load relative to the mod's directory!! (will load a new shader only if the shaderName wasn't found in shaders tho so i recommend adding your mod's id as a prefix)
 		inline static const Shader* load(const stl::string& shaderName, const stl::string& vertexPath, const stl::string& fragmentPath)
 		{
 			stl::string vertP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / vertexPath).string();
 			stl::string fragP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / fragmentPath).string();
-			if (shaders->contains(shaderName))
-				return shaders->at(shaderName);
+			if (shaders.contains(shaderName))
+				return shaders.at(shaderName);
 
 			Shader* shader = new Shader();
 			if (!shader->load(vertP, fragP))
@@ -26,26 +26,26 @@ namespace fdm
 				shader = nullptr;
 			}
 			
-			shaders->insert({ shaderName, shader });
+			shaders[shaderName] = shader;
 			return shader;
 		}
-		// will load relative to the mod's directory!! (will load a new shader only if the shaderName wasnt found in shaders tho)
+		// will load relative to the mod's directory!! (will load a new shader only if the shaderName wasn't found in shaders tho so i recommend adding your mod's id as a prefix)
 		inline static const Shader* load(const stl::string& shaderName, const stl::string& vertexPath, const stl::string& fragmentPath, const stl::string& geometryPath)
 		{
 			stl::string vertP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / vertexPath).string();
 			stl::string fragP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / fragmentPath).string();
-			stl::string geoP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / geometryPath).string();
-			if (shaders->contains(shaderName))
-				return shaders->at(shaderName);
+			stl::string geomP = (std::filesystem::path(fdm::getModPath(fdm::modID)) / geometryPath).string();
+			if (shaders.contains(shaderName))
+				return shaders.at(shaderName);
 
 			Shader* shader = new Shader();
-			if (!shader->load(vertP, geoP, fragP))
+			if (!shader->load(vertP, geomP, fragP))
 			{
 				delete shader;
 				shader = nullptr;
 			}
 
-			shaders->insert({ shaderName, shader });
+			shaders[shaderName] = shader;
 			return shader;
 		}
 

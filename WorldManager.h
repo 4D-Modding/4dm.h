@@ -8,11 +8,11 @@ namespace fdm
 	class WorldManager : public World 
 	{
 	public:
-		std::atomic_int numChunksLoaded; // 0x168
+		std::atomic<int> numChunksLoaded; // 0x168
 		Frustum frustum; // 0x16C
-		std::atomic_bool smoothLighting; // 0x1CC
-		std::atomic_bool shadows; // 0x1CD
-		std::atomic_bool lights; // 0x1CE
+		std::atomic<bool> smoothLighting; // 0x1CC
+		std::atomic<bool> shadows; // 0x1CD
+		std::atomic<bool> lights; // 0x1CE
 
 		~WorldManager() override
 		{
@@ -32,14 +32,29 @@ namespace fdm
 		{
 			return reinterpret_cast<void(__thiscall*)(WorldManager * self, const m4::Mat5 & MV, bool glasses, glm::vec3 worldColor)>(getFuncAddr((int)Func::WorldManager::render))(this, MV, glasses, worldColor);
 		}
-		virtual void updateLocal(StateManager& s, Player* player, double dt) {}
-		virtual void cleanupLocal(Player* player) {}
+		virtual void updateLocal(StateManager& s, Player* player, double dt)
+		{
+			return reinterpret_cast<void(__thiscall*)(WorldManager * self, StateManager&, Player*, double)>(getFuncAddr((int)Func::WorldManager::updateLocal))(this, s, player, dt);
+		}
+		virtual void cleanupLocal(Player* player)
+		{
+			return reinterpret_cast<void(__thiscall*)(WorldManager * self, Player*)>(getFuncAddr((int)Func::WorldManager::cleanupLocal))(this, player);
+		}
 		virtual void setRenderDistanceLocal(Player* player, unsigned char distance) {}
-		virtual void setDifficultyLocal(Player* player, int diff) {}
-		virtual void setSkinVisibility(bool visible) {}
+		virtual void setDifficultyLocal(Player* player, int difficulty)
+		{
+			return reinterpret_cast<void(__thiscall*)(WorldManager * self, Player*, int)>(getFuncAddr((int)Func::WorldManager::setDifficultyLocal))(this, player, difficulty);
+		}
+		virtual void setSkinVisibility(bool visible)
+		{
+			return reinterpret_cast<void(__thiscall*)(WorldManager * self, bool)>(getFuncAddr((int)Func::WorldManager::setSkinVisibility))(this, visible);
+		}
 		virtual void localPlayerInit(Player* player) {}
 		virtual void localPlayerRespawn(StateManager&, Player*) {}
-		virtual void sendChatMessage(Player* player, const stl::string&) {}
+		virtual void sendChatMessage(Player* player, const stl::string& message)
+		{
+			return reinterpret_cast<void(__thiscall*)(WorldManager * self, Player*, const stl::string&)>(getFuncAddr((int)Func::WorldManager::sendChatMessage))(this, player, message);
+		}
 		virtual void handleLightingOptionsUpdate() {}
 	};
 }

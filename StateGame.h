@@ -8,23 +8,23 @@ namespace fdm
 	class StateGame : public State 
 	{
 	public:
-		inline static StateGame* instanceObj = reinterpret_cast<StateGame*>((base + 0x2BE5E0));
+		inline static StateGame& instanceObj = *reinterpret_cast<StateGame*>(getDataAddr((int)Data::StateGame::instanceObj));
 		std::unique_ptr<WorldManager> world; // 0x8
 		CloudManager clouds; // 0x10
 		glm::mat4 projection2D; // 0xB0
 		glm::mat4 projection3D; // 0xF0
-		Shader* cloudShader; // 0x130
+		const Shader* cloudShader; // 0x130
 		uint32_t cloudmvID; // 0x138
 		uint32_t cloudBlendID; // 0x13C
 		MeshRenderer skyboxRenderer; // 0x140
-		Shader* moonShader; // 0x160
+		const Shader* moonShader; // 0x160
 		Tex2D* moonTex; // 0x168
 		uint32_t moonmvID; // 0x170
 		PAD(0x4);
 		MeshRenderer moonRenderer; // 0x178
-		Shader* tex2DShader; // 0x198
+		const Shader* tex2DShader; // 0x198
 		TexRenderer crosshairRenderer; // 0x1A0
-		Shader* blockShader; // 0x1C8
+		const Shader* blockShader; // 0x1C8
 		Framebuffer renderFramebuffer; // 0x1D0
 		float time; // 0x220
 		PAD(0x4);

@@ -17,35 +17,6 @@ namespace fdm::gui
 
 		Image() {}
 
-		Image(const stl::string& imgPath, bool modFolder = false)
-		{
-			const Tex2D* tex = ResourceManager::get(imgPath, modFolder);
-			if (tex == nullptr)
-				return;
-
-			tr = new TexRenderer();
-			tr->texture = tex;
-			tr->shader = ShaderManager::get("tex2DShader");
-			tr->init();
-
-			width = tr->texture->width;
-			height = tr->texture->height;
-		}
-		Image(const stl::string& imgPath, const stl::string& folderOverride)
-		{
-			const Tex2D* tex = ResourceManager::get(imgPath, folderOverride);
-			if (tex == nullptr)
-				return;
-
-			tr = new TexRenderer();
-			tr->texture = tex;
-			tr->shader = ShaderManager::get("tex2DShader");
-			tr->init();
-
-			width = tr->texture->width;
-			height = tr->texture->height;
-		}
-
 		void offsetX(int offset) override
 		{
 			this->xOffset = offset;

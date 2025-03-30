@@ -9,11 +9,11 @@ namespace fdm
 	public:
 		std::vector<Chunk *> chunksToLoad; // 0x1D0
 		ChunkLoader chunkLoader; // 0x1E8
-		std::atomic_bool chunksReady; // 0x288
+		std::atomic<bool> chunksReady; // 0x288
 
-		bool loadCube(const glm::vec4& pos, unsigned char distance) 
+		bool loadCube(const glm::vec4& pos, uint8_t distance) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(WorldTitleScreen* self, const glm::vec4& pos, unsigned char distance)>(getFuncAddr((int)Func::WorldTitleScreen::loadCube))(this, pos, distance);
+			return reinterpret_cast<bool (__thiscall*)(WorldTitleScreen* self, const glm::vec4& pos, uint8_t distance)>(getFuncAddr((int)Func::WorldTitleScreen::loadCube))(this, pos, distance);
 		}
 		void loadChunk(Chunk* c, bool shadows) 
 		{
@@ -30,6 +30,26 @@ namespace fdm
 		void loadChunks() 
 		{
 			return reinterpret_cast<void (__thiscall*)(WorldTitleScreen* self)>(getFuncAddr((int)Func::WorldTitleScreen::loadChunks))(this);
+		}
+		World::Type getType() override
+		{
+			return reinterpret_cast<World::Type(__thiscall*)(WorldTitleScreen * self)>(getFuncAddr((int)Func::WorldTitleScreen::getType))(this);
+		}
+		void handleLightingOptionsUpdate() override
+		{
+			return reinterpret_cast<void(__thiscall*)(WorldTitleScreen * self)>(getFuncAddr((int)Func::WorldTitleScreen::handleLightingOptionsUpdate))(this);
+		}
+		void localPlayerEvent(Player* player, Packet::ClientPacket eventType, int64_t eventValue, void* data) override
+		{
+			return reinterpret_cast<void(__thiscall*)(WorldTitleScreen * self, Player*, Packet::ClientPacket, int64_t, void*)>(getFuncAddr((int)Func::WorldTitleScreen::localPlayerEvent))(this, player, eventType, eventValue, data);
+		}
+		void localPlayerInit(Player* player) override
+		{
+			return reinterpret_cast<void(__thiscall*)(WorldTitleScreen * self, Player*)>(getFuncAddr((int)Func::WorldTitleScreen::localPlayerInit))(this, player);
+		}
+		void localPlayerRespawn(StateManager& s, Player* player) override
+		{
+			return reinterpret_cast<void(__thiscall*)(WorldTitleScreen * self, StateManager&, Player*)>(getFuncAddr((int)Func::WorldTitleScreen::localPlayerRespawn))(this, s, player);
 		}
 	};
 }

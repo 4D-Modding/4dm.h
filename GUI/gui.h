@@ -13,24 +13,3 @@
 #include "CheckBox.h"
 #include "TextInput.h"
 #include "Image.h"
-/*
-namespace fdm
-{
-	namespace gui
-	{
-		enum AlignmentX;
-		enum AlignmentY;
-		class Element;
-		class Window;
-		class ElemContainer;
-		class Interface;
-		class Text;
-		class ContentBox;
-		class Button;
-		class Slider;
-		class CheckBox;
-		class TextInput;
-		class Image;
-	}
-}
-*/

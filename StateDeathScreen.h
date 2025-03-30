@@ -7,18 +7,19 @@ namespace fdm
 	class StateDeathScreen : public State 
 	{
 	public:
-		inline static StateDeathScreen* instanceObj = reinterpret_cast<StateDeathScreen*>((base + 0x278CF0));
+		inline static StateDeathScreen& instanceObj = *reinterpret_cast<StateDeathScreen*>(getDataAddr((int)Data::StateDeathScreen::instanceObj));
+		inline static constexpr const float bgFadeTime = 1;
+		inline static constexpr const float skullFadeTime = 1;
+
 		TexRenderer skullRenderer; // 0x8
 		FontRenderer font; // 0x30
 		QuadRenderer qr; // 0xD0
-		Shader* qs; // 0xF8
+		const Shader* qs; // 0xF8
 		gui::Interface ui; // 0x100
 		bool updateViewFlag; // 0x168
 		PAD(0x7);
 		gui::Button retryButton; // 0x170
 		gui::Button quitButton; // 0x1C8
-		inline static const float bgFadeTime = 1.f; 
-		inline static const float skullFadeTime = 1.f; 
 		double animationStartTime; // 0x220
 
 		void updateProjection(const glm::ivec2& size, const glm::ivec2& translate2D) 
@@ -28,6 +29,10 @@ namespace fdm
 		inline static void retryButtonCallback(void* user) 
 		{
 			return reinterpret_cast<void (__fastcall*)(void* user)>(getFuncAddr((int)Func::StateDeathScreen::retryButtonCallback))(user);
+		}
+		inline static void quitButtonCallback(void* user)
+		{
+			return reinterpret_cast<void(__fastcall*)(void*)>(getFuncAddr((int)Func::StateDeathScreen::quitButtonCallback))(user);
 		}
 		void init(StateManager& s) override
 		{

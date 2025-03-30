@@ -72,6 +72,10 @@ namespace fdm::gui
 		{
 			selected = false;
 		}
+		bool enabled()
+		{
+			return reinterpret_cast<bool(__thiscall*)(gui::CheckBox * self)>(getFuncAddr((int)Func::gui::CheckBox::enabled))(this);
+		}
 		bool touchingMouse(gui::Window* w) 
 		{
 			return reinterpret_cast<bool (__thiscall*)(gui::CheckBox* self, gui::Window* w)>(getFuncAddr((int)Func::gui::CheckBox::touchingMouse))(this, w);

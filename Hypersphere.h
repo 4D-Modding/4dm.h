@@ -35,13 +35,20 @@ namespace fdm
 			PAD(0x4);
 			std::vector<float> sinVert; // 0x8
 			std::vector<float> cosVert; // 0x20
-
 		};
 		Hypersphere::VertInfo v; // 0x8
 
 		int attrCount(int buffIndex) const override
 		{
 			return reinterpret_cast<int (__thiscall*)(const Hypersphere* self, int buffIndex)>(getFuncAddr((int)Func::Hypersphere::attrCount))(this, buffIndex);
+		}
+		int attrSize(int buffIndex, int attrIndex) const override
+		{
+			return reinterpret_cast<int(__thiscall*)(const Hypersphere * self, int, int)>(getFuncAddr((int)Func::Hypersphere::attrSize))(this, buffIndex, attrIndex);
+		}
+		int attrStride(int buffIndex, int attrIndex) const override
+		{
+			return reinterpret_cast<int(__thiscall*)(const Hypersphere * self, int, int)>(getFuncAddr((int)Func::Hypersphere::attrStride))(this, buffIndex, attrIndex);
 		}
 		uint32_t attrType(int buffIndex, int attrIndex) const override
 		{
@@ -50,6 +57,18 @@ namespace fdm
 		int buffCount() const override
 		{
 			return reinterpret_cast<int (__thiscall*)(const Hypersphere* self)>(getFuncAddr((int)Func::Hypersphere::buffCount))(this);
+		}
+		int buffSize(int buffIndex) const override
+		{
+			return reinterpret_cast<int(__thiscall*)(const Hypersphere * self, int)>(getFuncAddr((int)Func::Hypersphere::buffSize))(this, buffIndex);
+		}
+		int vertCount() const override
+		{
+			return reinterpret_cast<int(__thiscall*)(const Hypersphere * self)>(getFuncAddr((int)Func::Hypersphere::vertCount))(this);
+		}
+		const void* buffData(int buffIndex) const override
+		{
+			return reinterpret_cast<const void* (__thiscall*)(const Hypersphere * self, int)>(getFuncAddr((int)Func::Hypersphere::buffData))(this, buffIndex);
 		}
 		Hypersphere(int edges) 
 		{

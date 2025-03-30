@@ -7,20 +7,27 @@ namespace fdm
 	class EntityItem : public Entity 
 	{
 	public:
-		inline static const float COLLECTION_DIST = 0.8f; 
 		std::unique_ptr<Item> item; // 0x20
-		inline static const float hitboxRadius = 0.1f; 
 		Hitbox hitbox; // 0x28
 		float rotation; // 0x78
-		inline static MeshRenderer* wireframeRenderer = reinterpret_cast<MeshRenderer*>((base + 0x279540));
 		PAD(0x4);
 		double spawnTime; // 0x80
-		inline static const float serverUpdateDelay = 0.5f; 
 		double lastServerUpdateTime; // 0x88
 
-		inline static std::unique_ptr<Entity> createWithItem(const std::unique_ptr<Item>& item, const glm::vec4& pos, const glm::vec4& vel) 
+		inline static constexpr const float COLLECTION_DIST = 0.8f;
+		inline static constexpr const float hitboxRadius = 0.1f;
+		inline static MeshRenderer& wireframeRenderer = *reinterpret_cast<MeshRenderer*>(getDataAddr((int)Data::EntityItem::wireframeRenderer));
+		inline static constexpr const float serverUpdateDelay = 0.5f;
+
+		bool action(World* world, Entity* actor, int action, const nlohmann::json& details) override
 		{
-			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const std::unique_ptr<Item>& item, const glm::vec4& pos, const glm::vec4& vel)>(getFuncAddr((int)Func::EntityItem::createWithItem))(item, pos, vel);
+			return reinterpret_cast<bool(__thiscall*)(EntityItem * self, World*, Entity*, int, const nlohmann::json&)>(getFuncAddr((int)Func::EntityItem::action))(this, world, actor, action, details);
+		}
+		inline static std::unique_ptr<Entity> createWithItem(std::unique_ptr<Item> item, const glm::vec4& pos, const glm::vec4& vel)
+		{
+			std::unique_ptr<Entity> result;
+			reinterpret_cast<std::unique_ptr<Entity>&(__fastcall*)(std::unique_ptr<Entity>*, std::unique_ptr<Item>, const glm::vec4&, const glm::vec4&)>(getFuncAddr((int)Func::EntityItem::createWithItem))(&result, std::move(item), pos, vel);
+			return result;
 		}
 		stl::string getName() override
 		{
@@ -60,10 +67,6 @@ namespace fdm
 		{
 			return reinterpret_cast<bool (__thiscall*)(EntityItem* self)>(getFuncAddr((int)Func::EntityItem::shouldSave))(this);
 		}
-		bool isIntersectingRay(const Entity::Ray& ray) override
-		{
-			return reinterpret_cast<bool (__thiscall*)(EntityItem* self, const Entity::Ray& ray)>(getFuncAddr((int)Func::EntityItem::isIntersectingRay))(this, ray);
-		}
 		uint32_t give(Inventory* inventory, int maxCount) 
 		{
 			return reinterpret_cast<uint32_t (__thiscall*)(EntityItem* self, Inventory* inventory, int maxCount)>(getFuncAddr((int)Func::EntityItem::give))(this, inventory, maxCount);
@@ -75,6 +78,30 @@ namespace fdm
 		inline static void collisionCallback(void* user, Hitbox* hitbox, World* world, const glm::ivec4& collisionBlock, int collisionComp, const glm::vec4& prevVel) 
 		{
 			return reinterpret_cast<void (__fastcall*)(void* user, Hitbox* hitbox, World* world, const glm::ivec4& collisionBlock, int collisionComp, const glm::vec4& prevVel)>(getFuncAddr((int)Func::EntityItem::collisionCallback))(user, hitbox, world, collisionBlock, collisionComp, prevVel);
+		}
+		float deathTimer() override
+		{
+			return reinterpret_cast<float(__thiscall*)(EntityItem * self)>(getFuncAddr((int)Func::EntityItem::deathTimer))(this);
+		}
+		nlohmann::json getServerUpdateAttributes() override
+		{
+			return reinterpret_cast<nlohmann::json(__thiscall*)(EntityItem * self)>(getFuncAddr((int)Func::EntityItem::getServerUpdateAttributes))(this);
+		}
+		bool isBlockEntity() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntityItem * self)>(getFuncAddr((int)Func::EntityItem::isBlockEntity))(this);
+		}
+		bool isClickable() override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntityItem * self)>(getFuncAddr((int)Func::EntityItem::isClickable))(this);
+		}
+		bool isIntersectingRay(const Entity::Ray& ray) override
+		{
+			return reinterpret_cast<bool(__thiscall*)(EntityItem * self, const Entity::Ray&)>(getFuncAddr((int)Func::EntityItem::isIntersectingRay))(this, ray);
+		}
+		void takeDamage(float damage, World* world) override
+		{
+			return reinterpret_cast<void(__thiscall*)(EntityItem * self, float, World*)>(getFuncAddr((int)Func::EntityItem::takeDamage))(this, damage, world);
 		}
 	};
 }

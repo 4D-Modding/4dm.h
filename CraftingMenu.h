@@ -4,6 +4,7 @@
 #include "InventoryCursor.h"
 #include "GUI/Window.h"
 #include "GUI/Element.h"
+#include "Item.h"
 
 namespace fdm 
 {
@@ -13,7 +14,6 @@ namespace fdm
 	class InventoryCursor;
 	class gui::Window;
 	class gui::Element;
-	class Item;
 
 	class CraftingMenu : public gui::Element 
 	{
@@ -78,7 +78,6 @@ namespace fdm
 				return *this;
 			}
 		};
-		inline static nlohmann::json* recipes = reinterpret_cast<nlohmann::json*>((base + 0x4DF90 + 0x270000));
 		InventoryManager* Interface; // 0x8
 		InventoryCursor* cursor; // 0x10
 		std::vector<CraftingMenu::CraftableRecipe> craftableRecipes; // 0x18
@@ -86,13 +85,18 @@ namespace fdm
 		int yOffset; // 0x34
 		gui::AlignmentX xAlign; // 0x38
 		gui::AlignmentY yAlign; // 0x3C
-		inline static TexRenderer* tr = reinterpret_cast<TexRenderer*>((base + 0x4DFA0 + 0x270000));
 		CraftingMenuCallback callback = NULL; // 0x40
 		void* user; // 0x48
+		inline static nlohmann::json& recipes = *reinterpret_cast<nlohmann::json*>(getDataAddr((int)Data::CraftingMenu::recipes));
+		inline static TexRenderer& tr = *reinterpret_cast<TexRenderer*>(getDataAddr((int)Data::CraftingMenu::tr));
 
 		inline static bool loadRecipes() 
 		{
 			return reinterpret_cast<bool (__fastcall*)()>(getFuncAddr((int)Func::CraftingMenu::loadRecipes))();
+		}
+		inline static void renderInit()
+		{
+			return reinterpret_cast<void (__fastcall*)()>(getFuncAddr((int)Func::CraftingMenu::renderInit))();
 		}
 		void render(gui::Window* w) override
 		{
@@ -105,6 +109,18 @@ namespace fdm
 		void offsetY(int offset) override
 		{
 			return reinterpret_cast<void (__thiscall*)(CraftingMenu* self, int offset)>(getFuncAddr((int)Func::CraftingMenu::offsetY))(this, offset);
+		}
+		void alignX(gui::AlignmentX a) override
+		{
+			return reinterpret_cast<void(__thiscall*)(CraftingMenu * self, gui::AlignmentX)>(getFuncAddr((int)Func::CraftingMenu::alignX))(this, a);
+		}
+		void alignY(gui::AlignmentY a) override
+		{
+			return reinterpret_cast<void(__thiscall*)(CraftingMenu * self, gui::AlignmentY)>(getFuncAddr((int)Func::CraftingMenu::alignY))(this, a);
+		}
+		bool mouseInput(const gui::Window* w, double xpos, double ypos) override
+		{
+			return reinterpret_cast<bool(__thiscall*)(CraftingMenu * self, const gui::Window*, double, double)>(getFuncAddr((int)Func::CraftingMenu::mouseInput))(this, w, xpos, ypos);
 		}
 		void getPos(const gui::Window* w, int* x, int* y) const override
 		{
@@ -124,7 +140,7 @@ namespace fdm
 		}
 		bool craftRecipe(int recipeIndex)
 		{
-			return reinterpret_cast<bool (__thiscall*)(CraftingMenu* self, int)>(fdm::base + 0x5C120)(this, recipeIndex);
+			return reinterpret_cast<bool(__thiscall*)(CraftingMenu * self, int)>(getFuncAddr((int)Func::CraftingMenu::craftRecipe))(this, recipeIndex);
 		}
 	};
 }

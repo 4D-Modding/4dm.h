@@ -8,18 +8,18 @@ namespace fdm
 	class CloudManager 
 	{
 	public:
-		inline static const float updateDelay = NULL; 
+		inline static const double updateDelay = 5; 
 		double lastUpdateTime; 
 		glm::vec3 offset; // 0x8
 		glm::vec3 velocity; // 0x14
 		uint32_t seed; // 0x20
 		PAD(0x4);
 		std::unordered_map<glm::i64vec3, std::unique_ptr<CloudChunk>> chunks; // 0x28
-		std::atomic_bool chunksReady; // 0x68
+		std::atomic<bool> chunksReady; // 0x68
 		PAD(0x3);
-		std::atomic_int loadedChunks; // 0x6C
+		std::atomic<int> loadedChunks; // 0x6C
 		std::vector<CloudChunk*> newChunks; // 0x70
-		std::atomic_bool shouldStopLoading; // 0x88
+		std::atomic<bool> shouldStopLoading; // 0x88
 		PAD(0x7);
 		std::thread chunkLoadingThread; // 0x90
 

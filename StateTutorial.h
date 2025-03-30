@@ -24,11 +24,12 @@ namespace fdm
 		{
 			glm::u8vec3 vert; 
 			glm::u8vec3 uv; // 0x3
-			uint32_t lighting; // 0x6
+			uint8_t lighting; // 0x6
 		};
 
-		inline static const float _zero = 1e-08f; 
-		inline static StateTutorial* instanceObj = reinterpret_cast<StateTutorial*>((base + 0x2C2860));
+		inline static constexpr const float _zero = 1e-08f;
+		inline static StateTutorial& instanceObj = *reinterpret_cast<StateTutorial*>(getDataAddr((int)Data::StateTutorial::instanceObj));
+		inline static constexpr const int demo_size = 16;
 		bool updateViewFlag; // 0x8
 		PAD(0x3);
 		glm::mat4 projection3D; // 0xC
@@ -60,8 +61,7 @@ namespace fdm
 		std::vector<uint32_t> block_indices_2d; // 0x498
 		MeshBuilder mesh2d; // 0x4B0
 		MeshRenderer mr2d; // 0x4E8
-		inline static const int demo_size = 16; 
-		unsigned char blocks[demo_size][demo_size][demo_size]; 
+		uint8_t blocks[demo_size][demo_size][demo_size]; 
 		struct 
 		{
 			glm::vec3 pos; 
@@ -78,6 +78,7 @@ namespace fdm
 			StateTutorial::PlayerDirection currentDirection; // 0xA0
 			PAD(0x4);
 			double stateStartTime; // 0xA8
+
 		} player;
 		struct 
 		{
