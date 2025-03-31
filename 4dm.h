@@ -2168,6 +2168,15 @@ namespace fdm
 		}
 	}
 
+
+	template<auto F>
+	inline static constexpr uint64_t getClassFuncAddr()
+	{
+		auto pFunc = F;
+		void* pPtr = (void*&)pFunc;
+		return reinterpret_cast<uint64_t>(pPtr);
+	}
+
 	inline std::vector<void(*)()> execFuncs;
 }
 
