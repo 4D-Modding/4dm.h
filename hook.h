@@ -21,6 +21,9 @@ template<typename FuncPtr> inline void Hook( unsigned long long target, FuncPtr 
 inline void __stdcall EnableHook(LPVOID target){ // enables specific hook.
 	reinterpret_cast<void(__stdcall*)(LPVOID target)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "EnableHook"))(target);
 }
+inline void __stdcall EnableHook(unsigned long long target){ // enables specific hook.
+	reinterpret_cast<void(__stdcall*)(LPVOID target)>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "EnableHook"))(reinterpret_cast<LPVOID>(target));
+}
 inline void EnableHook(){ // enables every hook.
 	EnableHook(nullptr);
 }
