@@ -9,7 +9,7 @@ namespace fdm
 	public:
 		struct voiceGroupInfo 
 		{
-			uint32_t handle; 
+			SoLoud::handle handle;
 			float volume; // 0x4
 		};
 		inline static SoLoud::Soloud& soloud = *reinterpret_cast<SoLoud::Soloud*>(getDataAddr((int)Data::AudioManager::soloud));
@@ -18,7 +18,7 @@ namespace fdm
 		inline static std::vector<stl::string>& BGMList = *reinterpret_cast<std::vector<stl::string>*>(getDataAddr((int)Data::AudioManager::BGMList));
 		inline static float& BGMVolume = *reinterpret_cast<float*>(getDataAddr((int)Data::AudioManager::BGMVolume));
 		inline static int& BGMNextIndex = *reinterpret_cast<int*>(getDataAddr((int)Data::AudioManager::BGMNextIndex));
-		inline static uint32_t& currentBGM = *reinterpret_cast<uint32_t*>(getDataAddr((int)Data::AudioManager::currentBGM));
+		inline static SoLoud::handle& currentBGM = *reinterpret_cast<SoLoud::handle*>(getDataAddr((int)Data::AudioManager::currentBGM));
 		inline static m4::Mat5& hyperplaneView = *reinterpret_cast<m4::Mat5*>(getDataAddr((int)Data::AudioManager::hyperplaneView));
 		inline static SoLoud::Wav* getSound(const stl::string& sound)
 		{
@@ -36,9 +36,9 @@ namespace fdm
 		{
 			return reinterpret_cast<bool(__fastcall*)(const stl::string&)>(getFuncAddr((int)Func::AudioManager::loadSound))(sound);
 		}
-		inline static uint32_t playSound4D(const stl::string& sound, const stl::string& voiceGroup, const glm::vec4& pos, const glm::vec4& vel)
+		inline static SoLoud::handle playSound4D(const stl::string& sound, const stl::string& voiceGroup, const glm::vec4& pos, const glm::vec4& vel)
 		{
-			return reinterpret_cast<uint32_t(__fastcall*)(const stl::string&, const stl::string&, const glm::vec4&, const glm::vec4&)>(getFuncAddr((int)Func::AudioManager::playSound4D))(sound, voiceGroup, pos, vel);
+			return reinterpret_cast<SoLoud::handle(__fastcall*)(const stl::string&, const stl::string&, const glm::vec4&, const glm::vec4&)>(getFuncAddr((int)Func::AudioManager::playSound4D))(sound, voiceGroup, pos, vel);
 		}
 		inline static void setListenerInfo4D(const glm::vec4& pos, const m4::Mat5& orientation, const glm::vec4& vel)
 		{
