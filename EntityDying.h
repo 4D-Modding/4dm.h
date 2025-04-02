@@ -18,10 +18,6 @@ namespace fdm
 		{
 			return reinterpret_cast<float (__thiscall*)(EntityDying* self)>(getFuncAddr((int)Func::EntityDying::deathTimer))(this);
 		}
-		inline static std::unique_ptr<Entity> createWithEntity(const std::unique_ptr<Entity>& entity, stl::uuid* id) 
-		{
-			return reinterpret_cast<std::unique_ptr<Entity> (__fastcall*)(const std::unique_ptr<Entity>&entity, stl::uuid* id)>(getFuncAddr((int)Func::EntityDying::createWithEntity))(entity, id);
-		}
 		stl::string getName() override
 		{
 			stl::string result;
