@@ -16,8 +16,8 @@ namespace fdm
 			VBO_COLOR = 4,
 			VBO_COUNT = 5,
 		};
-		const Tex2D* texture; 
-		const Shader* shader; // 0x8
+		const Tex2D* texture = nullptr; 
+		const Shader* shader = nullptr; // 0x8
 		uint32_t VAO = 0; // 0x10
 		uint32_t buffers[VBO_COUNT]{ 0 }; // 0x14
 
@@ -31,7 +31,21 @@ namespace fdm
 			this->texture = texture;
 			this->shader = shader;
 		}
-		TexRenderer& operator=(TexRenderer&& other)
+		TexRenderer(const TexRenderer& other) = delete;
+		TexRenderer& operator=(const TexRenderer& other) = delete;
+		TexRenderer(TexRenderer&& other) noexcept
+		{
+			texture = other.texture;
+			shader = other.shader;
+			VAO = other.VAO;
+			std::memcpy(buffers, other.buffers, sizeof(buffers));
+
+			other.texture = nullptr;
+			other.shader = nullptr;
+			other.VAO = 0;
+			std::memset(other.buffers, 0, sizeof(buffers));
+		}
+		TexRenderer& operator=(TexRenderer&& other) noexcept
 		{
 			reinterpret_cast<TexRenderer& (__thiscall*)(TexRenderer* self, TexRenderer& other)>(getFuncAddr((int)Func::TexRenderer::operatorEq))(this, other);
 			return *this;

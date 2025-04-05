@@ -42,7 +42,39 @@ namespace fdm
 		{
 			this->shader = shader;
 		}
-		bool init() 
+		QuadRenderer(const QuadRenderer& other) = delete;
+		QuadRenderer& operator=(const QuadRenderer& other) = delete;
+		QuadRenderer(QuadRenderer&& other) noexcept
+		{
+			shader = other.shader;
+			VAO = other.VAO;
+			mode = other.mode;
+			elementCount = other.elementCount;
+			std::memcpy(buffers, other.buffers, sizeof(buffers));
+
+			other.shader = nullptr;
+			other.VAO = 0;
+			other.mode = MODE_FILL;
+			other.elementCount = 6;
+			std::memset(other.buffers, 0, sizeof(buffers));
+		}
+		QuadRenderer& operator=(QuadRenderer&& other) noexcept
+		{
+			shader = other.shader;
+			VAO = other.VAO;
+			mode = other.mode;
+			elementCount = other.elementCount;
+			std::memcpy(buffers, other.buffers, sizeof(buffers));
+
+			other.shader = nullptr;
+			other.VAO = 0;
+			other.mode = MODE_FILL;
+			other.elementCount = 6;
+			std::memset(other.buffers, 0, sizeof(buffers));
+
+			return *this;
+		}
+		bool init()
 		{
 			return reinterpret_cast<bool (__thiscall*)(QuadRenderer* self)>(getFuncAddr((int)Func::QuadRenderer::init))(this);
 		}
