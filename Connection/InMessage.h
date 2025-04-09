@@ -14,10 +14,6 @@ namespace fdm::Connection
 		}
 
 		std::unique_ptr<SteamNetworkingMessage_t, void(__cdecl*)(SteamNetworkingMessage_t*)> messagePtr{ nullptr, InMessageDeleter };
-		~InMessage()
-		{
-			reinterpret_cast<void(__thiscall*)(Connection::InMessage * self)>(getFuncAddr((int)Func::Connection::InMessage::destr_InMessage))(this);
-		}
 		InMessage() : messagePtr(nullptr, InMessageDeleter) {}
 		InMessage(SteamNetworkingMessage_t* msg) : messagePtr(msg, InMessageDeleter) {}
 
