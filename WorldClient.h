@@ -103,9 +103,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(WorldClient* self, const Connection::InMessage& message, Player* player)>(getFuncAddr((int)Func::WorldClient::handleMessage))(this, message, player);
 		}
-		inline static bool inventoryUpdateCallback(nlohmann::json& action, void* user) 
+		inline static bool inventoryUpdateCallback(const nlohmann::json& action, void* user)
 		{
-			return reinterpret_cast<bool (__fastcall*)(nlohmann::json& action, void* user)>(getFuncAddr((int)Func::WorldClient::inventoryUpdateCallback))(action, user);
+			return reinterpret_cast<bool (__fastcall*)(const nlohmann::json& action, void* user)>(getFuncAddr((int)Func::WorldClient::inventoryUpdateCallback))(action, user);
 		}
 		World::Type getType() override
 		{

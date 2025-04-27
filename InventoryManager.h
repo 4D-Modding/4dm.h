@@ -6,7 +6,7 @@
 
 namespace fdm 
 {
-	using InventoryUpdateCallback = std::add_pointer<bool(nlohmann::json& action, void* user)>::type;
+	using InventoryUpdateCallback = std::add_pointer<bool(const nlohmann::json& action, void* user)>::type;
 	class InventoryManager 
 	{
 	public:
@@ -60,9 +60,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(InventoryManager* self, GLFWwindow* w, int width, int height)>(getFuncAddr((int)Func::InventoryManager::windowResize))(this, w, width, height);
 		}
-		bool applyAction(World* world, Player* player, nlohmann::json& action) 
+		bool applyAction(World* world, Player* player, const nlohmann::json& action)
 		{
-			return reinterpret_cast<bool (__thiscall*)(InventoryManager* self, World* world, Player* player, nlohmann::json& action)>(getFuncAddr((int)Func::InventoryManager::applyAction))(this, world, player, action);
+			return reinterpret_cast<bool (__thiscall*)(InventoryManager* self, World* world, Player* player, const nlohmann::json& action)>(getFuncAddr((int)Func::InventoryManager::applyAction))(this, world, player, action);
 		}
 		bool applyTransfer(InventoryManager::TransferAction action, std::unique_ptr<Item>& selectedSlot, std::unique_ptr<Item>& cursorSlot, Inventory* other) 
 		{
