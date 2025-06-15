@@ -89,7 +89,7 @@ namespace fdm
 
 		virtual ~World() {}
 		virtual World::Type getType() { return TYPE_CLIENT; }
-		virtual bool setBlockUpdate(const glm::ivec4& block, unsigned char value) {}
+		virtual void setBlockUpdate(const glm::ivec4& block, uint8_t value) {}
 		virtual bool addEntityToChunk(std::unique_ptr<Entity>& entity, Chunk* c)
 		{
 			return reinterpret_cast<bool(__thiscall*)(World * self, std::unique_ptr<Entity>& entity, Chunk* c)>(getFuncAddr((int)Func::World::addEntityToChunk))(this, entity, c);

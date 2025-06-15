@@ -180,9 +180,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void(__thiscall*)(WorldServer * self, const Connection::OutMessage&, WorldServer::PlayerInfo*, bool)>(getFuncAddr((int)Func::WorldServer::sendMessagePlayer))(this, message, playerInfo, reliable);
 		}
-		bool setBlockUpdate(const glm::ivec4& block, uint8_t value) override
+		void setBlockUpdate(const glm::ivec4& block, uint8_t value) override
 		{
-			return reinterpret_cast<bool(__thiscall*)(WorldServer * self, const glm::ivec4&, uint8_t)>(getFuncAddr((int)Func::WorldServer::setBlockUpdate))(this, block, value);
+			return reinterpret_cast<void(__thiscall*)(WorldServer * self, const glm::ivec4&, uint8_t)>(getFuncAddr((int)Func::WorldServer::setBlockUpdate))(this, block, value);
 		}
 		void setDifficultyLocal(Player* player, int difficulty)
 		{

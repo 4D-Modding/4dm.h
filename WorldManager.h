@@ -22,9 +22,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void (__thiscall*)(WorldManager* self, const glm::mat4& p)>(getFuncAddr((int)Func::WorldManager::updateRenderFrustum))(this, p);
 		}
-		bool setBlockUpdate(const glm::ivec4& block, unsigned char value) override
+		void setBlockUpdate(const glm::ivec4& block, uint8_t value) override
 		{
-			return reinterpret_cast<bool (__thiscall*)(WorldManager* self, const glm::ivec4& block, unsigned char value)>(getFuncAddr((int)Func::WorldManager::setBlockUpdate))(this, block, value);
+			return reinterpret_cast<void (__thiscall*)(WorldManager* self, const glm::ivec4& block, uint8_t value)>(getFuncAddr((int)Func::WorldManager::setBlockUpdate))(this, block, value);
 		}
 		
 
