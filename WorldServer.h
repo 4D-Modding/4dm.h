@@ -108,10 +108,6 @@ namespace fdm
 		{
 			return reinterpret_cast<bool(__thiscall*)(WorldServer * self, WorldServer::PlayerInfo*, std::unique_ptr<Item>&)>(getFuncAddr((int)Func::WorldServer::giveItem))(this, playerInfo, item);
 		}
-		void handleLightingOptionsUpdate()
-		{
-			return reinterpret_cast<void(__thiscall*)(WorldServer * self)>(getFuncAddr((int)Func::WorldServer::handleLightingOptionsUpdate))(this);
-		}
 		void handleMessage(const Connection::InMessage& message, double dt)
 		{
 			return reinterpret_cast<void(__thiscall*)(WorldServer * self, const Connection::InMessage&, double)>(getFuncAddr((int)Func::WorldServer::handleMessage))(this, message, dt);
@@ -132,17 +128,9 @@ namespace fdm
 		{
 			return reinterpret_cast<void(__thiscall*)(WorldServer * self)>(getFuncAddr((int)Func::WorldServer::loadChunks))(this);
 		}
-		void localPlayerEvent(Player* player, Packet::ClientPacket eventType, int64_t eventValue, void* data) override
-		{
-			return reinterpret_cast<void(__thiscall*)(WorldServer * self, Player*, Packet::ClientPacket, int64_t, void*)>(getFuncAddr((int)Func::WorldServer::localPlayerEvent))(this, player, eventType, eventValue, data);
-		}
 		void localPlayerInit(Player* player)
 		{
 			return reinterpret_cast<void(__thiscall*)(WorldServer * self, Player*)>(getFuncAddr((int)Func::WorldServer::localPlayerInit))(this, player);
-		}
-		void localPlayerRespawn(StateManager& s, Player* player)
-		{
-			return reinterpret_cast<void(__thiscall*)(WorldServer * self, StateManager&, Player*)>(getFuncAddr((int)Func::WorldServer::localPlayerRespawn))(this, s, player);
 		}
 		bool removePlayer(std::unordered_map<uint32_t, WorldServer::PlayerInfo>::iterator entry, bool endConnection)
 		{
