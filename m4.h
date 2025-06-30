@@ -69,15 +69,13 @@ namespace fdm
 			float e = (v.y * w.w) - (v.w * w.y);
 			float f = (v.z * w.w) - (v.w * w.z);
 
-			// result vector
-			glm::vec4 res;
-
-			res.x = (u.y * f) - (u.z * e) + (u.w * d);
-			res.y = -(u.x * f) + (u.z * c) - (u.w * b);
-			res.z = (u.x * e) - (u.y * c) + (u.w * a);
-			res.w = -(u.x * d) + (u.y * b) - (u.z * a);
-
-			return res;
+			return glm::vec4
+			{
+				(u.y * f) - (u.z * e) + (u.w * d),
+				-(u.x * f) + (u.z * c) - (u.w * b),
+				(u.x * e) - (u.y * c) + (u.w * a),
+				-(u.x * d) + (u.y * b) - (u.z * a)
+			};
 		}
 		inline BiVector4 wedge(const glm::vec4& u, const glm::vec4& v)
 		{
@@ -103,7 +101,7 @@ namespace fdm
 			Rotor(const BiVector4& plane, float radians)
 			{
 				float cosHalf = glm::cos(radians * 0.5f);
-				float sinHalf = glm::sin(radians * 0.5f);
+				float sinHalf = -glm::sin(radians * 0.5f);
 
 				a = cosHalf;
 
@@ -229,8 +227,6 @@ namespace fdm
 			}
 			glm::vec4 rotate(const glm::vec4& v) const
 			{
-				glm::vec4 result{ 0 };
-
 				float xyz = b.xy * v.z - b.xz * v.y + b.yz * v.x + b0123 * v.w;
 				float xyw = -b.xw * v.y + b.xy * v.w + b.yw * v.x + -b0123 * v.z;
 				float xzw = -b.xw * v.z + b.xz * v.w + b.zw * v.x + b0123 * v.y;
@@ -241,12 +237,13 @@ namespace fdm
 				float sZ = a * v.z + -b.xz * v.x - b.yz * v.y + b.zw * v.w;
 				float sW = a * v.w + -b.xw * v.x - b.yw * v.y - b.zw * v.z;
 
-				result.x = a * sX + (-sY * -b.xy - sZ * -b.xz - sW * -b.xw) + (b.yw * xyw + b.yz * xyz + b.zw * xzw) + (b0123 * yzw);
-				result.y = a * sY + (sX * -b.xy - sZ * -b.yz - sW * -b.yw) + (-b.xw * xyw - b.xz * xyz + b.zw * yzw) + (-b0123 * xzw);
-				result.z = a * sZ + (sX * -b.xz + sY * -b.yz - sW * -b.zw) + (-b.xw * xzw + b.xy * xyz - b.yw * yzw) + (b0123 * xyw);
-				result.w = a * sW + (sX * -b.xw + sY * -b.yw + sZ * -b.zw) + (b.xy * xyw + b.xz * xzw + b.yz * yzw) + (-b0123 * xyz);
-
-				return result;
+				return glm::vec4
+				{
+					a * sX + (-sY * -b.xy - sZ * -b.xz - sW * -b.xw) + (b.yw * xyw + b.yz * xyz + b.zw * xzw) + (b0123 * yzw),
+					a * sY + (sX * -b.xy - sZ * -b.yz - sW * -b.yw) + (-b.xw * xyw - b.xz * xyz + b.zw * yzw) + (-b0123 * xzw),
+					a * sZ + (sX * -b.xz + sY * -b.yz - sW * -b.zw) + (-b.xw * xzw + b.xy * xyz - b.yw * yzw) + (b0123 * xyw),
+					a * sW + (sX * -b.xw + sY * -b.yw + sZ * -b.zw) + (b.xy * xyw + b.xz * xzw + b.yz * yzw) + (-b0123 * xyz)
+				};
 			}
 			void normalize()
 			{
@@ -346,15 +343,15 @@ namespace fdm
 
 				return *this;
 			}
-			glm::vec4 multiply(const glm::vec4& v, float finalComp) const
+			glm::vec4 multiply(const glm::vec4& v, float finalComp = 1.0f) const
 			{
-				glm::vec4 result;
+				float vv[5]{ v.x, v.y, v.z, v.w, finalComp };
+				glm::vec4 result{ 0 };
 				for (int row = 0; row < 4; ++row)
 				{
-					result[row] = 0;
 					for (int col = 0; col < 5; ++col)
 					{
-						result[row] += value[col][row] * v[col];
+						result[row] += value[col][row] * vv[col];
 					}
 				}
 				return result;
