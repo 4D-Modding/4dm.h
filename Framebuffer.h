@@ -25,6 +25,10 @@ namespace fdm
 		{
 			texRenderer.shader = shader;
 		}
+		void _render()
+		{
+			return reinterpret_cast<void (__thiscall*)(Framebuffer* self)>(getFuncAddr((int)Func::Framebuffer::render))(this);
+		}
 		void render() 
 		{
 			const Shader* s = getShader();
