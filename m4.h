@@ -277,9 +277,9 @@ namespace fdm
 			{
 				value[0][0] = value[1][1] = value[2][2] = value[3][3] = value[4][4] = x;
 			}
-			Mat5(nlohmann::json& j)
+			Mat5(const nlohmann::json& j)
 			{
-				reinterpret_cast<void(__thiscall*)(Mat5*, nlohmann::json&)>(
+				reinterpret_cast<void(__thiscall*)(Mat5*, const nlohmann::json&)>(
 					getFuncAddr((int)Func::m4::Mat5::Mat5A)
 					)(this, j);
 			}
