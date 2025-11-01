@@ -2348,8 +2348,8 @@ creates a hook for a member function (__thiscall)
 to call the original function, do `original(self, <all of the you have arguments>)`
 `this` pointer is called `self`
 */
-#define $hook(returnType, cl, function, ...) \
-	namespace CONCAT(fdmHooks, __LINE__) \
+#define $hookID(id, returnType, cl, function, ...) \
+	namespace id \
 	{ \
 		class CONCAT(function, H) \
 		{ \
@@ -2363,19 +2363,26 @@ to call the original function, do `original(self, <all of the you have arguments
 		uint64_t hookAddr = getFuncAddr((int)(Func::cl::function)); \
 		if(hookAddr) \
 		{ \
-			Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original); \
+			Hook(hookAddr, &id::CONCAT(function, H)::hook, &id::CONCAT(function, H)::original); \
 			EnableHook(); \
 		} \
 	} \
-	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook(cl* self, ##__VA_ARGS__)
+	inline returnType __fastcall id::CONCAT(function, H)::hook(cl* self, ##__VA_ARGS__)
+
+/*
+creates a hook for a member function (__thiscall)
+to call the original function, do `original(self, <all of the you have arguments>)`
+`this` pointer is called `self`
+*/
+#define $hook(returnType, cl, function, ...) $hookID(CONCAT(fdmHooks, __LINE__), returnType, cl, function, __VA_ARGS__)
 
 /*
 creates a hook for a member function (__thiscall) using Func namespace.
 to call the original function, do `original(self, <all of the you have arguments>)`
 `this` pointer is called `self`
 */
-#define $hookByFunc(returnType, className, func, ...) \
-	namespace CONCAT(fdmHooks, __LINE__) \
+#define $hookByFuncID(id, returnType, className, func, ...) \
+	namespace id \
 	{ \
 		class H \
 		{ \
@@ -2389,18 +2396,25 @@ to call the original function, do `original(self, <all of the you have arguments
 		uint64_t hookAddr = getFuncAddr((int)(func)); \
 		if(hookAddr) \
 		{ \
-			Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original); \
+			Hook(hookAddr, &id::H::hook, &id::H::original); \
 			EnableHook(); \
 		} \
 	} \
-	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(className* self, ##__VA_ARGS__)
+	inline returnType __fastcall id::H::hook(className* self, ##__VA_ARGS__)
+
+/*
+creates a hook for a member function (__thiscall) using Func namespace.
+to call the original function, do `original(self, <all of the you have arguments>)`
+`this` pointer is called `self`
+*/
+#define $hookByFunc(returnType, className, func, ...) $hookByFuncID(CONCAT(fdmHooks, __LINE__), returnType, className, func, __VA_ARGS__)
 
 /*
 creates a hook for a static function (__fastcall)
 to call the original function, do `original(<all of the you have arguments>)`
 */
-#define $hookStatic(returnType, cl, function, ...) \
-	namespace CONCAT(fdmHooks, __LINE__) \
+#define $hookStaticID(id, returnType, cl, function, ...) \
+	namespace id \
 	{ \
 		class CONCAT(function, H)  \
 		{ \
@@ -2414,18 +2428,24 @@ to call the original function, do `original(<all of the you have arguments>)`
 		uint64_t hookAddr = getFuncAddr((int)(Func::cl::function)); \
 		if(hookAddr) \
 		{ \
-			Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook, &CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::original); \
+			Hook(hookAddr, &id::CONCAT(function, H)::hook, &id::CONCAT(function, H)::original); \
 			EnableHook(); \
 		} \
 	} \
-	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::CONCAT(function, H)::hook(__VA_ARGS__)
+	inline returnType __fastcall id::CONCAT(function, H)::hook(__VA_ARGS__)
+
+/*
+creates a hook for a static function (__fastcall)
+to call the original function, do `original(<all of the you have arguments>)`
+*/
+#define $hookStatic(returnType, cl, function, ...) $hookStaticID(CONCAT(fdmHooks, __LINE__), returnType, cl, function, __VA_ARGS__)
 
 /*
 creates a hook for a static function (__fastcall) using Func namespace.
 to call the original function, do `original(<all of the you have arguments>)`
 */
-#define $hookStaticByFunc(returnType, func, ...) \
-	namespace CONCAT(fdmHooks, __LINE__) \
+#define $hookStaticByFuncID(id, returnType, func, ...) \
+	namespace id \
 	{ \
 		class H \
 		{ \
@@ -2439,11 +2459,17 @@ to call the original function, do `original(<all of the you have arguments>)`
 		uint64_t hookAddr = getFuncAddr((int)(func)); \
 		if(hookAddr) \
 		{ \
-			Hook(hookAddr, &CONCAT(fdmHooks, __LINE__)::H::hook, &CONCAT(fdmHooks, __LINE__)::H::original); \
+			Hook(hookAddr, &id::H::hook, &id::H::original); \
 			EnableHook(); \
 		} \
 	} \
-	inline returnType __fastcall CONCAT(fdmHooks, __LINE__)::H::hook(__VA_ARGS__)
+	inline returnType __fastcall id::H::hook(__VA_ARGS__)
+
+/*
+creates a hook for a static function (__fastcall) using Func namespace.
+to call the original function, do `original(<all of the you have arguments>)`
+*/
+#define $hookStaticByFunc(returnType, func, ...) $hookStaticByFuncID(CONCAT(fdmHooks, __LINE__), returnType, func, __VA_ARGS__)
 
 #ifdef DEBUG_CONSOLE
 	#define initDLL \
