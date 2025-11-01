@@ -67,7 +67,7 @@ namespace fdm
 		{
 			reinterpret_cast<void(__thiscall*)(MeshRenderer* self)>(getFuncAddr((int)Func::MeshRenderer::destr_MeshRenderer))(this);
 		}
-		void render() 
+		void render() const
 		{
 			return reinterpret_cast<void (__thiscall*)(MeshRenderer* self)>(getFuncAddr((int)Func::MeshRenderer::render))(this);
 		}
