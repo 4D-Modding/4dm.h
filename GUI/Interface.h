@@ -65,10 +65,10 @@ namespace fdm
 
 				if (!this->elements.empty())
 				{
-					for (auto it = this->elements.begin(); it != this->elements.end(); ++it)
-					{
-						delete* it;
-					}
+					//for (auto it = this->elements.begin(); it != this->elements.end(); ++it)
+					//{
+					//	delete* it;
+					//}
 
 					this->elements.clear();
 				}
