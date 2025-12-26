@@ -2083,7 +2083,7 @@ namespace fdm
 	{
 		return reinterpret_cast<std::vector<fdm::stl::string>(__stdcall*)()>(GetProcAddress(GetModuleHandleA("4DModLoader-Core.dll"), "getLaunchArguments"))();
 	}
-	// useful for creating library mod headers
+	// useful for creating simple library mod headers
 	inline FARPROC getModFuncPointer(const fdm::stl::string& modId, const fdm::stl::string& funcName)
 	{
 		HMODULE modModule = getModHandle(modId);
@@ -2170,7 +2170,7 @@ namespace fdm
 
 
 	template<auto F>
-	inline static constexpr uint64_t getClassFuncAddr()
+	inline constexpr uint64_t getClassFuncAddr()
 	{
 		auto pFunc = F;
 		void* pPtr = (void*&)pFunc;
@@ -2178,6 +2178,62 @@ namespace fdm
 	}
 
 	inline std::vector<void(*)()> execFuncs;
+
+	// i decided to add the hook functions here but in the normal style because yes don't question it
+
+	// If target is NULL/nullptr (0), enables every hook.
+	// If id is fdm::ALL_HOOKS/NULL (0), enables every hook of the target. (modloader-core <= v2.2 enables all hooks of the target)
+	// INVALID_HOOK_ID is treated as ALL_HOOKS
+	inline void enableHook(void* target = NULL, uint64_t id = fdm::ALL_HOOKS)
+	{
+		EnableHook(target, id);
+	}
+
+	// If target is NULL/nullptr (0), enables every hook.
+	// If id is fdm::ALL_HOOKS/NULL (0), enables every hook of the target. (modloader-core <= v2.2 enables all hooks of the target)
+	// INVALID_HOOK_ID is treated as ALL_HOOKS
+	inline void enableHook(uint64_t target = NULL, uint64_t id = fdm::ALL_HOOKS)
+	{
+		EnableHook(target, id);
+	}
+
+	// Method not supported on modloader-core <= v2.2
+	// If target is NULL/nullptr (0), disables every hook.
+	// If id is fdm::ALL_HOOKS/NULL (0), disables every hook of the target.
+	// INVALID_HOOK_ID is treated as ALL_HOOKS
+	inline void disableHook(void* target = NULL, uint64_t id = fdm::ALL_HOOKS)
+	{
+		DisableHook(target, id);
+	}
+
+	// Method not supported on modloader-core <= v2.2
+	// If target is NULL/nullptr (0), disables every hook.
+	// If id is fdm::ALL_HOOKS/NULL (0), disables every hook of the target.
+	// INVALID_HOOK_ID is treated as ALL_HOOKS
+	inline void disableHook(uint64_t target = NULL, uint64_t id = fdm::ALL_HOOKS)
+	{
+		DisableHook(target, id);
+	}
+
+	// May return fdm::INVALID_HOOK_ID if the modloader-core version doesn't have the new hook methods (i.e. <= v2.2)
+	template<typename FuncPtr>
+	inline uint64_t hook(uint64_t target, FuncPtr detour, FuncPtr* original)
+	{
+		return Hook<FuncPtr>(target, detour, original);
+	}
+
+	// May return fdm::INVALID_HOOK_ID if the modloader-core version doesn't have the new hook methods (i.e. <= v2.2)
+	template<typename FuncPtr>
+	inline uint64_t hook(int func, FuncPtr detour, FuncPtr* original)
+	{
+		return Hook<FuncPtr>(getFuncAddr(func), detour, original);
+	}
+
+	// May return fdm::INVALID_HOOK_ID if the modloader-core version doesn't have the new hook methods (i.e. <= v2.2)
+	inline uint64_t hook(void* target, void* detour, void** original)
+	{
+		return Hook(target, detour, original);
+	}
 }
 
 #include "Console.h"
@@ -2345,7 +2401,7 @@ extern "C" inline __declspec(dllexport) void setModID(const fdm::stl::string& mo
 
 /*
 creates a hook for a member function (__thiscall)
-to call the original function, do `original(self, <all of the you have arguments>)`
+to call the original function, do `original(self, <all of the arguments you have>)`
 `this` pointer is called `self`
 */
 #define $hookID(id, returnType, cl, function, ...) \
@@ -2354,8 +2410,12 @@ to call the original function, do `original(self, <all of the you have arguments
 		class CONCAT(function, H) \
 		{ \
 		public: \
+			inline static uint64_t hookID = fdm::ALL_HOOKS; \
+			inline static uint64_t hookAddr = NULL; \
 			inline static returnType(__thiscall* original)(cl* self, ##__VA_ARGS__) = nullptr; \
 			static returnType __fastcall hook(cl* self, ##__VA_ARGS__); \
+			inline static void enable() { fdm::enableHook(hookAddr, hookID); } \
+			inline static void disable() { fdm::disableHook(hookAddr, hookID); } \
 		}; \
 	} \
 	$execAtLoad \
@@ -2363,22 +2423,23 @@ to call the original function, do `original(self, <all of the you have arguments
 		uint64_t hookAddr = getFuncAddr((int)(Func::cl::function)); \
 		if(hookAddr) \
 		{ \
-			Hook(hookAddr, &id::CONCAT(function, H)::hook, &id::CONCAT(function, H)::original); \
-			EnableHook(); \
+			id::CONCAT(function, H)::hookID = Hook(hookAddr, &id::CONCAT(function, H)::hook, &id::CONCAT(function, H)::original); \
+			id::CONCAT(function, H)::hookAddr = hookAddr; \
+			EnableHook(hookAddr, id::CONCAT(function, H)::hookID); \
 		} \
 	} \
 	inline returnType __fastcall id::CONCAT(function, H)::hook(cl* self, ##__VA_ARGS__)
 
 /*
 creates a hook for a member function (__thiscall)
-to call the original function, do `original(self, <all of the you have arguments>)`
+to call the original function, do `original(self, <all of the arguments you have>)`
 `this` pointer is called `self`
 */
 #define $hook(returnType, cl, function, ...) $hookID(CONCAT(fdmHooks, __LINE__), returnType, cl, function, __VA_ARGS__)
 
 /*
 creates a hook for a member function (__thiscall) using Func namespace.
-to call the original function, do `original(self, <all of the you have arguments>)`
+to call the original function, do `original(self, <all of the arguments you have>)`
 `this` pointer is called `self`
 */
 #define $hookByFuncID(id, returnType, className, func, ...) \
@@ -2387,8 +2448,12 @@ to call the original function, do `original(self, <all of the you have arguments
 		class H \
 		{ \
 		public: \
+			inline static uint64_t hookID = fdm::ALL_HOOKS; \
+			inline static uint64_t hookAddr = NULL; \
 			inline static returnType(__thiscall* original)(className* self, ##__VA_ARGS__) = nullptr; \
 			static returnType __fastcall hook(className* self, ##__VA_ARGS__); \
+			inline static void enable() { fdm::enableHook(hookAddr, hookID); } \
+			inline static void disable() { fdm::disableHook(hookAddr, hookID); } \
 		}; \
 	} \
 	$execAtLoad \
@@ -2396,22 +2461,23 @@ to call the original function, do `original(self, <all of the you have arguments
 		uint64_t hookAddr = getFuncAddr((int)(func)); \
 		if(hookAddr) \
 		{ \
-			Hook(hookAddr, &id::H::hook, &id::H::original); \
-			EnableHook(); \
+			id::H::hookID = Hook(hookAddr, &id::H::hook, &id::H::original); \
+			id::H::hookAddr = hookAddr; \
+			EnableHook(hookAddr, id::H::hookID); \
 		} \
 	} \
 	inline returnType __fastcall id::H::hook(className* self, ##__VA_ARGS__)
 
 /*
 creates a hook for a member function (__thiscall) using Func namespace.
-to call the original function, do `original(self, <all of the you have arguments>)`
+to call the original function, do `original(self, <all of the arguments you have>)`
 `this` pointer is called `self`
 */
 #define $hookByFunc(returnType, className, func, ...) $hookByFuncID(CONCAT(fdmHooks, __LINE__), returnType, className, func, __VA_ARGS__)
 
 /*
 creates a hook for a static function (__fastcall)
-to call the original function, do `original(<all of the you have arguments>)`
+to call the original function, do `original(<all of the arguments you have>)`
 */
 #define $hookStaticID(id, returnType, cl, function, ...) \
 	namespace id \
@@ -2419,8 +2485,12 @@ to call the original function, do `original(<all of the you have arguments>)`
 		class CONCAT(function, H)  \
 		{ \
 		public: \
+			inline static uint64_t hookID = fdm::ALL_HOOKS; \
+			inline static uint64_t hookAddr = NULL; \
 			inline static returnType(__fastcall* original)(__VA_ARGS__) = nullptr;\
 			static returnType __fastcall hook(__VA_ARGS__); \
+			inline static void enable() { fdm::enableHook(hookAddr, hookID); } \
+			inline static void disable() { fdm::disableHook(hookAddr, hookID); } \
 		}; \
 	} \
 	$execAtLoad \
@@ -2428,21 +2498,22 @@ to call the original function, do `original(<all of the you have arguments>)`
 		uint64_t hookAddr = getFuncAddr((int)(Func::cl::function)); \
 		if(hookAddr) \
 		{ \
-			Hook(hookAddr, &id::CONCAT(function, H)::hook, &id::CONCAT(function, H)::original); \
-			EnableHook(); \
+			id::CONCAT(function, H)::hookID = Hook(hookAddr, &id::CONCAT(function, H)::hook, &id::CONCAT(function, H)::original); \
+			id::CONCAT(function, H)::hookAddr = hookAddr; \
+			EnableHook(hookAddr, id::CONCAT(function, H)::hookID); \
 		} \
 	} \
 	inline returnType __fastcall id::CONCAT(function, H)::hook(__VA_ARGS__)
 
 /*
 creates a hook for a static function (__fastcall)
-to call the original function, do `original(<all of the you have arguments>)`
+to call the original function, do `original(<all of the arguments you have>)`
 */
 #define $hookStatic(returnType, cl, function, ...) $hookStaticID(CONCAT(fdmHooks, __LINE__), returnType, cl, function, __VA_ARGS__)
 
 /*
 creates a hook for a static function (__fastcall) using Func namespace.
-to call the original function, do `original(<all of the you have arguments>)`
+to call the original function, do `original(<all of the arguments you have>)`
 */
 #define $hookStaticByFuncID(id, returnType, func, ...) \
 	namespace id \
@@ -2450,8 +2521,12 @@ to call the original function, do `original(<all of the you have arguments>)`
 		class H \
 		{ \
 		public: \
+			inline static uint64_t hookID = fdm::ALL_HOOKS; \
+			inline static uint64_t hookAddr = NULL; \
 			inline static returnType(__fastcall* original)(__VA_ARGS__) = nullptr; \
 			static returnType __fastcall hook(__VA_ARGS__); \
+			inline static void enable() { fdm::enableHook(hookAddr, hookID); } \
+			inline static void disable() { fdm::disableHook(hookAddr, hookID); } \
 		}; \
 	} \
 	$execAtLoad \
@@ -2459,15 +2534,16 @@ to call the original function, do `original(<all of the you have arguments>)`
 		uint64_t hookAddr = getFuncAddr((int)(func)); \
 		if(hookAddr) \
 		{ \
-			Hook(hookAddr, &id::H::hook, &id::H::original); \
-			EnableHook(); \
+			id::H::hookID = Hook(hookAddr, &id::H::hook, &id::H::original); \
+			id::H::hookAddr = hookAddr; \
+			EnableHook(hookAddr, id::H::hookID); \
 		} \
 	} \
 	inline returnType __fastcall id::H::hook(__VA_ARGS__)
 
 /*
 creates a hook for a static function (__fastcall) using Func namespace.
-to call the original function, do `original(<all of the you have arguments>)`
+to call the original function, do `original(<all of the arguments you have>)`
 */
 #define $hookStaticByFunc(returnType, func, ...) $hookStaticByFuncID(CONCAT(fdmHooks, __LINE__), returnType, func, __VA_ARGS__)
 
