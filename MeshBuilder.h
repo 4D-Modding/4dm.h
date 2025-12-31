@@ -18,7 +18,6 @@ namespace fdm
 		{
 			const void* bufferData;
 			int bufferSize;
-			PAD(4);
 			std::vector<AttrInfo> attributes;
 		};
 		int vertexCount;
