@@ -36,13 +36,13 @@ namespace fdm
 		{
 			return reinterpret_cast<Chunk* (__thiscall*)(World* self, float x, float z, float w)>(getFuncAddr((int)Func::World::getChunkFromCoords))(this, x, z, w);
 		}
-		Entity* getEntityIntersection(glm::vec4& a, glm::vec4& b, const stl::uuid& ignoreEntity) 
+		Entity* getEntityIntersection(const glm::vec4& a, const glm::vec4& b, const stl::uuid& ignoreEntity) 
 		{
-			return reinterpret_cast<Entity* (__thiscall*)(World* self, glm::vec4& a, glm::vec4& b, const stl::uuid& ignoreEntity)>(getFuncAddr((int)Func::World::getEntityIntersection))(this, a, b, ignoreEntity);
+			return reinterpret_cast<Entity* (__thiscall*)(World* self, const glm::vec4& a, const glm::vec4& b, const stl::uuid& ignoreEntity)>(getFuncAddr((int)Func::World::getEntityIntersection))(this, a, b, ignoreEntity);
 		}
-		bool castRay(glm::vec4& currentPos, glm::ivec4& currentBlock, glm::ivec4& intersectBlock, glm::vec4& endpoint) 
+		bool castRay(glm::vec4& currentPos, glm::ivec4& currentBlock, glm::ivec4& intersectBlock, const glm::vec4& endpoint) 
 		{
-			return reinterpret_cast<bool (__thiscall*)(World* self, glm::vec4& currentPos, glm::ivec4& currentBlock, glm::ivec4& intersectBlock, glm::vec4& endpoint)>(getFuncAddr((int)Func::World::castRay))(this, currentPos, currentBlock, intersectBlock, endpoint);
+			return reinterpret_cast<bool (__thiscall*)(World* self, glm::vec4& currentPos, glm::ivec4& currentBlock, glm::ivec4& intersectBlock, const glm::vec4& endpoint)>(getFuncAddr((int)Func::World::castRay))(this, currentPos, currentBlock, intersectBlock, endpoint);
 		}
 		/*uint8_t getBlock(const glm::ivec4& block)
 		{
