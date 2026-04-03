@@ -30,7 +30,7 @@ namespace fdm
 
 		inline static nlohmann::json& blueprints = *reinterpret_cast<nlohmann::json*>(getDataAddr((int)Data::Entity::blueprints));
 		stl::uuid id; // 0x8
-		bool dead; // 0x18
+		bool dead = false; // 0x18
 
 		Entity(){}
 
