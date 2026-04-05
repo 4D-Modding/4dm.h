@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <cstdint>
 #include <cstdlib>
-#include <glm/glm.hpp>
+#include "glm/glm.hpp"
 #include "json.hpp"
 
 namespace fdm
