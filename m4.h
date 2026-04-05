@@ -1,11 +1,21 @@
 #pragma once
 
 #include "4dm.h"
+#include "vec5.h"
 
 namespace fdm
 {
 	namespace m4
 	{
+		struct BiVector4;
+
+		float dot(const BiVector4& a, const BiVector4& b);
+		glm::vec4 cross(const glm::vec4& u, const glm::vec4& v, const glm::vec4& w);
+		BiVector4 wedge(const glm::vec4& u, const glm::vec4& v);
+		BiVector4 normalize(const BiVector4& v);
+		float length(const BiVector4& v);
+		float length2(const BiVector4& v);
+
 		struct BiVector4
 		{
 			union { float b01 = 0, xy; };
@@ -15,53 +25,260 @@ namespace fdm
 			union { float b13 = 0, yw; };
 			union { float b23 = 0, zw; };
 
-			BiVector4() { }
-
-			BiVector4(float b01, float b02, float b03, float b12, float b13, float b23) : b01(b01), b02(b02), b03(b03), b12(b12), b13(b13), b23(b23) { }
-
-			BiVector4(const nlohmann::json& j)
-			{
-				reinterpret_cast<void(__thiscall*)(BiVector4*, const nlohmann::json & j)>(
-					getFuncAddr((int)Func::m4::BiVector4::BiVector4A)
-					)(this, j);
+			BiVector4() {}
+			BiVector4(float v)
+				: xy(v), xz(v), xw(v), yz(v), yw(v), zw(v) {
+			}
+			BiVector4(float xy, float xz, float xw, float yz, float yw, float zw)
+				: xy(xy), xz(xz), xw(xw), yz(yz), yw(yw), zw(zw) {
 			}
 
-			nlohmann::json toJson()
+			BiVector4(const BiVector4& other)
+				: xy(other.xy), xz(other.xz), xw(other.xw), yz(other.yz), yw(other.yw), zw(other.zw) {
+			}
+			BiVector4(BiVector4&& other) noexcept
+				: xy(other.xy), xz(other.xz), xw(other.xw), yz(other.yz), yw(other.yw), zw(other.zw)
 			{
-				nlohmann::json result{};
-				return reinterpret_cast<nlohmann::json&(__thiscall*)(m4::BiVector4 * self, nlohmann::json * result)>(getFuncAddr((int)Func::m4::BiVector4::toJson))(this, &result);
-				return result;
+				other.xy = 0;
+				other.xz = 0;
+				other.xw = 0;
+				other.yz = 0;
+				other.yw = 0;
+				other.zw = 0;
+			}
+			BiVector4& operator=(const BiVector4& other)
+			{
+				this->xy = other.xy;
+				this->xz = other.xz;
+				this->xw = other.xw;
+				this->yz = other.yz;
+				this->yw = other.yw;
+				this->zw = other.zw;
+
+				return *this;
+			}
+			BiVector4& operator=(BiVector4&& other) noexcept
+			{
+				if (this != &other)
+				{
+					this->xy = other.xy;
+					this->xz = other.xz;
+					this->xw = other.xw;
+					this->yz = other.yz;
+					this->yw = other.yw;
+					this->zw = other.zw;
+					other.xy = 0;
+					other.xz = 0;
+					other.xw = 0;
+					other.yz = 0;
+					other.yw = 0;
+					other.zw = 0;
+				}
+
+				return *this;
 			}
 
-			void normalize()
+			float& operator[](size_t i)
 			{
-				float l = glm::sqrt((b01 * b01) + (b02 * b02) + (b03 * b03) + (b12 * b12) + (b13 * b13) + (b23 * b23));
+				assert(i < 6);
 
-				if (l == 0) return;
+				return (&xy)[i];
+			}
+			const float& operator[](size_t i) const
+			{
+				assert(i < 6);
 
-				b01 /= l;
-				b02 /= l;
-				b03 /= l;
-				b12 /= l;
-				b13 /= l;
-				b23 /= l;
+				return (&xy)[i];
+			}
+
+			BiVector4 operator+(const BiVector4& other) const
+			{
+				return BiVector4
+				{
+					this->xy + other.xy,
+					this->xz + other.xz,
+					this->xw + other.xw,
+					this->yz + other.yz,
+					this->yw + other.yw,
+					this->zw + other.zw
+				};
+			}
+			BiVector4 operator+(float v) const
+			{
+				return BiVector4
+				{
+					this->xy + v,
+					this->xz + v,
+					this->xw + v,
+					this->yz + v,
+					this->yw + v,
+					this->zw + v
+				};
+			}
+			BiVector4 operator-(const BiVector4& other) const
+			{
+				return BiVector4
+				{
+					this->xy - other.xy,
+					this->xz - other.xz,
+					this->xw - other.xw,
+					this->yz - other.yz,
+					this->yw - other.yw,
+					this->zw - other.zw
+				};
+			}
+			BiVector4 operator-(float v) const
+			{
+				return BiVector4
+				{
+					this->xy - v,
+					this->xz - v,
+					this->xw - v,
+					this->yz - v,
+					this->yw - v,
+					this->zw - v
+				};
+			}
+			BiVector4 operator-() const
+			{
+				return BiVector4
+				{
+					-this->xy,
+					-this->xz,
+					-this->xw,
+					-this->yz,
+					-this->yw,
+					-this->zw
+				};
+			}
+			BiVector4 operator*(const BiVector4& other) const
+			{
+				return BiVector4
+				{
+					this->xy * other.xy,
+					this->xz * other.xz,
+					this->xw * other.xw,
+					this->yz * other.yz,
+					this->yw * other.yw,
+					this->zw * other.zw
+				};
+			}
+			BiVector4 operator*(float v) const
+			{
+				return BiVector4
+				{
+					this->xy * v,
+					this->xz * v,
+					this->xw * v,
+					this->yz * v,
+					this->yw * v,
+					this->zw * v
+				};
+			}
+			BiVector4 operator/(const BiVector4& other) const
+			{
+				return BiVector4
+				{
+					this->xy / other.xy,
+					this->xz / other.xz,
+					this->xw / other.xw,
+					this->yz / other.yz,
+					this->yw / other.yw,
+					this->zw / other.zw
+				};
+			}
+			BiVector4 operator/(float v) const
+			{
+				float invV = 1.0f / v;
+				return BiVector4
+				{
+					this->xy * invV,
+					this->xz * invV,
+					this->xw * invV,
+					this->yz * invV,
+					this->yw * invV,
+					this->zw * invV
+				};
+			}
+
+			BiVector4& operator+=(const BiVector4& other)
+			{
+				return *this = *this + other;
+			}
+			BiVector4& operator+=(float v)
+			{
+				return *this = *this + v;
+			}
+			BiVector4& operator-=(const BiVector4& other)
+			{
+				return *this = *this - other;
+			}
+			BiVector4& operator-=(float v)
+			{
+				return *this = *this - v;
+			}
+			BiVector4& operator*=(const BiVector4& other)
+			{
+				return *this = *this * other;
+			}
+			BiVector4& operator*=(float v)
+			{
+				return *this = *this * v;
+			}
+			BiVector4& operator/=(const BiVector4& other)
+			{
+				return *this = *this / other;
+			}
+			BiVector4& operator/=(float v)
+			{
+				return *this = *this / v;
+			}
+
+			bool operator==(const BiVector4& other) const
+			{
+				return this->xy == other.xy && this->xz == other.xz && this->xw == other.xw && this->yz == other.yz && this->yw == other.yw && this->zw == other.zw;
 			}
 
 			BiVector4 normalized() const
 			{
-				BiVector4 b = *this;
-				b.normalize();
-				return b;
+				BiVector4 v = *this;
+				v.normalize();
+				return v;
+			}
+			BiVector4& normalize()
+			{
+				float len = length2(*this);
+				if (len <= glm::epsilon<float>() * glm::epsilon<float>())
+				{
+					return *this;
+				}
+				return *this /= glm::sqrt(len);
 			}
 
-			constexpr bool operator==(const BiVector4& b) const
+			inline static BiVector4 XY() { return BiVector4{ 1,0,0,0,0,0 }; }
+			inline static BiVector4 XZ() { return BiVector4{ 0,1,0,0,0,0 }; }
+			inline static BiVector4 XW() { return BiVector4{ 0,0,1,0,0,0 }; }
+			inline static BiVector4 YZ() { return BiVector4{ 0,0,0,1,0,0 }; }
+			inline static BiVector4 YW() { return BiVector4{ 0,0,0,0,1,0 }; }
+			inline static BiVector4 ZW() { return BiVector4{ 0,0,0,0,0,1 }; }
+
+			BiVector4(const nlohmann::json& j)
+				: BiVector4(j.at(0).get<float>(), j.at(1).get<float>(), j.at(2).get<float>(), j.at(3).get<float>(), j.at(4).get<float>(), j.at(5).get<float>())
+			{}
+
+			nlohmann::json toJson()
 			{
-				return xy == b.xy && xz == b.xz && xw == b.xw && yz == b.yz && yw == b.yw && zw == b.zw;
+				return { xy, xz, xw, yz, yw, zw };
 			}
 		};
+
+		inline float dot(const BiVector4& a, const BiVector4& b)
+		{
+			return a.xy * b.xy + a.xz * b.xz + a.xw * b.xw + a.yz * b.yz + a.yw * b.yw + a.zw * b.zw;
+		}
 		inline glm::vec4 cross(const glm::vec4& u, const glm::vec4& v, const glm::vec4& w)
 		{
-			//  intermediate values
+			// intermediate values
 			float a = (v.x * w.y) - (v.y * w.x);
 			float b = (v.x * w.z) - (v.z * w.x);
 			float c = (v.x * w.w) - (v.w * w.x);
@@ -90,14 +307,35 @@ namespace fdm
 
 			return result.normalized();
 		}
-		
-		class Rotor
+		inline BiVector4 normalize(const BiVector4& v)
 		{
-		public:
+			return v.normalized();
+		}
+		inline float length(const BiVector4& v)
+		{
+			return glm::sqrt(length2(v));
+		}
+		inline float length2(const BiVector4& v)
+		{
+			return dot(v, v);
+		}
+
+		struct Rotor;
+
+		Rotor normalize(const Rotor& v);
+		float length(const Rotor& v);
+		float length2(const Rotor& v);
+
+		struct Rotor
+		{
 			float a = 1;
-			BiVector4 b{ };
-			float b0123 = 0;
+			BiVector4 b = 0.0f;
+			float b0123 = 0.0f;
+
 			Rotor() { }
+			Rotor(float a, BiVector4 b, float xyzw)
+				: a(a), b(b), b0123(xyzw) {
+			}
 			Rotor(const BiVector4& plane, float radians)
 			{
 				float cosHalf = glm::cos(radians * 0.5f);
@@ -105,20 +343,14 @@ namespace fdm
 
 				a = cosHalf;
 
-				b.b01 = sinHalf * plane.b01;
-				b.b02 = sinHalf * plane.b02;
-				b.b03 = sinHalf * plane.b03;
-				b.b12 = sinHalf * plane.b12;
-				b.b13 = sinHalf * plane.b13;
-				b.b23 = sinHalf * plane.b23;
+				b = plane;
+				b *= sinHalf;
 			}
 			Rotor(const glm::vec4& from, const glm::vec4& to)
 			{
-				float dot = glm::max(-1.0f, glm::min(1.0f, glm::dot(from, to)));
-				if (dot == 1)
+				float dot = glm::clamp(glm::dot(from, to), -1.0f, 1.0f);
+				if (dot >= 1.0f - glm::epsilon<float>())
 				{
-					a = 1;
-					b = {};
 					return;
 				}
 
@@ -128,102 +360,118 @@ namespace fdm
 				float sina = glm::sin(radians / 2.f);
 				// the left side of the products have b a, not a b, so flip
 				b = wedge(to, from);
-				b.b01 *= sina;
-				b.b02 *= sina;
-				b.b03 *= sina;
-				b.b12 *= sina;
-				b.b13 *= sina;
-				b.b23 *= sina;
+				b *= sina;
 
 				normalize();
 			}
-			Rotor(float a, const BiVector4& b, float b0123) : a(a), b(b), b0123(b0123) { }
+			Rotor(const BiVector4& u, const BiVector4& v)
+			{
+				a =
+					- u.xy * v.xy
+					- u.xz * v.xz
+					- u.xw * v.xw
+					- u.yz * v.yz
+					- u.yw * v.yw
+					- u.zw * v.zw;
+
+				b = BiVector4
+				{
+					-u.xw * v.yw - u.xz * v.yz + u.yw * v.xw + u.yz * v.xz,
+					-u.xw * v.zw + u.xy * v.yz - u.yz * v.xy + u.zw * v.xw,
+					+u.xy * v.yw + u.xz * v.zw - u.yw * v.xy - u.zw * v.xz,
+					-u.xy * v.xz + u.xz * v.xy - u.yw * v.zw + u.zw * v.yw,
+					+u.xw * v.xy - u.xy * v.xw + u.yz * v.zw - u.zw * v.yz,
+					+u.xw * v.xz - u.xz * v.xw + u.yw * v.yz - u.yz * v.yw
+				};
+
+				b0123 =
+					+ u.xw * v.yz
+					+ u.xy * v.zw
+					- u.xz * v.yw
+					- u.yw * v.xz
+					+ u.yz * v.xw
+					+ u.zw * v.xy;
+			}
+
+			Rotor(const Rotor& other)
+				: a(other.a), b(other.b), b0123(other.b0123) {
+			}
+			Rotor(Rotor&& other) noexcept
+				: a(other.a), b(other.b), b0123(other.b0123)
+			{
+				other.a = 1.0f;
+				other.b = 0.0f;
+				other.b0123 = 0.0f;
+			}
+			Rotor& operator=(const Rotor& other)
+			{
+				this->a = other.a;
+				this->b = other.b;
+				this->b0123 = other.b0123;
+
+				return *this;
+			}
+			Rotor& operator=(Rotor&& other) noexcept
+			{
+				if (this != &other)
+				{
+					this->a = other.a;
+					this->b = other.b;
+					this->b0123 = other.b0123;
+					other.a = 1.0f;
+					other.b = 0.0f;
+					other.b0123 = 0.0f;
+				}
+
+				return *this;
+			}
+
+			Rotor operator-() const
+			{
+				return Rotor{ a, -b, b0123 };
+			}
+			bool operator==(const Rotor& other) const
+			{
+				return this->a == other.a && this->b == other.b && this->b0123 == other.b0123;
+			}
+
 			Rotor operator*(const Rotor& r) const
 			{
-				Rotor result;
+				Rotor result{ this->b, r.b };
 
-				result.a =
-					(b.b01 * r.b.b01)
-					+ (a * r.a)
-					+ (b.b02 * r.b.b02)
-					+ (b.b03 * r.b.b03)
-					+ (b.b12 * r.b.b12)
-					+ (b.b13 * r.b.b13)
-					+ (b.b23 * r.b.b23)
-					+ (b0123 * r.b0123);
-				result.b.b01 =
-					(result.a * r.b.b01)
-					+ (b.b01 * r.a)
-					- (b.b02 * r.b.b12)
-					- (b.b03 * r.b.b13)
-					+ (b.b12 * r.b.b02)
-					+ (b.b13 * r.b.b03)
-					- (b.b23 * r.b0123)
-					- (b0123 * r.b.b23);
-				result.b.b02 =
-					(result.a * r.b.b02)
-					+ (result.b.b01 * r.b.b12)
-					+ (b.b02 * r.a)
-					- (b.b03 * r.b.b23)
-					- (b.b12 * r.b.b01)
-					+ (b.b13 * r.b0123)
-					+ (b.b23 * r.b.b03)
-					+ (b0123 * r.b.b13);
-				result.b.b03 =
-					+(result.a * r.b.b03)
-					+ (result.b.b01 * r.b.b13)
-					+ (result.b.b02 * r.b.b23)
-					+ (b.b03 * r.a)
-					- (b.b12 * r.b0123)
-					- (b.b13 * r.b.b01)
-					- (b.b23 * r.b.b02)
-					- (b0123 * r.b.b12);
-				result.b.b12 =
-					(result.a * r.b.b12)
-					- (result.b.b01 * r.b.b02)
-					+ (result.b.b02 * r.b.b01)
-					- (result.b.b03 * r.b0123)
-					+ (b.b12 * r.a)
-					- (b.b13 * r.b.b23)
-					+ (b.b23 * r.b.b13)
-					- (b0123 * r.b.b03);
-				result.b.b13 =
-					(result.a * r.b.b13)
-					- (result.b.b01 * r.b.b03)
-					+ (result.b.b02 * r.b0123)
-					+ (result.b.b03 * r.b.b01)
-					+ (result.b.b12 * r.b.b23)
-					+ (b.b13 * r.a)
-					- (b.b23 * r.b.b12)
-					+ (b0123 * r.b.b02);
-				result.b.b23 =
-					(result.a * r.b.b23)
-					- (result.b.b01 * r.b0123)
-					- (result.b.b02 * r.b.b03)
-					+ (result.b.b03 * r.b.b02)
-					- (result.b.b12 * r.b.b13)
-					+ (result.b.b13 * r.b.b12)
-					+ (b.b23 * r.a)
-					- (b0123 * r.b.b01);
-				result.b0123 =
-					(result.a * r.b.b23)
-					+ (result.b.b01 * r.b0123)
-					- (result.b.b02 * r.b.b13)
-					+ (result.b.b03 * r.b.b12)
-					+ (result.b.b12 * r.b.b03)
-					- (result.b.b13 * r.b.b02)
-					+ (result.b.b23 * r.b.b01)
-					+ (b0123 * r.a);
+				result.a +=
+					r.a * this->a +
+					r.b0123 * this->b0123;
+				result.b +=
+					r.b * this->a +
+					this->b * r.a +
+					BiVector4 // r.b * this->xyzw
+				{
+					-r.b.zw * this->b0123,
+					+r.b.yw * this->b0123,
+					-r.b.yz * this->b0123,
+					-r.b.xw * this->b0123,
+					+r.b.xz * this->b0123,
+					-r.b.xy * this->b0123,
+				} +
+				BiVector4 // this->b * r.xyzw
+				{
+					-this->b.zw * r.b0123,
+					+this->b.yw * r.b0123,
+					-this->b.yz * r.b0123,
+					-this->b.xw * r.b0123,
+					+this->b.xz * r.b0123,
+					-this->b.xy * r.b0123,
+				};
+				result.b0123 +=
+					this->a * r.b0123 +
+					r.a * this->b0123;
 
 				return result;
 			}
 			Rotor& operator*=(const Rotor& r)
 			{
-				Rotor result = *this * r;
-
-				*this = result;
-
-				return *this;
+				return *this = *this * r;
 			}
 			glm::vec4 rotate(const glm::vec4& v) const
 			{
@@ -245,21 +493,20 @@ namespace fdm
 					a * sW + (sX * -b.xw + sY * -b.yw + sZ * -b.zw) + (b.xy * xyw + b.xz * xzw + b.yz * yzw) + (-b0123 * xyz)
 				};
 			}
-			void normalize()
+
+			Rotor& normalize()
 			{
-				float l = glm::sqrt(a * a + b.xy * b.xy + b.xz * b.xz + b.xw * b.xw +
-					b.yz * b.yz + b.yw * b.yw + b.zw * b.zw + b0123 * b0123);
+				float len = length2(*this);
+				if (len <= glm::epsilon<float>() * glm::epsilon<float>())
+				{
+					return *this;
+				}
+				len = 1.0f / glm::sqrt(len);
+				this->a *= len;
+				this->b *= len;
+				this->b0123 *= len;
 
-				if (l == 0) return;
-
-				a /= l;
-				b.xy /= l;
-				b.xz /= l;
-				b.xw /= l;
-				b.yz /= l;
-				b.yw /= l;
-				b.zw /= l;
-				b0123 /= l;
+				return *this;
 			}
 
 			Rotor normalized() const
@@ -268,45 +515,79 @@ namespace fdm
 				r.normalize();
 				return r;
 			}
+
+			operator glm::mat4() const
+			{
+				return glm::mat4
+				{
+					rotate({ 1, 0, 0, 0 }),
+					rotate({ 0, 1, 0, 0 }),
+					rotate({ 0, 0, 1, 0 }),
+					rotate({ 0, 0, 0, 1 })
+				};
+			}
 		};
+		inline Rotor normalize(const Rotor& v)
+		{
+			return v.normalized();
+		}
+		inline float length(const Rotor& v)
+		{
+			return glm::sqrt(length2(v));
+		}
+		inline float length2(const Rotor& v)
+		{
+			return v.a * v.a + length2(v.b) + v.b0123 * v.b0123;
+		}
+
 		class Mat5
 		{
 		public:
-			float value[5][5] = { 0.f };
-			Mat5(float x = 0.f)
+			std::array<vec5, 5> value
 			{
-				value[0][0] = value[1][1] = value[2][2] = value[3][3] = value[4][4] = x;
+				vec5{ 0.0f, 0.0f, 0.0f, 0.0f, 0.0f },
+				vec5{ 0.0f, 0.0f, 0.0f, 0.0f, 0.0f },
+				vec5{ 0.0f, 0.0f, 0.0f, 0.0f, 0.0f },
+				vec5{ 0.0f, 0.0f, 0.0f, 0.0f, 0.0f },
+				vec5{ 0.0f, 0.0f, 0.0f, 0.0f, 0.0f }
+			};
+
+			Mat5(float x = 0.0f)
+			{
+				value[0][0] =
+				value[1][1] =
+				value[2][2] =
+				value[3][3] =
+				value[4][4] = x;
+			}
+			Mat5(const glm::mat4& m)
+			{
+				value[0] = m[0];
+				value[1] = m[1];
+				value[2] = m[2];
+				value[3] = m[3];
+				value[4][4] = 1.0f;
+			}
+			Mat5(const Rotor& r)
+				: Mat5((glm::mat4)r) {
+			}
+			Mat5(const std::array<vec5, 5>& value)
+				: value(value)
+			{
+			}
+			Mat5(const vec5& m0, const vec5& m1, const vec5& m2, const vec5& m3, const vec5& m4)
+			{
+				value[0] = m0;
+				value[1] = m1;
+				value[2] = m2;
+				value[3] = m3;
+				value[4] = m4;
 			}
 			Mat5(const nlohmann::json& j)
 			{
 				reinterpret_cast<void(__thiscall*)(Mat5*, const nlohmann::json&)>(
 					getFuncAddr((int)Func::m4::Mat5::Mat5A)
 					)(this, j);
-			}
-			Mat5(const Rotor& rotor)
-			{
-				glm::vec4 x = rotor.rotate({ 1, 0, 0, 0 });
-				value[0][0] = x[0];
-				value[0][1] = x[1];
-				value[0][2] = x[2];
-				value[0][3] = x[3];
-				glm::vec4 y = rotor.rotate({ 0, 1, 0, 0 });
-				value[1][0] = y[0];
-				value[1][1] = y[1];
-				value[1][2] = y[2];
-				value[1][3] = y[3];
-				glm::vec4 z = rotor.rotate({ 0, 0, 1, 0 });
-				value[2][0] = z[0];
-				value[2][1] = z[1];
-				value[2][2] = z[2];
-				value[2][3] = z[3];
-				glm::vec4 w = rotor.rotate({ 0, 0, 0, 1 });
-				value[3][0] = w[0];
-				value[3][1] = w[1];
-				value[3][2] = w[2];
-				value[3][3] = w[3];
-
-				value[4][4] = 1.0;
 			}
 			nlohmann::json toJson() const
 			{
@@ -318,6 +599,27 @@ namespace fdm
 			{
 				return { 1 };
 			}
+			Mat5(const Mat5& other)
+			{
+				this->value = other.value;
+			}
+			Mat5(Mat5&& other) noexcept
+			{
+				this->value = std::move(other.value);
+			}
+			Mat5& operator=(const Mat5& other)
+			{
+				this->value = other.value;
+
+				return *this;
+			}
+			Mat5& operator=(Mat5&& other) noexcept
+			{
+				this->value = std::move(other.value);
+
+				return *this;
+			}
+
 			Mat5 operator*(const Mat5& other) const
 			{
 				Mat5 result;
@@ -337,29 +639,81 @@ namespace fdm
 			}
 			Mat5& operator*=(const Mat5& other)
 			{
-				Mat5 result = *this * other;
+				return *this = *this * other;
+			}
 
-				std::memcpy(&value[0][0], &result.value[0][0], sizeof(value));
-
-				return *this;
+			vec5 multiply(const vec5& v) const
+			{
+				return vec5
+				{
+					value[0][0] * v[0] + value[1][0] * v[1] + value[2][0] * v[2] + value[3][0] * v[3] + value[4][0] * v[4],
+					value[0][1] * v[0] + value[1][1] * v[1] + value[2][1] * v[2] + value[3][1] * v[3] + value[4][1] * v[4],
+					value[0][2] * v[0] + value[1][2] * v[1] + value[2][2] * v[2] + value[3][2] * v[3] + value[4][2] * v[4],
+					value[0][3] * v[0] + value[1][3] * v[1] + value[2][3] * v[2] + value[3][3] * v[3] + value[4][3] * v[4],
+					value[0][4] * v[0] + value[1][4] * v[1] + value[2][4] * v[2] + value[3][4] * v[3] + value[4][4] * v[4]
+				};
 			}
 			glm::vec4 multiply(const glm::vec4& v, float finalComp = 1.0f) const
 			{
-				float vv[5]{ v.x, v.y, v.z, v.w, finalComp };
-				glm::vec4 result{ 0 };
-				for (int row = 0; row < 4; ++row)
-				{
-					for (int col = 0; col < 5; ++col)
-					{
-						result[row] += value[col][row] * vv[col];
-					}
-				}
-				return result;
+				return multiply(vec5{ v, finalComp }).xyzw();
+			}
+			vec5 operator*(const vec5& v) const
+			{
+				return multiply(v);
 			}
 			glm::vec4 operator*(const glm::vec4& v) const
 			{
 				return multiply(v, 1.0f);
 			}
+
+			// me when compatibility with old code:
+			//vec5& operator[](size_t i)
+			//{
+			//	assert(i < 5);
+			//
+			//	return value[i];
+			//}
+			//const vec5& operator[](size_t i) const
+			//{
+			//	assert(i < 5);
+			//
+			//	return value[i];
+			//}
+			float* operator[](size_t i)
+			{
+				assert(i < 5);
+
+				return &value[i][0];
+			}
+			const float* operator[](size_t i) const
+			{
+				assert(i < 5);
+
+				return &value[i][0];
+			}
+			vec5& at(size_t i)
+			{
+				assert(i < 5);
+
+				return value[i];
+			}
+			const vec5& at(size_t i) const
+			{
+				assert(i < 5);
+
+				return value[i];
+			}
+			// why multiple names for the same function? idk. felt like it
+
+			vec5& get(size_t i)
+			{
+				return at(i);
+			}
+			const vec5& get(size_t i) const
+			{
+				return at(i);
+			}
+
 			void translate(const glm::vec4& v)
 			{
 				value[4][0] += (value[0][0] * v.x) + (value[1][0] * v.y) + (value[2][0] * v.z) + (value[3][0] * v.w);
@@ -367,36 +721,56 @@ namespace fdm
 				value[4][2] += (value[0][2] * v.x) + (value[1][2] * v.y) + (value[2][2] * v.z) + (value[3][2] * v.w);
 				value[4][3] += (value[0][3] * v.x) + (value[1][3] * v.y) + (value[2][3] * v.z) + (value[3][3] * v.w);
 			}
+			void translate(float x, float y, float z, float w)
+			{
+				translate({ x,y,z,w });
+			}
+			void translate(float a)
+			{
+				translate(a, a, a, a);
+			}
 			void scale(const glm::vec4& s)
 			{
 				for (int row = 0; row < 5; ++row)
 					for (int col = 0; col < 4; ++col)
 						value[col][row] *= s[col];
 			}
-
-			float* operator[](int index)
+			void scale(float x, float y, float z, float w)
 			{
-				return value[index];
+				scale({ x,y,z,w });
 			}
-			const float* operator[](int index) const
+			void scale(float s)
 			{
-				return value[index];
+				scale(s, s, s, s);
 			}
 
-			// uhh. helpful little function i made
-			inline static Mat5 inverse(Mat5 m)
+			inline static Mat5 transpose(const Mat5& m)
+			{
+				return Mat5
+				{
+					{ m[0][0],m[1][0],m[2][0],m[3][0],m[4][0] },
+					{ m[0][1],m[1][1],m[2][1],m[3][1],m[4][1] },
+					{ m[0][2],m[1][2],m[2][2],m[3][2],m[4][2] },
+					{ m[0][3],m[1][3],m[2][3],m[3][3],m[4][3] },
+					{ m[0][4],m[1][4],m[2][4],m[3][4],m[4][4] }
+				};
+			}
+			inline static Mat5 inverse(const Mat5& m)
 			{
 				Mat5 s{ 1 };
 				Mat5 t{ m };
 
 				// Forward elimination
-				for (int i = 0; i < 5 - 1; ++i) {
+				for (int i = 0; i < 5 - 1; ++i)
+				{
 					int pivot = i;
 					float pivotsize = t[i][i];
 
-					for (int j = i + 1; j < 5; ++j) {
+					for (int j = i + 1; j < 5; ++j)
+					{
 						float tmp = t[j][i];
-						if (fabs(tmp) > fabs(pivotsize)) {
+						if (fabs(tmp) > fabs(pivotsize))
+						{
 							pivotsize = tmp;
 							pivot = j;
 						}
@@ -404,8 +778,10 @@ namespace fdm
 
 					if (pivotsize == 0.0f) return s;
 
-					if (pivot != i) {
-						for (int j = 0; j < 5; ++j) {
+					if (pivot != i)
+					{
+						for (int j = 0; j < 5; ++j)
+						{
 							float tmp;
 							tmp = t[i][j];
 							t[i][j] = t[pivot][j];
@@ -416,12 +792,15 @@ namespace fdm
 						}
 					}
 
-					for (int j = i + 1; j < 5; ++j) {
+					for (int j = i + 1; j < 5; ++j)
+					{
 						float f = t[j][i] / t[i][i];
-						for (int k = i + 1; k < 5; ++k) {
+						for (int k = i + 1; k < 5; ++k)
+						{
 							t[j][k] -= f * t[i][k];
 						}
-						for (int k = 0; k < 5; ++k) {
+						for (int k = 0; k < 5; ++k)
+						{
 							s[j][k] -= f * s[i][k];
 						}
 						t[j][i] = 0.0f;
@@ -429,18 +808,22 @@ namespace fdm
 				}
 
 				// Backward substitution
-				for (int i = 0; i < 5; ++i) {
+				for (int i = 0; i < 5; ++i)
+				{
 					float f = t[i][i];
-					if (f == 0.0f) return m4::Mat5{ 1 };
+					if (f == 0.0f) return Mat5{ 1 };
 
-					for (int j = 0; j < 5; ++j) {
+					for (int j = 0; j < 5; ++j)
+					{
 						t[i][j] /= f;
 						s[i][j] /= f;
 					}
 
-					for (int j = 0; j < i; ++j) {
+					for (int j = 0; j < i; ++j)
+					{
 						f = t[j][i];
-						for (int k = 0; k < 5; ++k) {
+						for (int k = 0; k < 5; ++k)
+						{
 							t[j][k] -= f * t[i][k];
 							s[j][k] -= f * s[i][k];
 						}
@@ -449,7 +832,22 @@ namespace fdm
 
 				return s;
 			}
+
+			operator glm::mat4() const
+			{
+				return glm::mat4
+				{
+					value[0].xyzw(),
+					value[1].xyzw(),
+					value[2].xyzw(),
+					value[3].xyzw()
+				};
+			}
 		};
+
+		inline Mat5 transpose(const Mat5& m) { return Mat5::transpose(m); }
+		inline Mat5 inverse(const Mat5& m) { return Mat5::inverse(m); }
+
 		inline Mat5 createCamera(const glm::vec4& eye, const glm::vec4& forward, const glm::vec4& up, const glm::vec4& right, const glm::vec4& over)
 		{
 			Mat5 result;
@@ -458,33 +856,15 @@ namespace fdm
 				getFuncAddr((int)Func::m4::createCamera)
 				)(&result, eye, forward, up, right, over);
 			return result;
+
 			/*
-			Mat5 cameraD{ 1 };
+			Mat5 cameraD{ -right, up, forward, over, {} };
+			cameraD = Mat5::transpose(cameraD);
 
-			cameraD[0][0] = right.x;
-			cameraD[1][0] = right.y;
-			cameraD[2][0] = right.z;
-			cameraD[3][0] = right.w;
-			cameraD[0][1] = up.x;
-			cameraD[1][1] = up.y;
-			cameraD[2][1] = up.z;
-			cameraD[3][1] = up.w;
-			cameraD[0][2] = -forward.x;
-			cameraD[1][2] = -forward.y;
-			cameraD[2][2] = -forward.z;
-			cameraD[3][2] = -forward.w;
-			cameraD[0][3] = over.x;
-			cameraD[1][3] = over.y;
-			cameraD[2][3] = over.z;
-			cameraD[3][3] = over.w;
+			Mat5 cameraP{ {}, {}, {}, {}, -eye };
 
-			Mat5 cameraP{ 1 };
-			cameraP[4][0] = -eye.x;
-			cameraP[4][1] = -eye.y;
-			cameraP[4][2] = -eye.z;
-			cameraP[4][3] = -eye.w;
-
-			return cameraD * cameraP;*/
+			return cameraD * cameraP;
+			*/
 		}
 		inline glm::vec4 adjustToMaxHorizSpeed(const glm::vec4& vel, const glm::vec4& deltaVel, float maxHorizSpeed)
 		{
@@ -514,6 +894,12 @@ namespace fdm
 		//{
 		//	return reinterpret_cast<glm::vec4(__fastcall*)(const nlohmann::json & j)>(getFuncAddr((int)Func::m4::vec4FromJson))(j);
 		//}
+
+		template<typename T>
+		inline nlohmann::json vec2ToJson(const glm::vec<2, T>& v)
+		{
+			return nlohmann::json{ v.x, v.y };
+		}
 		template<typename T>
 		inline nlohmann::json vec3ToJson(const glm::vec<3, T>& v)
 		{
@@ -525,6 +911,11 @@ namespace fdm
 			return nlohmann::json{ v.x, v.y, v.z, v.w };
 		}
 		template<typename T>
+		inline glm::vec<2, T> vec2FromJson(const nlohmann::json& j)
+		{
+			return glm::vec<2, T>{ j[0].get<T>(), j[1].get<T>() };
+		}
+		template<typename T>
 		inline glm::vec<3, T> vec3FromJson(const nlohmann::json& j)
 		{
 			return glm::vec<3, T>{ j[0].get<T>(), j[1].get<T>(), j[2].get<T>() };
@@ -533,6 +924,17 @@ namespace fdm
 		inline glm::vec<4, T> vec4FromJson(const nlohmann::json& j)
 		{
 			return glm::vec<4, T>{ j[0].get<T>(), j[1].get<T>(), j[2].get<T>(), j[3].get<T>() };
+		}
+
+		template<glm::length_t L, typename T>
+		inline glm::vec<L, T> safeNormalize(const glm::vec<L, T>& v)
+		{
+			T len = glm::dot(v, v);
+			if (len <= glm::epsilon<T>() * glm::epsilon<T>())
+			{
+				return glm::vec<L, T>{};
+			}
+			return v / glm::sqrt(len);
 		}
 
 		inline void printMat5(const Mat5& m)
